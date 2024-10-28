@@ -148,3 +148,45 @@
 {"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-28 17:36:00"}
 {"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-28 17:36:29"}
 {"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-28 17:37:44"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"Error: Unknown error","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:19:24"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:19:24"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:19:25"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:19:25"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:19:25"}
+{"level":"info","message":"GET /random-url - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:19:25"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:19:25"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"Error: Unknown error","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:20:53"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:20:53"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:20:53"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:20:53"}
+{"level":"info","message":"GET /random-url - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:20:54"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:20:54"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:20:54"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"Error: Unknown error","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-28 19:23:54"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-28 19:23:54"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:23:55"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:23:55"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:23:55"}
+{"level":"info","message":"GET /random-url - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:23:55"}
+{"level":"info","message":"GET / - ::ffff:127.0.0.1","timestamp":"2024-10-28 19:23:55"}

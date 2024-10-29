@@ -1,0 +1,3 @@
+{"level":"error","message":"Error: this.dbClient.collection is not a function","timestamp":"2024-10-29 10:59:49"}
+{"level":"error","message":"Request: GET /continents","timestamp":"2024-10-29 10:59:49"}
+{"level":"error","message":"IP Address: ::1","timestamp":"2024-10-29 10:59:49"}

@@ -22,8 +22,8 @@ class MongoDBClient {
   async connect() {
     try {
       const dbConfig = { url: '' };
-    const mongoUrl = process.env.MONGO_URL || dbConfig.url;
-    this.client = new MongoClient(mongoUrl);
+      const mongoUrl = process.env.MONGO_URL || dbConfig.url;
+      this.client = new MongoClient(mongoUrl);
       await this.client.connect();
       this.db = this.client.db();
     } catch (error) {

@@ -18,10 +18,20 @@ getMedia(media);
 
 
 function test(media) {
-  media.forEach((element) => {
-    console.log('0000000001');
-  });
-} 
+  media.forEach((riri, fifi, loulou, picsou) => {
+    console.log(riri);
+    console.log(fifi);
+    console.log(loulou);
+    console.log(picsou);
+  })
+
+
+  media.forEach(() => {
+    console.log('00000000001');
+  })
+
+
+}
 
 test(media);
 

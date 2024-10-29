@@ -19,18 +19,28 @@ app.get('/continents', async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
     const skip = (page - 1) * limit;
 
-    console.log('00000000001:' );
+    console.log('00000000001:');
     // const continents = await this.db.collection('continent').find().toArray();
-/*    const continents2 = await db
-    .collection('continent')
-    .find({})
-
-    console.log('00000000003:' + JSON.stringify(continents));*/
+    /*    const continents2 = await db
+        .collection('continent')
+        .find({})
+    
+        console.log('00000000003:' + JSON.stringify(continents));*/
 
     const continents = await db
-    .collection('continent')
-    .find({})
-    .toArray();
+      .collection('continent')
+      .find({})
+      .toArray();
+    console.log('00000000002:' + JSON.stringify(continents));
+
+    const query = {
+      type: 'find',
+      collectionName: 'continent',
+      filter: {},
+    };
+    const collection = db.collection(query.collectionName);
+    const result2 = await collection.find(query.filter).toArray();
+    console.log('00000000003:' + JSON.stringify(result2));
 
     /*
     const continents = await db
@@ -54,10 +64,9 @@ const startServer = async () => {
     const client = await MongoClient.connect(dbConfig.url);
     db = client.db(dbConfig.database);
     console.log('Connected to MongoDB database');
-
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
-      console.log(`Server started on port ${PORT}`);
+      console.log(`Server started on port http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error('Failed to connect to MongoDB database:', error.message);

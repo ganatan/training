@@ -26,7 +26,7 @@ function generateStructureForFolders(folders) {
   let fullStructure = '';
 
   folders.forEach(folder => {
-    const folderPath = path.join(__dirname, '..','..', folder);
+    const folderPath = path.join(__dirname, '..', '..', folder);
     if (fs.existsSync(folderPath)) {
       fullStructure += `\nStructure of ${folder}:\n`;
       fullStructure += getDirectoryStructure(folderPath);
@@ -38,7 +38,7 @@ function generateStructureForFolders(folders) {
   return fullStructure;
 }
 
-const foldersToInspect = ['src', '__tests__',  'tools'];
+const foldersToInspect = ['src', '__tests__', 'tools', 'tutorials'];
 const projectStructure = generateStructureForFolders(foldersToInspect);
 
 console.log(projectStructure);

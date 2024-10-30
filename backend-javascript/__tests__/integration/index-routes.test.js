@@ -1,8 +1,8 @@
-import request from 'supertest';
-import config from '../../src/core/config/config';
+// import request from 'supertest';
+// import config from '../../src/core/config/config';
 
 describe('Index Routes', () => {
-  let app;
+  // let app;
 
   beforeEach(() => {
     jest.resetModules();

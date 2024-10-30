@@ -2,7 +2,6 @@
 import fs from 'fs';
 import { getMockData } from '../../mock-data-loader';
 */
-
 jest.mock('fs');
 
 describe('mock-data-manager (JSON version)', () => {
@@ -14,7 +13,6 @@ describe('mock-data-manager (JSON version)', () => {
   test('should return mocked data for an existing JSON file', () => {
     expect(true).toBe(true);
   });
-
 
 /*
   test('should return mocked data for an existing JSON file', () => {

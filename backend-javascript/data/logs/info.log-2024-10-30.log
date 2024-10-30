@@ -126,3 +126,24 @@
 {"level":"info","message":"GET /favicon.ico - ::1","timestamp":"2024-10-30 18:08:01"}
 {"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:08:07"}
 {"level":"info","message":"GET /continents/1017 - ::1","timestamp":"2024-10-30 18:08:15"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"Error: Unknown error","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-30 18:15:21"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-30 18:15:21"}
+{"level":"info","message":"GET / - ::1","timestamp":"2024-10-30 18:15:53"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:15:56"}
+{"level":"info","message":"GET / - ::1","timestamp":"2024-10-30 18:35:38"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:35:43"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:38:44"}
+{"level":"info","message":"GET / - ::1","timestamp":"2024-10-30 18:41:06"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:41:09"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:57:03"}
+{"level":"info","message":"GET /continents/1000 - ::1","timestamp":"2024-10-30 18:57:08"}
+{"level":"info","message":"GET / - ::1","timestamp":"2024-10-30 18:57:48"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:57:51"}
+{"level":"info","message":"GET /continents/1001 - ::1","timestamp":"2024-10-30 18:58:00"}

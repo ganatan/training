@@ -19,19 +19,17 @@ app.get('/continents', async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
     const skip = (page - 1) * limit;
 
-    console.log('00000000001:');
     // const continents = await this.db.collection('continent').find().toArray();
     /*    const continents2 = await db
         .collection('continent')
         .find({})
+        */
     
-        console.log('00000000003:' + JSON.stringify(continents));*/
 
     const continents = await db
       .collection('continent')
       .find({})
       .toArray();
-    console.log('00000000002:' + JSON.stringify(continents));
 
     const query = {
       type: 'find',
@@ -40,7 +38,6 @@ app.get('/continents', async (req, res) => {
     };
     const collection = db.collection(query.collectionName);
     const result2 = await collection.find(query.filter).toArray();
-    console.log('00000000003:' + JSON.stringify(result2));
 
     /*
     const continents = await db

@@ -1,13 +1,10 @@
-'use strict';
+import express from 'express';
+import handleResponse from '../../infrastructure/logger/response-handler.js';
+import ContinentRepository from './continent-repository.js';
+import ContinentService from './continent-service.js';
+import ContinentController from './continent-controller.js';
 
-const express = require('express');
 const router = express.Router();
-
-const handleResponse = require('../../infrastructure/logger/response-handler');
-
-const ContinentRepository = require('./continent-repository');
-const ContinentService = require('./continent-service');
-const ContinentController = require('./continent-controller');
 
 const continentRepository = new ContinentRepository();
 const continentService = new ContinentService(continentRepository);
@@ -19,4 +16,4 @@ router.post('/', continentController.createItem, handleResponse);
 router.delete('/:id', continentController.deleteItem, handleResponse);
 router.put('/:id', continentController.updateItem, handleResponse);
 
-module.exports = router;
+export default router;

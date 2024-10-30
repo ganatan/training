@@ -1,5 +1,5 @@
-// import PostgreSQLClient from './class-pg-client';
-const PostgreSQLClient = require('./class-pg-client');
+import PostgreSQLClient from './class-pg-client.js';
+// const PostgreSQLClient = require('./class-pg-client');
 
 const dbClient = { name: 'pg' }
 

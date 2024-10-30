@@ -1,6 +1,4 @@
-'use strict';
-
-const logger = require('../logger/logger');
+import logger from '../logger/logger.js';
 
 const handleError = (err, req, res, next) => {
   const statusCode = err.status || 500;
@@ -23,4 +21,4 @@ const handleError = (err, req, res, next) => {
   res.status(statusCode).json({ error: err.message || 'Internal Server Error' });
 };
 
-module.exports = handleError;
+export default handleError;

@@ -1,29 +1,23 @@
-'use strict';
+import path from 'path';
+import { fileURLToPath } from 'url';
+// import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const nodeExternals = require('webpack-node-externals');
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-module.exports = {
-  mode: 'development',
-  entry: {
-    server: './src/server.js',
-    // 'create-database': './tools/database-scripts/create-database.js',
-    // 'create-domains': './tools/database-scripts/create-domains.js',
-  },
-  target: 'node',
-  externals: [nodeExternals()],
+export default {
+  mode: 'production',
+  entry: './src/server.js',
+  target: 'async-node',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js',
+    filename: 'server.bundle.mjs',
+    module: true,
+    chunkFormat: 'module',
   },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'data/mock', to: 'data/mock' },
-      ],
-    }),
-  ],
+  experiments: {
+    outputModule: true,
+  },
   module: {
     rules: [
       {
@@ -31,13 +25,12 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
         },
       },
     ],
   },
+  plugins: [
+  ],
   resolve: {
     extensions: ['.js'],
   },

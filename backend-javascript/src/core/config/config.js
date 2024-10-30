@@ -1,6 +1,4 @@
-'use strict';
-
-require('dotenv').config();
+import 'dotenv/config';
 
 const config = {
   development: {
@@ -41,4 +39,5 @@ const config = {
   },
 };
 
-module.exports = config;
+// module.exports = config;
+export default config;

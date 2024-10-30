@@ -1,6 +1,4 @@
-'use strict';
-
-const ContinentController = require('../../continent-controller');
+import ContinentController from '../../continent-controller.js';
 
 describe('Continents Controller', () => {
   let mockContinentService;

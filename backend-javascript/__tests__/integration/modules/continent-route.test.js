@@ -1,5 +1,3 @@
-'use strict';
-
 describe('Continents Routes', () => {
   beforeEach(() => {
     jest.clearAllMocks();

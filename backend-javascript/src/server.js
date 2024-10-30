@@ -1,18 +1,14 @@
-'use strict';
 
-const config = require('./core/config/config');
-
-const DBAdapterFactory = require('./core/database/db-adapter-factory');
-const DBConnectionService = require('./core/database/db-connection-service');
-const DBConnectionManager = require('./core/database/db-connection-manager');
-
-const dbClients = require('./core/database/db-clients-factory');
+import config from './core/config/config.js';
+import DBAdapterFactory from './core/database/db-adapter-factory.js';
+import DBConnectionService from './core/database/db-connection-service.js';
+import DBConnectionManager from './core/database/db-connection-manager.js';
+import dbClients from './core/database/db-clients-factory.js';
+import app from './app.js';
 
 const dbAdapterFactory = DBAdapterFactory.getInstance(dbClients);
 const dbConnectionService = new DBConnectionService(dbAdapterFactory, config);
 const dbConnectionManager = new DBConnectionManager(dbConnectionService);
-
-const app = require('./app');
 
 const ENV = process.env.NODE_ENV || 'development';
 const { port: PORT, host: HOST } = config[ENV];
@@ -22,7 +18,6 @@ const connections = new Set();
 
 const startServer = async () => {
   try {
-    console.log('00000000001:server:');
     await dbConnectionManager.connectDB();
     server = app.listen(PORT, () => {
       console.log(`Server running at http://${HOST}:${PORT} in ${ENV} mode`);
@@ -32,16 +27,13 @@ const startServer = async () => {
       connections.add(connection);
       connection.on('close', () => connections.delete(connection));
     });
-
   } catch (err) {
     console.error('Failed to connect to the database:', err);
   }
 };
 
-if (require.main === module) {
+if (import.meta.url === new URL(import.meta.url).href) {
   startServer();
 }
 
-module.exports = {
-  startServer,
-};
+export { startServer };

@@ -1,5 +1,3 @@
-'use strict';
-
 const DB_CLIENTS = {
   MOCK: 'mock',
   MONGODB: 'mongodb',
@@ -8,4 +6,4 @@ const DB_CLIENTS = {
   SEQUELIZE_PG: 'sequelize-pg',
 };
 
-module.exports = DB_CLIENTS;
+export default DB_CLIENTS;

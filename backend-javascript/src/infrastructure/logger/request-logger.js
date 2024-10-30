@@ -1,10 +1,8 @@
-'use strict';
-
-const logger = require('../logger/logger');
+import logger from '../logger/logger.js';
 
 const requestLogger = (req, res, next) => {
   logger.info(`${req.method} ${req.originalUrl} - ${req.ip}`);
   next();
 };
 
-module.exports = requestLogger;
+export default requestLogger;

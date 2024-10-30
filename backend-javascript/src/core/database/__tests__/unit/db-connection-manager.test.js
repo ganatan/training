@@ -1,6 +1,4 @@
-'use strict';
-
-const DBConnectionManager = require('../../db-connection-manager');
+import DBConnectionManager from '../../db-connection-manager';
 
 describe('DBConnectionManager', () => {
   let dbConnectionManager;

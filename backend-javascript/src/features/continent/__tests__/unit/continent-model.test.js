@@ -1,6 +1,4 @@
-'use strict';
-
-const Continent = require('../../continent-model');
+import Continent from '../../continent-model.js';
 
 describe('Continent Model', () => {
   test('should create a continent instance with correct properties', () => {

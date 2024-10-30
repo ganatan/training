@@ -1,12 +1,8 @@
-'use strict';
-
-const express = require('express');
-
-const handleResponse = require('./infrastructure/logger/response-handler');
+import express from 'express';
+import handleResponse from './infrastructure/logger/response-handler.js';
+import config from './core/config/config.js';
 
 const router = express.Router();
-const config = require('./core/config/config');
-
 const env = process.env.NODE_ENV || 'development';
 
 const host = config[env].host;
@@ -47,17 +43,17 @@ router.get('/', (req, res, next) => {
       },
       {
         url: `${url}${apiPaths.cities}`,
-        description: 'API to retrieve countries',
+        description: 'API to retrieve cities',
         methods: ['GET'],
       },
       {
         url: `${url}${apiPaths.persons}`,
-        description: 'API to retrieve countries',
+        description: 'API to retrieve persons',
         methods: ['GET'],
       },
       {
         url: `${url}${apiPaths.setup}`,
-        description: 'API to retrieve countries',
+        description: 'API to retrieve setup information',
         methods: ['GET'],
       },
     ],
@@ -79,4 +75,4 @@ router.use((req, res, next) => {
   next();
 }, handleResponse);
 
-module.exports = router;
+export default router;

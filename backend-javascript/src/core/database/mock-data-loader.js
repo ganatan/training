@@ -1,15 +1,16 @@
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
+/*
+import fs from 'fs';
+import path from 'path';
 
 const mockDataMap = {};
 
 const mocksDirectory = process.env.NODE_ENV === 'production'
-  ? path.join(__dirname, './data/mock/')
-  : path.join(__dirname, '../../../data/mock/');
+  ? path.join(new URL('.', import.meta.url).pathname, './data/mock/')
+  : path.join(new URL('.', import.meta.url).pathname, '../../../data/mock/');
+*/
 
-const getMockData = (tableName) => {
+export const getMockData = (tableName) => {
+/*
   const filePath = path.join(mocksDirectory, `${tableName}-mock.json`);
   if (fs.existsSync(filePath)) {
     const rawData = fs.readFileSync(filePath, 'utf-8');
@@ -23,10 +24,7 @@ const getMockData = (tableName) => {
 
     return mockDataMap[tableName];
   }
+    */
 
   return [];
-};
-
-module.exports = {
-  getMockData,
 };

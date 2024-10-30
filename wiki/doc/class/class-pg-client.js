@@ -16,6 +16,14 @@ class PostgreSQLClient {
 
     return PostgreSQLClient.instance;
   }
+
+}
+
+// module.exports = PostgreSQLClient;
+export default PostgreSQLClient;
+
+
+
 /*
   async connect() {
     console.log('00000000001:PostgreSQLClient:connect:');
@@ -49,7 +57,3 @@ class PostgreSQLClient {
   }
     */
 
-
-}
-
-module.exports = PostgreSQLClient;

@@ -1,5 +1,3 @@
-'use strict';
-
 class DBConnectionManager {
   constructor(connectionService) {
     this.connectionService = connectionService;
@@ -7,7 +5,6 @@ class DBConnectionManager {
   }
 
   async connectDB() {
-    console.log('00000000001:DBConnectionManager:connectDB:');
     this.dbClient = this.connectionService.createClient();
     const isConnected = await this.dbClient.connect();
     console.log(isConnected ? `Connected to ${this.dbClient.constructor.name}` : `Not Connected to ${this.dbClient.constructor.name}`);
@@ -31,4 +28,4 @@ class DBConnectionManager {
   }
 }
 
-module.exports = DBConnectionManager;
+export default DBConnectionManager;

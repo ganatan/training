@@ -1,8 +1,5 @@
-'use strict';
-
 class DBConnectionService {
   constructor(dbFactory, config) {
-    console.log('00000000001:DBConnectionService:constructor:');
     this.dbFactory = dbFactory;
     this.config = config;
   }
@@ -14,4 +11,4 @@ class DBConnectionService {
   }
 }
 
-module.exports = DBConnectionService;
+export default DBConnectionService;

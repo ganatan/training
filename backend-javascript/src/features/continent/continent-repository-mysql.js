@@ -1,5 +1,3 @@
-'use strict';
-
 class MySQLAdapter {
   constructor(dbClient) {
     this.dbClient = dbClient;
@@ -362,4 +360,4 @@ class MySQLAdapter {
   }
 }
 
-module.exports = MySQLAdapter;
+export default MySQLAdapter;

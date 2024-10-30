@@ -1,7 +1,5 @@
-'use strict';
-
-const mysql = require('mysql2/promise');
-const MySQLClient = require('../../adapters/mysql-adapter');
+import mysql from 'mysql2/promise';
+import MySQLClient from '../../adapters/mysql-adapter';
 
 jest.mock('mysql2/promise', () => ({
   createConnection: jest.fn(() => ({

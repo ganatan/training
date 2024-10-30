@@ -1,10 +1,9 @@
-'use strict';
-
-const {
+import {
   MAX_INTEGER,
   MIN_INTEGER,
   MAX_BIGINT,
-  MIN_BIGINT } = require('../../shared/constants/data-limits-constants');
+  MIN_BIGINT,
+} from '../../shared/constants/data-limits-constants.js';
 
 class PostgreSQLAdapter {
   constructor(dbClient) {
@@ -403,4 +402,4 @@ class PostgreSQLAdapter {
   }
 }
 
-module.exports = PostgreSQLAdapter;
+export default PostgreSQLAdapter;

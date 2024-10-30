@@ -1,11 +1,8 @@
-'use strict';
-
-const DB_CLIENTS = require('./db-clients');
-
-const MockClient = require('./adapters/mock-adapter');
-const MongoDBClient = require('./adapters/mongodb-adapter');
-const MySQLClient = require('./adapters/mysql-adapter');
-const PostgreSQLClient = require('./adapters/postgres-adapter');
+import DB_CLIENTS from './db-clients.js';
+import MockClient from './adapters/mock-adapter.js';
+import MongoDBClient from './adapters/mongodb-adapter.js';
+import MySQLClient from './adapters/mysql-adapter.js';
+import PostgreSQLClient from './adapters/postgres-adapter.js';
 
 const dbClients = {
   [DB_CLIENTS.MOCK]: MockClient,
@@ -14,4 +11,4 @@ const dbClients = {
   [DB_CLIENTS.PG]: PostgreSQLClient,
 };
 
-module.exports = dbClients;
+export default dbClients;

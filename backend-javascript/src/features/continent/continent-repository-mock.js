@@ -1,11 +1,10 @@
-'use strict';
-
-const continentsData = require('../../../data/mock/continent-mock.json');
+// import continentsData from '../../../data/mock/continent-mock.json';
 
 class MockAdapter {
   constructor(dbClient) {
     this.dbClient = dbClient;
-    this.continents = continentsData;
+    this.continents = [];
+    // this.continents = continentsData;
   }
 
   async getMockTrace() {
@@ -157,4 +156,4 @@ class MockAdapter {
   }
 }
 
-module.exports = MockAdapter;
+export default MockAdapter;

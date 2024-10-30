@@ -1,5 +1,3 @@
-'use strict';
-
 class Continent {
 
   constructor(id, code, name, wikipediaLink,
@@ -16,4 +14,4 @@ class Continent {
   }
 }
 
-module.exports = Continent;
+export default Continent;

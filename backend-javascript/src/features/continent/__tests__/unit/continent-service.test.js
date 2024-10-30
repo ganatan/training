@@ -1,6 +1,4 @@
-'use strict';
-
-const ContinentService = require('../../continent-service');
+import ContinentService from '../../continent-service';
 
 describe('Continents Service', () => {
   let mockContinentRepository;

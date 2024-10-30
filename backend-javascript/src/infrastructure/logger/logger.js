@@ -1,9 +1,7 @@
-'use strict';
+import { createLogger, format, transports } from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
-const { createLogger, format, transports } = require('winston');
-const DailyRotateFile = require('winston-daily-rotate-file');
-
-const { LOG_LEVEL, FILE_PATH, DATE_FORMAT, MAX_LOG_SIZE, MAX_LOG_FILES } = require('../../shared/constants/logging-constants');
+import { LOG_LEVEL, FILE_PATH, DATE_FORMAT, MAX_LOG_SIZE, MAX_LOG_FILES } from '../../shared/constants/logging-constants.js';
 
 const logger = createLogger({
   level: LOG_LEVEL.INFO,
@@ -14,40 +12,36 @@ const logger = createLogger({
     format.json(),
   ),
   transports: [
-    // Fichier pour les logs d'erreurs avec rotation par minute
     new DailyRotateFile({
       filename: `${FILE_PATH.ERROR_LOG}-%DATE%.log`,
-      datePattern: 'YYYY-MM-DD',  // Rotation par minute
+      datePattern: 'YYYY-MM-DD',
       level: LOG_LEVEL.ERROR,
       maxSize: MAX_LOG_SIZE,
       maxFiles: MAX_LOG_FILES,
       zippedArchive: true,
     }),
 
-    // Fichier pour les logs d'avertissements avec rotation par minute
     new DailyRotateFile({
       filename: `${FILE_PATH.WARN_LOG}-%DATE%.log`,
-      datePattern: 'YYYY-MM-DD',  // Rotation par minute
+      datePattern: 'YYYY-MM-DD',
       level: LOG_LEVEL.WARN,
       maxSize: MAX_LOG_SIZE,
       maxFiles: MAX_LOG_FILES,
       zippedArchive: true,
     }),
 
-    // Fichier pour les logs d'information avec rotation par minute
     new DailyRotateFile({
       filename: `${FILE_PATH.INFO_LOG}-%DATE%.log`,
-      datePattern: 'YYYY-MM-DD',  // Rotation par minute
+      datePattern: 'YYYY-MM-DD',
       level: LOG_LEVEL.INFO,
       maxSize: MAX_LOG_SIZE,
       maxFiles: MAX_LOG_FILES,
       zippedArchive: true,
     }),
 
-    // Fichier combiné pour tous les logs avec rotation par minute
     new DailyRotateFile({
       filename: `${FILE_PATH.COMBINED_LOG}-%DATE%.log`,
-      datePattern: 'YYYY-MM-DD',  // Rotation par minute
+      datePattern: 'YYYY-MM-DD',
       maxSize: MAX_LOG_SIZE,
       maxFiles: MAX_LOG_FILES,
       zippedArchive: true,
@@ -55,7 +49,6 @@ const logger = createLogger({
   ],
 });
 
-// Console pour les environnements non-production
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new transports.Console({
     format: format.combine(
@@ -65,4 +58,4 @@ if (process.env.NODE_ENV !== 'production') {
   }));
 }
 
-module.exports = logger;
+export default logger;

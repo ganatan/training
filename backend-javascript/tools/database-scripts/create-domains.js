@@ -1,5 +1,3 @@
-'use strict';
-
 const DomainService = require('../../src/features/setup/domain-service');
 
 async function main() {

@@ -1,6 +1,4 @@
-'use strict';
-
-const PostgreSQLAdapter = require('../../continent-repository-postgresql');
+import PostgreSQLAdapter from '../../continent-repository-postgresql.js';
 
 describe('PostgreSQLAdapter', () => {
   let dbClientMock;

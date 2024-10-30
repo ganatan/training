@@ -1,6 +1,4 @@
-'use strict';
-
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
 
 class MySQLClient {
   constructor(config) {
@@ -44,4 +42,4 @@ class MySQLClient {
   }
 }
 
-module.exports = MySQLClient;
+export default MySQLClient;

@@ -8,7 +8,8 @@ export default [
   {
     files: ['**/*.js'],
     languageOptions: {
-      sourceType: 'commonjs',
+      // sourceType: 'commonjs',
+      sourceType: 'module',
     },
   },
   {

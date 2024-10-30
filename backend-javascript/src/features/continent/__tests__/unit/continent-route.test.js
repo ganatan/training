@@ -1,7 +1,5 @@
-'use strict';
-
-const express = require('express');
-const continentRoute = require('../../continent-route');
+import express from 'express';
+import continentRoute from '../../continent-route';
 
 jest.mock('../../continent-controller');
 

@@ -1,6 +1,4 @@
-'use strict';
-
-const { ObjectId } = require('mongodb');
+import { ObjectId } from 'mongodb';
 
 class MongoDBAdapter {
   constructor(dbClient) {
@@ -14,15 +12,11 @@ class MongoDBAdapter {
       filter: {},
     };
     const result = await this.dbClient.query(query);
-
-    console.log('00000000001:' + JSON.stringify(result));
-
+/*
     const collection = this.dbClient.collection(query.collectionName);
     const result2 = await collection.find(query.filter).toArray();
+    */
 
-    console.log('00000000001:' + JSON.stringify(result2));
-
-    /*
     return result.map(item => ({
       id: item._id,
       code: item.code,
@@ -32,9 +26,8 @@ class MongoDBAdapter {
       population: item.population,
       countriesNumber: item.countries_number,
     }));
-    */
 
-    return [{ name: 1111 }]
+    // return [{ name: 1111 }]
   }
 
   async getItem(index) {
@@ -105,4 +98,4 @@ class MongoDBAdapter {
   }
 }
 
-module.exports = MongoDBAdapter;
+export default MongoDBAdapter;

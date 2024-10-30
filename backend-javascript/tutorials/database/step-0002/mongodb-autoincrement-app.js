@@ -71,9 +71,7 @@ app.post('/continents', async (req, res) => {
       population: req.body.population,
       countriesNumber: req.body.countriesNumber,
     };
-    console.log('00000000001:' + JSON.stringify(continentData));
     const result = await continentCollection.insertOne(continentData);
-    console.log('00000000001:' + JSON.stringify(result));
     res.status(201).json(result[0]); 
   } catch (error) {
     console.error('Error during insertion:', error.message);
@@ -157,9 +155,7 @@ app.get('/continents', async (req, res) => {
 
 
 app.post('/continents', async (req, res) => {
-  console.log('00000000001:post:');
   try {
-    console.log('00000000002:post:' + JSON.stringify(req.body));
     const db = await connectToDB();
     const countersCollection = db.collection('counters');
     const continentCollection = db.collection('continent');

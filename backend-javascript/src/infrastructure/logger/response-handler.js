@@ -1,5 +1,3 @@
-'use strict';
-
 const handleResponse = (req, res) => {
   if (res.locals.data) {
     return res.status(res.statusCode || 200).json(res.locals.data);
@@ -8,4 +6,4 @@ const handleResponse = (req, res) => {
   return res.status(500).json({ error: 'Internal Server Error' });
 };
 
-module.exports = handleResponse;
+export default handleResponse;

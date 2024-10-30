@@ -1,6 +1,4 @@
-'use strict';
-
-const MockAdapter = require('../../continent-repository-mock');
+import MockAdapter from '../../continent-repository-mock.js';
 
 describe('MockAdapter', () => {
   let mockAdapter;

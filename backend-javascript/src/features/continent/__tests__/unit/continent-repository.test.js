@@ -1,5 +1,3 @@
-'use strict';
-
 jest.mock('../../../../core/database/db-adapter-factory');
 jest.mock('../../../../core/database/db-clients-factory');
 jest.mock('../../../../core/config/config');
@@ -9,15 +7,15 @@ jest.mock('../../continent-repository-mongodb');
 jest.mock('../../continent-repository-mysql');
 jest.mock('../../continent-repository-postgresql');
 
-const ContinentRepository = require('../../continent-repository');
-const DBFactory = require('../../../../core/database/db-adapter-factory');
-const DB_CLIENTS = require('../../../../core/database/db-clients');
-const config = require('../../../../core/config/config');
-const logger = require('../../../../infrastructure/logger/logger');
-const MOCKAdapter = require('../../continent-repository-mock');
-const MongoDBAdapter = require('../../continent-repository-mongodb');
-const MySQLAdapter = require('../../continent-repository-mysql');
-const PostgreSQLAdapter = require('../../continent-repository-postgresql');
+import ContinentRepository from '../../continent-repository';
+import DBFactory from '../../../../core/database/db-adapter-factory';
+import DB_CLIENTS from '../../../../core/database/db-clients';
+import config from '../../../../core/config/config';
+import logger from '../../../../infrastructure/logger/logger';
+import MOCKAdapter from '../../continent-repository-mock';
+import MongoDBAdapter from '../../continent-repository-mongodb';
+import MySQLAdapter from '../../continent-repository-mysql';
+import PostgreSQLAdapter from '../../continent-repository-postgresql';
 
 describe('ContinentRepository', () => {
   let repository;

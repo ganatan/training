@@ -1,9 +1,6 @@
-'use strict';
+import { MongoClient } from 'mongodb';
+import MongoDBClient from '../../adapters/mongodb-adapter';
 
-const { MongoClient } = require('mongodb');
-const MongoDBClient = require('../../adapters/mongodb-adapter');
-
-// Mock MongoDB methods
 jest.mock('mongodb', () => ({
   MongoClient: jest.fn(() => ({
     connect: jest.fn(),
@@ -46,25 +43,6 @@ describe('MongoDBClient', () => {
     });
 
   });
-
-  /*
-  describe('query', () => {
-
-    beforeEach(async () => {
-      await mongoClientInstance.connect();
-    });
-
-    test('should throw an error for unsupported query type', async () => {
-      await expect(
-        mongoClientInstance.query({
-          type: 'unsupported',
-          collectionName: 'testCollection',
-        }),
-      ).rejects.toThrow('Type de requête MongoDB non pris en charge');
-    });
-
-  });
-  */
 
   describe('close', () => {
     test('should close the MongoDB connection', async () => {

@@ -1,5 +1,4 @@
-'use strict';
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 class MongoDBClient {
   constructor(config) {
@@ -64,4 +63,4 @@ class MongoDBClient {
   }
 }
 
-module.exports = MongoDBClient;
+export default MongoDBClient;

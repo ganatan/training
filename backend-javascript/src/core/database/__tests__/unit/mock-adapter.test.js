@@ -1,8 +1,6 @@
-'use strict';
-
-const MockClient = require('../../adapters/mock-adapter');
-const { getMockData } = require('../../mock-data-loader');
-const { extractTableName } = require('../../../../shared/utils/query-utils');
+import MockClient from '../../adapters/mock-adapter';
+import { getMockData } from '../../mock-data-loader';
+import { extractTableName } from '../../../../shared/utils/query-utils';
 
 jest.mock('../../mock-data-loader', () => ({
   getMockData: jest.fn(),

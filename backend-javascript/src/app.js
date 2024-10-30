@@ -1,14 +1,17 @@
-'use strict';
+console.log('00000000002');
 
-const express = require('express');
-const cors = require('cors');
-const compression = require('compression');
-const swaggerUi = require('swagger-ui-express');
+import express from 'express';
+import cors from 'cors';
+import compression from 'compression';
+import swaggerUi from 'swagger-ui-express';
 
-const swaggerDocs = require('./infrastructure/swagger/swagger-doc');
-const handleResponse = require('./infrastructure/logger/response-handler');
-const handleError = require('./infrastructure/errors/error-handler');
-const requestLogger = require('./infrastructure/logger/request-logger');
+import swaggerDocs from './infrastructure/swagger/swagger-doc.js';
+
+import handleResponse from './infrastructure/logger/response-handler.js';
+import handleError from './infrastructure/errors/error-handler.js';
+import requestLogger from './infrastructure/logger/request-logger.js';
+
+import routes from './main-routes.js';
 
 const app = express();
 
@@ -21,14 +24,12 @@ app.use(requestLogger);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-const routes = require('./main-routes');
-
 app.use('/', routes);
 
 app.use(handleResponse);
 app.use(handleError);
 
-module.exports = app;
+export default app;
 
 /*
 app.use(cors({

@@ -1,5 +1,3 @@
-'use strict';
-
 class ContinentService {
 
   constructor(continentRepository) {
@@ -39,4 +37,4 @@ class ContinentService {
 
 };
 
-module.exports = ContinentService;
+export default ContinentService;

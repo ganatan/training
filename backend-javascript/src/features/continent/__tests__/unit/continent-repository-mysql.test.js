@@ -1,6 +1,4 @@
-'use strict';
-
-const MySQLAdapter = require('../../continent-repository-mysql');
+import MySQLAdapter from '../../continent-repository-mysql';
 
 describe('MySQLAdapter', () => {
   let adapter;

@@ -1,6 +1,4 @@
-'use strict';
-
-const DBAdapterFactory = require('../../db-adapter-factory');
+import DBAdapterFactory from '../../db-adapter-factory';
 
 describe('DBAdapterFactory', () => {
   let dbClientsMock;

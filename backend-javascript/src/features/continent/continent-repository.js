@@ -1,15 +1,13 @@
-'use strict';
+import DBFactory from '../../core/database/db-adapter-factory.js';
+import dbClients from '../../core/database/db-clients-factory.js';
+import DB_CLIENTS from '../../core/database/db-clients.js';
+import config from '../../core/config/config.js';
+import logger from '../../infrastructure/logger/logger.js';
 
-const DBFactory = require('../../core/database/db-adapter-factory');
-const dbClients = require('../../core/database/db-clients-factory');
-const DB_CLIENTS = require('../../core/database/db-clients');
-const config = require('../../core/config/config');
-const logger = require('../../infrastructure/logger/logger');
-
-const MOCKAdapter = require('./continent-repository-mock');
-const MongoDBAdapter = require('./continent-repository-mongodb');
-const MySQLAdapter = require('./continent-repository-mysql');
-const PostgreSQLAdapter = require('./continent-repository-postgresql');
+import MOCKAdapter from './continent-repository-mock.js';
+import MongoDBAdapter from './continent-repository-mongodb.js';
+import MySQLAdapter from './continent-repository-mysql.js';
+import PostgreSQLAdapter from './continent-repository-postgresql.js';
 
 class ContinentRepository {
   constructor() {
@@ -37,7 +35,6 @@ class ContinentRepository {
           this.adapter = null;
           break;
       }
-
     } catch (error) {
       logger.error('Failed to initialize ContinentRepository:', error.message);
     }
@@ -84,4 +81,4 @@ class ContinentRepository {
   }
 }
 
-module.exports = ContinentRepository;
+export default ContinentRepository;

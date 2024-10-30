@@ -1,5 +1,3 @@
-'use strict';
-
 const DatabaseService = require('../../src/features/setup/db-connection-manager');
 
 async function main() {

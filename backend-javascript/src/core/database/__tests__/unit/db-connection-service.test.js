@@ -1,6 +1,4 @@
-'use strict';
-
-const DBConnectionService = require('../../db-connection-service');
+import DBConnectionService from '../../db-connection-service';
 
 describe('DBConnectionService', () => {
   let dbConnectionService;

@@ -1,6 +1,5 @@
-'use strict';
-
-const { Pool } = require('pg');
+import pg from 'pg';
+const { Pool } = pg;
 
 class PostgreSQLClient {
   constructor(dbClient) {
@@ -27,10 +26,7 @@ class PostgreSQLClient {
   }
 
   async connect() {
-    console.log('00000000001:PostgreSQLClient:connect:');
     try {
-      this.client2 = 'mlkjmlkj';
-      console.log('00000000001:PostgreSQLClient:connect:' + this.client2);
       this.client = await this.pool.connect();
 
       return true;
@@ -58,4 +54,4 @@ class PostgreSQLClient {
   }
 }
 
-module.exports = PostgreSQLClient;
+export default PostgreSQLClient;

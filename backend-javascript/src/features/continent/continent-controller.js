@@ -1,5 +1,3 @@
-'use strict';
-
 class ContinentController {
   constructor(continentService) {
     this.continentService = continentService;
@@ -80,4 +78,4 @@ class ContinentController {
   }
 }
 
-module.exports = ContinentController;
+export default ContinentController;

@@ -1,7 +1,5 @@
-'use strict';
-
-const { getMockData } = require('../mock-data-loader');
-const { extractTableName } = require('../../../shared/utils/query-utils');
+import { getMockData } from '../mock-data-loader.js';
+import { extractTableName } from '../../../shared/utils/query-utils.js';
 
 class MockClient {
   constructor(config) {
@@ -52,4 +50,4 @@ class MockClient {
   }
 }
 
-module.exports = MockClient;
+export default MockClient;

@@ -1,7 +1,5 @@
-'use strict';
-
-const handleResponse = require('../../response-handler');
-const handleError = require('../../../errors/error-handler');
+import handleResponse from '../../response-handler';
+import handleError from '../../../errors/error-handler';
 
 describe('Response Handler', () => {
   let mockRequest;

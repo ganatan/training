@@ -1,5 +1,3 @@
-'use strict';
-
 class DBAdapterFactory {
   static instance = null;
 
@@ -30,4 +28,4 @@ class DBAdapterFactory {
   }
 }
 
-module.exports = DBAdapterFactory;
+export default DBAdapterFactory;

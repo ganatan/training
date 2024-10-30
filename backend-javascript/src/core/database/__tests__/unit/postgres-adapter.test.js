@@ -1,7 +1,5 @@
-'use strict';
-
-const { Pool } = require('pg');
-const PostgreSQLClient = require('../../adapters/postgres-adapter');
+import { Pool } from 'pg';
+import PostgreSQLClient from '../../adapters/postgres-adapter';
 
 jest.mock('pg', () => {
   const mPool = {

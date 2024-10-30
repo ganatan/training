@@ -1,5 +1,3 @@
-'use strict';
-
 const { extractTableName } = require('../../query-utils');
 
 describe('extractTableName', () => {

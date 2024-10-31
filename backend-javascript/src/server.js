@@ -1,4 +1,3 @@
-
 import config from './core/config/config.js';
 import DBAdapterFactory from './core/database/db-adapter-factory.js';
 import DBConnectionService from './core/database/db-connection-service.js';
@@ -31,9 +30,5 @@ const startServer = async () => {
     console.error('Failed to connect to the database:', err);
   }
 };
-
-if (import.meta.url === new URL(import.meta.url).href) {
-  startServer();
-}
 
 export { startServer };

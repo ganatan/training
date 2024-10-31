@@ -1,73 +1,92 @@
-// import request from 'supertest';
-// import config from '../../src/core/config/config';
+import request from 'supertest';
+import express from 'express';
 
-describe('Index Routes', () => {
-  // let app;
+describe('Index API Routes', () => {
+  let app;
 
-  beforeEach(() => {
-    jest.resetModules();
-  });
-
-  test('GET / should return list of API endpoints (NODE_ENV not set)', async () => {
-    expect(true).toBe(true);
-  });
-
-  /*
-  test('GET / should return list of API endpoints (NODE_ENV not set)', async () => {
-    // Arrange
+  beforeEach(async () => {
     delete process.env.NODE_ENV;
-    const ENV = process.env.NODE_ENV || 'development';
-    const currentConfig = config[ENV];
-    const host = currentConfig.host;
-    const port = currentConfig.port;
-    const url = `http://${host}:${port}`;
-    app = require('../../src/app');
+    const { default: index } = await import('../../src/index-routes.js');
+    app = express();
+    app.use('/', index);
+  });
 
-    // Act
-    const res = await request(app).get('/');
+  describe('Root Route - Retrieve All API Endpoints', () => {
+    test('should return a list of all API endpoints with details', async () => {
+      // Act
+      const res = await request(app).get('/');
 
-    // Assert
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty('databaseType');
-    expect(res.body.databaseType).toBe(currentConfig.db.client);
-    expect(res.body).toHaveProperty('apis');
-    expect(res.body.apis).toBeInstanceOf(Array);
-    expect(res.body.apis[0]).toBeInstanceOf(Array);
-    expect(res.body.apis[0]).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ url: `${url}/continents`, description: 'API to retrieve continents', methods: ['GET'] }),
-        expect.objectContaining({ url: `${url}/continents/:id`, description: 'API to retrieve, update or delete a specific continent', methods: ['GET', 'POST', 'PUT', 'DELETE'] }),
-      ]),
-    );
+      // Assert
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('databaseType');
+      expect(res.body).toHaveProperty('apis');
+      expect(Array.isArray(res.body.apis)).toBe(true);
 
-    const expectedApis = [
-      { url: `${url}/countries`, description: 'API to retrieve countries', methods: ['GET'] },
-      { url: `${url}/cities`, description: 'API to retrieve countries', methods: ['GET'] },
-      { url: `${url}/persons`, description: 'API to retrieve countries', methods: ['GET'] },
-      { url: `${url}/setup`, description: 'API to retrieve countries', methods: ['GET'] },
-    ];
+      const [continentsApi, countriesApi, citiesApi, personsApi, setupApi] = res.body.apis;
 
-    expectedApis.forEach(expectedApi => {
-      expect(res.body.apis).toEqual(expect.arrayContaining([
-        expect.objectContaining(expectedApi),
-      ]));
+      expect(continentsApi).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            url: expect.stringContaining('/continents'),
+            description: 'API to retrieve continents',
+            methods: expect.arrayContaining(['GET']),
+          }),
+          expect.objectContaining({
+            url: expect.stringContaining('/continents/:id'),
+            description: 'API to retrieve, update or delete a specific continent',
+            methods: expect.arrayContaining(['GET', 'POST', 'PUT', 'DELETE']),
+          }),
+        ]),
+      );
+
+      expect(countriesApi).toEqual(
+        expect.objectContaining({
+          url: expect.stringContaining('/countries'),
+          description: 'API to retrieve countries',
+          methods: expect.arrayContaining(['GET']),
+        }),
+      );
+
+      expect(citiesApi).toEqual(
+        expect.objectContaining({
+          url: expect.stringContaining('/cities'),
+          description: 'API to retrieve cities',
+          methods: expect.arrayContaining(['GET']),
+        }),
+      );
+
+      expect(personsApi).toEqual(
+        expect.objectContaining({
+          url: expect.stringContaining('/persons'),
+          description: 'API to retrieve persons',
+          methods: expect.arrayContaining(['GET']),
+        }),
+      );
+
+      expect(setupApi).toEqual(
+        expect.objectContaining({
+          url: expect.stringContaining('/setup'),
+          description: 'API to retrieve setup information',
+          methods: expect.arrayContaining(['GET']),
+        }),
+      );
     });
   });
 
-  test('GET /random-url should return 404 with error message', async () => {
-    // Arrange
-    app = require('../../src/app');
+  describe('Error Handling - 404 for Non-Existing Routes', () => {
+    test('should return 404 and error message for non-existing route', async () => {
+      // Arrange
+      const nonExistentRoute = '/non-existent';
 
-    // Act
-    const res = await request(app).get('/random-url');
+      // Act
+      const res = await request(app).get(nonExistentRoute);
 
-    // Assert
-    expect(res.statusCode).toBe(404);
-    expect(res.body).toHaveProperty('status', 'error');
-    expect(res.body).toHaveProperty('message', 'Resource not found');
-    expect(res.body).toHaveProperty('url', '/random-url');
-    expect(res.body).toHaveProperty('errorCode', 404);
+      // Assert
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty('status', 'error');
+      expect(res.body).toHaveProperty('message', 'Resource not found');
+      expect(res.body).toHaveProperty('url', nonExistentRoute);
+      expect(res.body).toHaveProperty('errorCode', 404);
+    });
   });
-  */
-
 });

@@ -3,12 +3,12 @@ import handleResponse from './infrastructure/logger/response-handler.js';
 import config from './core/config/config.js';
 
 const router = express.Router();
-const env = process.env.NODE_ENV || 'development';
+const ENV = process.env.NODE_ENV || 'development';
 
-const host = config[env].host;
-const port = config[env].port;
+const host = config[ENV].host;
+const port = config[ENV].port;
 const url = `http://${host}:${port}`;
-const dbClient = config[env].db.client;
+const dbClient = config[ENV].db.client;
 
 const apiPaths = {
   continents: '/continents',

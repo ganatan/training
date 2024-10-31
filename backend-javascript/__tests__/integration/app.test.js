@@ -1,61 +1,36 @@
-// import request from 'supertest';
-// import config from '../../src/core/config/config';
+import request from 'supertest';
+import express from 'express';
 
 describe('Express application routes', () => {
-  // let app;
+  let app;
 
-  beforeEach(() => {
-    jest.resetModules();
+  beforeEach(async () => {
+    const { default: appModule } = await import('../../src/app.js');
+    app = express();
+    app.use(appModule);
   });
 
   const testEnvironments = ['test', 'development', 'production'];
 
   testEnvironments.forEach(env => {
-    test(`GET / should return a list of APIs in ${env} environment`, async () => {
-      expect(true).toBe(true);
+    describe(`Environment: ${env}`, () => {
+      beforeEach(() => {
+        process.env.NODE_ENV = env;
+      });
+
+      test(`GET / should return a list of APIs in ${env} environment`, async () => {
+        // Arrange
+
+        // Act
+        const response = await request(app).get('/');
+
+        // Assert
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty('databaseType');
+        expect(response.body).toHaveProperty('apis');
+        expect(response.body.apis).toBeInstanceOf(Array);
+
+      });
     });
   });
 });
-
-/*
-
-// Arrange
-process.env.NODE_ENV = env;
-const currentConfig = config[env];
-const host = currentConfig.host;
-const port = currentConfig.port;
-const url = `http://${host}:${port}`;
-app = require('../../src/app');
-
-// Act
-const response = await request(app).get('/');
-
-// Assert
-expect(response.statusCode).toBe(200);
-expect(response.body).toHaveProperty('databaseType');
-// expect(response.body.databaseType).toBe('pg');
-expect(response.body).toHaveProperty('apis');
-expect(response.body.apis).toBeInstanceOf(Array);
-
-expect(response.body.apis[0]).toBeInstanceOf(Array);
-expect(response.body.apis[0]).toEqual(
-  expect.arrayContaining([
-    expect.objectContaining({ url: `${url}/continents`, description: 'API to retrieve continents', methods: ['GET'] }),
-    expect.objectContaining({ url: `${url}/continents/:id`, description: 'API to retrieve, update or delete a specific continent', methods: ['GET', 'POST', 'PUT', 'DELETE'] }),
-  ]),
-);
-
-const expectedApis = [
-  { url: `${url}/countries`, description: 'API to retrieve countries', methods: ['GET'] },
-  { url: `${url}/cities`, description: 'API to retrieve countries', methods: ['GET'] },
-  { url: `${url}/persons`, description: 'API to retrieve countries', methods: ['GET'] },
-  { url: `${url}/setup`, description: 'API to retrieve countries', methods: ['GET'] },
-];
-
-expectedApis.forEach(expectedApi => {
-  expect(response.body.apis).toEqual(expect.arrayContaining([
-    expect.objectContaining(expectedApi),
-  ]));
-});
-
-*/

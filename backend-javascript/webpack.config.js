@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 export default {
   mode: 'production',
-  entry: './src/server.js',
+  entry: './src/index.js',
   target: 'async-node',
   output: {
     path: path.resolve(__dirname, 'dist'),

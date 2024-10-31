@@ -1,162 +1,95 @@
-// import MockAdapter from '../../continent-repository-mock.js';
+import MockAdapter from '../../../continent/continent-repository-mock.js';
 
 describe('MockAdapter', () => {
-  // let mockAdapter;
+  let mockAdapter;
 
-  describe('getItems', () => {
-    test('should handle filtering with zero values', async () => {
-      expect(true).toBe(true);
-    });
-  });
-
-/*
   beforeEach(() => {
     mockAdapter = new MockAdapter();
   });
 
   describe('getItems', () => {
 
-    test('should handle filtering with zero values', async () => {
+    test('should filter continents by area range', async () => {
       // Arrange
-      const req = {
-        query: {
-          countriesNumberMin: 0,
-          countriesNumberMax: 0,
-        },
-      };
+      const req = { query: { areaMin: 1000, areaMax: 5000000 } };
 
       // Act
       const result = await mockAdapter.getItems(req);
 
       // Assert
-      expect(result.continents).toBeDefined();
       result.continents.forEach(continent => {
-        expect(continent.countriesNumber).toBe(0);
+        expect(continent.area).toBeGreaterThanOrEqual(1000);
+        expect(continent.area).toBeLessThanOrEqual(5000000);
       });
     });
 
-    test('should handle invalid sort field gracefully', async () => {
-      // Arrange: Create a condition where sortBy will be undefined
-      const req = { query: { sort: '-' } };
+    test('should paginate results', async () => {
+      // Arrange
+      const req = { query: { page: 2, limit: 1 } };
 
       // Act
       const result = await mockAdapter.getItems(req);
 
       // Assert
-      expect(result).toBeDefined();
-      expect(result.continents).toBeDefined();
+      expect(result.continents.length).toBe(1);
     });
 
-    test('should filter by maximum density with zero area', async () => {
+    test('should sort continents by name in ascending order', async () => {
       // Arrange
-      const req = { query: { densityMax: 0.1 } };
-      mockAdapter.continents = [
-        { ...mockAdapter.continents[0] },
-        { ...mockAdapter.continents[0], area: 0, population: 100 },
-      ];
+      const req = { query: { sort: 'name' } };
 
       // Act
       const result = await mockAdapter.getItems(req);
 
       // Assert
-      expect(result).toBeDefined();
-      expect(result.continents).toBeDefined();
+      const names = result.continents.map(cont => cont.name);
+      expect(names).toEqual([...names].sort());
     });
 
-    test('should handle all filtering parameters simultaneously', async () => {
+    test('should calculate correct totals', async () => {
       // Arrange
-      const req = {
-        query: {
-          name: 'a',
-          code: 'A',
-          areaMin: '1000',
-          areaMax: '99999999',
-          populationMin: '1000',
-          populationMax: '9999999999',
-          countriesNumberMin: '0',
-          countriesNumberMax: '100',
-          densityMin: '0',
-          densityMax: '1000',
-          page: '1',
-          limit: '10',
-          sort: '-population',
-        },
-      };
-
-      // Act
-      const result = await mockAdapter.getItems(req);
-
-      // Assert
-      expect(result).toBeDefined();
-      expect(result.continents).toBeDefined();
-      expect(Array.isArray(result.continents)).toBeTruthy();
-    });
-
-    test('should handle invalid numeric parameters', async () => {
-      // Arrange
-      const req = {
-        query: {
-          areaMin: 'invalid',
-          populationMax: 'invalid',
-          countriesNumberMin: 'invalid',
-          densityMax: 'invalid',
-        },
-      };
-
-      // Act
-      const result = await mockAdapter.getItems(req);
-
-      // Assert
-      expect(result).toBeDefined();
-      expect(result.continents).toBeDefined();
-    });
-  });
-
-  describe('calculateTotals', () => {
-    test('should handle empty continents array', () => {
-      // Arrange
-      const emptyArray = [];
-
-      // Act
-      const result = mockAdapter.calculateTotals(emptyArray);
-
-      // Assert
-      expect(result).toEqual({
-        area: 0,
-        population: 0,
-        countriesNumber: 0,
-        density: 0,
-      });
-    });
-
-    test('should handle continent with zero area for density calculation', () => {
-      // Arrange
-      const continents = [{
-        area: 0,
-        population: 1000,
-        countriesNumber: 1,
-      }];
-
-      // Act
-      const result = mockAdapter.calculateTotals(continents);
-
-      // Assert
-      expect(result.density).toBe(0);
-    });
-  });
-
-  describe('error handling', () => {
-    test('should handle error when continents data is corrupted', async () => {
-      // Arrange
-      mockAdapter.continents = null;
       const req = { query: {} };
 
       // Act
       const result = await mockAdapter.getItems(req);
 
       // Assert
+      expect(result.allTotals).toHaveProperty('area');
+      expect(result.allTotals).toHaveProperty('population');
+      expect(result.allTotals).toHaveProperty('countriesNumber');
+      expect(result.allTotals).toHaveProperty('density');
+    });
+  });
+
+  describe('getItem', () => {
+
+    test('should return null if continent ID is not found', async () => {
+      // Act
+      const result = await mockAdapter.getItem(9999);
+
+      // Assert
       expect(result).toBeNull();
     });
   });
-  */
+
+  describe('updateItem', () => {
+
+    test('should return null if continent ID to update is not found', async () => {
+      // Act
+      const result = await mockAdapter.updateItem(9999, { name: 'NotFound' });
+
+      // Assert
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('deleteItem', () => {
+    test('should return null if continent ID to delete is not found', async () => {
+      // Act
+      const result = await mockAdapter.deleteItem(9999);
+
+      // Assert
+      expect(result).toBeNull();
+    });
+  });
 });

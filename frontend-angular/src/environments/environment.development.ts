@@ -7,5 +7,4 @@ export const environment = {
     fontawesome: 'Font Awesome 6.6.0',
   },
   backendAdminUrl: 'http://localhost:9000',
-  // backendAdminUrl: 'http://localhost:3000',
 };

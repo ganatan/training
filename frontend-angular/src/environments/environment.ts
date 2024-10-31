@@ -6,6 +6,5 @@ export const environment = {
     bootstrap: 'Bootstrap 5.3.3',
     fontawesome: 'Font Awesome 6.6.0',
   },
-  backendAdminUrl: 'http://localhost:9000',
-  // backendAdminUrl: 'http://localhost:3000',
+  backendAdminUrl: 'http://localhost:3000',
 };

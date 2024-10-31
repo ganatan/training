@@ -18,6 +18,8 @@ export class ItemsService {
     const params = this.buildQueryParams(filters);
     const url = `${this.backendUrl}/continents${params}`;
 
+    console.log('00000000001:getItems:' + url);
+
     return this.http.get<ItemsResponse>(url).pipe(
       catchError(this.handleError<ItemsResponse>('getItems', this.getDefaultResponse()))
     );

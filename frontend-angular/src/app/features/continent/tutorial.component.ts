@@ -14,6 +14,8 @@ import { Pagination } from '../../shared/utils/pagination/pagination';
 })
 export class TutorialComponent implements OnInit {
 
+  defaultSelectedItemsPerPage = 10;
+
   sortColumn: string | null = null;
   sortDirection: 'asc' | 'desc' | null = null;
 
@@ -48,15 +50,18 @@ export class TutorialComponent implements OnInit {
     densityMax: null,
   };
 
-  selectedItemsPerPage = 5;
+  selectedItemsPerPage: number;
   paginationEnabled = true;
-  pagination: Pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
+  pagination: Pagination;
 
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     private itemsService: ItemsService,
     private paginationService: PaginationService) {
+
+    this.selectedItemsPerPage = this.defaultSelectedItemsPerPage;
+    this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
   }
 
   ngOnInit(): void {
@@ -67,7 +72,7 @@ export class TutorialComponent implements OnInit {
     const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
-      sort, 
+      sort,
     };
     this.loading = true;
     this.itemsService.getItems(sortFilters)
@@ -121,7 +126,7 @@ export class TutorialComponent implements OnInit {
     const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
-      sort, 
+      sort,
     };
     this.setQueryParams(sortFilters);
     this.getItems(this.filters);
@@ -136,6 +141,13 @@ export class TutorialComponent implements OnInit {
   getQueryParams() {
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.filters = { ...this.filters, ...queryParams };
+    
+      const { limit } = this.filters || {};
+      if (limit) {
+        this.selectedItemsPerPage = limit;
+      }
+      
+      this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
       this.getItems(this.filters);
     });
   }
@@ -185,7 +197,7 @@ export class TutorialComponent implements OnInit {
         this.sortDirection = 'desc';
       } else if (this.sortDirection === 'desc') {
         this.sortDirection = null;
-        this.sortColumn = null; 
+        this.sortColumn = null;
       } else {
         this.sortDirection = 'asc';
       }
@@ -195,5 +207,5 @@ export class TutorialComponent implements OnInit {
     }
     this.search();
   }
-  
+
 }

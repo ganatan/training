@@ -6,7 +6,7 @@ jest.mock('../../continent-controller');
 */
 
 describe('Continent Routes', () => {
-  let app;
+  // let app;
 /*
   beforeEach(() => {
     app = express();

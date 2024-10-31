@@ -1,14 +1,13 @@
 // import MockAdapter from '../../continent-repository-mock.js';
 
 describe('MockAdapter', () => {
-  let mockAdapter;
+  // let mockAdapter;
 
   describe('getItems', () => {
     test('should handle filtering with zero values', async () => {
       expect(true).toBe(true);
     });
   });
-
 
 /*
   beforeEach(() => {

@@ -3,3 +3,6 @@ export const extractTableName = (query) => {
 
   return match ? match[1].toLowerCase() : null;
 };
+
+export const truncate = (value, maxLength) =>
+  value && value.length > maxLength ? value.slice(0, maxLength) : value;

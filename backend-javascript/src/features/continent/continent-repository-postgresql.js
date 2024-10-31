@@ -5,6 +5,8 @@ import {
   MIN_BIGINT,
 } from '../../shared/constants/data-limits-constants.js';
 
+import { truncate } from '../../shared/utils/query-utils.js';
+
 class PostgreSQLAdapter {
   constructor(dbClient) {
     this.dbClient = dbClient;
@@ -333,9 +335,9 @@ class PostgreSQLAdapter {
       `;
 
       const values = [
-        continentData.code,
-        continentData.name,
-        continentData.wikipediaLink,
+        truncate(continentData.code, 20),
+        truncate(continentData.name, 50),
+        truncate(continentData.wikipediaLink, 50),
         area,
         population,
         countriesNumber,
@@ -372,9 +374,9 @@ class PostgreSQLAdapter {
       `;
 
       const values = [
-        continentData.code,
-        continentData.name,
-        continentData.wikipediaLink,
+        truncate(continentData.code, 20),
+        truncate(continentData.name, 50),
+        truncate(continentData.wikipediaLink, 50),
         area,
         population,
         countriesNumber,

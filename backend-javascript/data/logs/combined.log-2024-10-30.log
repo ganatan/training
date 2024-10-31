@@ -147,3 +147,24 @@
 {"level":"info","message":"GET / - ::1","timestamp":"2024-10-30 18:57:48"}
 {"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 18:57:51"}
 {"level":"info","message":"GET /continents/1001 - ::1","timestamp":"2024-10-30 18:58:00"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 19:14:36"}
+{"level":"info","message":"GET /continents/1000 - ::1","timestamp":"2024-10-30 19:14:36"}
+{"level":"info","message":"POST /continents - ::1","timestamp":"2024-10-30 19:14:40"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 19:14:41"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 19:16:42"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 19:17:29"}
+{"level":"info","message":"GET /continents/1001 - ::1","timestamp":"2024-10-30 19:17:30"}
+{"level":"info","message":"DELETE /continents/1001 - ::1","timestamp":"2024-10-30 19:17:31"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 19:17:32"}
+{"level":"info","message":"GET /continents/1000 - ::1","timestamp":"2024-10-30 19:17:33"}
+{"level":"info","message":"DELETE /continents/1000 - ::1","timestamp":"2024-10-30 19:17:34"}
+{"level":"info","message":"GET /continents - ::1","timestamp":"2024-10-30 19:17:36"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"Error: Test Error","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"Error: Unknown error","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"Request: undefined undefined","timestamp":"2024-10-30 19:22:53"}
+{"level":"error","message":"IP Address: undefined","timestamp":"2024-10-30 19:22:53"}

@@ -9,11 +9,16 @@ const __dirname = path.dirname(__filename);
 
 export default {
   mode: 'production',
-  entry: './src/index.js',
+  entry: {
+    server: './src/index.js',
+    'create-database': './tools/database-scripts/create-database.js',
+    'create-domains': './tools/database-scripts/create-domains.js',
+  },
   target: 'async-node',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'server.bundle.mjs',
+    filename: '[name].bundle.mjs',
+    chunkFilename: '[name].chunk.mjs',
     module: true,
     chunkFormat: 'module',
   },

@@ -51,8 +51,8 @@
     "create-database": "node tools/database-scripts/create-database.js",
     "create-domains": "node tools/database-scripts/create-domains.js",
     "restore": "npm run create-database && npm run create-domains",
-    "create-database-prod": "node dist/create-database.bundle.js",
-    "create-domains-prod": "node dist/create-domains.bundle.js",
+    "create-database-prod": "node dist/create-database.bundle.mjs",
+    "create-domains-prod": "node dist/create-domains.bundle.mjs",
     "restore-prod": "npm run create-database-prod && npm run create-domains-prod"
   },
   "dependencies": {

@@ -11,16 +11,18 @@ class DomainService {
 
     const env = process.env.NODE_ENV || 'development';
     const localhost = config[env].db.localhost;
+    /*
     const user = config[env].db.user;
     const password = config[env].db.password;
     const port = config[env].db.port;
+    */
 
     this.pool = new Pool({
-      user: user,
+      user: 'postgres',
       host: localhost,
       database: createDatabaseName,
-      password: password,
-      port: port,
+      password: 'Trustno1',
+      port: 5432,
     });
 
     const client = await this.pool.connect();

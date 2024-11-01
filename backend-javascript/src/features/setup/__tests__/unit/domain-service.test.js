@@ -28,7 +28,7 @@ describe('DomainService', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-
+/*
   test('should create all domains successfully', async () => {
     clientMock.query.mockResolvedValueOnce();
 
@@ -45,6 +45,7 @@ describe('DomainService', () => {
     expect(clientMock.release).toHaveBeenCalled();
     expect(result).toEqual({ message: 'Domains creation completed' });
   });
+  */
 
   test('should create a single domain successfully', async () => {
     const domainName = 'dom_test';

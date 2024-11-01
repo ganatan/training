@@ -58,12 +58,12 @@ export class ItemService {
       );
   }
 
-  addItem(item: Item): Observable<Item> {
+  createItem(item: Item): Observable<Item> {
     const body = JSON.stringify(item);
     const url = this.backendUrl + '/continents';
 
     return this.http.post<Item>(url, body, httpOptions).pipe(
-      catchError(this.handleError('addItem', item))
+      catchError(this.handleError('createItem', item))
     );
   }
 

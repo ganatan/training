@@ -76,7 +76,6 @@ export class TutorialComponent {
       density: 0,
     }
     this.formItem.patchValue(item);
-    // this.formItem.setValue(item);
   }
 
   onCreate() {
@@ -118,7 +117,7 @@ export class TutorialComponent {
   }
 
   createItem(item: Item) {
-    this.itemService.addItem(item)
+    this.itemService.createItem(item)
       .subscribe(data => {
         this.setForm(this.formItem, data);
       });

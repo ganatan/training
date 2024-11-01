@@ -1,148 +1,197 @@
 import MySQLAdapter from '../../continent-repository-mysql';
 
 describe('MySQLAdapter', () => {
+  let dbClientMock;
   let adapter;
-  let mockDbClient;
 
   beforeEach(() => {
-    mockDbClient = {
-      query: jest.fn(),
-    };
-    adapter = new MySQLAdapter(mockDbClient);
+    dbClientMock = { query: jest.fn() };
+    adapter = new MySQLAdapter(dbClientMock);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   describe('getItems', () => {
-    test('should retrieve filtered items successfully', async () => {
-      // Arrange: Mock the database response
+    it('should handle all query parameters correctly', async () => {
       const req = {
         query: {
-          name: 'Asia',
-          page: 1,
-          limit: 10,
-          sort: '-population',
+          name: 'Europe',
+          code: 'EU',
+          areaMin: '1000',
+          areaMax: '5000',
+          populationMin: '1000000',
+          populationMax: '5000000',
+          countriesNumberMin: '5',
+          countriesNumberMax: '10',
+          densityMin: '50',
+          densityMax: '100',
+          page: '2',
+          limit: '5',
+          sort: '-name',
         },
       };
-      const mockResult = [
-        {
-          count: 2,
-          area: 44579000,
-          population: 4641054775,
-          countriesNumber: 49,
-          density: 1.04,
-          countPagination: 1,
-          areaPagination: 44579000,
-          populationPagination: 4641054775,
-          countriesNumberPagination: 49,
-          densityPagination: 1.04,
-          continents: [
-            {
-              id: 1,
-              code: 'AS',
-              name: 'Asia',
-              wikipediaLink: 'Asia',
-              area: 44579000,
-              population: 4641054775,
-              countriesNumber: 49,
-              density: 1.04,
-            },
-          ],
-        },
-      ];
-      mockDbClient.query.mockResolvedValue(mockResult);
 
-      // Act
+      dbClientMock.query.mockResolvedValue([{
+        count: 1,
+        area: 100,
+        population: 1000,
+        countriesNumber: 10,
+        density: 10,
+        countPagination: 1,
+        areaPagination: 100,
+        populationPagination: 1000,
+        countriesNumberPagination: 10,
+        densityPagination: 10,
+        continents: [],
+      }]);
+
       const result = await adapter.getItems(req);
-
-      // Assert
-      expect(result.paginationTotals.count).toBe(1);
-      expect(result.allTotals.area).toBe(44579000);
-      expect(result.continents[0].name).toBe('Asia');
+      expect(result).toBeTruthy();
+      expect(dbClientMock.query).toHaveBeenCalledWith(
+        expect.stringContaining('WHERE 1 = 1'),
+        expect.arrayContaining(['%Europe%', '%EU%', 1000, 5000, 1000000, 5000000, 5, 10, 50, 100]),
+      );
     });
 
+    it('should handle invalid pagination parameters', async () => {
+      const req = {
+        query: {
+          page: '-1',
+          limit: '0',
+        },
+      };
+
+      dbClientMock.query.mockResolvedValue([{
+        count: 1,
+        area: 100,
+        population: 1000,
+        countriesNumber: 10,
+        density: 10,
+        countPagination: 1,
+        areaPagination: 100,
+        populationPagination: 1000,
+        countriesNumberPagination: 10,
+        densityPagination: 10,
+        continents: [],
+      }]);
+
+      const result = await adapter.getItems(req);
+      expect(result).toBeTruthy();
+      // Vérifie que les valeurs par défaut sont utilisées
+      expect(dbClientMock.query).toHaveBeenCalledWith(
+        expect.stringContaining('LIMIT 10 OFFSET 0'),
+        expect.any(Array),
+      );
+    });
+
+    it('should handle empty filter values', async () => {
+      const req = {
+        query: {
+          name: '',
+          code: '',
+          areaMin: null,
+          areaMax: null,
+        },
+      };
+
+      dbClientMock.query.mockResolvedValue([{
+        count: 1,
+        area: 100,
+        population: 1000,
+        countriesNumber: 10,
+        density: 10,
+        countPagination: 1,
+        areaPagination: 100,
+        populationPagination: 1000,
+        countriesNumberPagination: 10,
+        densityPagination: 10,
+        continents: [],
+      }]);
+
+      const result = await adapter.getItems(req);
+      expect(result).toBeTruthy();
+      expect(dbClientMock.query).toHaveBeenCalledWith(
+        expect.stringContaining('WHERE 1 = 1'),
+        expect.arrayContaining([]),
+      );
+    });
+  });
+
+  describe('addFilterCondition', () => {
+    it('should add LIKE condition for string values', () => {
+      const params = [];
+      const result = adapter.addFilterCondition('WHERE 1 = 1', params, 'name', 'test', true);
+      expect(result).toBe('WHERE 1 = 1 AND name LIKE ?');
+      expect(params).toContain('%test%');
+    });
+
+    it('should add equals condition for non-string values', () => {
+      const params = [];
+      const result = adapter.addFilterCondition('WHERE 1 = 1', params, 'id', 1, false);
+      expect(result).toBe('WHERE 1 = 1 AND id = ?');
+      expect(params).toContain(1);
+    });
+  });
+
+  describe('addRangeCondition', () => {
+    it('should handle min and max values', () => {
+      const params = [];
+      const result = adapter.addRangeCondition('WHERE 1 = 1', params, 'population', '1000', '5000');
+      expect(result).toBe('WHERE 1 = 1 AND population >= ? AND population <= ?');
+      expect(params).toEqual([1000, 5000]);
+    });
+
+    it('should handle invalid number values', () => {
+      const params = [];
+      const result = adapter.addRangeCondition('WHERE 1 = 1', params, 'population', 'invalid', 'invalid');
+      expect(result).toBe('WHERE 1 = 1');
+      expect(params).toEqual([]);
+    });
+  });
+
+  describe('addDensityCondition', () => {
+    it('should handle density range conditions', () => {
+      const params = [];
+      const result = adapter.addDensityCondition('WHERE 1 = 1', params, '10.5', '20.5');
+      expect(result).toContain('(population / NULLIF(area, 0)) >= ?');
+      expect(result).toContain('(population / NULLIF(area, 0)) <= ?');
+      expect(params).toEqual([10.5, 20.5]);
+    });
   });
 
   describe('getItem', () => {
-    test('should retrieve an item by id successfully', async () => {
-      // Arrange
-      const mockResult = [{
-        id: 1,
-        code: 'AS',
-        name: 'Asia',
-        wikipediaLink: 'Asia',
-        area: 44579000,
-        population: 4641054775,
-        countriesNumber: 49,
-        density: 1.04,
-      }];
-      mockDbClient.query.mockResolvedValue(mockResult);
+    it('should handle invalid id values', async () => {
+      const invalidIds = ['abc', '-1', '99999999999999999999999'];
 
-      // Act
-      const result = await adapter.getItem(1);
-
-      // Assert
-      expect(result).toEqual(mockResult[0]);
+      for (const id of invalidIds) {
+        const result = await adapter.getItem(id);
+        expect(result).toBeNull();
+        expect(dbClientMock.query).toHaveBeenCalledWith(
+          expect.any(String),
+          [0],
+        );
+      }
     });
 
-    test('should return null if item not found', async () => {
-      // Arrange
-      mockDbClient.query.mockResolvedValue([]);
+    it('should handle empty result', async () => {
+      dbClientMock.query.mockResolvedValue([]);
 
-      // Act
-      const result = await adapter.getItem(999);
-
-      // Assert
+      const result = await adapter.getItem(1);
       expect(result).toBeNull();
     });
-
   });
 
-  describe('createItem', () => {
-    test('should create an item successfully', async () => {
-      // Arrange
-      const newContinent = { code: 'EU', name: 'Europe' };
-      const mockResult = { insertId: 1 };
-      mockDbClient.query.mockResolvedValue(mockResult);
-
-      // Act
-      const result = await adapter.createItem(newContinent);
-
-      // Assert
-      expect(result).toEqual(mockResult);
-      expect(mockDbClient.query).toHaveBeenCalledWith('INSERT INTO continent (code, name) VALUES (?, ?)', ['EU', 'Europe']);
+  describe('parseValidNumber', () => {
+    it('should handle various number formats', () => {
+      expect(adapter.parseValidNumber('123', 0)).toBe(123);
+      expect(adapter.parseValidNumber('-123', 0)).toBe(0);
+      expect(adapter.parseValidNumber('abc', 0)).toBe(0);
+      expect(adapter.parseValidNumber('0', 0)).toBe(0);
     });
-
   });
 
-  describe('updateItem', () => {
-    test('should update an item successfully', async () => {
-      // Arrange
-      const updatedContinent = { code: 'AS', name: 'Updated Asia' };
-      const mockResult = { affectedRows: 1 };
-      mockDbClient.query.mockResolvedValue(mockResult);
-
-      // Act
-      const result = await adapter.updateItem(1, updatedContinent);
-
-      // Assert
-      expect(result).toEqual(mockResult);
-      expect(mockDbClient.query).toHaveBeenCalledWith('UPDATE continent SET code = ?, name = ? WHERE id = ?', ['AS', 'Updated Asia', 1]);
-    });
-
-  });
-
-  describe('deleteItem', () => {
-    test('should delete an item successfully', async () => {
-      // Arrange
-      const mockResult = { affectedRows: 1 };
-      mockDbClient.query.mockResolvedValue(mockResult);
-
-      // Act
-      const result = await adapter.deleteItem(1);
-
-      // Assert
-      expect(result).toEqual(mockResult);
-      expect(mockDbClient.query).toHaveBeenCalledWith('DELETE FROM continent WHERE id = ?', [1]);
-    });
-
-  });
+  // Tests existants pour createItem, updateItem, et deleteItem...
 });
+

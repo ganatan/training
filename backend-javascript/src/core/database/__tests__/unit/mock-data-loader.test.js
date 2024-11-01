@@ -1,57 +1,43 @@
-/*
 import fs from 'fs';
 import { getMockData } from '../../mock-data-loader';
-*/
+
 jest.mock('fs');
 
-describe('mock-data-manager (JSON version)', () => {
-
+describe('mock-data-loader', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test('should return mocked data for an existing JSON file', () => {
-    expect(true).toBe(true);
-  });
-
-/*
-  test('should return mocked data for an existing JSON file', () => {
+  test('should return mock data for an existing and valid JSON file', () => {
     // Arrange
+    const tableName = 'testTable';
+    const mockData = [{ id: 1, name: 'Test' }];
     fs.existsSync.mockReturnValue(true);
-    fs.readFileSync.mockReturnValue('[{"id": 1001, "name": "Europe-mock"}]');
+    fs.readFileSync.mockReturnValue(JSON.stringify(mockData));
 
     // Act
-    const data = getMockData('continent');
+    const result = getMockData(tableName);
 
     // Assert
-    expect(data).toEqual([{ id: 1001, name: 'Europe-mock' }]);
+    expect(fs.existsSync).toHaveBeenCalledWith(expect.stringContaining(`${tableName}-mock.json`));
+    expect(fs.readFileSync).toHaveBeenCalledWith(expect.stringContaining(`${tableName}-mock.json`), 'utf-8');
+    expect(result).toEqual(mockData);
   });
 
-  test('should return an empty array for a non-existent JSON file', () => {
+  test('should return an empty array if JSON file contains invalid data', () => {
     // Arrange
-    fs.existsSync.mockReturnValue(false); // Simulate that the file does not exist
+    const tableName = 'invalidTable';
+    fs.existsSync.mockReturnValue(true);
+    fs.readFileSync.mockReturnValue('This is not valid JSON');
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     // Act
-    const data = getMockData('nonexistent-table');
+    const result = getMockData(tableName);
 
     // Assert
-    expect(data).toEqual([]); // Should return an empty array
+    expect(fs.existsSync).toHaveBeenCalledWith(expect.stringContaining(`${tableName}-mock.json`));
+    expect(fs.readFileSync).toHaveBeenCalledWith(expect.stringContaining(`${tableName}-mock.json`), 'utf-8');
+    expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining(`Erreur de parsing du fichier JSON pour la table ${tableName}`), expect.any(Error));
+    expect(result).toEqual([]);
   });
-
-  test('should return an empty array and log an error if the JSON file is malformed', () => {
-    // Arrange
-    fs.existsSync.mockReturnValue(true); // Simulate that the file exists
-    fs.readFileSync.mockReturnValue('{"id": 1001, "name": Europe-mock}'); // Malformed JSON content
-
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
-
-    // Act
-    const data = getMockData('continent');
-
-    // Assert
-    expect(data).toEqual([]); // Should return an empty array
-    consoleSpy.mockRestore();
-  });
-  */
-
 });

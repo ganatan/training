@@ -1,188 +1,147 @@
-/*
-jest.mock('../../../../core/database/db-adapter-factory');
-jest.mock('../../../../core/database/db-clients-factory');
-jest.mock('../../../../core/config/config');
-jest.mock('../../../../infrastructure/logger/logger');
-jest.mock('../../continent-repository-mock');
-jest.mock('../../continent-repository-mongodb');
-jest.mock('../../continent-repository-mysql');
-jest.mock('../../continent-repository-postgresql');
-
 import ContinentRepository from '../../continent-repository';
 import DBFactory from '../../../../core/database/db-adapter-factory';
 import DB_CLIENTS from '../../../../core/database/db-clients';
 import config from '../../../../core/config/config';
-import logger from '../../../../infrastructure/logger/logger';
 import MOCKAdapter from '../../continent-repository-mock';
 import MongoDBAdapter from '../../continent-repository-mongodb';
 import MySQLAdapter from '../../continent-repository-mysql';
 import PostgreSQLAdapter from '../../continent-repository-postgresql';
-*/
+import logger from '../../../../infrastructure/logger/logger';
+
+jest.mock('../../../../core/database/db-adapter-factory');
+jest.mock('../../continent-repository-mock');
+jest.mock('../../continent-repository-mongodb');
+jest.mock('../../continent-repository-mysql');
+jest.mock('../../continent-repository-postgresql');
+jest.mock('../../../../infrastructure/logger/logger');
 
 describe('ContinentRepository', () => {
-/*  let repository;
-  let mockDBClient;
-  let mockAdapter;
-  */
+  let dbFactoryMock;
+  let dbConfig;
 
-  /*
   beforeEach(() => {
+    dbConfig = config[process.env.NODE_ENV || 'development'];
+    dbFactoryMock = {
+      createClient: jest.fn(),
+    };
+    DBFactory.getInstance.mockReturnValue(dbFactoryMock);
+  });
+
+  afterEach(() => {
     jest.clearAllMocks();
-
-    mockDBClient = {
-      connect: jest.fn(),
-      query: jest.fn(),
-    };
-
-    mockAdapter = {
-      getItems: jest.fn(),
-      getItem: jest.fn(),
-      createItem: jest.fn(),
-      updateItem: jest.fn(),
-      deleteItem: jest.fn(),
-    };
-
-    DBFactory.getInstance.mockReturnValue({
-      createClient: jest.fn().mockReturnValue(mockDBClient),
-    });
-
-    config.development = {
-      db: {
-        client: DB_CLIENTS.MOCK,
-      },
-    };
-
-    [MOCKAdapter, MongoDBAdapter, MySQLAdapter, PostgreSQLAdapter]
-      .forEach(Adapter => {
-        Adapter.mockImplementation(() => mockAdapter);
-      });
-  });
-  */
-
-  describe('Constructor', () => {
-
-    test('devrait initialiser correctement avec MOCK adapter', () => {
-      expect(true).toBe(true);
-    });
-
-/*
-    test('devrait initialiser correctement avec MOCK adapter', () => {
-      repository = new ContinentRepository();
-      expect(repository.dbClient).toBe(mockDBClient);
-      expect(repository.adapter).toBeTruthy();
-    });
-
-    test('devrait initialiser correctement avec MongoDB adapter', () => {
-      config.development.db.client = DB_CLIENTS.MONGODB;
-      repository = new ContinentRepository();
-      expect(repository.adapter).toBeTruthy();
-    });
-
-    test('devrait gérer les erreurs d\'initialisation', () => {
-      DBFactory.getInstance.mockImplementation(() => {
-        throw new Error('DB Factory Error');
-      });
-      repository = new ContinentRepository();
-      expect(logger.error).toHaveBeenCalledWith(
-        'Failed to initialize ContinentRepository:',
-        'DB Factory Error',
-      );
-    });
-    */
   });
 
-  /*
-  describe('Méthodes CRUD', () => {
-    beforeEach(() => {
-      repository = new ContinentRepository();
-    });
+  test('should initialize with MOCKAdapter when db type is MOCK', () => {
+    dbConfig.db = { client: DB_CLIENTS.MOCK };
+    dbFactoryMock.createClient.mockReturnValue({});
 
-    describe('getItems', () => {
-      test('devrait retourner les items avec succès', async () => {
-        const mockItems = [{ id: 1, name: 'Europe' }, { id: 2, name: 'Asia' }];
-        mockAdapter.getItems.mockResolvedValue(mockItems);
+    const repository = new ContinentRepository();
 
-        const result = await repository.getItems({});
-        expect(result).toEqual(mockItems);
-        expect(mockAdapter.getItems).toHaveBeenCalledTimes(1);
-      });
-
-      test('devrait gérer l\'absence d\'adapter', async () => {
-        repository.adapter = null;
-        const result = await repository.getItems({});
-        expect(result).toEqual({ error: 'Database connection not initialized' });
-      });
-    });
-
-    describe('getItem', () => {
-      test('devrait retourner un item avec succès', async () => {
-        const mockItem = { id: 1, name: 'Europe' };
-        mockAdapter.getItem.mockResolvedValue(mockItem);
-
-        const result = await repository.getItem(1);
-        expect(result).toEqual(mockItem);
-        expect(mockAdapter.getItem).toHaveBeenCalledWith(1);
-      });
-
-      test('devrait gérer l\'absence d\'adapter', async () => {
-        repository.adapter = null;
-        const result = await repository.getItem(1);
-        expect(result).toEqual({ error: 'Database connection not initialized' });
-      });
-    });
-
-    describe('createItem', () => {
-      test('devrait créer un item avec succès', async () => {
-        const newItem = { name: 'Oceania' };
-        const createdItem = { id: 3, name: 'Oceania' };
-        mockAdapter.createItem.mockResolvedValue(createdItem);
-
-        const result = await repository.createItem(newItem);
-        expect(result).toEqual(createdItem);
-        expect(mockAdapter.createItem).toHaveBeenCalledWith(newItem);
-      });
-
-      test('devrait gérer l\'absence d\'adapter', async () => {
-        repository.adapter = null;
-        const result = await repository.createItem({});
-        expect(result).toEqual({ error: 'Database connection not initialized' });
-      });
-    });
-
-    describe('updateItem', () => {
-      test('devrait mettre à jour un item avec succès', async () => {
-        const updatedItem = { id: 1, name: 'Updated Europe' };
-        mockAdapter.updateItem.mockResolvedValue(updatedItem);
-
-        const result = await repository.updateItem(1, updatedItem);
-        expect(result).toEqual(updatedItem);
-        expect(mockAdapter.updateItem).toHaveBeenCalledWith(1, updatedItem);
-      });
-
-      test('devrait gérer l\'absence d\'adapter', async () => {
-        repository.adapter = null;
-        const result = await repository.updateItem(1, {});
-        expect(result).toEqual({ error: 'Database connection not initialized' });
-      });
-    });
-
-    describe('deleteItem', () => {
-      test('devrait supprimer un item avec succès', async () => {
-        const deleteResult = { success: true };
-        mockAdapter.deleteItem.mockResolvedValue(deleteResult);
-
-        const result = await repository.deleteItem(1);
-        expect(result).toEqual(deleteResult);
-        expect(mockAdapter.deleteItem).toHaveBeenCalledWith(1);
-      });
-
-      test('devrait gérer l\'absence d\'adapter', async () => {
-        repository.adapter = null;
-        const result = await repository.deleteItem(1);
-        expect(result).toEqual({ error: 'Database connection not initialized' });
-      });
-    });
+    expect(repository.adapter).toBeInstanceOf(MOCKAdapter);
+    expect(MOCKAdapter).toHaveBeenCalledWith(dbFactoryMock.createClient.mock.results[0].value);
   });
-  */
+
+  test('should initialize with MongoDBAdapter when db type is MONGODB', () => {
+    dbConfig.db = { client: DB_CLIENTS.MONGODB };
+    dbFactoryMock.createClient.mockReturnValue({});
+
+    const repository = new ContinentRepository();
+
+    expect(repository.adapter).toBeInstanceOf(MongoDBAdapter);
+    expect(MongoDBAdapter).toHaveBeenCalledWith(dbFactoryMock.createClient.mock.results[0].value);
+  });
+
+  test('should initialize with MySQLAdapter when db type is MYSQL', () => {
+    dbConfig.db = { client: DB_CLIENTS.MYSQL };
+    dbFactoryMock.createClient.mockReturnValue({});
+
+    const repository = new ContinentRepository();
+
+    expect(repository.adapter).toBeInstanceOf(MySQLAdapter);
+    expect(MySQLAdapter).toHaveBeenCalledWith(dbFactoryMock.createClient.mock.results[0].value);
+  });
+
+  test('should initialize with PostgreSQLAdapter when db type is PG', () => {
+    dbConfig.db = { client: DB_CLIENTS.PG };
+    dbFactoryMock.createClient.mockReturnValue({});
+
+    const repository = new ContinentRepository();
+
+    expect(repository.adapter).toBeInstanceOf(PostgreSQLAdapter);
+    expect(PostgreSQLAdapter).toHaveBeenCalledWith(dbFactoryMock.createClient.mock.results[0].value);
+  });
+
+  test('should log error for unsupported database type', () => {
+    dbConfig.db = { client: 'UNSUPPORTED_DB' };
+    dbFactoryMock.createClient.mockReturnValue({});
+
+    const repository = new ContinentRepository();
+
+    expect(logger.error).toHaveBeenCalledWith('Unsupported database type: UNSUPPORTED_DB');
+    expect(repository.adapter).toBeNull();
+  });
+
+  test('should return error if adapter is not initialized', async () => {
+    const repository = new ContinentRepository();
+    repository.adapter = null;
+
+    const result = await repository.getItems();
+
+    expect(result).toEqual({ error: 'Database connection not initialized' });
+  });
+
+  test('should call getItems on adapter if initialized', async () => {
+    const mockAdapter = { getItems: jest.fn().mockResolvedValue('mocked result') };
+    const repository = new ContinentRepository();
+    repository.adapter = mockAdapter;
+
+    const result = await repository.getItems();
+
+    expect(mockAdapter.getItems).toHaveBeenCalled();
+    expect(result).toBe('mocked result');
+  });
+
+  test('should call getItem on adapter if initialized', async () => {
+    const mockAdapter = { getItem: jest.fn().mockResolvedValue('mocked result') };
+    const repository = new ContinentRepository();
+    repository.adapter = mockAdapter;
+
+    const result = await repository.getItem(1);
+
+    expect(mockAdapter.getItem).toHaveBeenCalledWith(1);
+    expect(result).toBe('mocked result');
+  });
+
+  test('should call createItem on adapter if initialized', async () => {
+    const mockAdapter = { createItem: jest.fn().mockResolvedValue('mocked result') };
+    const repository = new ContinentRepository();
+    repository.adapter = mockAdapter;
+
+    const result = await repository.createItem({ name: 'Europe' });
+
+    expect(mockAdapter.createItem).toHaveBeenCalledWith({ name: 'Europe' });
+    expect(result).toBe('mocked result');
+  });
+
+  test('should call updateItem on adapter if initialized', async () => {
+    const mockAdapter = { updateItem: jest.fn().mockResolvedValue('mocked result') };
+    const repository = new ContinentRepository();
+    repository.adapter = mockAdapter;
+
+    const result = await repository.updateItem(1, { name: 'Updated Europe' });
+
+    expect(mockAdapter.updateItem).toHaveBeenCalledWith(1, { name: 'Updated Europe' });
+    expect(result).toBe('mocked result');
+  });
+
+  test('should call deleteItem on adapter if initialized', async () => {
+    const mockAdapter = { deleteItem: jest.fn().mockResolvedValue('mocked result') };
+    const repository = new ContinentRepository();
+    repository.adapter = mockAdapter;
+
+    const result = await repository.deleteItem(1);
+
+    expect(mockAdapter.deleteItem).toHaveBeenCalledWith(1);
+    expect(result).toBe('mocked result');
+  });
 });
-

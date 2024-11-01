@@ -3,7 +3,6 @@ const DB_CLIENTS = {
   MONGODB: 'mongodb',
   MYSQL: 'mysql',
   PG: 'pg',
-  SEQUELIZE_PG: 'sequelize-pg',
 };
 
 export default DB_CLIENTS;

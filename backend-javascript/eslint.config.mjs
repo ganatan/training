@@ -3,7 +3,7 @@ import pluginJs from '@eslint/js';
 
 export default [
   {
-    ignores: ['dist/**', 'eslint.config.mjs','docs/**','tools/database-sql/**','tutorials/**'],
+    ignores: ['dist/**', 'eslint.config.mjs', 'docs/**', 'tools/database-sql/**', 'tutorials/**'],
   },
   {
     files: ['**/*.js'],
@@ -29,7 +29,6 @@ export default [
       'no-redeclare': 'error',
       'consistent-return': 'error',
       'no-shadow': 'error',
-      // 'indent': ['error', 2],
       'quotes': ['error', 'single', { 'avoidEscape': true }],
       'semi': ['error', 'always'],
       'comma-dangle': ['error', 'always-multiline'],

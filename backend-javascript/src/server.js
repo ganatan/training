@@ -1,8 +1,10 @@
 import config from './core/config/config.js';
+
 import DBAdapterFactory from './core/database/db-adapter-factory.js';
 import DBConnectionService from './core/database/db-connection-service.js';
 import DBConnectionManager from './core/database/db-connection-manager.js';
 import dbClients from './core/database/db-clients-factory.js';
+
 import app from './app.js';
 
 const dbAdapterFactory = DBAdapterFactory.getInstance(dbClients);

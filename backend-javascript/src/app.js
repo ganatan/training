@@ -8,7 +8,7 @@ import handleResponse from './infrastructure/logger/response-handler.js';
 import handleError from './infrastructure/errors/error-handler.js';
 import requestLogger from './infrastructure/logger/request-logger.js';
 
-import routes from './main-routes.js';
+import routes from './app-routes.js';
 
 const app = express();
 

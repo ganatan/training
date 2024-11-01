@@ -1,6 +1,5 @@
 import DomainService from '../../domain-service';
 import pg from 'pg';
-import config from '../../../../core/config/config';
 
 jest.mock('pg');
 
@@ -28,24 +27,6 @@ describe('DomainService', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-/*
-  test('should create all domains successfully', async () => {
-    clientMock.query.mockResolvedValueOnce();
-
-    const result = await domainService.createDomains();
-
-    expect(pg.Pool).toHaveBeenCalledWith({
-      user: config[process.env.NODE_ENV || 'development'].db.user,
-      host: config[process.env.NODE_ENV || 'development'].db.localhost,
-      database: 'angular_backend_test',
-      password: config[process.env.NODE_ENV || 'development'].db.password,
-      port: config[process.env.NODE_ENV || 'development'].db.port,
-    });
-    expect(clientMock.query).toHaveBeenCalledTimes(20); // Assuming there are 20 domains to be created
-    expect(clientMock.release).toHaveBeenCalled();
-    expect(result).toEqual({ message: 'Domains creation completed' });
-  });
-  */
 
   test('should create a single domain successfully', async () => {
     const domainName = 'dom_test';

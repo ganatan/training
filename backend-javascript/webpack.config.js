@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 export default {
   mode: 'production',
   entry: {
-    server: './src/index.js',
+    server: './src/starter.js',
     'create-database': './tools/database-scripts/create-database.js',
     'create-domains': './tools/database-scripts/create-domains.js',
   },

@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 function getDirectoryStructure(dirPath, level = 0) {
   const files = fs.readdirSync(dirPath);
@@ -24,7 +24,7 @@ function generateStructureForFolders(folders) {
   let fullStructure = '';
 
   folders.forEach(folder => {
-    const folderPath = path.join(__dirname, '..', '..', folder);
+    const folderPath = path.join(path.resolve(), folder);
     if (fs.existsSync(folderPath)) {
       fullStructure += `\nStructure of ${folder}:\n`;
       fullStructure += getDirectoryStructure(folderPath);
@@ -41,7 +41,8 @@ const projectStructure = generateStructureForFolders(foldersToInspect);
 
 console.log(projectStructure);
 
-module.exports = {
+export {
   getDirectoryStructure,
   generateStructureForFolders,
 };
+

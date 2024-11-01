@@ -8,7 +8,8 @@ import handleResponse from './infrastructure/logger/response-handler.js';
 import handleError from './infrastructure/errors/error-handler.js';
 import requestLogger from './infrastructure/logger/request-logger.js';
 
-import routes from './app-routes.js';
+import featuresRoutes from './features-routes.js';
+import indexRoutes from './index-routes.js';
 
 const app = express();
 
@@ -20,7 +21,9 @@ app.use(requestLogger);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.use('/', routes);
+app.use('/', featuresRoutes);
+app.use('/', indexRoutes);
+app.use('*', indexRoutes);
 
 app.use(handleResponse);
 app.use(handleError);

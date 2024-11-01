@@ -1,4 +1,4 @@
-const DomainService = require('../../src/features/setup/domain-service');
+import DomainService from '../../src/features/setup/domain-service.js';
 
 async function main() {
   try {

@@ -1,4 +1,4 @@
-const DatabaseService = require('../../src/features/setup/db-connection-manager');
+import DatabaseService from '../../src/features/setup/database-service.js';
 
 async function main() {
   const databaseName = 'woper';

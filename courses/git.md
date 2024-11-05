@@ -4,7 +4,8 @@
 ## Installation
 
 ```bash
-sudo apt-get --yes install git   # installation
+# installation
+sudo apt-get --yes install git   
 ```
 
 To uninstall Git:

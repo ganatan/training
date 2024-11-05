@@ -10,16 +10,35 @@ ng generate component image
 
 ---
 
-## Source Code
+## Image Component Source Code
 
-### app.component.html
+```html
+<!-- image.component.html -->
+<p>image works!</p>
+```
+
+```typescript
+// image.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-image',
+  standalone: true,
+  imports: [],
+  templateUrl: './image.component.html',
+  styleUrl: './image.component.css'
+})
+export class ImageComponent {
+
+}
+```
+
+## App Component Source Code
 
 ```html
 <!-- app.component.html -->
 <app-image></app-image>
 ```
-
-### app.component.ts
 
 ```typescript
 // app.component.ts

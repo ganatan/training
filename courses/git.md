@@ -37,14 +37,14 @@ git config --global core.editor "notepad"
 ## Branch
 
 ```bash
-# Create a new branch
-git branch new-branch
-```
-
-```bash
 # List branches
 git branch
 git branch -a
+```
+
+```bash
+# Create a new branch
+git branch new-branch
 ```
 
 ```bash
@@ -54,6 +54,14 @@ git checkout main
 ```
 ---
 
+```bash
+# Delete a branch
+git branch -d branch-name
+
+# Force Delete a branch
+git branch -D branch-name
+```
+---
 
 
 ## Initializing a Git Repository

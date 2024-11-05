@@ -6,9 +6,7 @@
 ```bash
 # installation
 sudo apt-get --yes install git   
-```
 
-```bash
 # uninstallation
 sudo apt-get --yes purge git
 ```
@@ -19,15 +17,11 @@ sudo apt-get --yes purge git
 
 ```bash
 git config --list
-```
 
-```bash
 # user account
 git config --global user.email "user_email"
 git config --global user.name "user_name"
-```
 
-```bash
 # Set default editor
 git config --global core.editor "notepad"
 ```
@@ -118,19 +112,13 @@ git log --oneline -p index.html
 ```bash
 # Restore To position on a specific commit:
 git checkout <commit_id>
-```
 
-```bash
 # Return to the current state:
 git checkout master
-```
 
-```bash
 # Undo a specific commit
 git revert <commit_id>
-```
 
-```bash
 # Unstage a file
 git reset HEAD <file>
 ```

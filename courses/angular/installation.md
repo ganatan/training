@@ -19,3 +19,16 @@ ng new angular-starter
 ```
 ---
 
+
+## SSR & PWA
+
+```bash
+# SSR installation
+ng add @angular/ssr
+
+# PWA Installation
+ng add @angular/pwa
+
+```
+---
+

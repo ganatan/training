@@ -1,11 +1,13 @@
 
-# Git
+# Git Course
 
 ## Installation
 
 ```bash
-sudo apt-get --yes install git
+sudo apt-get --yes install git   # installation
 ```
+
+To uninstall Git:
 
 ```bash
 sudo apt-get --yes purge git
@@ -13,22 +15,22 @@ sudo apt-get --yes purge git
 
 ---
 
-## Configuration de Git
+## Configuration
 
-### Voir la configuration actuelle
+### View current configuration
 
 ```bash
 git config --list
 ```
 
-### Configurer le compte utilisateur
+### Configure user account
 
 ```bash
 git config --global user.email "user_email"
 git config --global user.name "user_name"
 ```
 
-### Configurer l'éditeur par défaut (exemple avec Notepad)
+### Set default editor (example with Notepad)
 
 ```bash
 git config --global core.editor "notepad"
@@ -36,61 +38,61 @@ git config --global core.editor "notepad"
 
 ---
 
-## Initialisation d'un dépôt Git
+## Initializing a Git Repository
 
-### Créer un fichier README et l'ajouter au dépôt
+### Create a README file and add it to the repository
 
 ```bash
-echo "# essai" >> README.md
+echo "# test" >> README.md
 ```
 
-### Initialiser le dépôt
+### Initialize the repository
 
 ```bash
 git init
 ```
 
-### Ajouter des fichiers au suivi
+### Add files to tracking
 
-Ajouter un fichier spécifique à l'index :
+Add a specific file to the index:
 
 ```bash
 git add README.md
 ```
 
-Ajouter tous les fichiers modifiés :
+Add all modified files:
 
 ```bash
 git add *
 ```
 
-### Committer les changements
+### Commit changes
 
 ```bash
 git commit -m "first commit"
 ```
 
-### Ajouter une remote
+### Add a remote
 
-Sans identifiants :
+Without credentials:
 
 ```bash
 git remote add origin https://github.com/user-name/example.git
 ```
 
-Avec identifiants :
+With credentials:
 
 ```bash
 git remote add origin https://user-name:user-password@github.com/user-name/example.git
 ```
 
-### Envoyer les changements vers le dépôt distant
+### Push changes to the remote repository
 
 ```bash
 git push -u origin master
 ```
 
-### Récupérer les mises à jour du dépôt distant
+### Pull updates from the remote repository
 
 ```bash
 git pull
@@ -98,73 +100,73 @@ git pull
 
 ---
 
-## Gestion des commits
+## Commit Management
 
-### Annuler le dernier commit (en gardant les modifications en stage)
+### Undo the last commit (keeping changes staged)
 
 ```bash
 git commit --amend
 ```
 
-### Vérifier l'état du projet
+### Check project status
 
 ```bash
 git status
 ```
 
-### Ajouter les fichiers au stage
+### Stage files
 
 ```bash
 git add *
 ```
 
-### Vérifier les différences entre les fichiers
+### Check differences between files
 
 ```bash
 git diff
 ```
 
-### Créer un commit avec un message
+### Create a commit with a message
 
 ```bash
 git commit -m "feature01"
 ```
 
-### Ajouter et committer en une seule commande
+### Stage and commit in one command
 
 ```bash
 git commit -a -m "feature01"
 ```
 
-### Afficher l'historique des commits
+### View commit history
 
-Avec un éditeur :
+With an editor:
 
 ```bash
 git log
 ```
 
-Sur une seule ligne :
+On a single line:
 
 ```bash
 git log --oneline
 ```
 
-Sur une seule ligne avec détails pour un fichier :
+Detailed view on a single line for a file:
 
 ```bash
 git log --oneline -p index.html
 ```
 
-### Restaurer un état du projet
+### Restore a project state
 
-Pour se positionner sur un commit spécifique :
+To position on a specific commit:
 
 ```bash
 git checkout <commit_id>
 ```
 
-Pour revenir à l'état actuel :
+To return to the current state:
 
 ```bash
 git checkout master
@@ -172,27 +174,27 @@ git checkout master
 
 ---
 
-## Gestion des branches
+## Branch Management
 
-### Créer une nouvelle branche
+### Create a new branch
 
 ```bash
 git branch prototype
 ```
 
-### Lister les branches
+### List branches
 
 ```bash
 git branch
 ```
 
-### Basculer sur une branche
+### Switch to a branch
 
 ```bash
 git checkout prototype
 ```
 
-### Revenir sur la branche principale
+### Switch back to the main branch
 
 ```bash
 git checkout master
@@ -200,29 +202,29 @@ git checkout master
 
 ---
 
-## Commandes additionnelles
+## Additional Commands
 
-### Annuler un commit spécifique
+### Undo a specific commit
 
 ```bash
 git revert <commit_id>
 ```
 
-### Annuler la mise en stage d'un fichier
+### Unstage a file
 
 ```bash
-git reset HEAD <fichier>
+git reset HEAD <file>
 ```
 
-### Fusionner des branches
+### Merge branches
 
 ```bash
-git merge <nom_de_branche>
+git merge <branch_name>
 ```
 
-### Récupérer un fichier à partir d'un commit et committer les modifications
+### Retrieve a file from a specific commit and commit changes
 
 ```bash
-git checkout <commit_id> <fichier>
-git commit -a -m "nouveau commit"
+git checkout <commit_id> <file>
+git commit -a -m "new commit"
 ```

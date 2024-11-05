@@ -3,10 +3,9 @@
 
 ## Installation 
 
-```bash
-# Check Angular Releases
-[https://github.com/angular/angular/releases](https://github.com/angular/angular/releases)
+- [Check Angular Releases](https://github.com/angular/angular/releases)
 
+```bash
 # uninstallation
 npm uninstall -g @angular/cli
 

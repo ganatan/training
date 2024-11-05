@@ -3,7 +3,7 @@
 
 ## Course List
 
+- [class](javascript/class.md)
 - [forEach](javascript/foreach.md)
-- [class](angular/class.md)
 
 Click on a link to open the corresponding documentation.

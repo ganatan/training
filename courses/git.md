@@ -55,10 +55,10 @@ git checkout main
 
 ```bash
 # Delete a branch
-git branch -d branch-name
+git branch -d new-branch
 
-# Force Delete a branch
-git branch -D branch-name
+# Delete a branch (force)
+git branch -D new-branch
 ```
 ---
 

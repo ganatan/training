@@ -61,8 +61,8 @@ git branch -D new-branch
 ```bash
 git init
 echo "# test" >> README.md
-git add README.md
 git status
+git add README.md
 git add *
 git commit -m "first commit"
 ```

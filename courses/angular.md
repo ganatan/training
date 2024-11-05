@@ -3,7 +3,7 @@
 
 ## Course List
 
-- [Installation](courses/git.md)
-- [Components](courses/git.md)
+- [Installation](courses/angular/installation.md)
+- [Components](courses/angular/components.md)
 
 Click on a link to open the corresponding documentation.

@@ -40,9 +40,7 @@ git config --global core.editor "notepad"
 # List branches
 git branch
 git branch -a
-```
 
-```bash
 # Create a new branch
 git branch new-branch
 ```
@@ -73,29 +71,25 @@ git add *
 git commit -m "first commit"
 ```
 
-### Add a remote
-
-Without credentials:
+### Remote
 
 ```bash
+# Add a remote Without credentials
 git remote add origin https://github.com/user-name/example.git
 ```
 
-With credentials:
-
 ```bash
+# Add a remote With credentials
 git remote add origin https://user-name:user-password@github.com/user-name/example.git
 ```
 
-### Push changes to the remote repository
-
 ```bash
+# Push changes to the remote repository
 git push -u origin master
 ```
 
-### Pull updates from the remote repository
-
 ```bash
+# Pull updates from the remote repository
 git pull
 ```
 

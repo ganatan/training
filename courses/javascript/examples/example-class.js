@@ -1,10 +1,3 @@
-
-# Javascript : class
-
-## class Source Code
-
-```javascript
-// example-class.js
 class Movie {
   constructor(name, director) {
     this.name = name;
@@ -25,5 +18,3 @@ console.log('movie:director:' + movie.director);
 console.log('movie:Object.keys:' + Object.keys(movie))
 
 movie.show();
-```
-

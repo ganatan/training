@@ -1,15 +1,11 @@
 
-# Documentation Git
+# Git
 
-## Installation de Git
-
-Pour installer Git, utilisez la commande suivante :
+## Installation
 
 ```bash
 sudo apt-get --yes install git
 ```
-
-Pour désinstaller Git :
 
 ```bash
 sudo apt-get --yes purge git

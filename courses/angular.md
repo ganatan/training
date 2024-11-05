@@ -3,7 +3,7 @@
 
 ## Course List
 
-- [Installation](courses/angular/installation.md)
-- [Components](courses/angular/components.md)
+- [Installation](angular/installation.md)
+- [Components](angular/components.md)
 
 Click on a link to open the corresponding documentation.

@@ -1,12 +1,10 @@
 
-# Documentation des Cours
+# Course Documentation
 
-Ce répertoire contient une série de cours pour vous aider à vous familiariser avec différents outils et frameworks.
+This repository contains a series of courses to help you get familiar with various tools and frameworks.
 
-## Liste des Cours
+## Course List
 
-- [Git](courses/git.md) : Documentation sur les commandes de base pour utiliser Git.
-- [Angular](courses/angular.md) : Guide pour démarrer avec Angular.
-- [React](courses/react.md) : Guide pour démarrer avec React.
+- [Git](courses/git.md): Documentation on basic commands to use Git.
 
-Cliquez sur un lien pour ouvrir la documentation correspondante.
+Click on a link to open the corresponding documentation.

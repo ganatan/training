@@ -62,6 +62,7 @@ git branch -D new-branch
 git init
 echo "# test" >> README.md
 git add README.md
+git status
 git add *
 git commit -m "first commit"
 ```
@@ -90,12 +91,6 @@ git pull
 ## Commits
 
 ```bash
-# Check project status
-git status
-
-# Stage files
-git add *
-
 # View commit history oneline
 git log --oneline
 
@@ -119,6 +114,19 @@ git commit -a -m "feature01"
 git log --oneline -p index.html
 ```
 
+## Merge branches
+
+```bash
+git merge <branch_name>
+
+# Retrieve a file from a specific commit and commit changes
+git checkout <commit_id> <file>
+git commit -a -m "new commit"
+```
+
+## Commits Restore
+
+
 ```bash
 # Restore To position on a specific commit:
 git checkout <commit_id>
@@ -133,12 +141,3 @@ git revert <commit_id>
 git reset HEAD <file>
 ```
 
-## Merge branches
-
-```bash
-git merge <branch_name>
-
-# Retrieve a file from a specific commit and commit changes
-git checkout <commit_id> <file>
-git commit -a -m "new commit"
-```

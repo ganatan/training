@@ -44,12 +44,13 @@ git branch new-branch
 ```bash
 # List branches
 git branch
+git branch -a
 ```
 
 ```bash
 # Switch to a branch
 git checkout new-branch
-git checkout master
+git checkout main
 ```
 ---
 

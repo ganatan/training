@@ -7,5 +7,6 @@ This repository contains a series of courses to help you get familiar with vario
 
 - [Git](courses/git.md)
 - [Angular](courses/angular.md)
+- [Javascript](courses/javascript.md)
 
 Click on a link to open the corresponding documentation.

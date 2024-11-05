@@ -63,35 +63,23 @@ git branch -D new-branch
 ---
 
 
-## Initializing a Git Repository
-
-### Create a README file and add it to the repository
-
-```bash
-echo "# test" >> README.md
-```
-
-### Initialize the repository
+## Initializing
 
 ```bash
 git init
 ```
 
-### Add files to tracking
-
-Add a specific file to the index:
+```bash
+echo "# test" >> README.md
+```
 
 ```bash
 git add README.md
 ```
 
-Add all modified files:
-
 ```bash
 git add *
 ```
-
-### Commit changes
 
 ```bash
 git commit -m "first commit"
@@ -125,103 +113,80 @@ git pull
 
 ---
 
-## Commit Management
-
-### Undo the last commit (keeping changes staged)
+## Commits
 
 ```bash
+# Undo the last commit
 git commit --amend
 ```
 
-### Check project status
-
 ```bash
+# Check project status
 git status
 ```
 
-### Stage files
-
 ```bash
+# Stage files
 git add *
 ```
 
-### Check differences between files
-
 ```bash
+# Check differences between files
 git diff
 ```
 
-### Create a commit with a message
-
 ```bash
+# Create a commit with a message
 git commit -m "feature01"
 ```
 
-### Stage and commit in one command
-
 ```bash
+# Stage and commit in one command
 git commit -a -m "feature01"
 ```
 
-### View commit history
-
-With an editor:
-
 ```bash
+# View commit history
 git log
 ```
 
-On a single line:
-
 ```bash
+# View commit history oneline
 git log --oneline
 ```
-
-Detailed view on a single line for a file:
 
 ```bash
 git log --oneline -p index.html
 ```
 
-### Restore a project state
-
-To position on a specific commit:
-
 ```bash
+# Restore To position on a specific commit:
 git checkout <commit_id>
 ```
 
-To return to the current state:
-
 ```bash
+# Return to the current state:
 git checkout master
 ```
 
----
-
-## Additional Commands
-
-### Undo a specific commit
-
 ```bash
+# Undo a specific commit
 git revert <commit_id>
 ```
 
-### Unstage a file
-
 ```bash
+# Unstage a file
 git reset HEAD <file>
 ```
 
-### Merge branches
+## Merge branches
 
 ```bash
 git merge <branch_name>
 ```
 
-### Retrieve a file from a specific commit and commit changes
-
 ```bash
+# Retrieve a file from a specific commit and commit changes
 git checkout <commit_id> <file>
 git commit -a -m "new commit"
 ```

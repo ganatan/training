@@ -52,7 +52,6 @@ git branch new-branch
 git checkout new-branch
 git checkout main
 ```
----
 
 ```bash
 # Delete a branch

@@ -1,7 +1,7 @@
 
 # Git Course
 
-## Installation
+## Setup
 
 ```bash
 # installation
@@ -17,22 +17,18 @@ sudo apt-get --yes purge git
 
 ## Configuration
 
-### View current configuration
-
 ```bash
 git config --list
 ```
 
-### Configure user account
-
 ```bash
+# user account
 git config --global user.email "user_email"
 git config --global user.name "user_name"
 ```
 
-### Set default editor (example with Notepad)
-
 ```bash
+# Set default editor
 git config --global core.editor "notepad"
 ```
 

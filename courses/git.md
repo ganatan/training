@@ -8,9 +8,8 @@
 sudo apt-get --yes install git   
 ```
 
-To uninstall Git:
-
 ```bash
+# uninstallation
 sudo apt-get --yes purge git
 ```
 

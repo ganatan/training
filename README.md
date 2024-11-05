@@ -5,6 +5,7 @@ This repository contains a series of courses to help you get familiar with vario
 
 ## Course List
 
-- [Git](courses/git.md): Documentation on basic commands to use Git.
+- [Git](courses/git.md)
+- [Angular](courses/angular.md)
 
 Click on a link to open the corresponding documentation.

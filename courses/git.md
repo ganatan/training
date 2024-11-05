@@ -82,14 +82,20 @@ git pull
 ## Commits
 
 ```bash
-# Undo the last commit
-git commit --amend
-
 # Check project status
 git status
 
 # Stage files
 git add *
+
+# View commit history oneline
+git log --oneline
+
+# View commit history
+git log
+
+# Undo the last commit
+git commit --amend
 
 # Check differences between files
 git diff
@@ -100,12 +106,8 @@ git commit -m "feature01"
 # Stage and commit in one command
 git commit -a -m "feature01"
 
-# View commit history
-git log
 
-# View commit history oneline
-git log --oneline
-
+# View commit history on File
 git log --oneline -p index.html
 ```
 

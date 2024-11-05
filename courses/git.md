@@ -1,7 +1,7 @@
 
 # Git Course
 
-## installation on linux
+## Installation on linux
 
 ```bash
 # installation
@@ -16,9 +16,14 @@ sudo apt-get --yes purge git
 ## Configuration
 
 ```bash
+# List config
 git config --list
 
-# user account
+# List global user account
+git config --global user.email
+git config --global user.name
+
+# Change global user account
 git config --global user.email "user_email"
 git config --global user.name "user_name"
 
@@ -64,6 +69,9 @@ git commit -m "first commit"
 ### Remote
 
 ```bash
+# List Remotes
+git remote -v
+
 # Add a remote Without credentials
 git remote add origin https://github.com/user-name/example.git
 

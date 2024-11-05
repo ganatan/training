@@ -1,7 +1,7 @@
 
 # Git Course
 
-## Setup
+## installation on linux
 
 ```bash
 # installation

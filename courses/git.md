@@ -34,6 +34,27 @@ git config --global core.editor "notepad"
 
 ---
 
+## Branch
+
+```bash
+# Create a new branch
+git branch new-branch
+```
+
+```bash
+# List branches
+git branch
+```
+
+```bash
+# Switch to a branch
+git checkout new-branch
+git checkout master
+```
+---
+
+
+
 ## Initializing a Git Repository
 
 ### Create a README file and add it to the repository
@@ -163,34 +184,6 @@ git checkout <commit_id>
 ```
 
 To return to the current state:
-
-```bash
-git checkout master
-```
-
----
-
-## Branch Management
-
-### Create a new branch
-
-```bash
-git branch prototype
-```
-
-### List branches
-
-```bash
-git branch
-```
-
-### Switch to a branch
-
-```bash
-git checkout prototype
-```
-
-### Switch back to the main branch
 
 ```bash
 git checkout master

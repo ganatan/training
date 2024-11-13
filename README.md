@@ -1,2 +1,2 @@
 
-# Applicationds & Examples
+# Applications & Examples

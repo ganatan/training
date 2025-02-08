@@ -10,7 +10,9 @@ npm install -g typescript
 mkdir typescript-starter
 cd typescript-starter
 
-# Création du fichier `app.ts` :
+# Création du fichier `app.ts`
+```
+
 ```typescript
 console.log('Movie');
 ```

@@ -5,11 +5,11 @@
 
 This repository contains a series of courses to help you get familiar with various tools and frameworks.
 
-- [Git](fullstack-courses/git.md)
 - [Angular](fullstack-courses/angular.md)
+- [Git](fullstack-courses/git.md)
 - [Javascript](fullstack-courses/javascript.md)
-- [Typescript](fullstack-courses/typescript.md)gandalf
 - [Node](fullstack-courses/node.md)
+- [Typescript](fullstack-courses/typescript.md)
 
 Click on a link to open the corresponding documentation.
 

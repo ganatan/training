@@ -12,7 +12,6 @@ cd typescript-starter
 
 # Création du fichier `app.ts`
 ```
-
 ```typescript
 console.log('Movie');
 ```
@@ -39,7 +38,6 @@ npm install --save-dev typescript
 
 # Ajout des scripts dans `package.json`
 ```
-
 ```json
 {
   "scripts": {

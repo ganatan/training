@@ -38,6 +38,7 @@ npm install --save-dev typescript
 
 # Ajout des scripts dans `package.json`
 ```
+
 ```json
 {
   "scripts": {
@@ -45,4 +46,40 @@ npm install --save-dev typescript
     "start": "node app"
   }
 }
+```
+
+
+
+## Utilisation de watch
+
+```bash
+# Installation
+npm install --save-dev nodemon ts-node
+
+# Creation de tsconfig.json
+```
+
+```json
+    {
+      "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "outDir": "./dist"
+      },
+      "include": ["src"]
+    }
+```
+
+```bash
+# Rajouter les scripts
+```
+
+```json
+		"scripts": {
+			"build": "tsc",
+			"start": "node dist/app.js",
+			"dev": "ts-node src/app.ts",
+			"watch": "nodemon --ext ts --exec ts-node src/app.ts"    
+		},
+
 ```

@@ -71,6 +71,9 @@ npm install --save-dev nodemon ts-node
 ```
 
 ```bash
+# Créer le répertoire src et copier app.ts dans src
+mkdir src
+
 # Rajouter les scripts
 ```
 

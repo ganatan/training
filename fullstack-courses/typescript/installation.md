@@ -16,7 +16,6 @@ cd typescript-starter
 ```typescript
 console.log('Movie');
 ```
-
 ```bash
 # Compilation et exécution
 tsc app

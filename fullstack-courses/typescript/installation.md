@@ -1,44 +1,41 @@
 # Installation TypeScript
 
 ## Installation globale
-```sh
-npm install -g typescript
-```
 
-## Création d’un projet TypeScript
-```sh
+```bash
+# installation en globale
+npm install -g typescript
+
+# Création d’un projet TypeScript
 mkdir typescript-starter
 cd typescript-starter
-```
 
-### Fichier `app.ts`
+# Création du fichier `app.ts`
 ```typescript
 console.log('Movie');
-```
 
-### Compilation et exécution
-```sh
+# Compilation et exécution
 tsc app
 node app
-```
 
-### Désinstallation
-```sh
+# Désinstallation
 npm uninstall -g typescript
 ```
-
 ---
 
+
 ## Installation locale
-```sh
+```bash
+# Installation
 npm init -y
 npm install --save-dev typescript
-```
 
-### Ajout des scripts dans `package.json`
+# Ajout des scripts dans `package.json`
 ```json
 "scripts": {
   "build": "tsc app",
   "start": "node app"
 }
 ```
+---
+

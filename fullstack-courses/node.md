@@ -1,6 +1,7 @@
 
 # Node Course
 
+- [installation](node/installation.md)
 - [mongodb](node/mongodb-adapter.md)
 - [postgresql](node/postgresql.md)
 

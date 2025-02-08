@@ -1,11 +1,40 @@
 # Installation
 
-	Installation en global via npm
+
+	- Installation et test rapide
+	
+		Installation en global via npm
 		npm install -g typescript
 
-	Installation en local
+	  mkdir typescript-starter
+  	cd typescript-starter
+
+		creer un fichier app.ts
+			console.log('Movie');
+
+		tsc app
+		node app
+
+		Désinstallation en global via npm
+		npm uninstall -g typescript
+
+
+
+	- Installation en local
 		npm init -y
-		npm install --save-dev typescript		
+		npm install --save-dev typescript
+
+		Rajouter les scripts		
+
+			"scripts": {
+				"build": "tsc app",
+				"start": "node app"
+			},
+
+
+
+
+
 		npm install --save-dev nodemon ts-node
 
 		creer tsconfig.json
@@ -18,14 +47,14 @@
 					"include": ["src"]
 				}
 
-	Rajouter les scripts
+	- Rajouter les scripts
+
 		"scripts": {
 			"build": "tsc",
 			"start": "node dist/app.js",
 			"dev": "ts-node src/app.ts",
 			"watch": "nodemon --ext ts --exec ts-node src/app.ts"    
 		},
-
 
 # Explications
 

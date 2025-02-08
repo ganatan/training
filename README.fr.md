@@ -5,10 +5,11 @@
 
 Ce répertoire contient une série de cours pour vous aider à vous familiariser avec divers outils et frameworks.
 
-- [Git](fullstack-courses/git.md)
 - [Angular](fullstack-courses/angular.md)
+- [Git](fullstack-courses/git.md)
 - [Javascript](fullstack-courses/javascript.md)
 - [Node](fullstack-courses/node.md)
+- [Typescript](fullstack-courses/typescript.md)
 
 Cliquez sur un lien pour ouvrir la documentation correspondante.
 

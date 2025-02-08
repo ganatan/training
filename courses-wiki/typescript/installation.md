@@ -1,61 +1,50 @@
-# Installation
+# 📌 Installation TypeScript
 
+## 🚀 Installation et test rapide
 
-	- Installation et test rapide
-	
-		Installation en global via npm
-		npm install -g typescript
+### 📦 Installation globale via npm
+```sh
+npm install -g typescript
+```
 
-	  mkdir typescript-starter
-  	cd typescript-starter
+### 📁 Création d’un projet TypeScript
+```sh
+mkdir typescript-starter
+cd typescript-starter
+```
 
-		creer un fichier app.ts
-			console.log('Movie');
+### 📝 Création du fichier `app.ts`
+```typescript
+console.log('Movie');
+```
 
-		tsc app
-		node app
+### 🔧 Compilation et exécution
+```sh
+tsc app
+node app
+```
 
-		Désinstallation en global via npm
-		npm uninstall -g typescript
+### ❌ Désinstallation globale via npm
+```sh
+npm uninstall -g typescript
+```
 
+---
 
+## 🛠 Installation en local
+```sh
+npm init -y
+npm install --save-dev typescript
+```
 
-	- Installation en local
-		npm init -y
-		npm install --save-dev typescript
+### 📜 Ajout des scripts dans `package.json`
+Ajoute les lignes suivantes dans la section `"scripts"` :
 
-		Rajouter les scripts		
+```json
+"scripts": {
+  "build": "tsc app",
+  "start": "node app"
+}
+```
 
-			"scripts": {
-				"build": "tsc app",
-				"start": "node app"
-			},
-
-
-
-
-
-		npm install --save-dev nodemon ts-node
-
-		creer tsconfig.json
-				{
-					"compilerOptions": {
-						"target": "ES6",
-						"module": "CommonJS",
-						"outDir": "./dist"
-					},
-					"include": ["src"]
-				}
-
-	- Rajouter les scripts
-
-		"scripts": {
-			"build": "tsc",
-			"start": "node dist/app.js",
-			"dev": "ts-node src/app.ts",
-			"watch": "nodemon --ext ts --exec ts-node src/app.ts"    
-		},
-
-# Explications
-
-  ts-node, qui interprète TypeScript à la volée.
+---

@@ -1,8 +1,7 @@
+# Guide des Cours Fullstack
 
 [![English](./ui/version-en.png) English](./README.md) | [![Français](./ui/version-fr.png) Français](./README.fr.md)
 
-
-# Guide des Cours Fullstack
 
 Ce répertoire contient une série de cours pour vous aider à vous familiariser avec divers outils et frameworks.
 

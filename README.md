@@ -1,7 +1,7 @@
-[![English](./ui/version-en.png) English](./README.md) | [![Français](./ui/version-fr.png) Français](./README.fr.md)
-
 
 # Fullstack Course Guide
+
+[![English](./ui/version-en.png) English](./README.md) | [![Français](./ui/version-fr.png) Français](./README.fr.md)
 
 This repository contains a series of courses to help you get familiar with various tools and frameworks.
 

@@ -13,7 +13,7 @@ cd typescript-starter
 # Création du fichier `app.ts`
 ```
 ```typescript
-console.log('Movie');
+  console.log('Movie');
 ```
 
 ```bash
@@ -40,15 +40,13 @@ npm install --save-dev typescript
 ```
 
 ```json
-{
-  "scripts": {
-    "build": "tsc app",
-    "start": "node app"
+  {
+    "scripts": {
+      "build": "tsc app",
+      "start": "node app"
+    }
   }
-}
 ```
-
-
 
 ## Utilisation de watch
 
@@ -60,14 +58,14 @@ npm install --save-dev nodemon ts-node
 ```
 
 ```json
-    {
-      "compilerOptions": {
-        "target": "ES6",
-        "module": "CommonJS",
-        "outDir": "./dist"
-      },
-      "include": ["src"]
-    }
+  {
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "CommonJS",
+      "outDir": "./dist"
+    },
+    "include": ["src"]
+  }
 ```
 
 ```bash
@@ -78,11 +76,10 @@ mkdir src
 ```
 
 ```json
-		"scripts": {
-			"build": "tsc",
-			"start": "node dist/app.js",
-			"dev": "ts-node src/app.ts",
-			"watch": "nodemon --ext ts --exec ts-node src/app.ts"    
-		},
-
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "ts-node src/app.ts",
+    "watch": "nodemon --ext ts --exec ts-node src/app.ts"    
+  },
 ```

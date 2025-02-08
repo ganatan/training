@@ -29,4 +29,4 @@
 
 # Explications
 
-	ts-node, qui interprète TypeScript à la volée.
+  ts-node, qui interprète TypeScript à la volée.

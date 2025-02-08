@@ -12,7 +12,6 @@ cd typescript-starter
 
 # Création du fichier `app.ts`
 ```
-
 ```typescript
 console.log('Movie');
 ```
@@ -35,9 +34,9 @@ npm init -y
 
 # Installation locale de TypeScript
 npm install --save-dev typescript
-```
 
-### Ajout des scripts dans `package.json`
+# Ajout des scripts dans `package.json`
+```
 ```json
 {
   "scripts": {

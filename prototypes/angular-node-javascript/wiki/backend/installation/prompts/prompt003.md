@@ -1,7 +1,6 @@
+# Test
 
-# Linter
-
-mon fichier app.js
+voila mon fichier app.js
 
   import express from 'express';
 
@@ -31,49 +30,41 @@ mon fichier app.js
     console.log(`Server started at http://localhost:${port}`);
   });
 
+et mon package.json
 
-mon fichier package.json
-
-{
-  "name": "backend-node-javascript",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "node app"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "description": "",
-  "devDependencies": {
-    "express": "^4.21.2"
+  {
+    "name": "backend-node-javascript",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "start": "node app",
+      "lint": "eslint ."    
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "description": "",
+    "devDependencies": {
+      "@eslint/js": "^9.20.0",
+      "eslint": "^9.20.0",
+      "express": "^4.21.2",
+      "globals": "^15.14.0"
+    }
   }
-}
 
 
-Je veux rajouter la notion de linter
-
-Remarques
-
-le site ESLint donne cette commande
-npm init @eslint/config@latest
-
-et le fichier de config sera eslint.config.js
-avec ce contenu
+je veux installer les test avec jest
 
 
-import globals from "globals";
-import pluginJs from "@eslint/js";
+comment faire
 
+par contre 
+  comment generer aussi le fichier de config
+  jest.config.js
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-];
+le site de jest evoque
+  npm init jest@latest
 
-
-tiens en compte
-
+tiens en compte  
 

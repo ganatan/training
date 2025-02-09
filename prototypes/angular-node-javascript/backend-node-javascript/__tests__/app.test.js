@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../app.js";
+import app from "../src/app.js";
 
 describe("GET /persons", () => {
   it("doit retourner une liste de personnes avec un code 200", async () => {

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node app",
+    "start": "node src/app",
+    "dev": "nodemon src/app",
     "lint": "eslint .",
     "test": "jest",
     "coverage": "jest --coverage",

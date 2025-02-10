@@ -44,4 +44,10 @@
   par
     "type": "module",
 
+- Rajouter les scripts    
+  "start": "node src/app",
+  "dev": "nodemon src/app",
+
+
+
 

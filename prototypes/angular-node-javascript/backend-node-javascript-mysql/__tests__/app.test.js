@@ -7,6 +7,7 @@ describe('GET /persons', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
+    expect(response.body.length).toBe(12);
   });
 });
 

@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app",
+    "start": "node src/server",
     "dev": "nodemon src/app",
     "lint": "eslint .",
     "test": "jest",
     "coverage": "jest --coverage",
     "build": "webpack --mode production --output-path dist",
-    "serve": "node dist/bundle.js"
+    "serve": "node dist/bundle.js",
+    "audit": "npm audit"
   },
   "keywords": [],
   "author": "",

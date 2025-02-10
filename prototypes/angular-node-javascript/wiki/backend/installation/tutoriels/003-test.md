@@ -5,23 +5,23 @@
   npm init jest@latest
 
   creation du fichier
-  
+
     jest.config.mjs
 
 
-      export default {
-        testEnvironment: "node",
-        clearMocks: true, 
-        collectCoverage: true,
+  le fichier de base est 
+      const config = {
         coverageProvider: "v8",
       };
 
+      export default config;
+
 
   Rajouter des scripts
-    "scripts": {
-    "start": "node app",
+    "start": "node src/app",
+    "dev": "nodemon src/app",
     "lint": "eslint .",
-    "test": "jest",
+    "test": "jest"
   }
 
 # Rajouter le coverage
@@ -31,6 +31,15 @@
     "coverage": "jest --coverage"
 
   creation du repertoire coverage    
+
+# Gestion des erreurs
+      export default {
+        testEnvironment: "node",
+        clearMocks: true, 
+        collectCoverage: true,
+        coverageProvider: "v8",
+      };
+
 
 
 # Premier test
@@ -88,3 +97,6 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 export default app;
+
+
+il faut mainteant installer babel

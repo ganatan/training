@@ -35,6 +35,11 @@
   });
 
 
+- Rajouter les scripts    
+  "start": "node app",
+  "dev": "nodemon app",
+
+
 - Gestion de l'erreur
   Cannot use import statement outside a module  
 

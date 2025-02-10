@@ -80,3 +80,14 @@ je veux faire un build
 est ce que c'est une bonne idee
 a quoi ca sert
 qulles sont les best practices
+
+
+# Synthese
+"start": "node src/app",
+    "dev": "nodemon src/app",
+    "lint": "eslint .",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "build": "webpack --mode production",
+    "serve": "node dist/bundle.js"
+

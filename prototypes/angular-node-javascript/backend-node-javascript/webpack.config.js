@@ -6,9 +6,6 @@ export default {
     path: path.resolve("dist"),
     filename: "bundle.js"
   },
-  experiments: {
-    outputModule: true
-  },
   module: {
     rules: [
       {
@@ -21,5 +18,8 @@ export default {
     ]
   },
   target: "node",
-  mode: "production"
+  mode: "production",
+  experiments: {
+    outputModule: true
+  },
 };

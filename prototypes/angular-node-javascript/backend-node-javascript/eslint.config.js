@@ -1,9 +1,13 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
+import globals from "globals";
+import pluginJs from "@eslint/js";
 
 export default [
   {
-    ignores: ['dist/**'],
+    ignores: [
+      'dist/**',
+      'eslint.config.js',
+      'webpack.config.js'
+    ],
   },
   {
     languageOptions: {
@@ -17,9 +21,11 @@ export default [
   pluginJs.configs.recommended,
   {
     rules: {
-      'no-console': 'off', 
-      'import/extensions': 'off',
-      'no-unused-vars': 'warn',
-    },
+      "indent": ["error", 2],
+      "quotes": ["error", "single"],
+      "semi": ["error", "always"],
+      "no-unused-vars": ["warn"],
+      "no-console": "off"
+    }
   },
 ];

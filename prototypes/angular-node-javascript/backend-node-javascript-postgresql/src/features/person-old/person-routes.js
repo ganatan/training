@@ -4,7 +4,7 @@ import PersonService from './person-service.js';
 import PersonRepository from './person-repository.js';
 
 const router = express.Router();
-const repository = new PersonRepository(true);
+const repository = new PersonRepository(false);
 const service = new PersonService(repository);
 const controller = new PersonController(service);
 

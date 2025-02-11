@@ -17,6 +17,7 @@ function getDirectoryStructure(dirPath, level = 0) {
       structure += getDirectoryStructure(fullPath, level + 1);
     }
   }
+
   return structure;
 }
 
@@ -31,6 +32,7 @@ function generateStructureForFolders(folders) {
       fullStructure += `\n${folder} directory does not exist.\n`;
     }
   }
+
   return fullStructure;
 }
 

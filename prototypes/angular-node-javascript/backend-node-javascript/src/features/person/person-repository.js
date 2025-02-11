@@ -17,30 +17,37 @@ class PersonRepository {
   }
 
   async getItems() {
-    return this.items;
+    return Promise.resolve(this.items);
   }
 
   async getItemById(id) {
-    return this.items.find((item) => item.id === id) || null;
+    return Promise.resolve(this.items.find((item) => item.id === id) || null);
   }
 
   async createItem(person) {
     const newPerson = { id: this.items.length + 1, ...person };
     this.items.push(newPerson);
-    return newPerson;
+
+    return Promise.resolve(newPerson);
   }
 
   async updateItem(id, updatedData) {
     const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) return null;
+    if (index === -1) {
+      return Promise.resolve(null);
+    }
     this.items[index] = { ...this.items[index], ...updatedData };
-    return this.items[index];
+
+    return Promise.resolve(this.items[index]);
   }
 
   async deleteItem(id) {
     const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) return null;
-    return this.items.splice(index, 1)[0];
+    if (index === -1) {
+      return Promise.resolve(null);
+    }
+
+    return Promise.resolve(this.items.splice(index, 1)[0]);
   }
 }
 

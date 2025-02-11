@@ -4,23 +4,23 @@ class PersonService {
   }
 
   async getItems() {
-    return this.repository.getItems();
+    return await this.repository.getItems();
   }
 
   async getItemById(id) {
-    return this.repository.getItemById(id);
+    return await this.repository.getItemById(id);
   }
 
   async createItem(person) {
-    return this.repository.createItem(person);
+    return await this.repository.createItem(person);
   }
 
   async updateItem(id, updatedData) {
-    return this.repository.updateItem(id, updatedData);
+    return await this.repository.updateItem(id, updatedData);
   }
 
   async deleteItem(id) {
-    return this.repository.deleteItem(id);
+    return await this.repository.deleteItem(id);
   }
 }
 

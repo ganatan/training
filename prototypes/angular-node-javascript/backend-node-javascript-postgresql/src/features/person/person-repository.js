@@ -1,3 +1,5 @@
+import pool from '../../config/database.js';
+
 class PersonRepository {
   constructor(useDatabase) {
     console.log('00000000001:' + useDatabase);
@@ -19,6 +21,15 @@ class PersonRepository {
   }
 
   async getItems() {
+    if (this.useDatabase) {
+      try {
+        const { rows } = await pool.query('SELECT * FROM person');
+        return rows;
+      } catch (error) {
+        console.error(`Database error: ${error.message}`);
+        return [];
+      }
+    }
     return this.items;
   }
 

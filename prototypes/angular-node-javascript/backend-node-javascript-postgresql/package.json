@@ -10,7 +10,8 @@
     "coverage": "jest --coverage",
     "build": "webpack --mode production --output-path dist",
     "serve": "node dist/bundle.js",
-    "audit": "npm audit"
+    "audit": "npm audit",
+    "generate-structure": "node tools/scripts/generate-structure.js"
   },
   "keywords": [],
   "author": "",

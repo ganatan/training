@@ -1,7 +1,7 @@
 import express from 'express';
 
-import personRoute from './features/person/person-route.js';
-import cityRoute from './features/city/city-route.js';
+import personRoute from './features/person/person-routes.js';
+import cityRoute from './features/city/city-routes.js';
 
 const router = express.Router();
 

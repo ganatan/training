@@ -1,11 +1,16 @@
 
-  npm install express pg dotenv
+creer 
+
+features-routes.js
+index-routes.js
 
 
-Modifier app.js
+deplacer le sql 
 
 
-  import express from 'express';
+
+creer database.js dans src/config/
+
   import pkg from 'pg';
   import dotenv from 'dotenv';
 
@@ -21,10 +26,17 @@ Modifier app.js
     port: process.env.DB_PORT || 5432,
   });
 
-  const app = express();
-  app.use(express.json());
+  export default pool;
 
-  app.get('/persons', async (req, res) => {
+
+Mettre à jour person-route.js
+
+  import express from 'express';
+  import pool from '../../config/database.js';
+
+  const router = express.Router();
+
+  router.get('/', async (req, res) => {
     try {
       const { rows } = await pool.query('SELECT * FROM person');
       res.json(rows);
@@ -33,7 +45,7 @@ Modifier app.js
     }
   });
 
-  app.post('/persons', async (req, res) => {
+  router.post('/', async (req, res) => {
     const { name, wikipedia_link, birth_date, birth_city_id } = req.body;
     const client = await pool.connect();
     try {
@@ -52,29 +64,34 @@ Modifier app.js
     }
   });
 
-  export default app;
+  export default router;
+
+  Mettre à jour app.js
+
+    import express from 'express';
+    import featuresRoutes from './features-routes.js';
+    import indexRoutes from './index-routes.js';
+
+    const app = express();
+
+    app.use(express.json());
+    app.use(featuresRoutes);
+    app.use('/', indexRoutes);
+    app.use('*', indexRoutes);
+
+    export default app;
+
+Améliorer server.js    
+
+  import app from './app.js';
+  import dotenv from 'dotenv';
+
+  dotenv.config();
+
+  const PORT = process.env.PORT || 3000;
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 
 
-
-Rajouter un fichier .env
-
-DB_USER=postgres
-DB_HOST=localhost
-DB_NAME=backend_node_javascript
-DB_PASSWORD=Trustno1
-DB_PORT=5432
-
-
-# tester un objet JSON avec postman
-
-{
-  "name": "Stanley Kubrick",
-  "wikipedia_link": "https://en.wikipedia.org/wiki/Stanley_Kubrick",
-  "birth_date": "1928-07-26",
-  "birth_city_id": 1
-}
-
-
-{
-  "name": "Los Angeles"
-}

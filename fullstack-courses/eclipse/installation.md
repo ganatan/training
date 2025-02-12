@@ -47,6 +47,11 @@
   </settings>
 
 
-# Fromtet du texte
+# Format du texte
 
   Ctrl + Shift + F
+
+
+# Commeantaires
+  Ctrl + Shift + / (pour commenter)
+  Ctrl + Shift + \ (pour décommenter)  

@@ -45,3 +45,8 @@
     </profiles>
 
   </settings>
+
+
+# Fromtet du texte
+
+  Ctrl + Shift + F

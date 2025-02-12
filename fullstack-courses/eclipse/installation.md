@@ -55,3 +55,14 @@
 # Commeantaires
   Ctrl + Shift + / (pour commenter)
   Ctrl + Shift + \ (pour décommenter)  
+
+# Tabulation 2 espaces
+  Window → Preferences
+  Java / Code Style  / Formatter
+    Créer un nouveau profil :
+      Clique sur "New..."
+        Donne un nom, par ex. "Tabulation 2 espaces"
+      Clique sur "OK"  
+
+        Indentation
+          Tab Size

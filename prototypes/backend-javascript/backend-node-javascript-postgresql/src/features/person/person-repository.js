@@ -2,7 +2,6 @@ import pool from '../../config/database.js';
 
 class PersonRepository {
   constructor(useDatabase) {
-    console.log('00000000001:' + useDatabase);
     this.useDatabase = useDatabase;
     this.items = [
       { id: 1, name: 'Steven Spielberg', city: 'Cincinnati' },
@@ -34,16 +33,51 @@ class PersonRepository {
   }
 
   async getItemById(id) {
+    if (this.useDatabase) {
+      try {
+        const { rows } = await pool.query('SELECT * FROM person WHERE id = $1', [id]);
+        return rows.length ? rows[0] : null;
+      } catch (error) {
+        console.error(`Database error: ${error.message}`);
+        return null;
+      }
+    }
     return this.items.find((item) => item.id === id) || null;
   }
 
-  async createItem(person) {
-    const newPerson = { id: this.items.length + 1, ...person };
-    this.items.push(newPerson);
-    return newPerson;
+  async createItem(item) {
+    if (this.useDatabase) {
+      try {
+        const { name } = item;
+        const { rows } = await pool.query(
+          'INSERT INTO person (name) VALUES ($1) RETURNING *',
+          [name]
+        );
+        return rows[0];
+      } catch (error) {
+        console.error(`Database error: ${error.message}`);
+        return null;
+      }
+    }
+    const newItem = { id: this.items.length + 1, ...item };
+    this.items.push(newItem);
+    return newItem;
   }
 
   async updateItem(id, updatedData) {
+    if (this.useDatabase) {
+      try {
+        const { name } = updatedData;
+        const { rows } = await pool.query(
+          'UPDATE person SET name = $1 WHERE id = $2 RETURNING *',
+          [name, id]
+        );
+        return rows.length ? rows[0] : null;
+      } catch (error) {
+        console.error(`Database error: ${error.message}`);
+        return null;
+      }
+    }
     const index = this.items.findIndex((item) => item.id === id);
     if (index === -1) return null;
     this.items[index] = { ...this.items[index], ...updatedData };
@@ -51,10 +85,22 @@ class PersonRepository {
   }
 
   async deleteItem(id) {
+    if (this.useDatabase) {
+      try {
+        const { rows } = await pool.query('DELETE FROM person WHERE id = $1 RETURNING *', [id]);
+        return rows.length ? rows[0] : null;
+      } catch (error) {
+        console.error(`Database error: ${error.message}`);
+        return null;
+      }
+    }
     const index = this.items.findIndex((item) => item.id === id);
     if (index === -1) return null;
     return this.items.splice(index, 1)[0];
   }
+
 }
 
 export default PersonRepository;
+
+

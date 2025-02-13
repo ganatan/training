@@ -1,55 +1,82 @@
 class CityController {
   constructor(service) {
     this.service = service;
+
+    this.getItems = this.getItems.bind(this);
+    this.getItemById = this.getItemById.bind(this);
+    this.createItem = this.createItem.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  getItems = async (req, res) => {
+  async getItems(req, res, next) {
     try {
-      const items = await this.service.getItems();
-      res.json(items);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+      res.locals.data = await this.service.getItems(req.query);
 
-  getItemById = async (req, res) => {
+      return next();
+    } catch (error) {
+
+      return next(error);
+    }
+  }
+
+  async getItemById(req, res, next) {
     try {
       const item = await this.service.getItemById(parseInt(req.params.id));
-      if (!item) return res.status(404).json({ error: 'Person not found' });
-      res.json(item);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+      if (!item) {
+        return next({ status: 404, message: 'Person not found' });
+      }
+      res.locals.data = item;
 
-  createItem = async (req, res) => {
+      return next();
+    } catch (error) {
+
+      return next(error);
+    }
+  }
+
+  async createItem(req, res, next) {
     try {
-      const newItem = await this.service.createItem(req.body);
-      res.status(201).json(newItem);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+      res.locals.data = await this.service.createItem(req.body);
+      res.status(201);
 
-  updateItem = async (req, res) => {
+      return next();
+    } catch (error) {
+
+      return next(error);
+    }
+  }
+
+  async updateItem(req, res, next) {
+    console.log('00000000001:updateItem');
     try {
       const updatedItem = await this.service.updateItem(parseInt(req.params.id), req.body);
-      if (!updatedItem) return res.status(404).json({ error: 'Person not found' });
-      res.json(updatedItem);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+      if (!updatedItem) {
+        return next({ status: 404, message: 'Person not found' });
+      }
+      res.locals.data = updatedItem;
 
-  deleteItem = async (req, res) => {
+      return next();
+    } catch (error) {
+
+      return next(error);
+    }
+  }
+
+  async deleteItem(req, res, next) {
     try {
       const deletedItem = await this.service.deleteItem(parseInt(req.params.id));
-      if (!deletedItem) return res.status(404).json({ error: 'Person not found' });
-      res.json(deletedItem);
+      if (!deletedItem) {
+        return next({ status: 404, message: 'Person not found' });
+      }
+      res.locals.data = deletedItem;
+
+      return next();
     } catch (error) {
-      res.status(500).json({ error: error.message });
+
+      return next(error);
     }
-  };
+  }
 }
 
 export default CityController;

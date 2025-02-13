@@ -55,10 +55,7 @@ class CityRepository {
     if (this.useDatabase) {
       try {
         const { name } = item;
-        const { rows } = await pool.query(
-          'INSERT INTO city (name) VALUES ($1) RETURNING *',
-          [name]
-        );
+        const { rows } = await pool.query('INSERT INTO city (name) VALUES ($1) RETURNING *', [name]);
 
         return rows[0];
       } catch (error) {
@@ -77,10 +74,29 @@ class CityRepository {
     if (this.useDatabase) {
       try {
         const { name } = updatedData;
-        const { rows } = await pool.query(
-          'UPDATE city SET name = $1 WHERE id = $2 RETURNING *',
-          [name, id]
-        );
+        const { rows } = await pool.query('UPDATE city SET name = $1 WHERE id = $2 RETURNING *', [name, id]);
+
+        return rows.length ? rows[0] : null;
+      } catch (error) {
+        console.error(`Database error: ${error.message}`);
+
+        return null;
+      }
+    }
+    const index = this.items.findIndex((item) => item.id === id);
+    if (index === -1) {
+
+      return null;
+    }
+    this.items[index] = { ...this.items[index], ...updatedData };
+
+    return this.items[index];
+  }
+
+  async deleteItem(id) {
+    if (this.useDatabase) {
+      try {
+        const { rows } = await pool.query('DELETE FROM city WHERE id = $1 RETURNING *', [id]);
 
         return rows.length ? rows[0] : null;
       } catch (error) {
@@ -93,23 +109,7 @@ class CityRepository {
     if (index === -1) {
       return null;
     }
-    this.items[index] = { ...this.items[index], ...updatedData };
 
-    return this.items[index];
-  }
-
-  async deleteItem(id) {
-    if (this.useDatabase) {
-      try {
-        const { rows } = await pool.query('DELETE FROM city WHERE id = $1 RETURNING *', [id]);
-        return rows.length ? rows[0] : null;
-      } catch (error) {
-        console.error(`Database error: ${error.message}`);
-        return null;
-      }
-    }
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) return null;
     return this.items.splice(index, 1)[0];
   }
 

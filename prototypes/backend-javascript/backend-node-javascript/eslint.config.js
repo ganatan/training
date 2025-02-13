@@ -20,13 +20,6 @@ export default [
   },
   pluginJs.configs.recommended,
   {
-    // rules: {
-    //   "indent": ["error", 2],
-    //   "quotes": ["error", "single"],
-    //   "semi": ["error", "always"],
-    //   "no-unused-vars": ["warn"],
-    //   "no-console": "off"
-    // }
     rules: {
       "indent": ["error", 2],
       "quotes": ["error", "single"],

@@ -4,7 +4,7 @@ class PersonRepository {
   constructor(useDatabase) {
     console.log('00000000001:' + useDatabase);
     this.useDatabase = useDatabase;
-      this.items = [
+    this.items = [
       { id: 1, name: 'Steven Spielberg', city: 'Cincinnati' },
       { id: 2, name: 'Martin Scorsese', city: 'New York' },
       { id: 3, name: 'Quentin Tarantino', city: 'Knoxville' },

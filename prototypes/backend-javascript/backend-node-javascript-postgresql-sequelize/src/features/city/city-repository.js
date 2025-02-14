@@ -1,53 +1,38 @@
-class CityRepository {
-  constructor() {
-    this.items = [
-      'Cincinnati',
-      'New York',
-      'Knoxville',
-      'London',
-      'Detroit',
-      'Kapuskasing',
-      'Denver',
-      'Burbank',
-      'San Francisco',
-      'Houston',
-      'Atlanta',
-      'Modesto',
-    ];
-  }
+import City from './city-model.js';
 
+class CityRepository {
   async getItems() {
-    return Promise.resolve(this.items);
+    return await City.findAll({ attributes: ['id', 'name'] });
   }
 
   async getItemById(id) {
-    return Promise.resolve(this.items.find((item) => item.id === id) || null);
+    return await City.findByPk(id, { attributes: ['id', 'name'] });
   }
 
-  async createItem(person) {
-    const newPerson = { id: this.items.length + 1, ...person };
-    this.items.push(newPerson);
-
-    return Promise.resolve(newPerson);
+  async createItem(city) {
+    return await City.create(city);
   }
 
   async updateItem(id, updatedData) {
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) {
-      return Promise.resolve(null);
-    }
-    this.items[index] = { ...this.items[index], ...updatedData };
+    const city = await City.findByPk(id);
 
-    return Promise.resolve(this.items[index]);
+    if (!city) {
+      return null;
+    }
+
+    return await city.update(updatedData);
   }
 
   async deleteItem(id) {
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) {
-      return Promise.resolve(null);
+    const city = await City.findByPk(id);
+
+    if (!city) {
+      return null;
     }
 
-    return Promise.resolve(this.items.splice(index, 1)[0]);
+    await city.destroy();
+
+    return city;
   }
 }
 

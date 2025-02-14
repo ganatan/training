@@ -1,18 +1,18 @@
 class CityRepository {
   constructor() {
     this.items = [
-      'Cincinnati',
-      'New York',
-      'Knoxville',
-      'London',
-      'Detroit',
-      'Kapuskasing',
-      'Denver',
-      'Burbank',
-      'San Francisco',
-      'Houston',
-      'Atlanta',
-      'Modesto',
+      { id: 1, name: 'Cincinnati' },
+      { id: 2, name: 'New York' },
+      { id: 3, name: 'Knoxville' },
+      { id: 4, name: 'London' },
+      { id: 5, name: 'Detroit' },
+      { id: 6, name: 'Kapuskasing' },
+      { id: 7, name: 'Denver' },
+      { id: 8, name: 'Burbank' },
+      { id: 9, name: 'San Francisco' },
+      { id: 10, name: 'Houston' },
+      { id: 11, name: 'Atlanta' },
+      { id: 12, name: 'Modesto' },
     ];
   }
 
@@ -24,11 +24,11 @@ class CityRepository {
     return Promise.resolve(this.items.find((item) => item.id === id) || null);
   }
 
-  async createItem(person) {
-    const newPerson = { id: this.items.length + 1, ...person };
-    this.items.push(newPerson);
+  async createItem(city) {
+    const newCity = { id: this.items.length + 1, ...city };
+    this.items.push(newCity);
 
-    return Promise.resolve(newPerson);
+    return Promise.resolve(newCity);
   }
 
   async updateItem(id, updatedData) {

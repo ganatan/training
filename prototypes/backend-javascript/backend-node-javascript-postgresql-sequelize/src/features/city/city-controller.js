@@ -11,11 +11,10 @@ class CityController {
 
   async getItems(req, res, next) {
     try {
-      res.locals.data = await this.service.getItems(req.query);
+      res.locals.data = await this.service.getItems();
 
       return next();
     } catch (error) {
-
       return next(error);
     }
   }
@@ -23,14 +22,15 @@ class CityController {
   async getItemById(req, res, next) {
     try {
       const item = await this.service.getItemById(parseInt(req.params.id));
+
       if (!item) {
         return next({ status: 404, message: 'City not found' });
       }
+
       res.locals.data = item;
 
       return next();
     } catch (error) {
-
       return next(error);
     }
   }
@@ -42,7 +42,6 @@ class CityController {
 
       return next();
     } catch (error) {
-
       return next(error);
     }
   }
@@ -50,14 +49,15 @@ class CityController {
   async updateItem(req, res, next) {
     try {
       const updatedItem = await this.service.updateItem(parseInt(req.params.id), req.body);
+
       if (!updatedItem) {
         return next({ status: 404, message: 'City not found' });
       }
+
       res.locals.data = updatedItem;
 
       return next();
     } catch (error) {
-
       return next(error);
     }
   }
@@ -65,14 +65,15 @@ class CityController {
   async deleteItem(req, res, next) {
     try {
       const deletedItem = await this.service.deleteItem(parseInt(req.params.id));
+
       if (!deletedItem) {
-        return next({ status: 404, message: 'City found' });
+        return next({ status: 404, message: 'City not found' });
       }
+
       res.locals.data = deletedItem;
 
       return next();
     } catch (error) {
-
       return next(error);
     }
   }

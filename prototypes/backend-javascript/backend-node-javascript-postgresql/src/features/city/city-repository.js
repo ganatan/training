@@ -23,9 +23,11 @@ class CityRepository {
     if (this.useDatabase && pool) {
       try {
         const { rows } = await pool.query('SELECT * FROM city');
+
         return rows;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return [];
       }
     }
@@ -37,9 +39,11 @@ class CityRepository {
     if (this.useDatabase && pool) {
       try {
         const { rows } = await pool.query('SELECT * FROM city WHERE id = $1', [id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
@@ -52,15 +56,18 @@ class CityRepository {
       try {
         const { name } = item;
         const { rows } = await pool.query('INSERT INTO city (name) VALUES ($1) RETURNING *', [name]);
+
         return rows[0];
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
 
     const newItem = { id: this.items.length + 1, ...item };
     this.items.push(newItem);
+
     return Promise.resolve(newItem);
   }
 
@@ -69,9 +76,11 @@ class CityRepository {
       try {
         const { name } = updatedData;
         const { rows } = await pool.query('UPDATE city SET name = $1 WHERE id = $2 RETURNING *', [name, id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
@@ -82,6 +91,7 @@ class CityRepository {
     }
 
     this.items[index] = { ...this.items[index], ...updatedData };
+
     return Promise.resolve(this.items[index]);
   }
 
@@ -89,9 +99,11 @@ class CityRepository {
     if (this.useDatabase && pool) {
       try {
         const { rows } = await pool.query('DELETE FROM city WHERE id = $1 RETURNING *', [id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }

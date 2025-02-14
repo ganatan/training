@@ -23,54 +23,27 @@ class PersonRepository {
     if (this.useDatabase && pool) {
       try {
         const { rows } = await pool.query('SELECT * FROM person');
+
         return rows;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return [];
       }
     }
-    
+
     return Promise.resolve(this.items);
   }
-
-  // async getItemById(id) {
-  //   return Promise.resolve(this.items.find((item) => item.id === id) || null);
-  // }
-
-  // async createItem(person) {
-  //   const newPerson = { id: this.items.length + 1, ...person };
-  //   this.items.push(newPerson);
-
-  //   return Promise.resolve(newPerson);
-  // }
-
-  // async updateItem(id, updatedData) {
-  //   const index = this.items.findIndex((item) => item.id === id);
-  //   if (index === -1) {
-  //     return Promise.resolve(null);
-  //   }
-  //   this.items[index] = { ...this.items[index], ...updatedData };
-
-  //   return Promise.resolve(this.items[index]);
-  // }
-
-  // async deleteItem(id) {
-  //   const index = this.items.findIndex((item) => item.id === id);
-  //   if (index === -1) {
-  //     return Promise.resolve(null);
-  //   }
-
-  //   return Promise.resolve(this.items.splice(index, 1)[0]);
-  // }
-
 
   async getItemById(id) {
     if (this.useDatabase && pool) {
       try {
         const { rows } = await pool.query('SELECT * FROM person WHERE id = $1', [id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
@@ -83,15 +56,18 @@ class PersonRepository {
       try {
         const { name } = item;
         const { rows } = await pool.query('INSERT INTO person (name) VALUES ($1) RETURNING *', [name]);
+
         return rows[0];
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
 
     const newItem = { id: this.items.length + 1, ...item };
     this.items.push(newItem);
+
     return Promise.resolve(newItem);
   }
 
@@ -100,9 +76,11 @@ class PersonRepository {
       try {
         const { name } = updatedData;
         const { rows } = await pool.query('UPDATE person SET name = $1 WHERE id = $2 RETURNING *', [name, id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
@@ -113,6 +91,7 @@ class PersonRepository {
     }
 
     this.items[index] = { ...this.items[index], ...updatedData };
+
     return Promise.resolve(this.items[index]);
   }
 
@@ -120,9 +99,11 @@ class PersonRepository {
     if (this.useDatabase && pool) {
       try {
         const { rows } = await pool.query('DELETE FROM person WHERE id = $1 RETURNING *', [id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }

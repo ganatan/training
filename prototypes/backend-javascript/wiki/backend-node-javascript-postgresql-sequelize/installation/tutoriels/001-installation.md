@@ -1,7 +1,5 @@
 
-  npm install pg sequelize
-  npm install pg-hstore
-
+  npm install pg sequelize pg-hstore
 
     import express from 'express';
     import { Sequelize, DataTypes } from 'sequelize';

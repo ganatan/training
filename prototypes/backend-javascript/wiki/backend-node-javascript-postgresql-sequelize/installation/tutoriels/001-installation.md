@@ -1,5 +1,6 @@
 
   npm install pg sequelize
+  npm install pg-hstore
 
 
     import express from 'express';

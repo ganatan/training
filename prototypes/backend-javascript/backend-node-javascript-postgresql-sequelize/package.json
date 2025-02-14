@@ -12,7 +12,18 @@
     "build": "webpack --mode production --output-path dist",
     "serve": "node dist/bundle.js",
     "audit": "npm audit",
-    "generate-structure": "node tools/scripts/generate-structure.js"
+    "generate-structure": "node tools/scripts/generate-structure.js",
+    "test-person-repository": "npm test -- person-repository.test.js",
+    "test-person-service": "npm test -- person-service.test.js",
+    "test-person-controller": "npm test -- person-controller.test.js",
+    "test-person-routes": "npm test -- person-routes.test.js",
+    "test-city-repository": "npm test -- city-repository.test.js",
+    "test-city-service": "npm test -- city-service.test.js",
+    "test-city-controller": "npm test -- city-controller.test.js",
+    "test-city-routes": "npm test -- city-routes.test.js",
+    "test-response-handler": "npm test -- response-handler.test.js",
+    "test-app": "npm test -- app.test.js",
+    "test-server": "npm test -- server.test.js"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +47,7 @@
   "dependencies": {
     "dotenv": "16.4.7",
     "pg": "^8.13.3",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.5"
   }
 }

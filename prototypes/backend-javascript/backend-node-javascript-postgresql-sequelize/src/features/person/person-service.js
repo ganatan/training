@@ -25,4 +25,3 @@ class PersonService {
 }
 
 export default PersonService;
-

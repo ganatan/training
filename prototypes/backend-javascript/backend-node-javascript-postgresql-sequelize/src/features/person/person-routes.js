@@ -1,11 +1,14 @@
 import express from 'express';
+
 import responseHandler from '../../middleware/response-handler.js';
+
 import PersonRepository from './person-repository.js';
 import PersonService from './person-service.js';
 import PersonController from './person-controller.js';
 
 const router = express.Router();
-const repository = new PersonRepository();
+
+const repository = new PersonRepository(true);
 const service = new PersonService(repository);
 const controller = new PersonController(service);
 
@@ -16,4 +19,3 @@ router.put('/:id', controller.updateItem, responseHandler);
 router.delete('/:id', controller.deleteItem, responseHandler);
 
 export default router;
-

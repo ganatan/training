@@ -11,8 +11,8 @@ class CityService {
     return await this.repository.getItemById(id);
   }
 
-  async createItem(city) {
-    return await this.repository.createItem(city);
+  async createItem(person) {
+    return await this.repository.createItem(person);
   }
 
   async updateItem(id, updatedData) {

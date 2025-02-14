@@ -11,9 +11,9 @@ class CityController {
 
   async getItems(req, res, next) {
     try {
-      res.locals.data = await this.service.getItems(req.query);
+      const data = await this.service.getItems(req.query);
 
-      return next();
+      return res.status(200).json(data);
     } catch (error) {
 
       return next(error);
@@ -24,11 +24,10 @@ class CityController {
     try {
       const item = await this.service.getItemById(parseInt(req.params.id));
       if (!item) {
-        return next({ status: 404, message: 'Person not found' });
+        return next({ status: 404, message: 'City not found' });
       }
-      res.locals.data = item;
 
-      return next();
+      return res.status(200).json(item);
     } catch (error) {
 
       return next(error);
@@ -37,10 +36,9 @@ class CityController {
 
   async createItem(req, res, next) {
     try {
-      res.locals.data = await this.service.createItem(req.body);
-      res.status(201);
+      const newItem = await this.service.createItem(req.body);
 
-      return next();
+      return res.status(201).json(newItem);
     } catch (error) {
 
       return next(error);
@@ -48,15 +46,13 @@ class CityController {
   }
 
   async updateItem(req, res, next) {
-    console.log('00000000001:updateItem');
     try {
       const updatedItem = await this.service.updateItem(parseInt(req.params.id), req.body);
       if (!updatedItem) {
-        return next({ status: 404, message: 'Person not found' });
+        return next({ status: 404, message: 'City not found' });
       }
-      res.locals.data = updatedItem;
 
-      return next();
+      return res.status(200).json(updatedItem);
     } catch (error) {
 
       return next(error);
@@ -67,11 +63,10 @@ class CityController {
     try {
       const deletedItem = await this.service.deleteItem(parseInt(req.params.id));
       if (!deletedItem) {
-        return next({ status: 404, message: 'Person not found' });
+        return next({ status: 404, message: 'City not found' });
       }
-      res.locals.data = deletedItem;
 
-      return next();
+      return res.status(200).json(deletedItem);
     } catch (error) {
 
       return next(error);

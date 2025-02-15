@@ -1,25 +1,19 @@
-# getItems
-
-  http://localhost:3000/persons
 
 # createItem
 
-  http://localhost:3000/persons
+  http://localhost:3002/persons
 
   {
     "name": "Greta Gerwig"
   }
 
 
+
 # updateItem
 
-  http://localhost:3000/persons/1
+  http://localhost:3002/persons/1005
 
   {
-      "name": "Steven Spielbergaaaa",
-      "city": "Cincinnatiaaaa"
+    "id": 1005,
+    "name": "Greta Gerwig"
   }
-
-# deleteItem
-
-  http://localhost:3000/persons/1

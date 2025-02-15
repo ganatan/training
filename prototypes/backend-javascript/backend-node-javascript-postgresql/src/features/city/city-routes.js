@@ -8,7 +8,7 @@ import CityController from './city-controller.js';
 
 const router = express.Router();
 
-const repository = new CityRepository(true);
+const repository = new CityRepository();
 const service = new CityService(repository);
 const controller = new CityController(service);
 

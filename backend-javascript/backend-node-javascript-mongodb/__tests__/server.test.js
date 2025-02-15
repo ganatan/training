@@ -1,18 +1,25 @@
-import server from '../src/server.js';
+import request from 'supertest';
+import app from '../src/app.js';
 
 describe('Server startup', () => {
-  it('should start and listen correctly', async () => {
-    // Arrange
-    const runningServer = server;
+  let server;
 
-    // Act
-    const isListening = runningServer.listening;
-
-    // Assert
-    expect(isListening).toBe(true);
+  beforeAll(async () => {
+    server = app.listen();
   });
 
-  afterAll(() => {
-    server.close();
+  afterAll(async () => {
+    await new Promise((resolve) => server.close(resolve));
+  });
+
+  test('should respond to health check', async () => {
+    // Arrange
+    const expectedStatus = 200;
+
+    // Act
+    const response = await request(app).get('/');
+
+    // Assert
+    expect(response.status).toBe(expectedStatus);
   });
 });

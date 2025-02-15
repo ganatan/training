@@ -15,12 +15,15 @@ class CityRepository {
     if (this.useDatabase) {
       try {
         const db = getDb();
+
         return await db.collection(this.collectionName).find({}).toArray();
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-        return [];
       }
+
+      return [];
     }
+
     return Promise.resolve(this.items);
   }
 
@@ -28,12 +31,15 @@ class CityRepository {
     if (this.useDatabase) {
       try {
         const db = getDb();
+
         return await db.collection(this.collectionName).findOne({ id });
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-        return null;
       }
+
+      return null;
     }
+
     return Promise.resolve(this.items.find((item) => item.id === id) || null);
   }
 
@@ -42,14 +48,18 @@ class CityRepository {
       try {
         const db = getDb();
         const result = await db.collection(this.collectionName).insertOne(item);
+
         return result.ops[0];
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-        return null;
       }
+
+      return null;
     }
+
     const newItem = { id: this.items.length + 1, ...item };
     this.items.push(newItem);
+
     return Promise.resolve(newItem);
   }
 
@@ -61,18 +71,25 @@ class CityRepository {
           .collection(this.collectionName)
           .updateOne({ id }, { $set: updatedData });
 
-        if (result.modifiedCount === 0) return null;
+        if (result.modifiedCount === 0) {
+          return null;
+        }
 
         return await db.collection(this.collectionName).findOne({ id });
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-        return null;
       }
+
+      return null;
     }
 
     const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) return Promise.resolve(null);
+    if (index === -1) {
+      return Promise.resolve(null);
+    }
+
     this.items[index] = { ...this.items[index], ...updatedData };
+
     return Promise.resolve(this.items[index]);
   }
 
@@ -82,16 +99,23 @@ class CityRepository {
         const db = getDb();
         const result = await db.collection(this.collectionName).deleteOne({ id });
 
-        if (result.deletedCount === 0) return null;
+        if (result.deletedCount === 0) {
+          return null;
+        }
+
         return { id };
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-        return null;
       }
+
+      return null;
     }
 
     const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) return Promise.resolve(null);
+    if (index === -1) {
+      return Promise.resolve(null);
+    }
+
     return Promise.resolve(this.items.splice(index, 1)[0]);
   }
 }

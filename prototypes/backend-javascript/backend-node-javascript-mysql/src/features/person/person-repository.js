@@ -20,17 +20,18 @@ class PersonRepository {
   }
 
   async getItems() {
-    console.log('00000000001');
     if (this.useDatabase && pool) {
       try {
         const [rows] = await pool.query('SELECT * FROM person');
-        console.log('00000000001:' + JSON.stringify(rows));
+
         return rows;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return [];
       }
     }
+
     return Promise.resolve(this.items);
   }
 
@@ -38,12 +39,15 @@ class PersonRepository {
     if (this.useDatabase && pool) {
       try {
         const [rows] = await pool.query('SELECT * FROM person WHERE id = ?', [id]);
+
         return rows.length ? rows[0] : null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
+
     return Promise.resolve(this.items.find((item) => item.id === id) || null);
   }
 
@@ -54,18 +58,23 @@ class PersonRepository {
         const [result] = await pool.query('INSERT INTO person (name) VALUES (?)', [name]);
 
         if (result.affectedRows > 0) {
-          return { id: result.insertId, name };
+          return {
+            id: result.insertId,
+            name: name,
+          };
         }
 
         return null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
 
     const newItem = { id: this.items.length + 1, ...item };
     this.items.push(newItem);
+
     return Promise.resolve(newItem);
   }
 
@@ -82,6 +91,7 @@ class PersonRepository {
         return null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }
@@ -92,6 +102,7 @@ class PersonRepository {
     }
 
     this.items[index] = { ...this.items[index], ...updatedData };
+
     return Promise.resolve(this.items[index]);
   }
 
@@ -107,6 +118,7 @@ class PersonRepository {
         return null;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
+
         return null;
       }
     }

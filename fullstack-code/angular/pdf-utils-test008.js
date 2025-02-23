@@ -262,7 +262,8 @@ function addWhiteLine(doc, posY, thickness = 1) {
     .stroke();
 }
 
-function generatePDF(data, outputPath, callback) {
+
+function generatePDFOld(data, outputPath, callback) {
   if (!fs.existsSync(path.dirname(outputPath))) {
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   }
@@ -520,9 +521,23 @@ function generatePDF(data, outputPath, callback) {
           // const pageWidth = doc.page.width;
 
 
-          // let sizeDownBrFirst = 0.2;
-          // let sizeDownBrSecond = 0.5;
+          let sizeDownBrFirst = 0.2;
+          let sizeDownBrSecond = 0.6;
           let textWith = 500;
+
+          let titleSize = 24;
+          let titleWidth = 500;
+          let titleColor = '#2196f3';
+          const xPos = (pageWidth - titleWidth) / 2;
+
+          doc.font('ARIALBD')
+            .fontSize(titleSize)
+            .fillColor(titleColor)
+            .text(`Démarrer une Application Web avec Angular CLI 19`,
+              xPos, doc.y, {
+              width: titleWidth,
+              align: 'left'
+            });
 
 
           doc.font('ARIALBD')
@@ -533,8 +548,10 @@ function generatePDF(data, outputPath, callback) {
               width: textWith,
               align: 'left'
             });
-          doc.font('ARIAL').moveDown(0.2);
-          doc.font('ARIAL').moveDown(0.5);
+
+          doc.font('ARIAL').moveDown(sizeDownBrFirst);
+          doc.font('ARIAL').moveDown(sizeDownBrSecond);
+
           doc.font('ARIAL')
             .fontSize(14)
             .fillColor('black')
@@ -544,8 +561,8 @@ function generatePDF(data, outputPath, callback) {
               align: 'left'
             });
 
-          doc.font('ARIAL').moveDown(0.2);
-          doc.font('ARIAL').moveDown(0.5);
+          doc.font('ARIAL').moveDown(sizeDownBrFirst);
+          doc.font('ARIAL').moveDown(sizeDownBrSecond);
 
           // doc.font('ARIAL')
           // .fontSize(14)

@@ -220,7 +220,6 @@ function generatePDF(data, outputPath, callback) {
       doc.y += imgHeight + 10;
     }
 
-
   })
 
 

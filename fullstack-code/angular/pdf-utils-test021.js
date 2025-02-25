@@ -705,6 +705,417 @@ function checkPageNew(doc) {
 }
 
 
+// function generatePDF(data, outputPath, callback) {
+//   if (!fs.existsSync(path.dirname(outputPath))) {
+//     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+//   }
+
+//   const doc = new PDFDocument({
+//     size: 'A4',
+//     margins: {
+//       top: PDF_TOP,
+//       bottom: PDF_BOTTOM,
+//       left: PDF_LEFT,
+//       right: PDF_RIGHT,
+//     }
+//   });
+
+//   const stream = fs.createWriteStream(outputPath);
+//   doc.pipe(stream);
+
+//   doc.registerFont('ARIAL', ARIAL);
+//   doc.registerFont('ARIALBD', ARIALBD);
+//   doc.registerFont('ARIALBI', ARIALBI);
+//   doc.registerFont('ARIALI', ARIALI);
+
+//   const bullet = '•';
+
+//   let itemTitleSize = 24;
+//   let itemTitleWidth = 500;
+//   let itemTitleColor = '#2196f3';
+//   let itemTitleAlign = 'center';
+//   let itemTitleFont = 'ARIALBD';
+
+//   let pageWidth = doc.page.width;
+//   let pageHeight = doc.page.height;
+//   let marginLeft = doc.page.margins.left;
+//   let marginRight = doc.page.margins.right;
+//   let marginTop = doc.page.margins.top;
+//   let marginBottom = doc.page.margins.bottom;
+//   let contentWidth = pageWidth - marginLeft - marginRight;
+//   let contentHeight = pageHeight - marginTop - marginBottom;
+
+//   let textWidth = 0;
+//   let xCentered = 0;
+//   let lineHeight = 0;
+//   let spaceAdded = 0;
+//   let textWidthItem = 200;
+//   let pathImages = 'D:/chendra/02-applications/201-admin/01-data/admin/features/images/tutorials/';
+//   let releaseDate = data.releaseDate;
+
+//   data.elements.forEach((element, index) => {
+//     let typeimage = element.typeimage;
+//     let typetext = element.typetext;
+//     let typeintro = element.typeintro;
+//     let typecode = element.typecode;
+//     let typechapter = element.typechapter;
+//     let typesignup = element.typesignup;
+//     let linkable = element.linkable;
+//     let itemTitleText = element.title;
+//     let title = element.title;
+//     let codefilename = element.codefilename;
+//     let nameimage = element.nameimage;
+//     let libelleImage = element.libelleimage;
+//     let chapternameimage = element.chapternameimage;
+//     let content = element.content;
+
+//     let displayIntro = false;
+//     let displayText = false;
+//     let displayChapter = false;
+//     let displayImage = false;
+//     let displayCode = false;
+
+
+//     // console.log('00000000001:' + doc.page.width);
+//     // console.log('00000000001:' + doc.page.height);
+//     // console.log('00000000001:' + doc.page.margins.left);
+//     // console.log('00000000001:' + doc.page.margins.right);
+//     // console.log('00000000001:' + doc.page.margins.top);
+//     // console.log('00000000001:' + doc.page.margins.bottom);
+
+//     if (!typeimage && !typeintro && !typecode && !typechapter && !typesignup) {
+//       if (typetext) {
+//         displayText = true;
+//       }
+//     }
+
+//     // if (!typeimage && typeintro && !typecode && !typechapter && !typesignup) {
+//     //   if (typetext) {
+//     //     displayIntro = true;
+//     //   }
+//     // }
+
+
+//     // if (typechapter) {
+//     //   displayChapter = true;
+//     // }
+
+//     // if (typeimage) {
+//     //   displayImage = true;
+//     // }
+
+//     // if (typecode) {
+//     //   displayCode = true;
+//     // }
+
+//     // A3
+//     // doc.font('ARIAL').fontSize(20).fillColor('black')
+//     //   .text('abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefghi', 
+//     //     0, 0, 
+//     //     { width: 612 });
+
+//     // A4
+//     // doc.font('ARIAL').fontSize(20).fillColor('black')
+//     //   .text('abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefg', 
+//     //     0, 0, 
+//     //     { width: 595 });
+
+
+
+//     if (displayIntro) {
+
+//       let nameimageBanner = 'introduction-banner.png';
+//       let imagePathBanner = pathImages + nameimageBanner;
+//       const imageBanner = doc.openImage(imagePathBanner);
+//       let imgWidthBanner = imageBanner.width;
+//       let imgHeightBanner = imageBanner.height;
+//       let scaleFactorBanner = 0.75;
+//       let newWidthBanner = imgWidthBanner * scaleFactorBanner;
+//       let newHeightBanner = imgHeightBanner * scaleFactorBanner;
+
+//       let centerX = (pageWidth - newWidthBanner) / 2;
+//       let posY = 18;
+//       doc.image(imagePathBanner, centerX, posY, {
+//         width: newWidthBanner,
+//         height: newHeightBanner,
+//       });
+
+//       let nameimageIntro = 'introduction-background.png';
+//       let imagePathIntro = pathImages + nameimageIntro;
+//       doc.image(imagePathIntro, 0, 60, {
+//         width: pageWidth,
+//         height: pageHeight,
+//       });
+
+//       const nameImageTutorial = 'tutorial.png';
+//       const imagePathTutorial = path.join(pathImages, nameImageTutorial);
+//       addImageWithShadow(true, doc, imagePathTutorial, 350, 380);
+
+//       doc.y += 65;
+//       textColorTitle = 'white';
+//       doc.font('ARIALBD').fontSize(34).fillColor(textColorTitle).text(title, PDF_LEFT, doc.y, {
+//         width: 500,
+//         align: 'center'
+//       });
+
+//       doc.y += 40;
+//       textColorTitle = 'grey';
+//       let guideTitle = 'Guide Complet';
+//       doc.font('ARIALBD').fontSize(26).fillColor('#D9D9D9').text(guideTitle, PDF_LEFT, doc.y, {
+//         width: 500,
+//         align: 'center'
+//       });
+
+//       const linePosY = doc.y + 45;
+//       addLine('white', doc, linePosY, 1);
+
+//       doc.y += 60;
+//       textColorTitle = 'white';
+//       doc.font('ARIALBD').fontSize(12).fillColor(textColorTitle).text(releaseDate, PDF_LEFT, doc.y, {
+//         width: 500,
+//         align: 'right'
+//       });
+
+//       const pageWidthIntro = doc.page.width;
+//       const pageHeightIntro = doc.page.height;
+//       const pageMarginsIntro = doc.page.margins.left + doc.page.margins.right;
+//       let textWidthIntro = (pageWidthIntro - pageMarginsIntro) * 0.58;
+
+//       textColor = 'white';
+//       doc.y += 30;
+//       let sizeIntro = 18;
+
+//       writeText(1, doc, content);
+
+//       doc.addPage({
+//         size: PDF_SIZE,
+//         top: PDF_TOP,
+//         bottom: PDF_BOTTOM,
+//         left: PDF_LEFT,
+//         right: PDF_RIGHT,
+//       });
+
+//       nameimageIntro = 'introduction-background.png';
+//       imagePathIntro = pathImages + nameimageIntro;
+//       doc.image(imagePathIntro, 0, 0, {
+//         width: pageWidth,
+//         height: pageHeight,
+//       });
+
+//       doc.addPage({
+//         size: PDF_SIZE,
+//         top: PDF_TOP,
+//         bottom: PDF_BOTTOM,
+//         left: PDF_LEFT,
+//         right: PDF_RIGHT,
+//       });
+
+//     }
+
+//     if (displayText) {
+
+//       textWidth = 500;
+//       textHeight = 0;
+//       xCentered = marginLeft + (contentWidth - textWidth) / 2;
+//       if (linkable) {
+//         doc.font('ARIALBD').fontSize(24);
+//         let textHeight = doc.heightOfString(`${index}-${title}`, {
+//           width: textWidth,
+//           align: 'center',
+//           lineGap: 3,
+//         });
+//       }
+//       content = addParagraph(content);
+//       content = sanitize(content);
+//       doc.font('ARIAL').fontSize(14);
+//       textHeight += doc.heightOfString(`${content}`, {
+//         width: 500, align: 'left', lineGap: 3,
+//       });
+//       lineHeight = doc.currentLineHeight();
+//       if (linkable) {
+//         spaceAdded = SIZE_DOWN_BR_SECOND * lineHeight;
+//         textHeight = textHeight + spaceAdded;
+//       }
+//       while (doc.y + textHeight > contentHeight) {
+//         checkPageNew(doc);
+//         textHeight -= contentHeight;
+//       }
+//       if (linkable) {
+//         doc.font('ARIALBD').fontSize(24);
+//         doc.fillColor('#2196f3')
+//           .text(`${index}-${title}`, xCentered, doc.y, {
+//             width: textWidth,
+//             align: 'center',
+//             lineGap: 3,
+//           });
+//         doc.font('ARIAL').moveDown(SIZE_DOWN_BR_SECOND);
+//       } else {
+//         addLine('grey', doc, doc.y, 1);
+//       }
+//       writeText(3, doc, content);
+//     }
+
+//     if (displayChapter) {
+
+//       doc.addPage({
+//         size: PDF_SIZE,
+//         top: PDF_TOP,
+//         bottom: PDF_BOTTOM,
+//         left: PDF_LEFT,
+//         right: PDF_RIGHT,
+//       });
+
+//       let nameimageIntro = 'introduction-background.png';
+//       let imagePathIntro = pathImages + nameimageIntro;
+//       doc.image(imagePathIntro, 0, 0, {
+//         width: pageWidth,
+//         height: pageHeight,
+//       });
+
+
+//       textWidth = 500;
+//       xCentered = marginLeft + (contentWidth - textWidth) / 2;
+//       doc.font('ARIAL').fontSize(24);
+//       textHeight = doc.heightOfString(`${index}-chapter-${title}`, xCentered, doc.y, {
+//         width: textWidth,
+//         align: 'center',
+//         lineGap: 3,
+//       });
+//       content = addParagraph(content);
+//       content = sanitize(content);
+//       doc.font('ARIAL').fontSize(14);
+//       textHeight = doc.heightOfString(`${content}`, 50, doc.y, {
+//         width: 500, align: 'left', lineGap: 3,
+//       });
+//       while (doc.y + textHeight > contentHeight) {
+//         checkPageNew(doc);
+//         textHeight -= contentHeight;
+//       }
+//       doc.font('ARIAL').fontSize(24);
+//       doc.fillColor('white')
+//         .text(`${index}-chapter-${title}`, xCentered, doc.y, {
+//           width: textWidth,
+//           align: 'center',
+//           lineGap: 3,
+//         });
+//       doc.font('ARIAL').fontSize(14);
+//       writeText(2, doc, content);
+//       doc.addPage({
+//         size: PDF_SIZE,
+//         top: PDF_TOP,
+//         bottom: PDF_BOTTOM,
+//         left: PDF_LEFT,
+//         right: PDF_RIGHT,
+//       });
+
+//     }
+
+//     if (displayImage) {
+//       textWidth = 500;
+//       xCentered = marginLeft + (contentWidth - textWidth) / 2;
+//       doc.font('ARIAL').fontSize(14);
+
+//       let libelleImageTmp = libelleImage;
+//       if (libelleImageTmp === '') {
+//         libelleImageTmp = ' ';
+//       }
+
+//       textHeight = doc.heightOfString(`${libelleImageTmp}`, {
+//         width: textWidth,
+//         align: 'center',
+//         lineGap: 3,
+//       });
+
+//       const imagePath = 'D:/chendra/02-applications/201-admin/01-data/admin/features/images/tutorials/' + nameimage;
+//       const image = doc.openImage(imagePath);
+
+//       let imgWidth = image.width * 0.75;
+//       let imgHeight = image.height * 0.75;
+
+//       const pageWidthImage = doc.page.width - doc.page.margins.left - doc.page.margins.right;
+//       const pageHeightImage = doc.page.height - doc.page.margins.top - doc.page.margins.bottom;
+
+//       let scale = Math.min(pageWidthImage / imgWidth, pageHeightImage / imgHeight, 1);
+//       let imgWidthResize = imgWidth * scale;
+//       let imgHeightResize = imgHeight * scale;
+
+//       while (doc.y + textHeight + imgHeightResize > pageHeightImage) {
+//         checkPageNew(doc);
+//         textHeight -= pageHeightImage;
+//       }
+
+//       doc.font('ARIAL').fontSize(14).fillColor('black')
+//         .text(`${libelleImageTmp}`, xCentered, doc.y, {
+//           width: textWidth,
+//           align: 'center',
+//           lineGap: 3,
+//         });
+
+//       xCentered = doc.page.margins.left + (pageWidthImage - imgWidthResize) / 2;
+
+//       doc.image(imagePath, xCentered, doc.y, {
+//         width: imgWidthResize,
+//         height: imgHeightResize,
+//       });
+
+//       doc.y += imgHeightResize + 10;
+//     }
+
+//     if (displayCode) {
+
+//       let linePosY = doc.y + 2;
+//       addLine('red', doc, linePosY, 1);
+
+//       textWidth = 500;
+//       xCentered = marginLeft + (contentWidth - textWidth) / 2;
+//       doc.font('ARIALBD').fontSize(12);
+//       let codefilenameTmp = codefilename;
+//       if (codefilenameTmp === '') {
+//         codefilenameTmp = ' ';
+//       }
+//       textHeight = doc.heightOfString(`${codefilenameTmp}`, xCentered, doc.y, {
+//         width: textWidth,
+//         align: 'center',
+//         lineGap: 3,
+//       });
+//       content = sanitize(content);
+//       doc.font('ARIAL').fontSize(12);
+//       let textHeightCode = doc.heightOfString(`${content}`, 70, doc.y, {
+//         width: 470, align: 'left', lineGap: 3,
+//       });
+//       textHeight = textHeight + textHeightCode;
+//       while (doc.y + textHeight > contentHeight) {
+//         checkPageNew(doc);
+//         textHeight -= contentHeight;
+//       }
+//       doc.font('ARIALBD').fontSize(12);
+//       doc.fillColor('#2196f3')
+//         .text(`${codefilenameTmp}`, xCentered, doc.y, {
+//           width: textWidth,
+//           align: 'center',
+//           lineGap: 3,
+//         });
+//       let yCode = doc.y;
+//       doc.font('ARIAL').fontSize(12);
+//       doc.fillColor('grey')
+//         .text(`${content}`, 70, doc.y, {
+//           width: 470, align: 'left', lineGap: 3,
+//         });
+
+//       linePosY = doc.y + 2;
+//       addLine('red', doc, linePosY, 1);
+//     }
+
+//   })
+
+//   doc.end();
+//   stream.on('finish', () => {
+//     if (callback) callback();
+//   });
+// }
+
+
+
 function generatePDF(data, outputPath, callback) {
   if (!fs.existsSync(path.dirname(outputPath))) {
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
@@ -728,365 +1139,156 @@ function generatePDF(data, outputPath, callback) {
   doc.registerFont('ARIALBI', ARIALBI);
   doc.registerFont('ARIALI', ARIALI);
 
-  const bullet = '•';
+  // const bullet = '•';
 
-  let itemTitleSize = 24;
-  let itemTitleWidth = 500;
-  let itemTitleColor = '#2196f3';
-  let itemTitleAlign = 'center';
-  let itemTitleFont = 'ARIALBD';
+  // let itemTitleSize = 24;
+  // let itemTitleWidth = 500;
+  // let itemTitleColor = '#2196f3';
+  // let itemTitleAlign = 'center';
+  // let itemTitleFont = 'ARIALBD';
+
+
+  let intro = {
+    sizeText : 14,
+    sizeTitle : 24,
+  }
 
   let pageWidth = doc.page.width;
   let pageHeight = doc.page.height;
+
   let marginLeft = doc.page.margins.left;
   let marginRight = doc.page.margins.right;
   let marginTop = doc.page.margins.top;
   let marginBottom = doc.page.margins.bottom;
+
   let contentWidth = pageWidth - marginLeft - marginRight;
   let contentHeight = pageHeight - marginTop - marginBottom;
 
-  let textWidth = 0;
-  let xCentered = 0;
-  let lineHeight = 0;
-  let spaceAdded = 0;
-  let textWidthItem = 200;
-  let pathImages = 'D:/chendra/02-applications/201-admin/01-data/admin/features/images/tutorials/';
-  let releaseDate = data.releaseDate;
+  // let textWidth = 0;
+  // let xCentered = 0;
+  // let lineHeight = 0;
+  // let spaceAdded = 0;
+  // let textWidthItem = 200;
+  // let pathImages = 'D:/chendra/02-applications/201-admin/01-data/admin/features/images/tutorials/';
+  // let releaseDate = data.releaseDate;
 
-  doc.font('ARIAL').fontSize(20).fillColor('white')
-    .text('aaaa', 0, 0, { width: 400 });
+  data.elements.forEach((element, index) => {
 
-  // data.elements.forEach((element, index) => {
-  //   let typeimage = element.typeimage;
-  //   let typetext = element.typetext;
-  //   let typeintro = element.typeintro;
-  //   let typecode = element.typecode;
-  //   let typechapter = element.typechapter;
-  //   let typesignup = element.typesignup;
-  //   let linkable = element.linkable;
-  //   let itemTitleText = element.title;
-  //   let title = element.title;
-  //   let codefilename = element.codefilename;
-  //   let nameimage = element.nameimage;
-  //   let libelleImage = element.libelleimage;
-  //   let chapternameimage = element.chapternameimage;
-  //   let content = element.content;
+    let typeimage = element.typeimage;
+    let typetext = element.typetext;
+    let typeintro = element.typeintro;
+    let typecode = element.typecode;
+    let typechapter = element.typechapter;
+    let typesignup = element.typesignup;
 
-  //   let displayIntro = false;
-  //   let displayText = false;
-  //   let displayChapter = false;
-  //   let displayImage = false;
-  //   let displayCode = false;
+    let linkable = element.linkable;
+    let title = element.title;
+    let content = element.content;
 
-  //   if (!typeimage && !typeintro && !typecode && !typechapter && !typesignup) {
-  //     if (typetext) {
-  //       displayText = true;
-  //     }
-  //   }
+    // let itemTitleText = element.title;
+    // let codefilename = element.codefilename;
+    // let nameimage = element.nameimage;
+    // let libelleImage = element.libelleimage;
+    // let chapternameimage = element.chapternameimage;
 
-  //   if (typeimage) {
-  //     displayImage = true;
-  //   }
-
-  //   if (typechapter) {
-  //     displayChapter = true;
-  //   }
-
-  //   if (typecode) {
-  //     displayCode = true;
-  //   }
-
-  //   if (!typeimage && typeintro && !typecode && !typechapter && !typesignup) {
-  //     if (typetext) {
-  //       displayIntro = true;
-  //     }
-  //   }
-
-  //   if (displayIntro) {
-
-  //     let nameimageBanner = 'introduction-banner.png';
-  //     let imagePathBanner = pathImages + nameimageBanner;
-  //     const imageBanner = doc.openImage(imagePathBanner);
-  //     let imgWidthBanner = imageBanner.width;
-  //     let imgHeightBanner = imageBanner.height;
-  //     let scaleFactorBanner = 0.75;
-  //     let newWidthBanner = imgWidthBanner * scaleFactorBanner;
-  //     let newHeightBanner = imgHeightBanner * scaleFactorBanner;
-
-  //     let centerX = (pageWidth - newWidthBanner) / 2;
-  //     let posY = 18;
-  //     doc.image(imagePathBanner, centerX, posY, {
-  //       width: newWidthBanner,
-  //       height: newHeightBanner,
-  //     });
-
-  //     let nameimageIntro = 'introduction-background.png';
-  //     let imagePathIntro = pathImages + nameimageIntro;
-  //     doc.image(imagePathIntro, 0, 60, {
-  //       width: pageWidth,
-  //       height: pageHeight,
-  //     });
-
-  //     const nameImageTutorial = 'tutorial.png';
-  //     const imagePathTutorial = path.join(pathImages, nameImageTutorial);
-  //     addImageWithShadow(true, doc, imagePathTutorial, 350, 380);
-
-  //     doc.y += 65;
-  //     textColorTitle = 'white';
-  //     doc.font('ARIALBD').fontSize(34).fillColor(textColorTitle).text(title, PDF_LEFT, doc.y, {
-  //       width: 500,
-  //       align: 'center'
-  //     });
-
-  //     doc.y += 40;
-  //     textColorTitle = 'grey';
-  //     let guideTitle = 'Guide Complet';
-  //     doc.font('ARIALBD').fontSize(26).fillColor('#D9D9D9').text(guideTitle, PDF_LEFT, doc.y, {
-  //       width: 500,
-  //       align: 'center'
-  //     });
-
-  //     const linePosY = doc.y + 45;
-  //     addLine('white', doc, linePosY, 1);
-
-  //     doc.y += 60;
-  //     textColorTitle = 'white';
-  //     doc.font('ARIALBD').fontSize(12).fillColor(textColorTitle).text(releaseDate, PDF_LEFT, doc.y, {
-  //       width: 500,
-  //       align: 'right'
-  //     });
-
-  //     const pageWidthIntro = doc.page.width;
-  //     const pageHeightIntro = doc.page.height;
-  //     const pageMarginsIntro = doc.page.margins.left + doc.page.margins.right;
-  //     let textWidthIntro = (pageWidthIntro - pageMarginsIntro) * 0.58;
-
-  //     textColor = 'white';
-  //     doc.y += 30;
-  //     let sizeIntro = 18;
-
-  //     writeText(1, doc, content);
-
-  //     doc.addPage({
-  //       size: PDF_SIZE,
-  //       top: PDF_TOP,
-  //       bottom: PDF_BOTTOM,
-  //       left: PDF_LEFT,
-  //       right: PDF_RIGHT,
-  //     });
-
-  //     nameimageIntro = 'introduction-background.png';
-  //     imagePathIntro = pathImages + nameimageIntro;
-  //     doc.image(imagePathIntro, 0, 0, {
-  //       width: pageWidth,
-  //       height: pageHeight,
-  //     });
-
-  //     doc.addPage({
-  //       size: PDF_SIZE,
-  //       top: PDF_TOP,
-  //       bottom: PDF_BOTTOM,
-  //       left: PDF_LEFT,
-  //       right: PDF_RIGHT,
-  //     });
-
-  //   }
-
-  //   if (displayText) {
-
-  //     textWidth = 500;
-  //     textHeight = 0;
-  //     xCentered = marginLeft + (contentWidth - textWidth) / 2;
-  //     if (linkable) {
-  //       doc.font('ARIALBD').fontSize(24);
-  //       let textHeight = doc.heightOfString(`${index}-${title}`, {
-  //         width: textWidth,
-  //         align: 'center',
-  //         lineGap: 3,
-  //       });
-  //     }
-  //     content = addParagraph(content);
-  //     content = sanitize(content);
-  //     doc.font('ARIAL').fontSize(14);
-  //     textHeight += doc.heightOfString(`${content}`, {
-  //       width: 500, align: 'left', lineGap: 3,
-  //     });
-  //     lineHeight = doc.currentLineHeight();
-  //     if (linkable) {
-  //       spaceAdded = SIZE_DOWN_BR_SECOND * lineHeight;
-  //       textHeight = textHeight + spaceAdded;
-  //     }
-  //     while (doc.y + textHeight > contentHeight) {
-  //       checkPageNew(doc);
-  //       textHeight -= contentHeight;
-  //     }
-  //     if (linkable) {
-  //       doc.font('ARIALBD').fontSize(24);
-  //       doc.fillColor('#2196f3')
-  //         .text(`${index}-${title}`, xCentered, doc.y, {
-  //           width: textWidth,
-  //           align: 'center',
-  //           lineGap: 3,
-  //         });
-  //       doc.font('ARIAL').moveDown(SIZE_DOWN_BR_SECOND);
-  //     } else {
-  //       addLine('grey', doc, doc.y, 1);
-  //     }
-  //     writeText(3, doc, content);
-  //   }
-
-  //   if (displayChapter) {
-
-  //     doc.addPage({
-  //       size: PDF_SIZE,
-  //       top: PDF_TOP,
-  //       bottom: PDF_BOTTOM,
-  //       left: PDF_LEFT,
-  //       right: PDF_RIGHT,
-  //     });
-
-  //     let nameimageIntro = 'introduction-background.png';
-  //     let imagePathIntro = pathImages + nameimageIntro;
-  //     doc.image(imagePathIntro, 0, 0, {
-  //       width: pageWidth,
-  //       height: pageHeight,
-  //     });
+    let displayIntro = false;
+    let displayText = false;
+    let displayChapter = false;
+    let displayImage = false;
+    let displayCode = false;
 
 
-  //     textWidth = 500;
-  //     xCentered = marginLeft + (contentWidth - textWidth) / 2;
-  //     doc.font('ARIAL').fontSize(24);
-  //     textHeight = doc.heightOfString(`${index}-chapter-${title}`, xCentered, doc.y, {
-  //       width: textWidth,
-  //       align: 'center',
-  //       lineGap: 3,
-  //     });
-  //     content = addParagraph(content);
-  //     content = sanitize(content);
-  //     doc.font('ARIAL').fontSize(14);
-  //     textHeight = doc.heightOfString(`${content}`, 50, doc.y, {
-  //       width: 500, align: 'left', lineGap: 3,
-  //     });
-  //     while (doc.y + textHeight > contentHeight) {
-  //       checkPageNew(doc);
-  //       textHeight -= contentHeight;
-  //     }
-  //     doc.font('ARIAL').fontSize(24);
-  //     doc.fillColor('white')
-  //       .text(`${index}-chapter-${title}`, xCentered, doc.y, {
-  //         width: textWidth,
-  //         align: 'center',
-  //         lineGap: 3,
-  //       });
-  //     doc.font('ARIAL').fontSize(14);
-  //     writeText(2, doc, content);
-  //     doc.addPage({
-  //       size: PDF_SIZE,
-  //       top: PDF_TOP,
-  //       bottom: PDF_BOTTOM,
-  //       left: PDF_LEFT,
-  //       right: PDF_RIGHT,
-  //     });
+    if (!typeimage && !typeintro && !typecode && !typechapter && !typesignup) {
+      if (typetext) {
+        displayText = true;
+      }
+    }
 
-  //   }
+    // if (!typeimage && typeintro && !typecode && !typechapter && !typesignup) {
+    //   if (typetext) {
+    //     displayIntro = true;
+    //   }
+    // }
 
-  //   if (displayImage) {
-  //     textWidth = 500;
-  //     xCentered = marginLeft + (contentWidth - textWidth) / 2;
-  //     doc.font('ARIAL').fontSize(14);
 
-  //     let libelleImageTmp = libelleImage;
-  //     if (libelleImageTmp === '') {
-  //       libelleImageTmp = ' ';
-  //     }
+    // if (typechapter) {
+    //   displayChapter = true;
+    // }
 
-  //     textHeight = doc.heightOfString(`${libelleImageTmp}`, {
-  //       width: textWidth,
-  //       align: 'center',
-  //       lineGap: 3,
-  //     });
+    // if (typeimage) {
+    //   displayImage = true;
+    // }
 
-  //     const imagePath = 'D:/chendra/02-applications/201-admin/01-data/admin/features/images/tutorials/' + nameimage;
-  //     const image = doc.openImage(imagePath);
+    // if (typecode) {
+    //   displayCode = true;
+    // }
 
-  //     let imgWidth = image.width * 0.75;
-  //     let imgHeight = image.height * 0.75;
+    // A3
+    // doc.font('ARIAL').fontSize(20).fillColor('black')
+    //   .text('abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefghi', 
+    //     0, 0, 
+    //     { width: 612 });
 
-  //     const pageWidthImage = doc.page.width - doc.page.margins.left - doc.page.margins.right;
-  //     const pageHeightImage = doc.page.height - doc.page.margins.top - doc.page.margins.bottom;
+    // A4
+    // doc.font('ARIAL').fontSize(20).fillColor('black')
+    //   .text('abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefg', 
+    //     0, 0, 
+    //     { width: 595 });
 
-  //     let scale = Math.min(pageWidthImage / imgWidth, pageHeightImage / imgHeight, 1);
-  //     let imgWidthResize = imgWidth * scale;
-  //     let imgHeightResize = imgHeight * scale;
+    if (displayText) {
 
-  //     while (doc.y + textHeight + imgHeightResize > pageHeightImage) {
-  //       checkPageNew(doc);
-  //       textHeight -= pageHeightImage;
-  //     }
+      
+      textWidth = 500;
+      textHeight = 0;
+      xCentered = marginLeft + (contentWidth - textWidth) / 2;
+      if (linkable) {
+        doc.font('ARIALBD').fontSize(intro.sizeTitle);
+        let textHeight = doc.heightOfString(`${index}-${title}`, {
+          width: textWidth,
+          align: 'center',
+          lineGap: 3,
+        });
+      }
+      content = addParagraph(content);
+      content = sanitize(content);
+      doc.font('ARIAL').fontSize(intro.sizeText);
+      textHeight += doc.heightOfString(`${content}`, {
+        width: 500, align: 'left', lineGap: 3,
+      });
+      lineHeight = doc.currentLineHeight();
+      if (linkable) {
+        spaceAdded = SIZE_DOWN_BR_SECOND * lineHeight;
+        textHeight = textHeight + spaceAdded;
+      }
+      while (doc.y + textHeight > contentHeight) {
+        checkPageNew(doc);
+        textHeight -= contentHeight;
+      }
+      if (linkable) {
+        doc.font('ARIALBD').fontSize(intro.sizeTitle);
+        doc.fillColor('#2196f3')
+          .text(`${index}-${title}`, xCentered, doc.y, {
+            width: textWidth,
+            align: 'center',
+            lineGap: 3,
+          });
+        doc.font('ARIAL').moveDown(SIZE_DOWN_BR_SECOND);
+      } else {
+        addLine('grey', doc, doc.y, 1);
+      }
+      writeText(3, doc, content);
+    }
 
-  //     doc.font('ARIAL').fontSize(14).fillColor('black')
-  //       .text(`${libelleImageTmp}`, xCentered, doc.y, {
-  //         width: textWidth,
-  //         align: 'center',
-  //         lineGap: 3,
-  //       });
 
-  //     xCentered = doc.page.margins.left + (pageWidthImage - imgWidthResize) / 2;
+    // if (displayText) {
+    //   doc.font('ARIAL').fontSize(20).fillColor('black')
+    //     .text('abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefg',
+    //       0, 0,
+    //       { width: 595 });
+    // }
 
-  //     doc.image(imagePath, xCentered, doc.y, {
-  //       width: imgWidthResize,
-  //       height: imgHeightResize,
-  //     });
 
-  //     doc.y += imgHeightResize + 10;
-  //   }
-
-  //   if (displayCode) {
-
-  //     let linePosY = doc.y + 2;
-  //     addLine('red', doc, linePosY, 1);
-
-  //     textWidth = 500;
-  //     xCentered = marginLeft + (contentWidth - textWidth) / 2;
-  //     doc.font('ARIALBD').fontSize(12);
-  //     let codefilenameTmp = codefilename;
-  //     if (codefilenameTmp === '') {
-  //       codefilenameTmp = ' ';
-  //     }
-  //     textHeight = doc.heightOfString(`${codefilenameTmp}`, xCentered, doc.y, {
-  //       width: textWidth,
-  //       align: 'center',
-  //       lineGap: 3,
-  //     });
-  //     content = sanitize(content);
-  //     doc.font('ARIAL').fontSize(12);
-  //     let textHeightCode = doc.heightOfString(`${content}`, 70, doc.y, {
-  //       width: 470, align: 'left', lineGap: 3,
-  //     });
-  //     textHeight = textHeight + textHeightCode;
-  //     while (doc.y + textHeight > contentHeight) {
-  //       checkPageNew(doc);
-  //       textHeight -= contentHeight;
-  //     }
-  //     doc.font('ARIALBD').fontSize(12);
-  //     doc.fillColor('#2196f3')
-  //       .text(`${codefilenameTmp}`, xCentered, doc.y, {
-  //         width: textWidth,
-  //         align: 'center',
-  //         lineGap: 3,
-  //       });
-  //     let yCode = doc.y;
-  //     doc.font('ARIAL').fontSize(12);
-  //     doc.fillColor('grey')
-  //       .text(`${content}`, 70, doc.y, {
-  //         width: 470, align: 'left', lineGap: 3,
-  //       });
-
-  //     linePosY = doc.y + 2;
-  //     addLine('red', doc, linePosY, 1);
-  //   }
-
-  // })
+  })
 
   doc.end();
   stream.on('finish', () => {

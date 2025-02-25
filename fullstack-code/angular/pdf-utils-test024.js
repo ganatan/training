@@ -14,19 +14,20 @@ const PDF_LEFT = 30;
 const PDF_RIGHT = 30;
 
 const PDF_WIDTH = 535;
+// const PDF_WIDTH_FULL = 595;
 
 const PDF_INTRO = {
   titleFont: 'ARIALBD',
   titleSize: 24,
   titleWidth: PDF_WIDTH,
-  titleColor: '#2196f3',
   titleLeft: 60,
+  titleColor: '#2196f3',
   titleAlign: 'left',
   textFont: 'ARIAL',
   textSize: 14,
-  textWidth: 200,
+  textWidth: 495,
+  textLeft: 50,
   textColor: 'black',
-  textLeft: 30,
   textAlign: 'left',
 }
 
@@ -101,7 +102,6 @@ function writeTextLi(doc, text, font, color, width, size, left, align) {
   let index = 0;
   let bulletLi = '';
   let leftLi = 10;
-
   while ((match = regex.exec(text)) !== null) {
     const beforeMatch = text.substring(lastIndex, match.index);
     const nextMatchBr = text.substring(match.index + match[0].length).trim().startsWith('<br>');

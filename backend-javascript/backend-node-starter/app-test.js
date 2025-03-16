@@ -16,13 +16,13 @@ const pool = mysql.createPool({
 });
 
 const getItems = async () => {
-  console.log('00000000001');
   try {
     const [rows] = await pool.query('SELECT * FROM person');
-    console.log('00000000002:' + JSON.stringify(rows));
+
     return rows;
   } catch (error) {
     console.error(`Database error: ${error.message}`);
+
     return [];
   }
 };

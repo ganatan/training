@@ -1,15 +1,45 @@
-- Creer un  frontend avec java
+# Creer un  frontend avec java
 
 
-File / New / Project / Web / Dynamic Web Project
+# Installer Tomcat
+Tester Tomcat
+  http://127.0.0.1:8080/
 
-On indique un nom arbitraire
-frontendjava
+Installer un serveur Tomcat
+  dans l'onglet
+    Servers / create a new server
+    Apache / Tomcat 11 / Next  
+    Browse / D:\hal\Tomcat 11.0
+    double click sur server
+      Tomcat admin Port : 8088
+      HTTP/1.1 : 8089
+    clic droit
+      clean
+      start      
 
-on coche la case
-Generate web.xml deployment descriptor
+
+  Tomcat 10 et 11 utilisent Jakarta EE au lieu de Java EE
+  ce qui favorise les annotations @WebServlet au lieu du web.xml.      
+
+# Creer le projet
+  
+  File / New / Project / Web / Dynamic Web Project
+
+  On indique un nom arbitraire
+  frontendjava
+
+  selectionner 
+    Dynamic Web Module 5.0 (6.1 pour Jakarta 11 pas compatible avec Tomcat)
+
+  Va dans Window → Preferences → Install/Update → Available Software Sites.
+    Cherche l'entrée https://download.jboss.org/jbosstools/photon/stable/updates/.
+    Désactive-la ou supprime-la.
 
 
+  on coche la case
+  Generate web.xml deployment descriptor
+
+  Creer index.HTML dans Webapp    
 
 
 Creer un server
@@ -17,7 +47,12 @@ Creer un server
     Tomcat Admin Port     8081
     HTTP/1.1              8082
 
-Creer index.HTML dans Webapp    
+
+clic sur le projet   !!!!!!!!!!!!!!!!!!!!!!!!!!!!! obligatoire
+  Run as server
+    Select de la ligne
+    Always
+
 
 Ajouter Jakarta Servlet API via le serveur Tomcat dans Eclipse
   Vérifier si Tomcat est bien configuré dans Eclipse :

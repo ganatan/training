@@ -10,7 +10,7 @@ eclipse     Version: 2024-12 (4.34.0)
 
 Je veux que le projet s'appelle frontend-java
 
-il doit etre le plu simple possible 
+il doit etre le plus simple possible 
 
 Je vexu afficher dands ma page une liste d'utilisateurs
 

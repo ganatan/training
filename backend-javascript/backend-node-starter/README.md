@@ -10,7 +10,6 @@
     "name": "Greta Gerwig"
   }
 
-
 # updateItem
 
   http://localhost:3000/persons/1

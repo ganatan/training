@@ -7,12 +7,14 @@ Installer "Spring Tools 4"
 Lancer l'executable
   SpringToolSuite4.exe
 
+Exclude from scan  
+
 
   Sélectionne Spring Starter Project.
     Type : Maven
-    Name : backend-springboot
+    Name : backend-java-springboot
     Group : com.ganatan
-    Artifact : backend-springboot
+    Artifact : backend-java-springboot
     Packaging : Jar
     Java Version : 21
 

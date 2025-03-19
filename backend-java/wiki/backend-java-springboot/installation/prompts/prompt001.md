@@ -12,12 +12,14 @@ eclipse     Version: 2024-12 (4.34.0)
 
 J'ai installé Spring Tools 4 via un 
 
+j'ai utilise Sélectionne Spring Starter Project.
+
 Je veux que le projet s'appelle backend-java-springboot
 
-il doit etre le plu simple possible et renvoie une API renvoyant une liste de 12 réalisateurs américains avec les informations suivantes :
+il doit etre le plus simple possible et renvoie une API renvoyant une liste de 12 réalisateurs américains avec les informations suivantes :
 
 l'url sera 
-http://localhost:port/persons
+http://localhost:9000/persons
 
 id : un increment
 name : leur nom

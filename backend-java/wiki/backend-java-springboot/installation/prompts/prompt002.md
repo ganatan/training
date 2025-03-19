@@ -15,5 +15,4 @@ Réponds en français.
 
 La réponse doit tenir sur un seul écran et ne pas utiliser de canevas sur le côté.
 
-# port Serveur
-
+et je veux voir le resultat dans le navigateur

@@ -12,7 +12,7 @@ Je veux que le projet s'appelle frontend-java-maven
 
 il doit etre le plu simple possible 
 
-Je vexu afficher dands ma page une liste d'utilisateurs
+Je veux afficher dands ma page une liste d'utilisateurs
 
 Comment je dois faire 
 

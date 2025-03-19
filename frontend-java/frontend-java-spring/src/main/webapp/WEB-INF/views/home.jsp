@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Spring MVC</title>
+    <title>Home Page</title>
 </head>
 <body>
-    <h1>${message}</h1>
-    <h2>${message}</h2>
+    <h1>Welcome to Spring MVC on Tomcat 11 Test!</h1>
 </body>
 </html>

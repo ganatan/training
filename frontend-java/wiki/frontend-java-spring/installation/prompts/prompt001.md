@@ -184,6 +184,10 @@ public class Home extends HttpServlet {
 }
 
 
+Adapte mon projet pour tenir compte de
+
+WebConfig.java pour la config de spring
+
 
 Tout le code doit être en anglais.
 Les données doivent être en anglais.

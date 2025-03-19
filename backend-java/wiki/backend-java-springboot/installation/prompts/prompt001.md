@@ -3,12 +3,16 @@
 
 Je veux developper une application avec springboot
 
-J'ai jdk 21 et eclipse 
+J'ai 
+
+Jakarta 10
+Tomact 11
+java 21 
 eclipse     Version: 2024-12 (4.34.0)
 
 J'ai installé Spring Tools 4 via un 
 
-Je veux que le projet s'appelle backend-springboot
+Je veux que le projet s'appelle backend-java-springboot
 
 il doit etre le plu simple possible et renvoie une API renvoyant une liste de 12 réalisateurs américains avec les informations suivantes :
 

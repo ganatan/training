@@ -5,6 +5,10 @@
 	Tomcat 11
 	Eclipse
 
+# Paramètres Eclipse
+	Settings
+	Desactiver JBOSS
+		Windows / Preferences / Install Update / JBOss Tools
 
 # Creer un  frontend avec java
 

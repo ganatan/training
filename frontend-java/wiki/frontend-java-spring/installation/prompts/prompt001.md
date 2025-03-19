@@ -1,3 +1,21 @@
+# initialisation
+
+Je veux developper une application frontend avec java et maven et spring
+
+Mes outils 
+
+	Jakarta 21
+	Java 21
+	Tomcat 11
+	Eclipse Version: 2024-12 (4.34.0)
+
+
+Je veux que le projet s'appelle frontend-java-spring
+
+il doit etre le plus simple possible 
+
+voila mon pom.xml
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -117,3 +135,62 @@
     </build>
 
 </project>
+
+
+
+voila mon web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+         
+    <display-name>java-example-starter</display-name>
+
+    <!-- ✅ Déclaration de la servlet -->
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.ganatan.apps.Home</servlet-class>
+    </servlet>
+
+    <!-- ✅ Mapping de la servlet -->
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+
+voila mon Home.java
+
+package com.ganatan.apps;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class Home extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        response.getWriter().println("<h1>Welcome to Jakarta EE 10 on Tomcat 11!</h1>");
+    }
+}
+
+
+
+Tout le code doit être en anglais.
+Les données doivent être en anglais.
+
+Pas de commentaires dans le code.
+
+Réponds en français.
+
+La réponse doit tenir sur un seul écran et ne pas utiliser de canevas sur le côté.
+

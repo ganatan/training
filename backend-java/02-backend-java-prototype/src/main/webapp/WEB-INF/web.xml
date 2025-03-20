@@ -9,7 +9,7 @@
   
   <servlet>
     <servlet-name>PersonsServlet</servlet-name>
-    <servlet-class>com.ganatan.servlets.PersonsServlet</servlet-class>
+    <servlet-class>com.ganatan.features.person.PersonController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PersonsServlet</servlet-name>

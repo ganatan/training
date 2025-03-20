@@ -1,4 +1,4 @@
-package com.ganatan.servlets;
+package com.ganatan.features.person;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,7 +12,7 @@ class PersonsServletTest {
 
     @Test
     void shouldReturnJsonResponse() throws Exception {
-        PersonsServlet servlet = new PersonsServlet();
+    	PersonController servlet = new PersonController();
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         StringWriter responseWriter = new StringWriter();

@@ -112,3 +112,12 @@ Clique sur l'URL affichée (http://localhost:9000/persons)
 Ouvre l'onglet Web → Window > Show View > Other > General > Internal Web Browser
 Entre l'URL → http://localhost:9000/persons
 Valide pour voir la réponse JSON.
+
+
+
+# Execution
+Exécuter manuellement en tant qu'application Spring Boot
+Si le problème persiste :
+
+Fais un clic droit sur BackendJavaSpringbootApplication.java.
+Sélectionne Run As > Spring Boot App.

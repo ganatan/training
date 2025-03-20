@@ -1,35 +1,9 @@
-# initialisation
+j'ai cree un projet java avec maven
 
-Je veux developper une application frontend avec java et maven
-
-Mes outils 
-
-jdk 21 
-eclipse     Version: 2024-12 (4.34.0)
+mes fichiers
 
 
-Je veux que le projet s'appelle frontend-java-maven
-
-il doit etre le plu simple possible 
-
-Je veux afficher dands ma page une liste d'utilisateurs
-
-Comment je dois faire 
-
-
-
-Tout le code doit être en anglais.
-Les données doivent être en anglais.
-
-Pas de commentaires dans le code.
-
-Réponds en français.
-
-La réponse doit tenir sur un seul écran et ne pas utiliser de canevas sur le côté.
-
-# prompt 2
-
-voila mon pom.xml avec jdk 21 et eclipse 2024-12 (4.34.0)
+pom.xml
 
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -100,12 +74,34 @@ voila mon pom.xml avec jdk 21 et eclipse 2024-12 (4.34.0)
 </project>
 
 
-je veux rajouter
-ce type
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-		</dependency>
+web.xml
 
-adapte le avec jakarta version    
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    version="4.0"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+  <display-name>Archetype Created Web Application</display-name>
+</web-app>
+
+
+
+J'ai cette erreur sur index.jsp
+
+
+		The default superclass, "javax.servlet.http.HttpServlet", according to the project's Dynamic Web Module facet version (4.0), was not found on the Java 
+ Build Path.
+
+
+
+Tout le code doit être en anglais.
+Les données doivent être en anglais.
+
+Pas de commentaires dans le code.
+
+Réponds en français.
+
+La réponse doit tenir sur un seul écran et ne pas utiliser de canevas sur le côté.

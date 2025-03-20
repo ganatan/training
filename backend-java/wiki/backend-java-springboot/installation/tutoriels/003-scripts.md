@@ -11,10 +11,13 @@ Node.js (package.json)	                              Spring Boot (Maven / Termin
 "test": "jest"	                                      mvn test
 
 "coverage": "jest --coverage"	                        mvn jacoco:report
+
 "build": 
 "webpack --mode production --output-path dist"	      mvn clean package
 
-"serve": "node dist/bundle.js"	                      java -jar target/backend-springboot-0.0.1-SNAPSHOT.jar
+"serve": "node dist/bundle.js"	                      java -jar target/backend-java-springboot-0.0.1-SNAPSHOT.jar
+                                                      puis
+                                                      localhost:9000/persons
 
 "audit": "npm audit"	                                mvn dependency:analyze
 

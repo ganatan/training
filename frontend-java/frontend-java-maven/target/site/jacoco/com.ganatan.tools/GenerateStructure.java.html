@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenerateStructure.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">frontend-java-maven</a> &gt; <a href="index.source.html" class="el_package">com.ganatan.tools</a> &gt; <span class="el_source">GenerateStructure.java</span></div><h1>GenerateStructure.java</h1><pre class="source lang-java linenums">package com.ganatan.tools;
+
+import java.io.File;
+
+<span class="nc" id="L5">public class GenerateStructure {</span>
+	public static void main(String[] args) {
+<span class="nc" id="L7">		String projectPath = &quot;.&quot;;</span>
+<span class="nc" id="L8">		File projectDir = new File(projectPath);</span>
+
+<span class="nc bnc" id="L10" title="All 4 branches missed.">		if (projectDir.exists() &amp;&amp; projectDir.isDirectory()) {</span>
+<span class="nc" id="L11">			listFiles(projectDir, 0);</span>
+<span class="nc" id="L12">		} else {</span>
+<span class="nc" id="L13">			System.out.println(&quot;Invalid project directory: &quot; + projectPath);</span>
+		}
+<span class="nc" id="L15">	}</span>
+
+	private static void listFiles(File directory, int level) {
+<span class="nc" id="L18">		File[] files = directory.listFiles();</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">		if (files == null)</span>
+<span class="nc" id="L20">			return;</span>
+
+<span class="nc bnc" id="L22" title="All 2 branches missed.">		for (File file : files) {</span>
+<span class="nc" id="L23">			System.out.println(&quot;  &quot;.repeat(level) + &quot;- &quot; + file.getName());</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">			if (file.isDirectory()) {</span>
+<span class="nc" id="L25">				listFiles(file, level + 1);</span>
+			}
+		}
+<span class="nc" id="L28">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

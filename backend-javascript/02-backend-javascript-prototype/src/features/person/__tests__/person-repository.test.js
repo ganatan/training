@@ -1,10 +1,12 @@
 import PersonRepository from '../person-repository.js';
+import { MOCK_DATA } from '../person-mock-data.js';
 
 describe('PersonRepository', () => {
   let repository;
 
   beforeEach(() => {
-    repository = new PersonRepository();
+    repository = new PersonRepository(false);
+    repository.items = JSON.parse(JSON.stringify(MOCK_DATA));
   });
 
   // Arrange - Act - Assert

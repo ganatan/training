@@ -1,54 +1,29 @@
-class CityRepository {
+import MockRepository from './city-repository-mock.js';
+
+class Repository {
   constructor() {
-    this.items = [
-      { id: 1, name: 'Cincinnati' },
-      { id: 2, name: 'New York' },
-      { id: 3, name: 'Knoxville' },
-      { id: 4, name: 'London' },
-      { id: 5, name: 'Detroit' },
-      { id: 6, name: 'Kapuskasing' },
-      { id: 7, name: 'Denver' },
-      { id: 8, name: 'Burbank' },
-      { id: 9, name: 'San Francisco' },
-      { id: 10, name: 'Houston' },
-      { id: 11, name: 'Atlanta' },
-      { id: 12, name: 'Modesto' },
-    ];
+    this.repository = new MockRepository();
   }
 
   async getItems() {
-    return Promise.resolve(this.items);
+    return this.repository.getItems();
   }
 
   async getItemById(id) {
-    return Promise.resolve(this.items.find((item) => item.id === id) || null);
+    return this.repository.getItemById(id);
   }
 
-  async createItem(city) {
-    const newCity = { id: this.items.length + 1, ...city };
-    this.items.push(newCity);
-
-    return Promise.resolve(newCity);
+  async createItem(data) {
+    return this.repository.createItem(data);
   }
 
-  async updateItem(id, updatedData) {
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) {
-      return Promise.resolve(null);
-    }
-    this.items[index] = { ...this.items[index], ...updatedData };
-
-    return Promise.resolve(this.items[index]);
+  async updateItem(id, data) {
+    return this.repository.updateItem(id, data);
   }
 
   async deleteItem(id) {
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) {
-      return Promise.resolve(null);
-    }
-
-    return Promise.resolve(this.items.splice(index, 1)[0]);
+    return this.repository.deleteItem(id);
   }
 }
 
-export default CityRepository;
+export default Repository;

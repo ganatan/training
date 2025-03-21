@@ -1,4 +1,4 @@
-class PersonService {
+class Service {
   constructor(repository) {
     this.repository = repository;
   }
@@ -24,4 +24,4 @@ class PersonService {
   }
 }
 
-export default PersonService;
+export default Service;

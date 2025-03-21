@@ -6,9 +6,11 @@ import PersonRepository from './person-repository.js';
 import PersonService from './person-service.js';
 import PersonController from './person-controller.js';
 
+import config from '../../config/config.js';
+
 const router = express.Router();
 
-const repository = new PersonRepository(true);
+const repository = new PersonRepository(config.useDatabase);
 const service = new PersonService(repository);
 const controller = new PersonController(service);
 

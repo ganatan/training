@@ -6,9 +6,11 @@ import CityRepository from './city-repository.js';
 import CityService from './city-service.js';
 import CityController from './city-controller.js';
 
+import config from '../../config/config.js';
+
 const router = express.Router();
 
-const repository = new CityRepository(true);
+const repository = new CityRepository(config.useDatabase);
 const service = new CityService(repository);
 const controller = new CityController(service);
 

@@ -1,4 +1,4 @@
-class CityService {
+class Service {
   constructor(repository) {
     this.repository = repository;
   }
@@ -24,4 +24,4 @@ class CityService {
   }
 }
 
-export default CityService;
+export default Service;

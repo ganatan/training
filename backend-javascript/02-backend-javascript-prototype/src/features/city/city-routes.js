@@ -2,15 +2,15 @@ import express from 'express';
 
 import responseHandler from '../../middleware/response-handler.js';
 
-import CityRepository from './city-repository.js';
-import CityService from './city-service.js';
-import CityController from './city-controller.js';
+import Repository from './city-repository.js';
+import Service from './city-service.js';
+import Controller from './city-controller.js';
 
 const router = express.Router();
 
-const repository = new CityRepository();
-const service = new CityService(repository);
-const controller = new CityController(service);
+const repository = new Repository();
+const service = new Service(repository);
+const controller = new Controller(service);
 
 router.get('/', controller.getItems, responseHandler);
 router.get('/:id', controller.getItemById, responseHandler);

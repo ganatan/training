@@ -1,10 +1,12 @@
 import CityRepository from '../city-repository.js';
+import { MOCK_DATA } from '../city-mock-data.js';
 
 describe('CityRepository', () => {
   let repository;
 
   beforeEach(() => {
-    repository = new CityRepository();
+    repository = new CityRepository(false);
+    repository.items = JSON.parse(JSON.stringify(MOCK_DATA));
   });
 
   test('getItems should return all cities', async () => {

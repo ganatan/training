@@ -2,15 +2,15 @@ import express from 'express';
 
 import responseHandler from '../../middleware/response-handler.js';
 
-import PersonRepository from './person-repository.js';
-import PersonService from './person-service.js';
-import PersonController from './person-controller.js';
+import Repository from './person-repository.js';
+import Service from './person-service.js';
+import Controller from './person-controller.js';
 
 const router = express.Router();
 
-const repository = new PersonRepository();
-const service = new PersonService(repository);
-const controller = new PersonController(service);
+const repository = new Repository();
+const service = new Service(repository);
+const controller = new Controller(service);
 
 router.get('/', controller.getItems, responseHandler);
 router.get('/:id', controller.getItemById, responseHandler);

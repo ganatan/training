@@ -1,163 +1,32 @@
-import pool from '../../config/database.js';
+import PersonPgRepository from './person-repository-pg.js';
+import PersonMockRepository from './person-repository-mock.js';
 
 class PersonRepository {
   constructor(useDatabase) {
-    this.useDatabase = useDatabase;
-    this.items = [
-      { id: 1, name: 'Steven Spielberg', city: 'Cincinnati' },
-      { id: 2, name: 'Martin Scorsese', city: 'New York' },
-      { id: 3, name: 'Quentin Tarantino', city: 'Knoxville' },
-      { id: 4, name: 'Christopher Nolan', city: 'London' },
-      { id: 5, name: 'Francis Ford Coppola', city: 'Detroit' },
-      { id: 6, name: 'James Cameron', city: 'Kapuskasing' },
-      { id: 7, name: 'David Fincher', city: 'Denver' },
-      { id: 8, name: 'Tim Burton', city: 'Burbank' },
-      { id: 9, name: 'Clint Eastwood', city: 'San Francisco' },
-      { id: 10, name: 'Wes Anderson', city: 'Houston' },
-      { id: 11, name: 'Spike Lee', city: 'Atlanta' },
-      { id: 12, name: 'George Lucas', city: 'Modesto' },
-    ];
+    this.repository = useDatabase
+      ? new PersonPgRepository()
+      : new PersonMockRepository();
   }
 
   async getItems() {
-    if (this.useDatabase && pool) {
-      try {
-        const { rows } = await pool.query('SELECT * FROM person');
-
-        const formattedRows = rows.map((row) => {
-          const {
-            id,
-            name,
-            wikipedia_link,
-            birth_date,
-            birth_city_id,
-            death_date,
-            death_city_id,
-            gender_id,
-            image
-          } = row;
-
-          return {
-            id,
-            name,
-            wikipediaLink: wikipedia_link,
-            birthDate: birth_date?.toISOString().split('T')[0] || null,
-            birthCityId: birth_city_id,
-            deathDate: death_date ? death_date.toISOString().split('T')[0] : null,
-            deathCityId: death_city_id,
-            genderId: gender_id,
-            image: image || null
-          };
-        });
-
-        return formattedRows;
-      } catch (error) {
-        console.error(`Database error: ${error.message}`);
-        return [];
-      }
-    }
-
-    return Promise.resolve(this.items);
+    return this.repository.getItems();
   }
 
   async getItemById(id) {
-    if (this.useDatabase && pool) {
-      try {
-        const { rows } = await pool.query('SELECT * FROM person WHERE id = $1', [id]);
-
-        if (!rows.length) return null;
-
-        const row = rows[0];
-
-        const result = {
-          id: row.id,
-          name: row.name,
-          wikipediaLink: row.wikipedia_link,
-          birthDate: row.birth_date?.toISOString().split('T')[0],
-          birthCityId: row.birth_city_id,
-          deathDate: row.death_date?.toISOString().split('T')[0] || null,
-          deathCityId: row.death_city_id,
-          genderId: row.gender_id,
-          image: row.image || null
-        };
-
-        return result;
-      } catch (error) {
-        console.error(`Database error: ${error.message}`);
-        return null;
-      }
-    }
-
-    const item = this.items.find((item) => item.id === id);
-    return item ? this.cleanObject(item) : null;
+    return this.repository.getItemById(id);
   }
 
-
-  async createItem(item) {
-    if (this.useDatabase && pool) {
-      try {
-        const { name } = item;
-        const { rows } = await pool.query('INSERT INTO person (name) VALUES ($1) RETURNING *', [name]);
-
-        return rows[0];
-      } catch (error) {
-        console.error(`Database error: ${error.message}`);
-
-        return null;
-      }
-    }
-
-    const newItem = { id: this.items.length + 1, ...item };
-    this.items.push(newItem);
-
-    return Promise.resolve(newItem);
+  async createItem(data) {
+    return this.repository.createItem(data);
   }
 
-  async updateItem(id, updatedData) {
-    if (this.useDatabase && pool) {
-      try {
-        const { name } = updatedData;
-        const { rows } = await pool.query('UPDATE person SET name = $1 WHERE id = $2 RETURNING *', [name, id]);
-
-        return rows.length ? rows[0] : null;
-      } catch (error) {
-        console.error(`Database error: ${error.message}`);
-
-        return null;
-      }
-    }
-
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) {
-      return Promise.resolve(null);
-    }
-
-    this.items[index] = { ...this.items[index], ...updatedData };
-
-    return Promise.resolve(this.items[index]);
+  async updateItem(id, data) {
+    return this.repository.updateItem(id, data);
   }
 
   async deleteItem(id) {
-    if (this.useDatabase && pool) {
-      try {
-        const { rows } = await pool.query('DELETE FROM person WHERE id = $1 RETURNING *', [id]);
-
-        return rows.length ? rows[0] : null;
-      } catch (error) {
-        console.error(`Database error: ${error.message}`);
-
-        return null;
-      }
-    }
-
-    const index = this.items.findIndex((item) => item.id === id);
-    if (index === -1) {
-      return Promise.resolve(null);
-    }
-
-    return Promise.resolve(this.items.splice(index, 1)[0]);
+    return this.repository.deleteItem(id);
   }
-
 }
 
 export default PersonRepository;

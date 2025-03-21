@@ -1,4 +1,4 @@
-class CityController {
+class Controller {
   constructor(service) {
     this.service = service;
 
@@ -74,4 +74,4 @@ class CityController {
   }
 }
 
-export default CityController;
+export default Controller;

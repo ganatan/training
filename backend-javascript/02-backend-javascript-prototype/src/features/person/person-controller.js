@@ -1,4 +1,4 @@
-class PersonController {
+class Controller {
   constructor(service) {
     this.service = service;
 
@@ -74,4 +74,4 @@ class PersonController {
   }
 }
 
-export default PersonController;
+export default Controller;

@@ -1,5 +1,5 @@
-import CityRepository from '../city-repository.js';
-import { MOCK_DATA } from '../city-mock-data.js';
+import CityRepository from '../city.repository.js';
+import { MOCK_DATA } from '../city.mock-data.js';
 
 describe('CityRepository', () => {
   let repository;

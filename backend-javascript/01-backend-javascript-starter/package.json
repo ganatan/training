@@ -11,7 +11,7 @@
     "build": "webpack --mode production --output-path dist",
     "serve": "node dist/bundle.js",
     "audit": "npm audit",
-    "generate-structure": "node tools/scripts/generate-structure.js"
+    "generate-project-structure": "node tools/scripts/generate-project-structure.js"
   },
   "keywords": [],
   "author": "",

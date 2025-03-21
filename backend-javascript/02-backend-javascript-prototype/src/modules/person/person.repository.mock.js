@@ -1,4 +1,4 @@
-import { MOCK_DATA } from './person-mock-data.js';
+import { MOCK_DATA } from './person.mock-data.js';
 
 class MockRepository {
   constructor() {

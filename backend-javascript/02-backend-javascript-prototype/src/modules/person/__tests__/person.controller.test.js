@@ -1,4 +1,4 @@
-import PersonController from '../person-controller.js';
+import Controller from '../person.controller.js';
 
 describe('PersonController', () => {
   let controller;
@@ -14,7 +14,7 @@ describe('PersonController', () => {
       deleteItem: jest.fn(),
     };
 
-    controller = new PersonController(mockService);
+    controller = new Controller(mockService);
 
     req = { params: {}, body: {}, query: {} };
     res = {

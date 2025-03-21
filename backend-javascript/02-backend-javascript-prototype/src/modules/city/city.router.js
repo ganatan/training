@@ -1,10 +1,10 @@
 import express from 'express';
 
-import responseHandler from '../../middleware/response-handler.js';
+import responseHandler from '../../middlewares/response-handler.js';
 
-import Repository from './city-repository.js';
-import Service from './city-service.js';
-import Controller from './city-controller.js';
+import Repository from './city.repository.js';
+import Service from './city.service.js';
+import Controller from './city.controller.js';
 
 const router = express.Router();
 

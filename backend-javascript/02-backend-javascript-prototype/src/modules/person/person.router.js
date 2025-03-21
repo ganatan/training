@@ -1,10 +1,10 @@
 import express from 'express';
 
-import responseHandler from '../../middleware/response-handler.js';
+import responseHandler from '../../middlewares/response-handler.js';
 
-import Repository from './person-repository.js';
-import Service from './person-service.js';
-import Controller from './person-controller.js';
+import Repository from './person.repository.js';
+import Service from './person.service.js';
+import Controller from './person.controller.js';
 
 const router = express.Router();
 

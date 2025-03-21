@@ -1,4 +1,4 @@
-import MockRepository from './city-repository-mock.js';
+import MockRepository from './person.repository.mock.js';
 
 class Repository {
   constructor() {

@@ -1,4 +1,4 @@
-import PersonService from '../person-service.js';
+import Service from '../person.service.js';
 
 describe('PersonService', () => {
   let service;
@@ -16,7 +16,7 @@ describe('PersonService', () => {
       deleteItem: jest.fn(),
     };
 
-    service = new PersonService(mockRepository);
+    service = new Service(mockRepository);
   });
 
   // Arrange - Act - Assert

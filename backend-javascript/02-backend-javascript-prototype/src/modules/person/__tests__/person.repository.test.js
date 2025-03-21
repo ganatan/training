@@ -1,11 +1,11 @@
-import PersonRepository from '../person-repository.js';
-import { MOCK_DATA } from '../person-mock-data.js';
+import Repository from '../person.repository.js';
+import { MOCK_DATA } from '../person.mock-data.js';
 
 describe('PersonRepository', () => {
   let repository;
 
   beforeEach(() => {
-    repository = new PersonRepository(false);
+    repository = new Repository(false);
     repository.items = JSON.parse(JSON.stringify(MOCK_DATA));
   });
 

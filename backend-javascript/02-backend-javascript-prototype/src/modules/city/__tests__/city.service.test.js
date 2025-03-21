@@ -1,4 +1,4 @@
-import CityService from '../city-service.js';
+import CityService from '../city.service.js';
 
 describe('CityService', () => {
   let service;

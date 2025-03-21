@@ -1,4 +1,4 @@
-import CityController from '../city-controller.js';
+import CityController from '../city.controller.js';
 
 describe('CityController', () => {
   let controller;

@@ -1,13 +1,13 @@
 import express from 'express';
 
-import featuresRoutes from './features-routes.js';
-import indexRoutes from './index-routes.js';
+import modulesRouter from './modules.router.js';
+import rootRouter from './root.router.js';
 
 const app = express();
 
-app.use(featuresRoutes);
+app.use(modulesRouter);
 
-app.use('/', indexRoutes);
-app.use('*', indexRoutes);
+app.use('/', rootRouter);
+app.use('*', rootRouter);
 
 export default app;

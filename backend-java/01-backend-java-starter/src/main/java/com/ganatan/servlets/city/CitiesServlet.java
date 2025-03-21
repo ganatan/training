@@ -1,7 +1,8 @@
-package com.ganatan.modules.person;
+package com.ganatan.servlets.city;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Arrays;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,22 +10,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/")
-public class PersonController extends HttpServlet {
-
-    private final PersonService personService;
-
-    public PersonController() {
-        PersonRepository repository = new PersonRepository();
-        this.personService = new PersonService(repository);
-    }
-
-    @Override
+@WebServlet("/cities")
+public class CitiesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<Person> items = personService.getItems();
-
+        List<City> persons = Arrays.asList(
+            new City(1,  "Cincinnati"),
+            new City(2,  "London"),
+            new City(3,  "New York"),
+            new City(4, "Knoxville")
+        );
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        new ObjectMapper().writeValue(response.getWriter(), items);
+        new ObjectMapper().writeValue(response.getWriter(), persons);
     }
 }

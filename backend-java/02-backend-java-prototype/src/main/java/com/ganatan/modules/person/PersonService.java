@@ -11,7 +11,7 @@ public class PersonService {
         this.repository = repository;
     }
 
-    public List<Person> getAllPersons() {
-        return repository.getAll();
+    public List<Person> getItems() {
+        return repository.getItems();
     }
 }

@@ -62,7 +62,7 @@
   </dependencies>
 
   <build>
-    <finalName>frontend-java-maven</finalName>
+    <finalName>backend-java-prototype</finalName>
     <plugins>
       <!-- Compilation -->
       <plugin>

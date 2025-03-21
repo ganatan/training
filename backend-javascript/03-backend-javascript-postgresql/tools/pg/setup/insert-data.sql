@@ -14,7 +14,6 @@ INSERT INTO continent (code, name, wikipedia_link, area, population, countries_n
 VALUES ('SA', 'South America-pg', 'South_America', 17840000, 428240000, 12);
 
 
-
 INSERT INTO country (name,wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,flag,continent_id) 
 VALUES('United States','United_States','US','USA','660','us.png',
 (select id from continent where code='NA'));
@@ -47,6 +46,7 @@ VALUES('Fresno, California','Fresno,_California',true,
 INSERT INTO city ( name,wikipedia_link,capital,country_id) 
 VALUES('Detroit','Detroit',true,
 (select id from country where iso_numeric='US'));
+
 
 INSERT INTO person (name,wikipedia_link,birth_date,birth_city_id) 
 VALUES('Robert Downey Jr.','Robert_Downey_Jr.','1965-04-04',

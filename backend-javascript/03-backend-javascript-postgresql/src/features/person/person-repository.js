@@ -24,10 +24,35 @@ class PersonRepository {
       try {
         const { rows } = await pool.query('SELECT * FROM person');
 
-        return rows;
+        const formattedRows = rows.map((row) => {
+          const {
+            id,
+            name,
+            wikipedia_link,
+            birth_date,
+            birth_city_id,
+            death_date,
+            death_city_id,
+            gender_id,
+            image
+          } = row;
+
+          return {
+            id,
+            name,
+            wikipediaLink: wikipedia_link,
+            birthDate: birth_date?.toISOString().split('T')[0] || null,
+            birthCityId: birth_city_id,
+            deathDate: death_date ? death_date.toISOString().split('T')[0] : null,
+            deathCityId: death_city_id,
+            genderId: gender_id,
+            image: image || null
+          };
+        });
+
+        return formattedRows;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-
         return [];
       }
     }
@@ -40,16 +65,33 @@ class PersonRepository {
       try {
         const { rows } = await pool.query('SELECT * FROM person WHERE id = $1', [id]);
 
-        return rows.length ? rows[0] : null;
+        if (!rows.length) return null;
+
+        const row = rows[0];
+
+        const result = {
+          id: row.id,
+          name: row.name,
+          wikipediaLink: row.wikipedia_link,
+          birthDate: row.birth_date?.toISOString().split('T')[0],
+          birthCityId: row.birth_city_id,
+          deathDate: row.death_date?.toISOString().split('T')[0] || null,
+          deathCityId: row.death_city_id,
+          genderId: row.gender_id,
+          image: row.image || null
+        };
+
+        return result;
       } catch (error) {
         console.error(`Database error: ${error.message}`);
-
         return null;
       }
     }
 
-    return Promise.resolve(this.items.find((item) => item.id === id) || null);
+    const item = this.items.find((item) => item.id === id);
+    return item ? this.cleanObject(item) : null;
   }
+
 
   async createItem(item) {
     if (this.useDatabase && pool) {

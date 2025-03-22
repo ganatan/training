@@ -1,4 +1,4 @@
-package com.ganatan.servlets.city;
+package com.ganatan.modules;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet("/cities")
-public class CitiesServlet extends HttpServlet {
+public class CityController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<City> persons = Arrays.asList(
             new City(1,  "Cincinnati"),

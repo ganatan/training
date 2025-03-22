@@ -1,18 +1,21 @@
-package com.ganatan.servlets;
+package com.ganatan.modules;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import com.ganatan.modules.PersonController;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonsServletTest {
+class PersonControllerTest {
 
     @Test
     void shouldReturnJsonResponse() throws Exception {
-        PersonsServlet servlet = new PersonsServlet();
+        PersonController servlet = new PersonController();
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         StringWriter responseWriter = new StringWriter();

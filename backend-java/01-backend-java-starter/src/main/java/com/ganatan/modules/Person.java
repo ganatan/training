@@ -1,4 +1,4 @@
-package com.ganatan.servlets;
+package com.ganatan.modules;
 
 public class Person {
     private int id;

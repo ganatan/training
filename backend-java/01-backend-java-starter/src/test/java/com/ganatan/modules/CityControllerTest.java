@@ -1,23 +1,21 @@
-apres rajout du test
-
-PersonsServletTest.java
-
-
-package com.ganatan.servlets;
+package com.ganatan.modules;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import com.ganatan.modules.CityController;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonsServletTest {
+class CityControllerTest {
 
     @Test
     void shouldReturnJsonResponse() throws Exception {
-        PersonsServlet servlet = new PersonsServlet();
+    	CityController servlet = new CityController();
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         StringWriter responseWriter = new StringWriter();
@@ -27,19 +25,7 @@ class PersonsServletTest {
         servlet.doGet(request, response);
 
         String json = responseWriter.toString();
-        assertTrue(json.contains("\"name\":\"Steven Spielberg\""));
-        assertTrue(json.contains("\"city\":\"Cincinnati\""));
-        assertTrue(json.contains("\"name\":\"Quentin Tarantino\""));
+        assertTrue(json.contains("\"name\":\"Cincinnati\""));
+        assertTrue(json.contains("\"name\":\"London\""));
     }
 }
-
-
-
-  mvn clean
-  mvn compile
-  mvn test
-  
-  mvn clean test jacoco:report
-
-
-  mvn -Dtest=PersonServletTest test

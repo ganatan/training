@@ -1,4 +1,4 @@
-package com.ganatan.servlets.city;
+package com.ganatan.modules;
 
 public class City {
     private int id;

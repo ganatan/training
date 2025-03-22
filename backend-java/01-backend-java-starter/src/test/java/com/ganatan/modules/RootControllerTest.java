@@ -1,23 +1,21 @@
-apres rajout du test
-
-PersonsServletTest.java
-
-
-package com.ganatan.servlets;
+package com.ganatan.modules;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import com.ganatan.modules.RootController;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonsServletTest {
+public class RootControllerTest {
 
     @Test
-    void shouldReturnJsonResponse() throws Exception {
-        PersonsServlet servlet = new PersonsServlet();
+    void shouldReturnRootEndpointsJson() throws Exception {
+        RootController servlet = new RootController();
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         StringWriter responseWriter = new StringWriter();
@@ -27,19 +25,7 @@ class PersonsServletTest {
         servlet.doGet(request, response);
 
         String json = responseWriter.toString();
-        assertTrue(json.contains("\"name\":\"Steven Spielberg\""));
-        assertTrue(json.contains("\"city\":\"Cincinnati\""));
-        assertTrue(json.contains("\"name\":\"Quentin Tarantino\""));
+        assertTrue(json.contains("\"url\":\"http://localhost:9900/persons\""));
+        assertTrue(json.contains("\"url\":\"http://localhost:9900/cities\""));
     }
 }
-
-
-
-  mvn clean
-  mvn compile
-  mvn test
-  
-  mvn clean test jacoco:report
-
-
-  mvn -Dtest=PersonServletTest test

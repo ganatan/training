@@ -1,6 +1,8 @@
-package com.ganatan.modules.person;
+package com.ganatan.modules;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,22 +11,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/persons")
-public class PersonController extends HttpServlet {
+@WebServlet("/")
+public class RootController extends HttpServlet {
+    private final int port = 9900;
 
-    private final PersonService personService;
-
-    public PersonController() {
-        PersonRepository repository = new PersonRepository();
-        this.personService = new PersonService(repository);
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<Person> items = personService.getItems();
+        String baseUrl = "http://localhost:" + port;
+
+        Map<String, Object> root = new HashMap<>();
+        root.put("endpoints", List.of(
+            Map.of("url", baseUrl + "/persons"),
+            Map.of("url", baseUrl + "/cities")
+        ));
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        new ObjectMapper().writeValue(response.getWriter(), items);
+        new ObjectMapper().writeValue(response.getWriter(), root);
     }
 }

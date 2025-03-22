@@ -26,16 +26,4 @@
 <!--     <url-pattern>/</url-pattern> -->
 <!--   </servlet-mapping> -->
 
-
-
-
-  <servlet>
-    <servlet-name>CitiesServlet</servlet-name>
-    <servlet-class>com.ganatan.modules.city.CityController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CitiesServlet</servlet-name>
-    <url-pattern>/cities</url-pattern>
-  </servlet-mapping>
-  
 </web-app>

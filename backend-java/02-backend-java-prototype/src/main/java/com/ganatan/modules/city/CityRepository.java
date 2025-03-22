@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class CityRepository {
 
 	public List<City> getItems() {
-		return Arrays.asList(new City(1, "Mock Cincinnati"), new City(2, "London"), new City(3, "New York"),
+		return Arrays.asList(new City(1, "Cincinnati"), new City(2, "London"), new City(3, "New York"),
 				new City(4, "Knoxville"));
 	}
 }

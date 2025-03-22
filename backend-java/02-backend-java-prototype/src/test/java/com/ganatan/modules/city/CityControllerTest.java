@@ -1,4 +1,4 @@
-package com.ganatan.modules.person;
+package com.ganatan.modules.city;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,11 +8,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PersonControllerTest {
+public class CityControllerTest {
 
     @Test
-    void shouldReturnPersonListAsJson() throws Exception {
-        PersonController controller = new PersonController();
+    void shouldReturnCityListAsJson() throws Exception {
+        CityController controller = new CityController();
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         StringWriter writer = new StringWriter();
@@ -22,8 +22,7 @@ public class PersonControllerTest {
         controller.doGet(request, response);
 
         String json = writer.toString();
-        assertTrue(json.contains("\"name\":\"Steven Spielberg\""));
-        assertTrue(json.contains("\"city\":\"Cincinnati\""));
-        assertTrue(json.contains("\"name\":\"Quentin Tarantino\""));
+        assertTrue(json.contains("\"name\":\"Cincinnati\""));
+        assertTrue(json.contains("\"name\":\"London\""));
     }
 }

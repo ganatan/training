@@ -1,3 +1,4 @@
+dans 
 package com.ganatan.modules.person;
 
 import java.io.IOException;
@@ -9,17 +10,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-import com.ganatan.config.AppConfig;
-
 @WebServlet("/persons")
 public class PersonController extends HttpServlet {
 
     private final PersonService personService;
 
     public PersonController() {
-    	System.out.println("321321321");
-        PersonRepository repository = new PersonRepository(AppConfig.useDatabase());
+        PersonRepository repository = new PersonRepository(true);
         this.personService = new PersonService(repository);
     }
 
@@ -32,3 +29,8 @@ public class PersonController extends HttpServlet {
         new ObjectMapper().writeValue(response.getWriter(), items);
     }
 }
+
+comment avoir une variable
+        PersonRepository repository = new PersonRepository(true);
+
+à la place de true et qui serait dans un fichier ENV comme en javascript

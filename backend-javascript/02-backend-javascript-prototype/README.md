@@ -7,7 +7,7 @@
   http://localhost:3000/persons
 
   {
-    "name": "Greta Gerwig"
+    "name": "James Cameron"
   }
 
 

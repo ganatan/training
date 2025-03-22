@@ -24,6 +24,10 @@ class Repository {
   async deleteItem(id) {
     return this.repository.deleteItem(id);
   }
+
+  async existsByName(name) {
+    return await this.repository.existsByName(name)
+  }
 }
 
 export default Repository;

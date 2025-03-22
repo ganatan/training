@@ -1,0 +1,14 @@
+{
+  "issues": [
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "city"
+      ],
+      "message": "Required"
+    }
+  ],
+  "name": "ZodError"
+}

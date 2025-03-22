@@ -1,14 +1,22 @@
 import express from 'express';
+import config from './config/config.js';
 
 const router = express.Router();
 
-const index = [
-  'persons',
-  'cities',
-];
+const url = `http://localhost:${config.port}`;
+const root = {
+  endpoints: [
+    {
+      url: `${url}/persons`,
+    },
+    {
+      url: `${url}/cities`,
+    },
+  ],
+};
 
 router.get('/', (req, res) => {
-  res.json(index);
+  res.json(root);
 });
 
 router.use((req, res) => {

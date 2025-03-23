@@ -1,31 +1,46 @@
 package com.ganatan.modules;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ganatan.shared.constants.ApiRoutes;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet("/")
 public class RootController extends HttpServlet {
-    private final int port = 9900;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String baseUrl = "http://localhost:" + port;
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        Map<String, Object> root = new HashMap<>();
-        root.put("endpoints", List.of(
-            Map.of("url", baseUrl + "/persons"),
-            Map.of("url", baseUrl + "/cities")
-        ));
+        Map<String, Object> endpoints = ApiRoutes.ROUTES.entrySet().stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entry -> Map.of(
+                    "url", entry.getValue().path(),
+                    "methods", entry.getValue().methods()
+                )
+            ));
 
+        Map<String, Object> root = new LinkedHashMap<>();
+        root.put("version", "1.0.0");
+        root.put("status", "ok");
+        root.put("timestamp", Instant.now().toString());
+        root.put("endpoints", endpoints);
+
+        response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
         new ObjectMapper().writeValue(response.getWriter(), root);
     }
 }

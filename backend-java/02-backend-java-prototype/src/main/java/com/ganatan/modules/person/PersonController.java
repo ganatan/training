@@ -15,17 +15,16 @@ import com.ganatan.config.AppConfig;
 @WebServlet("/persons")
 public class PersonController extends HttpServlet {
 
-    private final PersonService personService;
+    private final PersonService service;
 
     public PersonController() {
-    	System.out.println("321321321");
         PersonRepository repository = new PersonRepository(AppConfig.useDatabase());
-        this.personService = new PersonService(repository);
+        this.service= new PersonService(repository);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<Person> items = personService.getItems();
+    	List<Person> items = service.getItems();
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

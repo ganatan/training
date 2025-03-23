@@ -1,8 +1,10 @@
 import MockRepository from './city.repository.mock.js';
 
 class Repository {
-  constructor() {
-    this.repository = new MockRepository();
+  constructor(useDatabase) {
+    this.repository = useDatabase
+      ? new MockRepository()
+      : new MockRepository();
   }
 
   async getItems() {
@@ -23,6 +25,10 @@ class Repository {
 
   async deleteItem(id) {
     return this.repository.deleteItem(id);
+  }
+
+  async existsByName(name) {
+    return await this.repository.existsByName(name);
   }
 }
 

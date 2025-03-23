@@ -1,5 +1,5 @@
 import { MOCK_DATA } from '../../mocks/person/person.mock-data.js';
-import createPerson from './person.model.js';
+import createItem from './person.model.js';
 
 class MockRepository {
   constructor() {
@@ -15,7 +15,7 @@ class MockRepository {
   }
 
   async createItem(data) {
-    const newItem = createPerson({ id: this.items.length + 1, ...data });
+    const newItem = createItem({ id: this.items.length + 1, ...data });
     this.items.push(newItem);
 
     return newItem;

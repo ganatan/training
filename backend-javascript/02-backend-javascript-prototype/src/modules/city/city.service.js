@@ -1,3 +1,5 @@
+import { validateItem } from './city.schema.js';
+
 class Service {
   constructor(repository) {
     this.repository = repository;
@@ -11,11 +13,32 @@ class Service {
     return await this.repository.getItemById(id);
   }
 
-  async createItem(person) {
-    return await this.repository.createItem(person);
+  async createItem(createdData) {
+    try {
+      validateItem(createdData);
+    } catch (error) {
+      error.status = 400;
+      throw error;
+    }
+
+    const exists = await this.repository.existsByName(createdData.name);
+    if (exists) {
+      const error = new Error('City already exists');
+      error.status = 409;
+      throw error;
+    }
+
+    return await this.repository.createItem(createdData);
   }
 
   async updateItem(id, updatedData) {
+    try {
+      validateItem(updatedData);
+    } catch (error) {
+      error.status = 400;
+      throw error;
+    }
+
     return await this.repository.updateItem(id, updatedData);
   }
 

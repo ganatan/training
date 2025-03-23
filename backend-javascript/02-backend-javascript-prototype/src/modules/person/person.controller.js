@@ -1,3 +1,9 @@
+import { HTTP_STATUS } from '../../shared/constants/http.js';
+
+const MESSAGES = {
+  ITEM_NOT_FOUND: 'Person not found',
+};
+
 class Controller {
   constructor(service) {
     this.service = service;
@@ -11,65 +17,58 @@ class Controller {
 
   async getItems(req, res, next) {
     try {
-      const data = await this.service.getItems(req.query);
-
-      return res.status(200).json(data);
+      const result = await this.service.getItems(req.query);
+      res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-
-      return next(error);
+      next(error);
     }
   }
 
   async getItemById(req, res, next) {
     try {
-      const item = await this.service.getItemById(parseInt(req.params.id));
-      if (!item) {
-        return next({ status: 404, message: 'Person not found' });
+      const result = await this.service.getItemById(parseInt(req.params.id));
+      if (!result) {
+        return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
       }
 
-      return res.status(200).json(item);
+      res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-
-      return next(error);
+      next(error);
     }
   }
 
   async createItem(req, res, next) {
     try {
-      const newItem = await this.service.createItem(req.body);
-
-      return res.status(201).json(newItem);
+      const result = await this.service.createItem(req.body);
+      res.status(HTTP_STATUS.CREATED).json(result);
     } catch (error) {
-
-      return next(error);
+      next(error);
     }
   }
 
   async updateItem(req, res, next) {
     try {
-      const updatedItem = await this.service.updateItem(parseInt(req.params.id), req.body);
-      if (!updatedItem) {
-        return next({ status: 404, message: 'Person not found' });
+      const result = await this.service.updateItem(parseInt(req.params.id), req.body);
+      if (!result) {
+        return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
       }
 
-      return res.status(200).json(updatedItem);
+      res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-
-      return next(error);
+      next(error);
     }
   }
 
   async deleteItem(req, res, next) {
     try {
-      const deletedItem = await this.service.deleteItem(parseInt(req.params.id));
-      if (!deletedItem) {
-        return next({ status: 404, message: 'Person not found' });
+      const result = await this.service.deleteItem(parseInt(req.params.id));
+      if (!result) {
+        return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
       }
 
-      return res.status(200).json(deletedItem);
+      res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-
-      return next(error);
+      next(error);
     }
   }
 }

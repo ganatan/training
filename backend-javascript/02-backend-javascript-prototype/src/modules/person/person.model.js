@@ -1,5 +1,5 @@
-function createPerson({ id, name, city }) {
+function createItem({ id, name, city }) {
   return { id, name, city };
 }
 
-export default createPerson;
+export default createItem;

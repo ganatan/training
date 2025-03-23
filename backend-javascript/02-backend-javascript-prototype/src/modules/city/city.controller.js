@@ -11,9 +11,9 @@ class Controller {
 
   async getItems(req, res, next) {
     try {
-      const data = await this.service.getItems(req.query);
+      const result = await this.service.getItems(req.query);
 
-      return res.status(200).json(data);
+      return res.status(200).json(result);
     } catch (error) {
 
       return next(error);
@@ -22,12 +22,12 @@ class Controller {
 
   async getItemById(req, res, next) {
     try {
-      const item = await this.service.getItemById(parseInt(req.params.id));
-      if (!item) {
+      const result = await this.service.getItemById(parseInt(req.params.id));
+      if (!result) {
         return next({ status: 404, message: 'City not found' });
       }
 
-      return res.status(200).json(item);
+      return res.status(200).json(result);
     } catch (error) {
 
       return next(error);
@@ -36,9 +36,9 @@ class Controller {
 
   async createItem(req, res, next) {
     try {
-      const newItem = await this.service.createItem(req.body);
+      const result = await this.service.createItem(req.body);
 
-      return res.status(201).json(newItem);
+      return res.status(201).json(result);
     } catch (error) {
 
       return next(error);
@@ -47,12 +47,12 @@ class Controller {
 
   async updateItem(req, res, next) {
     try {
-      const updatedItem = await this.service.updateItem(parseInt(req.params.id), req.body);
-      if (!updatedItem) {
+      const result = await this.service.updateItem(parseInt(req.params.id), req.body);
+      if (!result) {
         return next({ status: 404, message: 'City not found' });
       }
 
-      return res.status(200).json(updatedItem);
+      return res.status(200).json(result);
     } catch (error) {
 
       return next(error);
@@ -61,12 +61,12 @@ class Controller {
 
   async deleteItem(req, res, next) {
     try {
-      const deletedItem = await this.service.deleteItem(parseInt(req.params.id));
-      if (!deletedItem) {
+      const result = await this.service.deleteItem(parseInt(req.params.id));
+      if (!result) {
         return next({ status: 404, message: 'City not found' });
       }
 
-      return res.status(200).json(deletedItem);
+      return res.status(200).json(result);
     } catch (error) {
 
       return next(error);

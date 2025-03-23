@@ -1,103 +1,173 @@
 import Service from '../person.service.js';
+import * as schema from '../person.schema.js';
+
+jest.mock('../person.schema.js');
 
 describe('PersonService', () => {
   let service;
-  let mockRepository;
+  let repository;
 
   beforeEach(() => {
-    mockRepository = {
-      getItems: jest.fn().mockResolvedValue([
-        { id: 1, name: 'Steven Spielberg', city: 'Cincinnati' },
-        { id: 2, name: 'Martin Scorsese', city: 'New York' },
-      ]),
+    repository = {
+      getItems: jest.fn(),
       getItemById: jest.fn(),
       createItem: jest.fn(),
       updateItem: jest.fn(),
       deleteItem: jest.fn(),
+      existsByName: jest.fn(),
     };
 
-    service = new Service(mockRepository);
+    schema.validateItem.mockImplementation(() => true);
+    service = new Service(repository);
   });
 
-  // Arrange - Act - Assert
-  test('getItems should return all persons', async () => {
+  test('getItems returns all persons', async () => {
     // Arrange
+    const expected = [
+      { id: 1, name: 'Steven Spielberg', city: 'Cincinnati' },
+      { id: 2, name: 'Martin Scorsese', city: 'New York' },
+    ];
+    repository.getItems.mockResolvedValue(expected);
+
     // Act
-    const items = await service.getItems();
+    const result = await service.getItems();
+
     // Assert
-    expect(items).toHaveLength(2);
-    expect(mockRepository.getItems).toHaveBeenCalledTimes(1);
+    expect(result).toEqual(expected);
+    expect(repository.getItems).toHaveBeenCalledTimes(1);
   });
 
-  test('getItemById should return a person by ID', async () => {
+  test('getItemById returns a person', async () => {
     // Arrange
-    mockRepository.getItemById.mockResolvedValue({ id: 1, name: 'Steven Spielberg', city: 'Cincinnati' });
+    const expected = { id: 1, name: 'Steven Spielberg' };
+    repository.getItemById.mockResolvedValue(expected);
+
     // Act
-    const person = await service.getItemById(1);
+    const result = await service.getItemById(1);
+
     // Assert
-    expect(person).toEqual({ id: 1, name: 'Steven Spielberg', city: 'Cincinnati' });
-    expect(mockRepository.getItemById).toHaveBeenCalledWith(1);
+    expect(result).toEqual(expected);
+    expect(repository.getItemById).toHaveBeenCalledWith(1);
   });
 
-  test('getItemById should return null if person is not found', async () => {
+  test('getItemById returns null if not found', async () => {
     // Arrange
-    mockRepository.getItemById.mockResolvedValue(null);
-    // Act
-    const person = await service.getItemById(999);
-    // Assert
-    expect(person).toBeNull();
-    expect(mockRepository.getItemById).toHaveBeenCalledWith(999);
-  });
+    repository.getItemById.mockResolvedValue(null);
 
-  test('createItem should add a new person', async () => {
-    // Arrange
-    const newPerson = { name: 'New Director', city: 'Los Angeles' };
-    mockRepository.createItem.mockResolvedValue({ id: 3, ...newPerson });
     // Act
-    const createdPerson = await service.createItem(newPerson);
-    // Assert
-    expect(createdPerson).toMatchObject({ id: 3, name: 'New Director', city: 'Los Angeles' });
-    expect(mockRepository.createItem).toHaveBeenCalledWith(newPerson);
-  });
+    const result = await service.getItemById(999);
 
-  test('updateItem should update an existing person', async () => {
-    // Arrange
-    const updatedData = { name: 'Updated Name' };
-    mockRepository.updateItem.mockResolvedValue({ id: 1, ...updatedData, city: 'Cincinnati' });
-    // Act
-    const updatedPerson = await service.updateItem(1, updatedData);
-    // Assert
-    expect(updatedPerson).toMatchObject({ id: 1, name: 'Updated Name', city: 'Cincinnati' });
-    expect(mockRepository.updateItem).toHaveBeenCalledWith(1, updatedData);
-  });
-
-  test('updateItem should return null if person not found', async () => {
-    // Arrange
-    mockRepository.updateItem.mockResolvedValue(null);
-    // Act
-    const result = await service.updateItem(999, { name: 'Updated Name' });
     // Assert
     expect(result).toBeNull();
-    expect(mockRepository.updateItem).toHaveBeenCalledWith(999, { name: 'Updated Name' });
+    expect(repository.getItemById).toHaveBeenCalledWith(999);
   });
 
-  test('deleteItem should remove a person and return it', async () => {
+  test('createItem creates a person when valid and unique', async () => {
     // Arrange
-    mockRepository.deleteItem.mockResolvedValue({ id: 1, name: 'Steven Spielberg' });
+    const newPerson = { name: 'James Cameron', city: 'Kapuskasing' };
+    const expected = { id: 3, ...newPerson };
+    repository.existsByName.mockResolvedValue(false);
+    repository.createItem.mockResolvedValue(expected);
+
     // Act
-    const deletedPerson = await service.deleteItem(1);
+    const result = await service.createItem(newPerson);
+
     // Assert
-    expect(deletedPerson).toMatchObject({ id: 1, name: 'Steven Spielberg' });
-    expect(mockRepository.deleteItem).toHaveBeenCalledWith(1);
+    expect(schema.validateItem).toHaveBeenCalledWith(newPerson);
+    expect(repository.existsByName).toHaveBeenCalledWith('James Cameron');
+    expect(result).toEqual(expected);
+    expect(repository.createItem).toHaveBeenCalledWith(newPerson);
   });
 
-  test('deleteItem should return null if person not found', async () => {
+  test('createItem throws 409 if name already exists', async () => {
     // Arrange
-    mockRepository.deleteItem.mockResolvedValue(null);
+    const newPerson = { name: 'James Cameron', city: 'Kapuskasing' };
+    repository.existsByName.mockResolvedValue(true);
+
+    // Act + Assert
+    await expect(service.createItem(newPerson)).rejects.toMatchObject({
+      message: 'Person already exists',
+      status: 409,
+    });
+  });
+
+  test('createItem throws 400 on invalid data', async () => {
+    // Arrange
+    const invalid = { name: '', city: '' };
+    schema.validateItem.mockImplementation(() => {
+      throw new Error('Invalid');
+    });
+
+    // Act + Assert
+    await expect(service.createItem(invalid)).rejects.toMatchObject({
+      message: 'Invalid',
+      status: 400,
+    });
+  });
+
+  test('updateItem updates and returns person', async () => {
+    // Arrange
+    const updated = { name: 'Updated', city: 'Miami' };
+    const expected = { id: 1, ...updated };
+    repository.updateItem.mockResolvedValue(expected);
+
+    // Act
+    const result = await service.updateItem(1, updated);
+
+    // Assert
+    expect(schema.validateItem).toHaveBeenCalledWith(updated);
+    expect(result).toEqual(expected);
+    expect(repository.updateItem).toHaveBeenCalledWith(1, updated);
+  });
+
+  test('updateItem returns null if not found', async () => {
+    // Arrange
+    const update = { name: 'X' };
+    repository.updateItem.mockResolvedValue(null);
+
+    // Act
+    const result = await service.updateItem(999, update);
+
+    // Assert
+    expect(result).toBeNull();
+    expect(repository.updateItem).toHaveBeenCalledWith(999, update);
+  });
+
+  test('updateItem throws 400 on invalid data', async () => {
+    // Arrange
+    schema.validateItem.mockImplementation(() => {
+      throw new Error('Invalid');
+    });
+
+    // Act + Assert
+    await expect(service.updateItem(1, {})).rejects.toMatchObject({
+      message: 'Invalid',
+      status: 400,
+    });
+  });
+
+  test('deleteItem deletes and returns person', async () => {
+    // Arrange
+    const expected = { id: 1, name: 'Spielberg' };
+    repository.deleteItem.mockResolvedValue(expected);
+
+    // Act
+    const result = await service.deleteItem(1);
+
+    // Assert
+    expect(result).toEqual(expected);
+    expect(repository.deleteItem).toHaveBeenCalledWith(1);
+  });
+
+  test('deleteItem returns null if not found', async () => {
+    // Arrange
+    repository.deleteItem.mockResolvedValue(null);
+
     // Act
     const result = await service.deleteItem(999);
+
     // Assert
     expect(result).toBeNull();
-    expect(mockRepository.deleteItem).toHaveBeenCalledWith(999);
+    expect(repository.deleteItem).toHaveBeenCalledWith(999);
   });
 });

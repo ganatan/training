@@ -18,9 +18,11 @@ class Controller {
   async getItems(req, res, next) {
     try {
       const result = await this.service.getItems(req.query);
-      res.status(HTTP_STATUS.OK).json(result);
+
+      return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-      next(error);
+
+      return next(error);
     }
   }
 
@@ -31,18 +33,21 @@ class Controller {
         return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
       }
 
-      res.status(HTTP_STATUS.OK).json(result);
+      return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-      next(error);
+
+      return next(error);
     }
   }
 
   async createItem(req, res, next) {
     try {
       const result = await this.service.createItem(req.body);
-      res.status(HTTP_STATUS.CREATED).json(result);
+
+      return res.status(HTTP_STATUS.CREATED).json(result);
     } catch (error) {
-      next(error);
+
+      return next(error);
     }
   }
 
@@ -53,9 +58,10 @@ class Controller {
         return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
       }
 
-      res.status(HTTP_STATUS.OK).json(result);
+      return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-      next(error);
+
+      return next(error);
     }
   }
 
@@ -66,9 +72,10 @@ class Controller {
         return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
       }
 
-      res.status(HTTP_STATUS.OK).json(result);
+      return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-      next(error);
+
+      return next(error);
     }
   }
 }

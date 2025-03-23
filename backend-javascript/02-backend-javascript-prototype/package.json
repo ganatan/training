@@ -17,6 +17,7 @@
     "test-person.service": "npm test -- person.service.test.js",
     "test-person.controller": "npm test -- person.controller.test.js",
     "test-person.router": "npm test -- person.router.test.js",
+    "test-person.schema": "npm test -- person.schema.test.js",
     "test-city.repository": "npm test -- city.repository.test.js",
     "test-city.service": "npm test -- city.service.test.js",
     "test-city.controller": "npm test -- city.controller.test.js",

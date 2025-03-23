@@ -1,3 +1,9 @@
+import { HTTP_STATUS } from '../../shared/constants/http.js';
+
+const MESSAGES = {
+  ITEM_ALREADY_EXISTS: 'City already exists',
+};
+
 import { validateItem } from './city.schema.js';
 
 class Service {
@@ -17,14 +23,14 @@ class Service {
     try {
       validateItem(createdData);
     } catch (error) {
-      error.status = 400;
+      error.status = HTTP_STATUS.BAD_REQUEST;
       throw error;
     }
 
     const exists = await this.repository.existsByName(createdData.name);
     if (exists) {
-      const error = new Error('City already exists');
-      error.status = 409;
+      const error = new Error(MESSAGES.ITEM_ALREADY_EXISTS);
+      error.status = HTTP_STATUS.CONFLICT;
       throw error;
     }
 
@@ -35,7 +41,7 @@ class Service {
     try {
       validateItem(updatedData);
     } catch (error) {
-      error.status = 400;
+      error.status = HTTP_STATUS.BAD_REQUEST;
       throw error;
     }
 

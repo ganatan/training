@@ -1,5 +1,5 @@
-import PgRepository from './person.repository.pg.js';
 import MockRepository from './person.repository.mock.js';
+import PgRepository from './person.repository.pg.js';
 
 class Repository {
   constructor(useDatabase) {
@@ -26,6 +26,10 @@ class Repository {
 
   async deleteItem(id) {
     return this.repository.deleteItem(id);
+  }
+
+  async existsByName(name) {
+    return await this.repository.existsByName(name);
   }
 }
 

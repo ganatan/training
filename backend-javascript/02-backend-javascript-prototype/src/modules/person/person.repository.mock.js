@@ -1,5 +1,5 @@
-import { MOCK_DATA } from './person.mock-data.js';
-import createPerson from './person.model.js'
+import { MOCK_DATA } from '../../mocks/person/person.mock-data.js';
+import createPerson from './person.model.js';
 
 class MockRepository {
   constructor() {
@@ -15,10 +15,10 @@ class MockRepository {
   }
 
   async createItem(data) {
-    const newItem = createPerson({ id: this.items.length + 1, ...data })
-    this.items.push(newItem)
-    
-    return newItem    
+    const newItem = createPerson({ id: this.items.length + 1, ...data });
+    this.items.push(newItem);
+
+    return newItem;
   }
 
   async updateItem(id, data) {
@@ -38,9 +38,9 @@ class MockRepository {
 
   async existsByName(name) {
     return this.items.some(
-      item => item.name.toLowerCase() === name.toLowerCase()
-    )
-  }  
+      item => item.name.toLowerCase() === name.toLowerCase(),
+    );
+  }
 }
 
 export default MockRepository;

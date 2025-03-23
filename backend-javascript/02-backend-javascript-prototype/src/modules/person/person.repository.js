@@ -1,8 +1,10 @@
 import MockRepository from './person.repository.mock.js';
 
 class Repository {
-  constructor() {
-    this.repository = new MockRepository();
+  constructor(useDatabase) {
+    this.repository = useDatabase
+      ? new MockRepository()
+      : new MockRepository();
   }
 
   async getItems() {
@@ -26,7 +28,7 @@ class Repository {
   }
 
   async existsByName(name) {
-    return await this.repository.existsByName(name)
+    return await this.repository.existsByName(name);
   }
 }
 

@@ -1,4 +1,4 @@
-import { MOCK_DATA } from './city.mock-data.js';
+import { MOCK_DATA } from '../../mocks/city/city.mock-data.js';
 
 class MockRepository {
   constructor() {

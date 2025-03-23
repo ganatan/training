@@ -1,5 +1,5 @@
 import Repository from '../person.repository.js';
-import { MOCK_DATA } from '../person.mock-data.js';
+import { MOCK_DATA } from '../../../mocks/person/person.mock-data.js';
 
 describe('PersonRepository', () => {
   let repository;

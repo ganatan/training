@@ -1,18 +1,18 @@
 import CityRepository from '../city.repository.js';
-import { MOCK_DATA } from '../../../mocks/city/city.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../../mocks/city/city.mock-data.js';
 
 describe('CityRepository', () => {
   let repository;
 
   beforeEach(() => {
     repository = new CityRepository(false); // Use mock repository
-    repository.items = JSON.parse(JSON.stringify(MOCK_DATA)); // Reset mock data
+    repository.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA)); // Reset mock data
   });
 
   describe('getItems', () => {
     it('should return all cities', async () => {
       // Arrange
-      const expectedLength = MOCK_DATA.length;
+      const expectedLength = ITEMS_MOCK_DATA.length;
 
       // Act
       const items = await repository.getItems();
@@ -26,7 +26,7 @@ describe('CityRepository', () => {
   describe('getItemById', () => {
     it('should return a city by ID', async () => {
       // Arrange
-      const expectedCity = MOCK_DATA.find(city => city.id === 1);
+      const expectedCity = ITEMS_MOCK_DATA.find(city => city.id === 1);
 
       // Act
       const city = await repository.getItemById(1);
@@ -48,7 +48,7 @@ describe('CityRepository', () => {
     it('should add a new city', async () => {
       // Arrange
       const newCity = { name: 'Los Angeles' };
-      const expectedLength = MOCK_DATA.length + 1;
+      const expectedLength = ITEMS_MOCK_DATA.length + 1;
 
       // Act
       const createdCity = await repository.createItem(newCity);
@@ -64,8 +64,8 @@ describe('CityRepository', () => {
     it('should remove a city and return it', async () => {
       // Arrange
       const cityIdToDelete = 1;
-      const expectedCity = MOCK_DATA.find(city => city.id === cityIdToDelete);
-      const expectedLength = MOCK_DATA.length - 1;
+      const expectedCity = ITEMS_MOCK_DATA.find(city => city.id === cityIdToDelete);
+      const expectedLength = ITEMS_MOCK_DATA.length - 1;
 
       // Act
       const deletedCity = await repository.deleteItem(cityIdToDelete);

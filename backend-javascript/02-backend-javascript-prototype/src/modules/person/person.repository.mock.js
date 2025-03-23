@@ -1,9 +1,9 @@
-import { MOCK_DATA } from '../../mocks/person/person.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../mocks/person/person.mock-data.js';
 import createItem from './person.model.js';
 
 class MockRepository {
   constructor() {
-    this.items = JSON.parse(JSON.stringify(MOCK_DATA));
+    this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   }
 
   async getItems() {

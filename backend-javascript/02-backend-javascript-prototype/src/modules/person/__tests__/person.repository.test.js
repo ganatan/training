@@ -1,18 +1,18 @@
 import Repository from '../person.repository.js';
-import { MOCK_DATA } from '../../../mocks/person/person.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../../mocks/person/person.mock-data.js';
 
 describe('PersonRepository', () => {
   let repository;
 
   beforeEach(() => {
     repository = new Repository(); // Use mock repository
-    repository.items = JSON.parse(JSON.stringify(MOCK_DATA)); // Reset mock data
+    repository.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA)); // Reset mock data
   });
 
   describe('getItems', () => {
     it('should return all persons', async () => {
       // Arrange
-      const expectedLength = MOCK_DATA.length;
+      const expectedLength = ITEMS_MOCK_DATA.length;
 
       // Act
       const items = await repository.getItems();
@@ -26,7 +26,7 @@ describe('PersonRepository', () => {
   describe('getItemById', () => {
     it('should return a person by ID', async () => {
       // Arrange
-      const expectedPerson = MOCK_DATA.find(person => person.id === 1);
+      const expectedPerson = ITEMS_MOCK_DATA.find(person => person.id === 1);
 
       // Act
       const person = await repository.getItemById(1);
@@ -48,7 +48,7 @@ describe('PersonRepository', () => {
     it('should add a new person', async () => {
       // Arrange
       const newPerson = { name: 'New Director', city: 'Los Angeles' };
-      const expectedLength = MOCK_DATA.length + 1;
+      const expectedLength = ITEMS_MOCK_DATA.length + 1;
 
       // Act
       const createdPerson = await repository.createItem(newPerson);
@@ -65,7 +65,7 @@ describe('PersonRepository', () => {
       // Arrange
       const personId = 1;
       const updatedData = { name: 'Updated Name' };
-      const expectedPerson = { ...MOCK_DATA.find(person => person.id === personId), ...updatedData };
+      const expectedPerson = { ...ITEMS_MOCK_DATA.find(person => person.id === personId), ...updatedData };
 
       // Act
       const updatedPerson = await repository.updateItem(personId, updatedData);
@@ -89,8 +89,8 @@ describe('PersonRepository', () => {
     it('should remove a person and return it', async () => {
       // Arrange
       const personId = 1;
-      const expectedPerson = MOCK_DATA.find(person => person.id === personId);
-      const expectedLength = MOCK_DATA.length - 1;
+      const expectedPerson = ITEMS_MOCK_DATA.find(person => person.id === personId);
+      const expectedLength = ITEMS_MOCK_DATA.length - 1;
 
       // Act
       const deletedPerson = await repository.deleteItem(personId);

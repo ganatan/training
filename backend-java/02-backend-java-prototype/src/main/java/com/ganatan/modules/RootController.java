@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ganatan.shared.constants.ApiRoutes;
+import com.ganatan.shared.constants.Routes;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,7 +22,7 @@ public class RootController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Map<String, Object> endpoints = ApiRoutes.ROUTES.entrySet().stream()
+        Map<String, Object> endpoints = Routes.ROUTES.entrySet().stream()
             .collect(Collectors.toMap(
                 Map.Entry::getKey,
                 entry -> Map.of(

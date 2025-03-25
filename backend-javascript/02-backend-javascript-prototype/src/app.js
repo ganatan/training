@@ -1,7 +1,7 @@
 import express from 'express';
 
-import modulesRouter from './modules.router.js';
-import rootRouter from './root.router.js';
+import modulesRouter from './routers/modules.router.js';
+import rootRouter from './routers/root.router.js';
 
 const app = express();
 

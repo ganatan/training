@@ -7,15 +7,27 @@ export const routes: Routes = [
   { path: '', component: HomeComponent, },
 
   {
-    path: 'continents',
-    loadComponent: () => import('./modules/features/continent/item.component')
+    path: 'cities',
+    loadComponent: () => import('./modules/features/city/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
-    path: 'continents/:id',
-    loadComponent: () => import('./modules/features/continent-form/item.component')
+    path: 'cities/:id',
+    loadComponent: () => import('./modules/features/city-form/item.component')
       .then(mod => mod.ItemComponent)
   },
+
+  {
+    path: 'professions',
+    loadComponent: () => import('./modules/features/profession/item.component')
+      .then(mod => mod.ItemComponent)
+  },
+  {
+    path: 'professions/:id',
+    loadComponent: () => import('./modules/features/profession-form/item.component')
+      .then(mod => mod.ItemComponent)
+  },
+
 
   {
     path: 'bootstrap',

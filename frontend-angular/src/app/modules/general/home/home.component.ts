@@ -27,9 +27,15 @@ export class HomeComponent {
     },
     {
       icon: "fa-solid fa-globe",
-      name: "continents",
-      description: "continents",
-      link: '/continents'
+      name: "professions",
+      description: "professions",
+      link: '/professions'
+    },
+    {
+      icon: "fa-solid fa-globe",
+      name: "cities",
+      description: "cities",
+      link: '/cities'
     },
   ]
 

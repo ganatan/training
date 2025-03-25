@@ -80,7 +80,6 @@ export class ItemComponent implements OnInit {
     this.loading = true;
     this.itemsService.getItems(sortFilters)
       .subscribe(response => {
-        console.log('00000000001:' + JSON.stringify(response));
         // const count = response.totals.globalTotals.count;
         // this.pagination.totalItems = count;
         this.items = response;

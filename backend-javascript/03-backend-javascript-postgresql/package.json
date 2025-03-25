@@ -12,7 +12,7 @@
     "serve": "node dist/bundle.js",
     "audit": "npm audit",
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",
-    "generate-professions": "node tools/scripts/generate-professions.js 100000",
+    "generate-professions": "node tools/scripts/generate-professions.js 1000",
     "generate-module": "node tools/scripts/generate-module.js continent",
     "test:city:repository": "npm test -- city.repository.test.js",
     "test:city:service": "npm test -- city.service.test.js",

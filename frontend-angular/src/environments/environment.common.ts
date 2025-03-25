@@ -6,6 +6,7 @@ export const appInfo = {
   logo: 'ganatan',
   network: 'ganatan',
   website: 'www.ganatan.com',
+  useDatabase: false,
 };
 
 export const applicationBase = {

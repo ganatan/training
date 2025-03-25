@@ -6,11 +6,6 @@ export const environment = {
     ...applicationBase,
     angular: `${applicationBase.angular} DEV`,
   },
-  urlNews: './assets/params/json/mock/trailers.json',
-  urlMovies: './assets/params/json/mock/movies.json',
-  config: {
-    api: false,
-    url: './assets/params/json/crud/',
-  },
+  useDatabase: true,
   backend: 'http://localhost:3000',
 };

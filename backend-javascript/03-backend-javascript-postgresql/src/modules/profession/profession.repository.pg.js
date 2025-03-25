@@ -60,6 +60,15 @@ class PgRepository {
 
     return rows.length ? rows[0] : null;
   }
+
+  async existsByName(name) {
+    const { rows } = await pool.query(
+      'SELECT 1 FROM profession WHERE LOWER(name) = LOWER($1) LIMIT 1',
+      [name]
+    );
+    return rows.length > 0;
+  }
+
 }
 
 export default PgRepository;

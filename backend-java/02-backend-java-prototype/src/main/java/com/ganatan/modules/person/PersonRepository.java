@@ -2,6 +2,8 @@ package com.ganatan.modules.person;
 
 import java.util.List;
 
+import com.ganatan.mocks.person.PersonRepositoryMock;
+
 public class PersonRepository {
 
     private final Object repository;

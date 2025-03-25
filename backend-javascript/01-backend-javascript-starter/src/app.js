@@ -36,7 +36,7 @@ const works = [
   { id: 5, title: 'Inception', year: 2010 },
   { id: 6, title: 'The Dark Knight', year: 2008 },
   { id: 7, title: 'Dune', year: 2021 },
-  { id: 8, title: 'Arrival', year: 2016 }
+  { id: 8, title: 'Arrival', year: 2016 },
 ];
 
 const url = `http://localhost:${config.port}`;

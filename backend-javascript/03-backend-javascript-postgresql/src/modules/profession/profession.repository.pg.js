@@ -1,101 +1,118 @@
-import pool from '../../config/database.js';
+import pool from '../../core/database/database.js';
+
+import { addFilterCondition, adaptSortField } from '../../shared/utils/query/query-utils.js';
+
+const ITEM_NAME = 'profession';
+const ITEMS_NAME = 'profession';
+const TABLE_NAME = 'profession';
+const ITEM_KEY = 'profession';
 
 class PgRepository {
 
-
   async getItems(filters) {
-    let result =
-    {
-      "metadata": {
-        "totals": {
-          "currentPageTotals": {
-            "count": 3,
-            "offset": 0,
-            "limit": 3
-          },
-          "globalTotals": {
-            "count": 4,
-            "totalPages": 2
-          }
-        },
-      },
-      "data": [
-        {
-          "id": 1,
-          "name": "Item 1"
-        },
-        {
-          "id": 2,
-          "name": "Item 2"
-        },
-        {
-          "id": 3,
-          "name": "Item 3"
-        },
-        {
-          "id": 3,
-          "name": "Item 3"
-        }
-      ]
-    };
-
-    return result;
+    try {
+      const {
+        page_number = 1,
+        page_size = 10,
+        sort = '-name',
+        name = '',
+      } = filters;
+  
+      const validPage = page_number > 0 ? parseInt(page_number, 10) : 1;
+      const validSize = page_size > 0 ? parseInt(page_size, 10) : 10;
+      const offset = (validPage - 1) * validSize;
+  
+      let filterConditions = 'WHERE (1 = 1) AND (id >= 1000)';
+      const params = [];
+  
+      filterConditions = addFilterCondition(filterConditions, params, 'name', name);
+  
+      const sortMapping = {
+        creationDate: 'creation_date',
+        releaseDate: 'release_date',
+      };
+      let sortBy = adaptSortField(sort, sortMapping);
+      let sortOrder = 'ASC';
+      if (sort.startsWith('-')) {
+        sortOrder = 'DESC';
+        sortBy = sortBy.substring(1);
+      }
+  
+      const sql = this.buildQueryItems(filterConditions, validSize, offset, sortBy, sortOrder);
+      const result = await pool.query(sql, params);
+  
+      return this.formatResultItems(result.rows, { offset, limit: validSize });
+    } catch (error) {
+      console.error(`Error retrieving ${ITEMS_NAME}:`, error);
+      return null;
+    }
   }
 
+  formatResultItems(result, { offset, limit }) {
+    const dynamicKey = ITEM_KEY;
+    const { totals = {}, [dynamicKey]: data = [] } = result[0] || {};
+  
+    const count = totals?.currentPageTotals?.count ?? 0;
+    const globalCount = totals?.globalTotals?.count ?? 0;
+    const totalPages = Math.ceil(globalCount / limit);
+  
+    return {
+      metadata: {
+        totals: {
+          currentPageTotals: {
+            count,
+            offset,
+            limit
+          },
+          globalTotals: {
+            count: globalCount,
+            totalPages
+          }
+        }
+      },
+      data
+    };
+  }
 
-  // async getItems({ page = 1, size = 10, name = '' } = {}) {
-  //   const offset = (page - 1) * size;
-  //   const filter = `%${name}%`;
-
-  //   const dataQuery = `
-  //     SELECT id, name
-  //     FROM profession
-  //     WHERE name ILIKE $1
-  //     ORDER BY id
-  //     LIMIT $2 OFFSET $3
-  //   `;
-
-  //   const countQuery = `
-  //     SELECT COUNT(*)::int AS count
-  //     FROM profession
-  //     WHERE name ILIKE $1
-  //   `;
-
-  //   const [dataResult, countResult] = await Promise.all([
-  //     pool.query(dataQuery, [filter, size, offset]),
-  //     pool.query(countQuery, [filter]),
-  //   ]);
-
-  //   const total = countResult.rows[0].count;
-  //   const totalPages = Math.ceil(total / size);
-  //   const currentPageCount = dataResult.rowCount;
-
-  //   const metadata = {
-  //     totals: {
-  //       currentPageTotals: {
-  //         count: currentPageCount,
-  //         offset,
-  //         limit: size
-  //       },
-  //       globalTotals: {
-  //         count: total,
-  //         totalPages
-  //       }
-  //     }
-  //   };
-
-  //   const data = dataResult.rows.map(row => ({
-  //     id: row.id,
-  //     name: row.name
-  //   }));
-
-  //   return { metadata, data };
-  // }
-
-  async getItemsCount() {
-    const { rows } = await pool.query('SELECT COUNT(*) AS count FROM profession');
-
-    return { count: Number(rows[0].count) };
+  buildQueryItems(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
+    return `
+      WITH filtered_data AS (
+        SELECT id, name
+        FROM ${TABLE_NAME}
+        ${filterConditions}
+        ORDER BY ${sortBy} ${sortOrder}
+      ),
+      pagination_data AS (
+        SELECT
+          id,
+          name
+        FROM filtered_data
+        ORDER BY ${sortBy} ${sortOrder}
+        LIMIT ${limit} OFFSET ${offset}
+      ),
+      global_totals AS (
+        SELECT COUNT(*) AS count
+        FROM filtered_data
+      ),
+      current_page_totals AS (
+        SELECT COUNT(*) AS count
+        FROM pagination_data
+      )
+      SELECT
+        (
+          SELECT JSON_BUILD_OBJECT(
+            'currentPageTotals',
+              JSON_BUILD_OBJECT('count', current_page_totals.count),
+            'globalTotals',
+              JSON_BUILD_OBJECT('count', global_totals.count)
+          )
+          FROM current_page_totals, global_totals
+        ) AS totals,
+        (
+          SELECT JSON_AGG(pagination_data.*)
+          FROM pagination_data
+        ) AS ${TABLE_NAME};
+    `;
   }
 
   async getItemById(id) {

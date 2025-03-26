@@ -7,10 +7,7 @@ const MESSAGES = {
 class Controller {
   constructor(service) {
     this.service = service;
-
     this.getItems = this.getItems.bind(this);
-    this.getItemsCount = this.getItemsCount.bind(this);
-    this.getItemsPaginated = this.getItemsPaginated.bind(this);
     this.getItemById = this.getItemById.bind(this);
     this.createItem = this.createItem.bind(this);
     this.updateItem = this.updateItem.bind(this);
@@ -19,30 +16,7 @@ class Controller {
 
   async getItems(req, res, next) {
     try {
-      console.log('00000000001:' + JSON.stringify(req.query));
       const result = await this.service.getItems(req.query);
-
-      return res.status(HTTP_STATUS.OK).json(result);
-    } catch (error) {
-
-      return next(error);
-    }
-  }
-
-  async getItemsCount(req, res, next) {
-    try {
-      const result = await this.service.getItemsCount(req.query);
-
-      return res.status(HTTP_STATUS.OK).json(result);
-    } catch (error) {
-
-      return next(error);
-    }
-  }
-
-  async getItemsPaginated(req, res, next) {
-    try {
-      const result = await this.service.getItemsPaginated(req.query);
 
       return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {

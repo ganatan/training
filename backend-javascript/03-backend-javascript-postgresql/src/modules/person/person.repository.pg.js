@@ -1,4 +1,4 @@
-import pool from '../../config/database.js';
+import pool from '../../core/database/database.js';
 
 class PgRepository {
   async getItems() {

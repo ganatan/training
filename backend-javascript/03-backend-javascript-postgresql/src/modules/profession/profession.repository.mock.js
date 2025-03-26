@@ -28,10 +28,6 @@ class MockRepository {
     return { metadata, data };
   }
 
-  async getItemsCount() {
-    return { count: this.items.length };
-  }
-
   async getItemById(id) {
     return this.items.find((item) => item.id === id) || null;
   }

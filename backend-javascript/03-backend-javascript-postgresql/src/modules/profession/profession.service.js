@@ -15,50 +15,37 @@ class Service {
     return await this.repository.getItems(query);
   }
 
-  async getItemsCount() {
-    return await this.repository.getItemsCount();
-  }
-
-  async getItemsPaginated({ page, size, name }) {
-    const [items, total] = await Promise.all([
-      this.repository.getItems({ page, size, name }),
-      this.repository.getItemsCount(name),
-    ]);
-
-    return { items, total };
-  }
-
   async getItemById(id) {
     return await this.repository.getItemById(id);
   }
 
-  async createItem(createdData) {
+  async createItem(data) {
     try {
-      validateItem(createdData);
+      validateItem(data);
     } catch (error) {
       error.status = HTTP_STATUS.BAD_REQUEST;
       throw error;
     }
 
-    const exists = await this.repository.existsByName(createdData.name);
+    const exists = await this.repository.existsByName(data.name);
     if (exists) {
       const error = new Error(MESSAGES.ITEM_ALREADY_EXISTS);
       error.status = HTTP_STATUS.CONFLICT;
       throw error;
     }
 
-    return await this.repository.createItem(createdData);
+    return await this.repository.createItem(data);
   }
 
-  async updateItem(id, updatedData) {
+  async updateItem(id, data) {
     try {
-      validateItem(updatedData);
+      validateItem(data);
     } catch (error) {
       error.status = HTTP_STATUS.BAD_REQUEST;
       throw error;
     }
 
-    return await this.repository.updateItem(id, updatedData);
+    return await this.repository.updateItem(id, data);
   }
 
   async deleteItem(id) {

@@ -6,7 +6,7 @@ import Repository from './person.repository.js';
 import Service from './person.service.js';
 import Controller from './person.controller.js';
 
-import config from '../../config/config.js';
+import config from '../../core/config/config.js';
 
 const router = express.Router();
 

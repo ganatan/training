@@ -12,10 +12,6 @@ class Repository {
     return this.repository.getItems(query);
   }
 
-  async getItemsCount() {
-    return this.repository.getItemsCount();
-  }
-
   async getItemById(id) {
     return this.repository.getItemById(id);
   }

@@ -1,4 +1,4 @@
-import pool from '../../src/config/database.js';
+import pool from '../../src/core/database/database.js';
 
 const total = Number(process.argv[2]);
 

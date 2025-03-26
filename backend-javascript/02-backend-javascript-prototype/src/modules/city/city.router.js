@@ -6,7 +6,7 @@ import Repository from './city.repository.js';
 import Service from './city.service.js';
 import Controller from './city.controller.js';
 
-import config from '../../config/config.js';
+import config from '../../core/config/config.js';
 
 const router = express.Router();
 

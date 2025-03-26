@@ -6,7 +6,7 @@ import Repository from './profession.repository.js';
 import Service from './profession.service.js';
 import Controller from './profession.controller.js';
 
-import config from '../../config/config.js';
+import config from '../../core/config/config.js';
 
 const router = express.Router();
 

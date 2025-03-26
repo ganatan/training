@@ -4,13 +4,7 @@
       <div class="d-flex align-items-center me-3">
         <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name" placeholder=""
           (keydown)="onKeydown($event)">
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search(1)">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search(2)">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search(3)">
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false"
@@ -61,7 +55,7 @@
       <div class="d-flex align-items-center">
         <select class="form-select form-select-sm" aria-label="Items per page"
           (ngModelChange)="changeItemsPerPage($event)" [(ngModel)]="selectedItemsPerPage">
-          <option *ngFor="let count of [5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500, 1000, 2000]" [value]="count">{{
+          <option *ngFor="let count of [1, 2, 3, 4, 5, 10, 20, 30, 40, 50]" [value]="count">{{
             count }}
           </option>
         </select>

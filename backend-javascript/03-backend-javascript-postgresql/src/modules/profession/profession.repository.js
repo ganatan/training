@@ -8,8 +8,8 @@ class Repository {
       : new MockRepository();
   }
 
-  async getItems() {
-    return this.repository.getItems();
+  async getItems(query) {
+    return this.repository.getItems(query);
   }
 
   async getItemsCount() {

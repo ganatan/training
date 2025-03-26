@@ -1,27 +1,12 @@
-import { readFile } from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { ITEMS_MOCK_DATA } from '../../mocks/city/city.mock-data.js';
 import createItem from './city.model.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class MockRepository {
   constructor() {
-    this.items = null;
-    this.filePath = path.join(__dirname, '../../mocks/city.mock-data.json');
-  }
-
-  async load() {
-    if (!this.items) {
-      const data = await readFile(this.filePath, 'utf-8');
-      this.items = JSON.parse(data);
-    }
+    this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   }
 
   async getItems() {
-    await this.load();
-
     return this.items;
   }
 

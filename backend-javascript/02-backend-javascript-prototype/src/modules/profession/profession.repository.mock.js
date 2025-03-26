@@ -1,28 +1,31 @@
-import { readFile } from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { ITEMS_MOCK_DATA } from '../../mocks/profession/profession.mock-data.js';
 import createItem from './profession.model.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class MockRepository {
   constructor() {
-    this.items = null;
-    this.filePath = path.join(__dirname, '../../mocks/profession.mock-data.json');
+    this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   }
 
-  async load() {
-    if (!this.items) {
-      const data = await readFile(this.filePath, 'utf-8');
-      this.items = JSON.parse(data);
-    }
-  }
+  async getItems({ offset = 0, limit = 10 } = {}) {
+    const total = this.items.length;
+    const totalPages = Math.ceil(total / limit);
+    const data = this.items.slice(offset, offset + limit);
 
-  async getItems() {
-    await this.load();
+    const metadata = {
+      totals: {
+        currentPageTotals: {
+          count: data.length,
+          offset,
+          limit
+        },
+        globalTotals: {
+          count: total,
+          totalPages
+        }
+      }
+    };
 
-    return this.items;
+    return { metadata, data };
   }
 
   async getItemsCount() {

@@ -71,20 +71,20 @@ export class ItemComponent implements OnInit {
     this.getQueryParams();
   }
 
-  getItems(filters: any, typeSearch: number): void {
+  getItems(filters: any): void {
     const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
     };
     this.loading = true;
-    this.itemsService.getItems(sortFilters, typeSearch)
+    this.itemsService.getItems(sortFilters)
       .subscribe(response => {
-        const count = response.total.count;
-        this.pagination.totalItems = count;
         console.log('00000000001:' + JSON.stringify(response));
-        this.items = response.items;
-         this.setTotals(response);
+        const count = response.metadata.totals.currentPageTotals.count;
+        this.pagination.totalItems = count;
+        this.items = response.data;
+        this.setTotals(response);
         this.loading = false;
         this.updatePagination();
       });
@@ -92,12 +92,12 @@ export class ItemComponent implements OnInit {
 
   setTotals(response: any): void {
     this.totals = {
-      count: response.totals.currentPageTotals.count,
-      countAll: response.totals.globalTotals.count,
+      count: response.metadata.totals.currentPageTotals.count,
+      countAll: response.metadata.totals.globalTotals.count
     };
   }
 
-  setQueryParams(filters: any, typeSearch: number) {
+  setQueryParams(filters: any) {
     const sanitizedFilters = { ...filters };
     if (sanitizedFilters.name === "") {
       sanitizedFilters.name = null;
@@ -111,10 +111,10 @@ export class ItemComponent implements OnInit {
     const queryParams = { ...this.filters, ...sanitizedFilters };
     const url = URL_ITEMS;
     this.router.navigate([url], { queryParams });
-    this.getItems(this.filters, typeSearch);
+    this.getItems(this.filters);
   }
 
-  search(typeSearch: number) {
+  search() {
     const filters = {
       ...this.filters,
       page: this.pagination.currentPage,
@@ -125,12 +125,12 @@ export class ItemComponent implements OnInit {
       ...filters,
       sort,
     };
-    this.setQueryParams(sortFilters, typeSearch);
+    this.setQueryParams(sortFilters);
   }
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === "Enter") {
-      this.search(1);
+      this.search();
     }
   }
 
@@ -142,7 +142,7 @@ export class ItemComponent implements OnInit {
         this.selectedItemsPerPage = size;
       }
       this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
-      this.getItems(this.filters, 1);
+      this.getItems(this.filters);
     });
   }
 
@@ -170,13 +170,13 @@ export class ItemComponent implements OnInit {
 
   changePage(page: number) {
     this.pagination.currentPage = page;
-    this.search(1);
+    this.search();
   }
 
   changeItemsPerPage(event: string) {
     const itemsPerPage = parseInt(event, 10);
     this.pagination.itemsPerPage = itemsPerPage;
-    this.search(1);
+    this.search();
   }
 
   getGlobalPosition(index: number): number {
@@ -201,7 +201,7 @@ export class ItemComponent implements OnInit {
       this.sortField = field ? field : column;
       this.sortDirection = 'asc';
     }
-    this.search(1);
+    this.search();
   }
 
 }

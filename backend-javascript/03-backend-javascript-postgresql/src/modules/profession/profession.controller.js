@@ -19,6 +19,7 @@ class Controller {
 
   async getItems(req, res, next) {
     try {
+      console.log('00000000001:' + JSON.stringify(req.query));
       const result = await this.service.getItems(req.query);
 
       return res.status(HTTP_STATUS.OK).json(result);

@@ -6,8 +6,26 @@ class MockRepository {
     this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   }
 
-  async getItems() {
-    return this.items;
+  async getItems({ offset = 0, limit = 10 } = {}) {
+    const total = this.items.length;
+    const totalPages = Math.ceil(total / limit);
+    const data = this.items.slice(offset, offset + limit);
+
+    const metadata = {
+      totals: {
+        currentPageTotals: {
+          count: data.length,
+          offset,
+          limit
+        },
+        globalTotals: {
+          count: total,
+          totalPages
+        }
+      }
+    };
+
+    return { metadata, data };
   }
 
   async getItemsCount() {

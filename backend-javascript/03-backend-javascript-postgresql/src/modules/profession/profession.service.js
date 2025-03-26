@@ -11,8 +11,8 @@ class Service {
     this.repository = repository;
   }
 
-  async getItems() {
-    return await this.repository.getItems();
+  async getItems(query) {
+    return await this.repository.getItems(query);
   }
 
   async getItemsCount() {

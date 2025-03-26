@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "totals": {
+      "currentPageTotals": {
+        "count": 4,
+        "offset": 0,
+        "limit": 10
+      },
+      "globalTotals": {
+        "count": 4,
+        "totalPages": 1
+      }
+    }
+  },
+  "data": [
+    {
+      "id": 1,
+      "name": "Director"
+    },
+    {
+      "id": 2,
+      "name": "Producer"
+    },
+    {
+      "id": 3,
+      "name": "Screenwriter"
+    },
+    {
+      "id": 4,
+      "name": "Editor"
+    }
+  ]
+}

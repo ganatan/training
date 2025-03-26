@@ -1,12 +1,27 @@
-import { ITEMS_MOCK_DATA } from '../../mocks/person/person.mock-data.js';
+import { readFile } from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import createItem from './person.model.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class MockRepository {
   constructor() {
-    this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
+    this.items = null;
+    this.filePath = path.join(__dirname, '../../mocks/person.mock-data.json');
+  }
+
+  async load() {
+    if (!this.items) {
+      const data = await readFile(this.filePath, 'utf-8');
+      this.items = JSON.parse(data);
+    }
   }
 
   async getItems() {
+    await this.load();
+
     return this.items;
   }
 

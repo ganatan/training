@@ -22,6 +22,7 @@
     "test:person:service": "npm test -- person.service.test.js",
     "test:person:controller": "npm test -- person.controller.test.js",
     "test:person:router": "npm test -- person.router.test.js",
+    "test:profession:repository:mock": "npm test -- profession.repository.mock.test.js",
     "test:profession:repository": "npm test -- profession.repository.test.js",
     "test:profession:schema": "npm test -- profession.schema.test.js",
     "test:profession:service": "npm test -- profession.service.test.js",
@@ -51,8 +52,8 @@
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "2.8.5",
     "dotenv": "16.4.7",
-    "zod": "^3.24.2"
+    "zod": "3.24.2"
   }
 }

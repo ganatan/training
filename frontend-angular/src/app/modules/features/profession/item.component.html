@@ -2,9 +2,15 @@
   <div class="row pt-5">
     <div class="col-12 d-flex flex-wrap align-items-center justify-content-between">
       <div class="d-flex align-items-center me-3">
-        <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name"
-          placeholder="" (keydown)="onKeydown($event)">
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
+        <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name" placeholder=""
+          (keydown)="onKeydown($event)">
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search(1)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search(2)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search(3)">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false"

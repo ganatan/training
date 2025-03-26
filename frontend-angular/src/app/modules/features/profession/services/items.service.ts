@@ -23,7 +23,7 @@ interface Filters {
 export class ItemsService {
   private backendUrl: string = environment.backend;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private buildQueryParams(filters: Filters): string {
     const queryParams = new URLSearchParams();
@@ -42,9 +42,10 @@ export class ItemsService {
     return queryParams.toString() ? `?${queryParams.toString()}` : '';
   }
 
-  getItems(filters: Filters = {}): Observable<Item[]> {
+  getItems(filters: Filters = {}, typeSearch: number): Observable<Item[]> {
     const params = this.buildQueryParams(filters);
-    const url = `${this.backendUrl}/${URL_ITEMS}${params}`;
+    let url = `${this.backendUrl}/${URL_ITEMS}${params}`;
+    url = `${this.backendUrl}/${URL_ITEMS}/paginated${params}`;
 
     return this.http.get<Item[]>(url).pipe(
       catchError(this.handleError<Item[]>('getItems', []))

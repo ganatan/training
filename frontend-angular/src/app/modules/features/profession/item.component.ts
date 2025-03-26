@@ -71,19 +71,20 @@ export class ItemComponent implements OnInit {
     this.getQueryParams();
   }
 
-  getItems(filters: any): void {
+  getItems(filters: any, typeSearch: number): void {
     const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
     };
     this.loading = true;
-    this.itemsService.getItems(sortFilters)
+    this.itemsService.getItems(sortFilters, typeSearch)
       .subscribe(response => {
-        // const count = response.totals.globalTotals.count;
-        // this.pagination.totalItems = count;
-        this.items = response;
-        // this.setTotals(response);
+        const count = response.total.count;
+        this.pagination.totalItems = count;
+        console.log('00000000001:' + JSON.stringify(response));
+        this.items = response.items;
+         this.setTotals(response);
         this.loading = false;
         this.updatePagination();
       });
@@ -96,7 +97,7 @@ export class ItemComponent implements OnInit {
     };
   }
 
-  setQueryParams(filters: any) {
+  setQueryParams(filters: any, typeSearch: number) {
     const sanitizedFilters = { ...filters };
     if (sanitizedFilters.name === "") {
       sanitizedFilters.name = null;
@@ -110,10 +111,10 @@ export class ItemComponent implements OnInit {
     const queryParams = { ...this.filters, ...sanitizedFilters };
     const url = URL_ITEMS;
     this.router.navigate([url], { queryParams });
-    this.getItems(this.filters);
+    this.getItems(this.filters, typeSearch);
   }
 
-  search() {
+  search(typeSearch: number) {
     const filters = {
       ...this.filters,
       page: this.pagination.currentPage,
@@ -124,12 +125,12 @@ export class ItemComponent implements OnInit {
       ...filters,
       sort,
     };
-    this.setQueryParams(sortFilters);
+    this.setQueryParams(sortFilters, typeSearch);
   }
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === "Enter") {
-      this.search();
+      this.search(1);
     }
   }
 
@@ -141,7 +142,7 @@ export class ItemComponent implements OnInit {
         this.selectedItemsPerPage = size;
       }
       this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
-      this.getItems(this.filters);
+      this.getItems(this.filters, 1);
     });
   }
 
@@ -169,13 +170,13 @@ export class ItemComponent implements OnInit {
 
   changePage(page: number) {
     this.pagination.currentPage = page;
-    this.search();
+    this.search(1);
   }
 
   changeItemsPerPage(event: string) {
     const itemsPerPage = parseInt(event, 10);
     this.pagination.itemsPerPage = itemsPerPage;
-    this.search();
+    this.search(1);
   }
 
   getGlobalPosition(index: number): number {
@@ -200,7 +201,7 @@ export class ItemComponent implements OnInit {
       this.sortField = field ? field : column;
       this.sortDirection = 'asc';
     }
-    this.search();
+    this.search(1);
   }
 
 }

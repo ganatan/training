@@ -1,4 +1,4 @@
-import { ITEMS_MOCK_DATA } from '../../mocks/profession/profession.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../mocks/profession.mock-data.js';
 import createItem from './profession.model.js';
 
 class MockRepository {
@@ -15,14 +15,14 @@ class MockRepository {
       totals: {
         currentPageTotals: {
           count: data.length,
-          offset,
-          limit
+          offset: offset,
+          limit: limit,
         },
         globalTotals: {
           count: total,
-          totalPages
-        }
-      }
+          totalPages: totalPages,
+        },
+      },
     };
 
     return { metadata, data };

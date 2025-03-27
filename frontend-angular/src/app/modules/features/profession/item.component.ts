@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ItemsService } from './services/items.service';
-import { Item } from './services/item';
+// import { ItemsService } from './services/items-api.service';
+import { Item } from './services/item.model';
+import { ITEMS_SERVICE } from './services/items.token';
 
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
 import { URL_ITEMS, NAME_ITEM, RESPONSE_ITEM } from './services/item.constants';
+
+import { ItemsProvider } from './services/items.provider';
 
 interface Filters {
   page: number | null;
@@ -27,11 +31,15 @@ interface Filters {
   ],
   providers: [
     PaginationService,
+    ItemsProvider,
   ],
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
+
+  private itemsService = inject(ITEMS_SERVICE);
+  private paginationService = inject(PaginationService);
 
   name_default = NAME_ITEM;
   defaultSelectedItemsPerPage = 10;
@@ -59,9 +67,7 @@ export class ItemComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private itemsService: ItemsService,
-    private paginationService: PaginationService) {
+    private router: Router) {
 
     this.selectedItemsPerPage = this.defaultSelectedItemsPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
@@ -78,16 +84,14 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    this.itemsService.getItems(sortFilters)
-      .subscribe(response => {
-        console.log('00000000001:' + JSON.stringify(response));
-        const count = response.metadata.totals.currentPageTotals.count;
-        this.pagination.totalItems = count;
-        this.items = response.data;
-        this.setTotals(response);
-        this.loading = false;
-        this.updatePagination();
-      });
+    this.itemsService.getItems().subscribe(response => {
+      const count = response.metadata.totals.globalTotals.count;
+      this.pagination.totalItems = count;
+      this.items = response.data;
+      this.setTotals(response);
+      this.loading = false;
+      this.updatePagination();
+    });
   }
 
   setTotals(response: any): void {
@@ -156,7 +160,11 @@ export class ItemComponent implements OnInit {
     this.router.navigate([URL_ITEMS, 0]);
   }
 
-  selectItem(item: Item) {
+  // selectItem(item: Item) {
+  //   this.router.navigate([URL_ITEMS, item.id]);
+  // }
+
+  selectItem(item: any) {
     this.router.navigate([URL_ITEMS, item.id]);
   }
 

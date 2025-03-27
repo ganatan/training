@@ -6,6 +6,6 @@ export const environment = {
     ...applicationBase,
     angular: `${applicationBase.angular} PROD`,
   },
-  useDatabase: false,
+  useDatabase: true,
   backend: 'http://localhost:3000',
 };

@@ -1,12 +1,12 @@
 import CityRepository from '../city.repository.js';
-import { ITEMS_MOCK_DATA } from '../../../mocks/city/city.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../../mocks/city.mock-data.js';
 
 describe('CityRepository', () => {
   let repository;
 
   beforeEach(() => {
-    repository = new CityRepository(false); // Use mock repository
-    repository.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA)); // Reset mock data
+    repository = new CityRepository(false);
+    repository.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   });
 
   describe('getItems', () => {

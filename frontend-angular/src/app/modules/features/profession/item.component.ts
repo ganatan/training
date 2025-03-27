@@ -86,7 +86,7 @@ export class ItemComponent implements OnInit {
     this.loading = true;
     this.itemsService.getItems(filters)
       .subscribe(response => {
-        const count = response.metadata.totals.globalTotals.count;
+        const count = response.metadata.pagination.totalItems;
         this.pagination.totalItems = count;
         this.items = response.data;
         this.setTotals(response);
@@ -97,8 +97,8 @@ export class ItemComponent implements OnInit {
 
   setTotals(response: any): void {
     this.totals = {
-      count: response.metadata.totals.currentPageTotals.count,
-      countAll: response.metadata.totals.globalTotals.count
+      count: response.metadata.pagination.perPage,
+      countAll: response.metadata.pagination.totalItems,
     };
   }
 

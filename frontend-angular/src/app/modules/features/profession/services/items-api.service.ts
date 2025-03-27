@@ -31,11 +31,11 @@ export class ItemsApiService implements ItemsServiceInterface {
     const queryParams = new URLSearchParams();
 
     if (filters.size) {
-      queryParams.set('page_size', filters.size.toString());
+      queryParams.set('size', filters.size.toString());
     }
 
     if (filters.page) {
-      queryParams.set('page_number', filters.page.toString());
+      queryParams.set('page', filters.page.toString());
     }
 
     if (filters.sort) {

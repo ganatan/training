@@ -1,5 +1,5 @@
-import MockRepository from './profession.repository.mock.js';
-import PgRepository from './profession.repository.pg.js';
+import MockRepository from './item.repository.mock.js';
+import PgRepository from './item.repository.pg.js';
 
 class Repository {
   constructor(useDatabase) {

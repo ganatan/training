@@ -1,4 +1,4 @@
-import Controller from '../profession.controller.js';
+import Controller from '../item.controller.js';
 
 describe('ProfessionController', () => {
   let controller;

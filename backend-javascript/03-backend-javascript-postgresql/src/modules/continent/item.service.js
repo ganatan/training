@@ -4,7 +4,7 @@ const MESSAGES = {
   ITEM_ALREADY_EXISTS: 'Profession already exists',
 };
 
-import { validateItem } from './profession.schema.js';
+import { validateItem } from './item.schema.js';
 
 class Service {
   constructor(repository) {

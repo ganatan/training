@@ -11,8 +11,12 @@ export const ROUTES = {
     path: '/professions',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
-  works: {
-    path: '/works',
+  artworks: {
+    path: '/artworks',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  continents: {
+    path: '/continents',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 };

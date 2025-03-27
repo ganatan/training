@@ -28,6 +28,16 @@ export const routes: Routes = [
       .then(mod => mod.ItemComponent)
   },
 
+  {
+    path: 'continents',
+    loadComponent: () => import('./modules/features/continent/item.component')
+      .then(mod => mod.ItemComponent)
+  },
+  // {
+  //   path: 'continents/:id',
+  //   loadComponent: () => import('./modules/features/continent-form/item.component')
+  //     .then(mod => mod.ItemComponent)
+  // },
 
   {
     path: 'bootstrap',

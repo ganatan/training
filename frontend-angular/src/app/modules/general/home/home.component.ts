@@ -20,16 +20,22 @@ export class HomeComponent {
 
   items = [
     {
-      icon: "fa-brands fa-bootstrap",
-      name: "bootstrap",
-      description: "UI and components",
-      link: '/bootstrap'
-    },
-    {
       icon: "fa-solid fa-globe",
       name: "professions",
       description: "professions",
       link: '/professions'
+    },
+    {
+      icon: "fa-solid fa-globe",
+      name: "continents",
+      description: "continents",
+      link: '/continents'
+    },
+    {
+      icon: "fa-brands fa-bootstrap",
+      name: "bootstrap",
+      description: "UI and components",
+      link: '/bootstrap'
     },
     {
       icon: "fa-solid fa-globe",

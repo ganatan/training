@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row pt-5">
     <div class="col-12 d-flex flex-wrap align-items-center justify-content-between">
-      <div class="d-flex align-items-center me-3">
+      <div class="d-flex align-items-center mb-2 mb-sm-0">
         <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name" placeholder=""
           (keydown)="onKeydown($event)">
         <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
@@ -16,7 +16,7 @@
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
-      <nav class="d-flex align-items-center me-3" aria-label="Page navigation" *ngIf="pagination.useful">
+      <nav class="d-flex align-items-center" aria-label="Page navigation" *ngIf="pagination.useful">
         <ul class="pagination pagination-sm mb-0">
           <li class="page-item" [ngClass]="{disabled: pagination.currentPage === 1}">
             <a class="page-link cursor-pointer" (click)="changePage(1)" (keydown)="changePage(1)" tabindex="0">

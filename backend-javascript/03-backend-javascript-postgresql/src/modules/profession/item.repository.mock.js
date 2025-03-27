@@ -1,5 +1,5 @@
 import { ITEMS_MOCK_DATA } from '../../mocks/profession.mock-data.js';
-import createItem from './profession.model.js';
+import createItem from './item.model.js';
 
 class MockRepository {
   constructor() {

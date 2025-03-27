@@ -2,10 +2,8 @@ import pool from '../../core/database/database.js';
 
 import { addFilterCondition, adaptSortField } from '../../shared/utils/query/query-utils.js';
 
-const ITEM_NAME = 'profession';
 const ITEMS_NAME = 'profession';
 const TABLE_NAME = 'profession';
-const ITEM_KEY = 'profession';
 
 class PgRepository {
 
@@ -92,7 +90,7 @@ class PgRepository {
   }
 
   async getItemById(id) {
-    const { rows } = await pool.query('SELECT * FROM profession WHERE id = $1', [id]);
+    const { rows } = await pool.query(`SELECT * FROM ${TABLE_NAME} WHERE id = $1`, [id]);
     if (!rows.length) { return null; }
 
     const row = rows[0];
@@ -105,27 +103,27 @@ class PgRepository {
 
   async createItem(data) {
     const { name } = data;
-    const { rows } = await pool.query('INSERT INTO profession (name) VALUES ($1) RETURNING *', [name]);
+    const { rows } = await pool.query(`INSERT INTO ${TABLE_NAME} (name) VALUES ($1) RETURNING *`, [name]);
 
     return rows[0];
   }
 
   async updateItem(id, data) {
     const { name } = data;
-    const { rows } = await pool.query('UPDATE profession SET name = $1 WHERE id = $2 RETURNING *', [name, id]);
+    const { rows } = await pool.query(`UPDATE ${TABLE_NAME} SET name = $1 WHERE id = $2 RETURNING *`, [name, id]);
 
     return rows.length ? rows[0] : null;
   }
 
   async deleteItem(id) {
-    const { rows } = await pool.query('DELETE FROM profession WHERE id = $1 RETURNING *', [id]);
+    const { rows } = await pool.query(`DELETE FROM ${TABLE_NAME} WHERE id = $1 RETURNING *`, [id]);
 
     return rows.length ? rows[0] : null;
   }
 
   async existsByName(name) {
     const { rows } = await pool.query(
-      'SELECT 1 FROM profession WHERE LOWER(name) = LOWER($1) LIMIT 1',
+      `SELECT 1 FROM ${TABLE_NAME}  WHERE LOWER(name) = LOWER($1) LIMIT 1`,
       [name]
     );
     return rows.length > 0;

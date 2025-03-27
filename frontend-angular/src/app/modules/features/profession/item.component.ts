@@ -42,7 +42,7 @@ export class ItemComponent implements OnInit {
   private paginationService = inject(PaginationService);
 
   name_default = NAME_ITEM;
-  defaultSelectedItemsPerPage = 10;
+  defaultSelectedPerPage = 10;
   sortColumn: string | null = null;
   sortField: string | null = null;
   sortDirection: 'asc' | 'desc' | null = null;
@@ -61,7 +61,7 @@ export class ItemComponent implements OnInit {
     name: null,
   };
 
-  selectedItemsPerPage: number;
+  selectedPerPage: number;
   paginationEnabled = true;
   pagination: Pagination;
 
@@ -69,8 +69,8 @@ export class ItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
-    this.selectedItemsPerPage = this.defaultSelectedItemsPerPage;
-    this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
+    this.selectedPerPage = this.defaultSelectedPerPage;
+    this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
   }
 
   ngOnInit(): void {
@@ -84,14 +84,15 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    this.itemsService.getItems().subscribe(response => {
-      const count = response.metadata.totals.globalTotals.count;
-      this.pagination.totalItems = count;
-      this.items = response.data;
-      this.setTotals(response);
-      this.loading = false;
-      this.updatePagination();
-    });
+    this.itemsService.getItems(filters)
+      .subscribe(response => {
+        const count = response.metadata.totals.globalTotals.count;
+        this.pagination.totalItems = count;
+        this.items = response.data;
+        this.setTotals(response);
+        this.loading = false;
+        this.updatePagination();
+      });
   }
 
   setTotals(response: any): void {
@@ -122,7 +123,7 @@ export class ItemComponent implements OnInit {
     const filters = {
       ...this.filters,
       page: this.pagination.currentPage,
-      size: this.pagination.itemsPerPage
+      size: this.pagination.perPage
     };
     const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
@@ -143,16 +144,16 @@ export class ItemComponent implements OnInit {
       this.filters = { ...this.filters, ...queryParams };
       const { size } = this.filters || {};
       if (size) {
-        this.selectedItemsPerPage = size;
+        this.selectedPerPage = size;
       }
-      this.pagination = this.paginationService.initializePagination(this.selectedItemsPerPage);
+      this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
       this.getItems(this.filters);
     });
   }
 
   updatePagination() {
     this.pagination.currentPage = Number(this.filters.page) || 1;
-    this.pagination.itemsPerPage = this.filters.size || this.selectedItemsPerPage;
+    this.pagination.perPage = this.filters.size || this.selectedPerPage;
     this.setPagination();
   }
 
@@ -181,14 +182,14 @@ export class ItemComponent implements OnInit {
     this.search();
   }
 
-  changeItemsPerPage(event: string) {
-    const itemsPerPage = parseInt(event, 10);
-    this.pagination.itemsPerPage = itemsPerPage;
+  changePerPage(event: string) {
+    const perPage = parseInt(event, 10);
+    this.pagination.perPage = perPage;
     this.search();
   }
 
   getGlobalPosition(index: number): number {
-    const offset = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
+    const offset = (this.pagination.currentPage - 1) * this.pagination.perPage;
 
     return offset + index + 1;
   }

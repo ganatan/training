@@ -7,24 +7,20 @@ class MockRepository {
   }
 
   async getItems({ offset = 0, limit = 10 } = {}) {
-    const total = this.items.length;
-    const totalPages = Math.ceil(total / limit);
+    const totalItems = this.items.length;
+    const totalPages = Math.ceil(totalItems / limit);
+    const currentPage = Math.floor(offset / limit) + 1;
     const data = this.items.slice(offset, offset + limit);
-
+  
     const metadata = {
-      totals: {
-        currentPageTotals: {
-          count: data.length,
-          offset: offset,
-          limit: limit,
-        },
-        globalTotals: {
-          count: total,
-          totalPages: totalPages,
-        },
-      },
+      pagination: {
+        currentPage,
+        perPage: limit,
+        totalItems,
+        totalPages
+      }
     };
-
+  
     return { metadata, data };
   }
 

@@ -17,9 +17,11 @@ export class ItemsApiService implements ItemsServiceInterface {
   private backendUrl = environment.backend;
 
   getItems(filters: Filters = {}): Observable<ItemsResponse> {
-    console.log('00000000001:getItems:api');
+    console.log('00000000001:getItems:api:' + JSON.stringify(filters));
     const params = this.buildQueryParams(filters);
     const url = `${this.backendUrl}/${URL_ITEMS}${params}`;
+
+    console.log('00000000001:'+ url);
     return this.http.get<ItemsResponse>(url).pipe(
       catchError(this.handleError('getItems', getDefaultItemsResponse()))
     );

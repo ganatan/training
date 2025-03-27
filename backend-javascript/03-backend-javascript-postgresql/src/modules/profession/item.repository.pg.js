@@ -15,16 +15,16 @@ class PgRepository {
         sort = '-name',
         name = ''
       } = filters;
-  
+
       const currentPage = Math.max(1, parseInt(page, 10));
       const perPage = Math.max(1, parseInt(size, 10));
       const offset = (currentPage - 1) * perPage;
-  
+
       let filterConditions = 'WHERE (1 = 1) AND (id >= 1000)';
       const filterParams = [];
-  
+
       filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
-  
+
       const sortMapping = {
         creationDate: 'creation_date',
         releaseDate: 'release_date'
@@ -34,15 +34,14 @@ class PgRepository {
       if (sort.startsWith('-')) {
         sortBy = sortBy.substring(1);
       }
-  
+
       const sqlCount = this.buildQueryCount(filterConditions);
       const sqlData = this.buildQueryData(filterConditions, perPage, offset, sortBy, sortOrder);
-  
       const [countResult, dataResult] = await Promise.all([
         pool.query(sqlCount, filterParams),
         pool.query(sqlData, filterParams)
       ]);
-  
+
       return this.formatResultItems(dataResult.rows, {
         currentPage,
         perPage,
@@ -53,10 +52,10 @@ class PgRepository {
       return null;
     }
   }
-  
+
   formatResultItems(data, { currentPage, perPage, totalItems }) {
     const totalPages = Math.ceil(totalItems / perPage);
-  
+
     return {
       metadata: {
         pagination: {
@@ -69,7 +68,7 @@ class PgRepository {
       data
     };
   }
-  
+
   buildQueryCount(filterConditions) {
     return `
       SELECT COUNT(*) AS count
@@ -77,7 +76,7 @@ class PgRepository {
       ${filterConditions};
     `;
   }
-  
+
   buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
     return `
       SELECT id, name

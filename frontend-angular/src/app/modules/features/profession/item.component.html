@@ -52,8 +52,8 @@
         <b><span style="color:gray;">{{ totals.count }} sur {{ totals.countAll }}</span></b>
       </div>
       <div class="d-flex align-items-center">
-        <select class="form-select form-select-sm" aria-label="Items per page"
-          (ngModelChange)="changePerPage($event)" [(ngModel)]="selectedPerPage">
+        <select class="form-select form-select-sm" aria-label="Items per page" (ngModelChange)="changePerPage($event)"
+          [(ngModel)]="selectedPerPage">
           <option *ngFor="let count of [1, 2, 3, 4, 5, 10, 20, 30, 40, 50]" [value]="count">{{
             count }}
           </option>
@@ -116,7 +116,7 @@
           <tr *ngFor="let item of items; let i = index" (click)="selectItem(item)">
             <td class="d-none d-md-table-cell text-center">{{ i + 1 }}</td>
             <td class="d-none d-md-table-cell text-center">{{ item.id }}</td>
-            <td class="text-center">{{ item.name }}</td>
+            <td style="cursor: pointer" class="text-primary text-center">{{ item.name }}</td>
           </tr>
           <tr>
             <td [attr.colspan]="14" class="text-center">

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row pt-5">
     <div class="col-12 d-flex flex-wrap align-items-center justify-content-between">
-      <div class="d-flex align-items-center me-3">
+      <div class="d-flex align-items-center mb-2 mb-sm-0">
         <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name" placeholder=""
           (keydown)="onKeydown($event)">
         <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
@@ -48,13 +48,12 @@
           </li>
         </ul>
       </nav>
-
-      <!-- <div class="d-none d-md-flex align-items-center">
+      <div class="d-none d-md-flex align-items-center">
         <b><span style="color:gray;">{{ totals.count }} sur {{ totals.countAll }}</span></b>
-      </div> -->
+      </div>
       <div class="d-flex align-items-center">
-        <select class="form-select form-select-sm" aria-label="Items per page"
-          (ngModelChange)="changePerPage($event)" [(ngModel)]="selectedPerPage">
+        <select class="form-select form-select-sm" aria-label="Items per page" (ngModelChange)="changePerPage($event)"
+          [(ngModel)]="selectedPerPage">
           <option *ngFor="let count of [1, 2, 3, 4, 5, 10, 20]" [value]="count">{{ count }}</option>
         </select>
       </div>
@@ -201,10 +200,10 @@
                 <i class="fab fa-wikipedia-w"></i>
               </a>
             </td>
-            <!-- <td class="d-none d-md-table-cell text-end">{{ item.area | number:'1.0-0':'fr' }}</td>
+            <td class="d-none d-md-table-cell text-end">{{ item.area | number:'1.0-0':'fr' }}</td>
             <td class="d-none d-md-table-cell text-end">{{ item.population | number:'1.0-0':'fr' }}</td>
             <td class="d-none d-md-table-cell text-end">{{ item.countriesNumber }}</td>
-            <td class="d-none d-md-table-cell text-end">{{ item.density | number:'1.5-5' }}</td> -->
+            <td class="d-none d-md-table-cell text-end">{{ item.density | number:'1.5-5' }}</td>
           </tr>
           <tr>
             <td colspan="10" class="text-center"><strong></strong></td>
@@ -225,7 +224,7 @@
             <td class="d-none d-md-table-cell text-end text-secondary">{{ totals.density }}</td>
           </tr>
           <tr>
-            <!-- <td colspan="6" class="d-none d-md-table-cell text-center"><strong>Search Totals</strong></td>
+            <td colspan="6" class="d-none d-md-table-cell text-center"><strong>Search Totals</strong></td>
             <td class="text-end d-none d-lg-table-cell d-xl-table-cell text-secondary">{{ totals.areaAll |
               number:'1.0-0':'fr'
               }}</td>
@@ -235,7 +234,7 @@
             <td class="d-none d-md-table-cell text-end text-secondary">{{
               totals.countriesNumberAll }}</td>
             <td class="d-none d-md-table-cell text-end text-secondary">{{
-              totals.densityAll }}</td> -->
+              totals.densityAll }}</td>
           </tr>
         </tfoot>
       </table>

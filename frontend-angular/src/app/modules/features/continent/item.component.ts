@@ -41,7 +41,7 @@ export class ItemComponent implements OnInit {
   private paginationService = inject(PaginationService);
 
   name_default = NAME_ITEM;
-  defaultSelectedPerPage = 10;
+  defaultSelectedPerPage = 5;
   sortColumn: string | null = null;
   sortField: string | null = null;
   sortDirection: 'asc' | 'desc' | null = null;
@@ -50,10 +50,12 @@ export class ItemComponent implements OnInit {
   loading = false;
 
   totals = {
+    count: 0,
     area: 0,
     population: 0,
     countriesNumber: 0,
     density: 0,
+    countAll: 0,
     areaAll: 0,
     populationAll: 0,
     countriesNumberAll: 0,
@@ -112,10 +114,12 @@ export class ItemComponent implements OnInit {
 
   setTotals(response: any): void {
     this.totals = {
+      count: response.totals.currentPage.count,
       area: response.totals.global.area,
       population: response.totals.global.population,
       countriesNumber: response.totals.global.countriesNumber,
       density: response.totals.global.density,
+      countAll: response.totals.global.count,
       areaAll: response.totals.currentPage.area,
       populationAll: response.totals.currentPage.population,
       countriesNumberAll: response.totals.currentPage.countriesNumber,

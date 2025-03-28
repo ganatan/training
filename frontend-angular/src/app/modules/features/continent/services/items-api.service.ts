@@ -11,6 +11,9 @@ import {
   getDefaultItemsResponse
 } from './item.model';
 
+import { addFilterParam } from '../../../../shared/utils/query-utils';
+
+
 @Injectable()
 export class ItemsApiService implements ItemsServiceInterface {
   private http = inject(HttpClient);
@@ -30,8 +33,22 @@ export class ItemsApiService implements ItemsServiceInterface {
 
     if (filters.page) { queryParams.set('page', filters.page.toString()); }
     if (filters.size) { queryParams.set('size', filters.size.toString()); }
-    if (filters.sort) { queryParams.set('sort', filters.sort); }
-    if (filters.name) { queryParams.set('name', filters.name); }
+
+    // if (filters.sort) { queryParams.set('sort', filters.sort); }
+    // if (filters.name) { queryParams.set('name', filters.name); }
+
+    addFilterParam(queryParams, 'sort', filters.sort);
+
+    addFilterParam(queryParams, 'name', filters.name);
+    addFilterParam(queryParams, 'code', filters.code);
+    addFilterParam(queryParams, 'areaMin', filters.areaMin);
+    addFilterParam(queryParams, 'areaMax', filters.areaMax);
+    addFilterParam(queryParams, 'populationMin', filters.populationMin);
+    addFilterParam(queryParams, 'populationMax', filters.populationMax);
+    addFilterParam(queryParams, 'countriesNumberMin', filters.countriesNumberMin);
+    addFilterParam(queryParams, 'countriesNumberMax', filters.countriesNumberMax);
+    addFilterParam(queryParams, 'densityMin', filters.densityMin);
+    addFilterParam(queryParams, 'densityMax', filters.densityMax);
 
     return queryParams.toString() ? `?${queryParams.toString()}` : '';
   }

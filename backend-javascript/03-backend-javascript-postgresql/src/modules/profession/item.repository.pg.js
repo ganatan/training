@@ -2,6 +2,8 @@ import pool from '../../core/database/database.js';
 
 import { addFilterCondition, adaptSortField } from '../../shared/utils/query/query-utils.js';
 
+import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
+
 const ITEMS_NAME = 'profession';
 const TABLE_NAME = 'profession';
 
@@ -11,11 +13,11 @@ class PgRepository {
     try {
       const {
         page = 1,
-        size = 10,
+        size = DEFAULT_ITEMS_PER_PAGE,
         sort = 'name',
         name = '',
       } = filters;
-
+      
       const currentPage = Math.max(1, parseInt(page, 10));
       const perPage = Math.max(1, parseInt(size, 10));
       const offset = (currentPage - 1) * perPage;

@@ -1,7 +1,7 @@
 export const ITEMS_MOCK_DATA = [
   {
-    "id": 1003,
-    "name": "Australia-pg",
+    "id": 4,
+    "name": "Australia",
     "code": "OC",
     "area": 8600000,
     "population": "41261000",
@@ -9,8 +9,8 @@ export const ITEMS_MOCK_DATA = [
     "density": "4.00000"
   },
   {
-    "id": 1002,
-    "name": "Asia-pg",
+    "id": 3,
+    "name": "Asia",
     "code": "AS",
     "area": 44579000,
     "population": "4545133000",
@@ -18,8 +18,8 @@ export const ITEMS_MOCK_DATA = [
     "density": "101.00000"
   },
   {
-    "id": 1001,
-    "name": "Antarctica-pg",
+    "id": 2,
+    "name": "Antarctica",
     "code": "AN",
     "area": 14000000,
     "population": "4490",
@@ -27,8 +27,8 @@ export const ITEMS_MOCK_DATA = [
     "density": "0.00000"
   },
   {
-    "id": 1000,
-    "name": "Africa-pg",
+    "id": 1,
+    "name": "Africa",
     "code": "AF",
     "area": 30370000,
     "population": "1287920000",

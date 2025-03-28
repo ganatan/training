@@ -1,4 +1,6 @@
 import { ITEMS_MOCK_DATA } from '../../mocks/profession.mock-data.js';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
+
 import createItem from './item.model.js';
 
 class MockRepository {
@@ -6,7 +8,7 @@ class MockRepository {
     this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   }
 
-  async getItems({ offset = 0, limit = 10 } = {}) {
+  async getItems({ offset = 0, limit = DEFAULT_ITEMS_PER_PAGE } = {}) {
     const totalItems = this.items.length;
     const totalPages = Math.ceil(totalItems / limit);
     const currentPage = Math.floor(offset / limit) + 1;

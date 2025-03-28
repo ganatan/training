@@ -5,7 +5,6 @@ import { inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// import { ItemsService } from './services/items-api.service';
 import { Item } from './services/item.model';
 import { ITEMS_SERVICE } from './services/items.token';
 
@@ -13,6 +12,7 @@ import { PaginationService } from '../../../shared/services/pagination/paginatio
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
 import { URL_ITEMS, NAME_ITEM } from './services/item.constants';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 
 import { ItemsProvider } from './services/items.provider';
 
@@ -42,7 +42,7 @@ export class ItemComponent implements OnInit {
   private paginationService = inject(PaginationService);
 
   name_default = NAME_ITEM;
-  defaultSelectedPerPage = 10;
+  defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
   sortDirection: 'asc' | 'desc' | null = null;

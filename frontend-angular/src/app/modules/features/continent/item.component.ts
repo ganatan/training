@@ -12,6 +12,7 @@ import { PaginationService } from '../../../shared/services/pagination/paginatio
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
 import { URL_ITEMS, NAME_ITEM } from './services/item.constants';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 
 import { ItemsProvider } from './services/items.provider';
 
@@ -41,7 +42,7 @@ export class ItemComponent implements OnInit {
   private paginationService = inject(PaginationService);
 
   name_default = NAME_ITEM;
-  defaultSelectedPerPage = 5;
+  defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
   sortDirection: 'asc' | 'desc' | null = null;
@@ -100,9 +101,8 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    this.itemsService.getItems(filters)
+    this.itemsService.getItems(sortFilters)
       .subscribe(response => {
-        console.log('00000000001:' + JSON.stringify(response));
         const count = response.metadata.pagination.totalItems;
         this.pagination.totalItems = count;
         this.items = response.data;

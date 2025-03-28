@@ -73,6 +73,15 @@ export interface Filters {
   size?: number | null;
   sort?: string | null;
   name?: string | null;
+  code?: string | null;
+  areaMin?: number | null;
+  areaMax?: number | null;
+  populationMin?: number | null;
+  populationMax?: number | null;
+  countriesNumberMin?: number | null;
+  countriesNumberMax?: number | null;
+  densityMin?: number | null;
+  densityMax?: number | null;
 }
 
 export interface ItemsServiceInterface {

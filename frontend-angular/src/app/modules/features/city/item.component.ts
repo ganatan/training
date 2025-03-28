@@ -11,6 +11,7 @@ import { PaginationService } from '../../../shared/services/pagination/paginatio
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
 import { URL_ITEMS, NAME_ITEM, RESPONSE_ITEM } from './services/item.constants';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 
 interface Filters {
   page: number | null;
@@ -34,7 +35,7 @@ interface Filters {
 export class ItemComponent implements OnInit {
 
   name_default = NAME_ITEM;
-  defaultSelectedPerPage = 10;
+  defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
   sortDirection: 'asc' | 'desc' | null = null;

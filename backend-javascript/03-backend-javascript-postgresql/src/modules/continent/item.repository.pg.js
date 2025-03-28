@@ -7,9 +7,8 @@ import {
   addDensityCondition,
 } from '../../shared/utils/query/query-utils.js';
 
-import {
-  MAX_INTEGER,
-} from '../../shared/constants/data-limits.constants.js';
+import { MAX_INTEGER } from '../../shared/constants/data-limits.constants.js';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
 
 const ITEMS_NAME = 'continent';
 const TABLE_NAME = 'continent';
@@ -20,8 +19,8 @@ class PgRepository {
     try {
       const {
         page = 1,
-        size = 10,
-        sort = '-name',
+        size = DEFAULT_ITEMS_PER_PAGE,
+        sort = 'name',
         name = '',
         code = '',
         areaMin = null,
@@ -138,9 +137,9 @@ class PgRepository {
     return `
       SELECT 
         COUNT(id) AS count,
-        SUM(area) AS area,
-        SUM(population::BIGINT) AS population,
-        SUM(countries_number) AS "countriesNumber"
+        SUM(area) :: int AS area,
+        SUM(population) :: float AS population,
+        SUM(countries_number) :: int AS countriesNumber
       FROM ${TABLE_NAME}
       ${filterConditions};
     `;
@@ -152,9 +151,9 @@ class PgRepository {
         id, 
         name,
         code,
-        area,
-        population,
-        countries_number AS "countriesNumber",
+        area :: int as area,
+        population :: float as "population",
+        countries_number :: int as "countriesNumber",
         ROUND((population / NULLIF(area, 0))::NUMERIC, 5) as "density"
       FROM ${TABLE_NAME}
       ${filterConditions}

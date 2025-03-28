@@ -39,6 +39,7 @@ export class ItemsApiService implements ItemsServiceInterface {
   private handleError<T>(operation: string, result: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
+
       return of(result);
     };
   }

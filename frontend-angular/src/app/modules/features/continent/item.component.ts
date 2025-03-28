@@ -11,7 +11,7 @@ import { ITEMS_SERVICE } from './services/items.token';
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
-import { URL_ITEMS, NAME_ITEM, RESPONSE_ITEM } from './services/item.constants';
+import { URL_ITEMS, NAME_ITEM } from './services/item.constants';
 
 import { ItemsProvider } from './services/items.provider';
 

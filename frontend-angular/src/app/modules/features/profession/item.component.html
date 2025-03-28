@@ -90,6 +90,9 @@
               Page Rank
             </th>
             <th class="d-none d-md-table-cell text-secondary font-weight-bold text-center">
+              Total Rank
+            </th>
+            <th class="d-none d-md-table-cell text-secondary font-weight-bold text-center">
               <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
                 'fa-sort': sortColumn !== 'id' || sortDirection === null,
                 'fa-sort-up': sortColumn === 'id' && sortDirection === 'asc',
@@ -109,28 +112,43 @@
         </thead>
         <tbody *ngIf="items && items.length > 0">
           <tr>
-            <td [attr.colspan]="14" class="text-center">
+            <td [attr.colspan]="4" class="text-center">
               <strong></strong>
             </td>
           </tr>
           <tr *ngFor="let item of items; let i = index" (click)="selectItem(item)">
             <td class="d-none d-md-table-cell text-center">{{ i + 1 }}</td>
+            <td class="d-none d-md-table-cell text-center">
+              {{ (pagination.currentPage - 1) * pagination.perPage + i + 1 }}
+            </td>
             <td class="d-none d-md-table-cell text-center">{{ item.id }}</td>
             <td style="cursor: pointer" class="text-primary text-center">{{ item.name }}</td>
           </tr>
           <tr>
-            <td [attr.colspan]="14" class="text-center">
+            <td [attr.colspan]="4" class="text-center">
               <strong></strong>
             </td>
           </tr>
         </tbody>
         <tbody *ngIf="!items || items.length === 0">
           <tr>
-            <td [attr.colspan]="14" class="text-center">
+            <td [attr.colspan]="4" class="text-center">
               <strong>No {{ name_default }} available</strong>
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="1" class="d-none d-md-table-cell text-center"><strong>Page Totals : {{ totals.count }}</strong>
+            </td>
+            <td colspan="3" class="d-none d-md-table-cell text-end text-secondary"></td>
+          </tr>
+          <tr>
+            <td colspan="1" class="d-none d-md-table-cell text-center"><strong>Search Totals : {{ totals.countAll
+                }}</strong></td>
+            <td colspan="3" class="text-end d-none d-lg-table-cell d-xl-table-cell text-secondary"></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>

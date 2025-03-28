@@ -9,7 +9,6 @@ import { Item } from './services/item';
 
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
-import { CheckboxComponent } from '../../../shared/components/checkbox/checkbox.component';
 
 import { URL_ITEMS, NAME_ITEM, RESPONSE_ITEM } from './services/item.constants';
 

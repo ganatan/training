@@ -20,7 +20,7 @@ export class HomeComponent {
 
   items = [
     {
-      icon: "fa-solid fa-globe",
+      icon: "fa-solid fa-user-tie",
       name: "professions",
       description: "professions",
       link: '/professions'
@@ -32,13 +32,7 @@ export class HomeComponent {
       link: '/continents'
     },
     {
-      icon: "fa-brands fa-bootstrap",
-      name: "bootstrap",
-      description: "UI and components",
-      link: '/bootstrap'
-    },
-    {
-      icon: "fa-solid fa-globe",
+      icon: "fa-solid fa-city",
       name: "cities",
       description: "cities",
       link: '/cities'

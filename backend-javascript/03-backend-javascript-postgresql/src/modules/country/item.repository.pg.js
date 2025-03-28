@@ -1,9 +1,18 @@
 import pool from '../../core/database/database.js';
 
-import { addFilterCondition, adaptSortField } from '../../shared/utils/query/query-utils.js';
+import {
+  addFilterCondition,
+  adaptSortField,
+  addRangeCondition,
+  addDensityCondition,
+} from '../../shared/utils/query/query-utils.js';
 
-const ITEMS_NAME = 'profession';
-const TABLE_NAME = 'profession';
+import {
+  MAX_INTEGER,
+} from '../../shared/constants/data-limits.constants.js';
+
+const ITEMS_NAME = 'continent';
+const TABLE_NAME = 'continent';
 
 class PgRepository {
 
@@ -14,6 +23,15 @@ class PgRepository {
         size = 10,
         sort = 'name',
         name = '',
+        code = '',
+        areaMin = null,
+        areaMax = null,
+        populationMin = null,
+        populationMax = null,
+        countriesNumberMin = null,
+        countriesNumberMax = null,
+        densityMin = null,
+        densityMax = null,
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
@@ -24,6 +42,12 @@ class PgRepository {
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 'code', code);
+      filterConditions = addRangeCondition(filterConditions, filterParams, 'area', areaMin, areaMax, 0, MAX_INTEGER);
+      filterConditions = addRangeCondition(filterConditions, filterParams, 'population', populationMin, populationMax);
+      filterConditions = addRangeCondition(filterConditions, filterParams, 'countries_number', countriesNumberMin, countriesNumberMax);
+      filterConditions = addDensityCondition(filterConditions, filterParams, densityMin, densityMax);
 
       const sortMapping = {
         creationDate: 'creation_date',
@@ -35,17 +59,30 @@ class PgRepository {
         sortBy = sortBy.substring(1);
       }
 
-      const sqlCount = this.buildQueryCount(filterConditions);
+      const sqlGlobal = this.buildQueryTotals(filterConditions);
       const sqlData = this.buildQueryData(filterConditions, perPage, offset, sortBy, sortOrder);
-      const [countResult, dataResult] = await Promise.all([
-        pool.query(sqlCount, filterParams),
+
+      const [globalResult, dataResult] = await Promise.all([
+        pool.query(sqlGlobal, filterParams),
         pool.query(sqlData, filterParams),
       ]);
+
+      const global = globalResult.rows[0];
+
+      global.density = global.area > 0
+        ? parseFloat((parseFloat(global.population) / parseFloat(global.area)).toFixed(5))
+        : 0;
+
+      const currentPageStats = this.computeCurrentPageTotals(dataResult.rows);
 
       return this.formatResultItems(dataResult.rows, {
         currentPage: currentPage,
         perPage: perPage,
-        totalItems: parseInt(countResult.rows[0].count, 10),
+        totalItems: parseInt(global.count, 10),
+        totals: {
+          global: global,
+          currentPage: currentPageStats,
+        },
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEMS_NAME}:`, error);
@@ -54,7 +91,33 @@ class PgRepository {
     }
   }
 
-  formatResultItems(data, { currentPage, perPage, totalItems }) {
+  computeCurrentPageTotals(rows) {
+    let area = 0;
+    let population = 0;
+    let countriesNumber = 0;
+    let count = 0;
+
+    for (const item of rows) {
+      count += 1;
+      area += parseFloat(item.area || 0);
+      population += parseFloat(item.population || 0);
+      countriesNumber += parseInt(item.countriesNumber || 0);
+    }
+
+    const density = area > 0
+      ? parseFloat((population / area).toFixed(5))
+      : 0;
+
+    return {
+      count,
+      area,
+      population,
+      countriesNumber,
+      density,
+    };
+  }
+
+  formatResultItems(data, { currentPage, perPage, totalItems, totals }) {
     const totalPages = Math.ceil(totalItems / perPage);
 
     return {
@@ -66,13 +129,18 @@ class PgRepository {
           totalPages: totalPages,
         },
       },
+      totals: totals,
       data: data,
     };
   }
 
-  buildQueryCount(filterConditions) {
+  buildQueryTotals(filterConditions) {
     return `
-      SELECT COUNT(*) AS count
+      SELECT 
+        COUNT(id) AS count,
+        SUM(area) AS area,
+        SUM(population::BIGINT) AS population,
+        SUM(countries_number) AS "countriesNumber"
       FROM ${TABLE_NAME}
       ${filterConditions};
     `;
@@ -80,7 +148,14 @@ class PgRepository {
 
   buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
     return `
-      SELECT id, name
+      SELECT 
+        id, 
+        name,
+        code,
+        area,
+        population,
+        countries_number AS "countriesNumber",
+        ROUND((population / NULLIF(area, 0))::NUMERIC, 5) as "density"
       FROM ${TABLE_NAME}
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}

@@ -43,6 +43,7 @@ export class ItemsService {
   getItems(filters: Filters = {}): Observable<ItemsResponse> {
     const params = this.buildQueryParams(filters);
     const url = `${this.backendUrl}/${URL_ITEMS}${params}`;
+
     return this.http.get<ItemsResponse>(url).pipe(
       catchError(this.handleError<ItemsResponse>('getItems', this.getDefaultResponse()))
     );

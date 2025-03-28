@@ -11,16 +11,16 @@ class MockRepository {
     const totalPages = Math.ceil(totalItems / limit);
     const currentPage = Math.floor(offset / limit) + 1;
     const data = this.items.slice(offset, offset + limit);
-  
+
     const metadata = {
       pagination: {
-        currentPage,
+        currentPage: currentPage,
         perPage: limit,
-        totalItems,
-        totalPages
-      }
+        totalItems: totalItems,
+        totalPages: totalPages,
+      },
     };
-  
+
     return { metadata, data };
   }
 

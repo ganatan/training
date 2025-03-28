@@ -13,7 +13,7 @@ class PgRepository {
         page = 1,
         size = 10,
         sort = '-name',
-        name = ''
+        name = '',
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
@@ -27,10 +27,10 @@ class PgRepository {
 
       const sortMapping = {
         creationDate: 'creation_date',
-        releaseDate: 'release_date'
+        releaseDate: 'release_date',
       };
       let sortBy = adaptSortField(sort, sortMapping);
-      let sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
+      const sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
       if (sort.startsWith('-')) {
         sortBy = sortBy.substring(1);
       }
@@ -39,16 +39,17 @@ class PgRepository {
       const sqlData = this.buildQueryData(filterConditions, perPage, offset, sortBy, sortOrder);
       const [countResult, dataResult] = await Promise.all([
         pool.query(sqlCount, filterParams),
-        pool.query(sqlData, filterParams)
+        pool.query(sqlData, filterParams),
       ]);
 
       return this.formatResultItems(dataResult.rows, {
-        currentPage,
-        perPage,
-        totalItems: parseInt(countResult.rows[0].count, 10)
+        currentPage: currentPage,
+        perPage: perPage,
+        totalItems: parseInt(countResult.rows[0].count, 10),
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEMS_NAME}:`, error);
+
       return null;
     }
   }
@@ -59,13 +60,13 @@ class PgRepository {
     return {
       metadata: {
         pagination: {
-          currentPage,
-          perPage,
-          totalItems,
-          totalPages
-        }
+          currentPage: currentPage,
+          perPage: perPage,
+          totalItems: totalItems,
+          totalPages: totalPages,
+        },
       },
-      data
+      data: data,
     };
   }
 
@@ -123,8 +124,9 @@ class PgRepository {
   async existsByName(name) {
     const { rows } = await pool.query(
       `SELECT 1 FROM ${TABLE_NAME}  WHERE LOWER(name) = LOWER($1) LIMIT 1`,
-      [name]
+      [name],
     );
+
     return rows.length > 0;
   }
 

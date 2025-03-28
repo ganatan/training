@@ -5,11 +5,9 @@ describe('ProfessionRepository', () => {
   let repository;
 
   beforeEach(() => {
-    repository = new Repository(false); // false = MockRepository
-    // Injection des données dans l’instance mock
+    repository = new Repository(false);
     repository.repository.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   });
-
 
   describe('getItemById', () => {
     it('should return a profession by ID', async () => {

@@ -4,7 +4,7 @@ import {
   addFilterCondition,
   adaptSortField,
   addRangeCondition,
-  addDensityCondition
+  addDensityCondition,
 } from '../../shared/utils/query/query-utils.js';
 
 import {
@@ -51,10 +51,10 @@ class PgRepository {
 
       const sortMapping = {
         creationDate: 'creation_date',
-        releaseDate: 'release_date'
+        releaseDate: 'release_date',
       };
       let sortBy = adaptSortField(sort, sortMapping);
-      let sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
+      const sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
       if (sort.startsWith('-')) {
         sortBy = sortBy.substring(1);
       }
@@ -64,7 +64,7 @@ class PgRepository {
 
       const [globalResult, dataResult] = await Promise.all([
         pool.query(sqlGlobal, filterParams),
-        pool.query(sqlData, filterParams)
+        pool.query(sqlData, filterParams),
       ]);
 
       const global = globalResult.rows[0];
@@ -76,16 +76,17 @@ class PgRepository {
       const currentPageStats = this.computeCurrentPageTotals(dataResult.rows);
 
       return this.formatResultItems(dataResult.rows, {
-        currentPage,
-        perPage,
+        currentPage: currentPage,
+        perPage: perPage,
         totalItems: parseInt(global.count, 10),
         totals: {
-          global,
-          currentPage: currentPageStats
-        }
+          global: global,
+          currentPage: currentPageStats,
+        },
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEMS_NAME}:`, error);
+
       return null;
     }
   }
@@ -112,7 +113,7 @@ class PgRepository {
       area,
       population,
       countriesNumber,
-      density
+      density,
     };
   }
 
@@ -122,14 +123,14 @@ class PgRepository {
     return {
       metadata: {
         pagination: {
-          currentPage,
-          perPage,
-          totalItems,
-          totalPages
-        }
+          currentPage: currentPage,
+          perPage: perPage,
+          totalItems: totalItems,
+          totalPages: totalPages,
+        },
       },
-      totals,
-      data
+      totals: totals,
+      data: data,
     };
   }
 
@@ -162,7 +163,6 @@ class PgRepository {
       OFFSET ${offset};
     `;
   }
-
 
   async getItemById(id) {
     const { rows } = await pool.query(`SELECT * FROM ${TABLE_NAME} WHERE id = $1`, [id]);
@@ -199,8 +199,9 @@ class PgRepository {
   async existsByName(name) {
     const { rows } = await pool.query(
       `SELECT 1 FROM ${TABLE_NAME}  WHERE LOWER(name) = LOWER($1) LIMIT 1`,
-      [name]
+      [name],
     );
+
     return rows.length > 0;
   }
 

@@ -7,6 +7,6 @@ export const ITEMS_MOCK_DATA = [
     population: 500000,
     countriesNumber: 5,
     wikipediaLink: 'https://en.wikipedia.org/wiki/Director',
-    density: 500
+    density: 500,
   },
 ];

@@ -11,16 +11,12 @@ import { ITEMS_SERVICE } from './services/items.token';
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
-import { URL_ITEMS, NAME_ITEM } from './services/item.constants';
+import { ITEM_CONSTANTS } from './services/item.constants';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 
 import { ItemsProvider } from './services/items.provider';
 
-interface Filters {
-  page: number | null;
-  size: number | null;
-  name: string | null;
-}
+import { Filters } from './services/filters.model';
 
 @Component({
   selector: 'app-item',
@@ -41,7 +37,7 @@ export class ItemComponent implements OnInit {
   private itemsService = inject(ITEMS_SERVICE);
   private paginationService = inject(PaginationService);
 
-  name_default = NAME_ITEM;
+  name_default = ITEM_CONSTANTS.ROUTE_PATH;
   defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
@@ -117,7 +113,7 @@ export class ItemComponent implements OnInit {
       sanitizedFilters.sort = null;
     }
     const queryParams = { ...this.filters, ...sanitizedFilters };
-    const url = URL_ITEMS;
+    const url = ITEM_CONSTANTS.RESOURCE_NAME;
     this.router.navigate([url], { queryParams });
     this.getItems(this.filters);
   }
@@ -161,11 +157,11 @@ export class ItemComponent implements OnInit {
   }
 
   createItem() {
-    this.router.navigate([URL_ITEMS, 0]);
+    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, 0]);
   }
 
   selectItem(item: any) {
-    this.router.navigate([URL_ITEMS, item.id]);
+    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, item.id]);
   }
 
   selectPagination() {

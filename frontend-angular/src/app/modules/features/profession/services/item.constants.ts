@@ -1,3 +1,5 @@
-export const URL_ITEMS = 'professions';
-export const NAME_ITEM = 'professions';
-export const RESPONSE_ITEM = 'professions';
+export const ITEM_CONSTANTS = {
+  RESOURCE_NAME: 'professions',
+  ROUTE_PATH: 'professions',
+  RESPONSE_KEY: 'professions',
+};

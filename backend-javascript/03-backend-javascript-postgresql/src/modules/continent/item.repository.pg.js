@@ -58,19 +58,17 @@ class PgRepository {
         sortBy = sortBy.substring(1);
       }
 
-      const sqlGlobal = this.buildQueryTotals(filterConditions);
+      const sqlCount = this.buildQueryCount(filterConditions);
       const sqlData = this.buildQueryData(filterConditions, perPage, offset, sortBy, sortOrder);
       const [globalResult, dataResult] = await Promise.all([
-        pool.query(sqlGlobal, filterParams),
+        pool.query(sqlCount, filterParams),
         pool.query(sqlData, filterParams),
       ]);
 
       const global = globalResult.rows[0];
-
       global.density = global.area > 0
         ? parseFloat((parseFloat(global.population) / parseFloat(global.area)).toFixed(5))
         : 0;
-
       const currentPageTotals = this.buildCurrentPageTotals(dataResult.rows);
 
       return this.formatResultItems(dataResult.rows, {
@@ -132,7 +130,7 @@ class PgRepository {
     };
   }
 
-  buildQueryTotals(filterConditions) {
+  buildQueryCount(filterConditions) {
     return `
       SELECT 
         COUNT(id) AS count,

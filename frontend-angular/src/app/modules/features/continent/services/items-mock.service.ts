@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { Filters } from './filters.model';
 import {
-  Filters,
   ItemsResponse,
   ItemsServiceInterface,
   Item

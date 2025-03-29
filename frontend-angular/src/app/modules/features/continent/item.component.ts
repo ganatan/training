@@ -16,20 +16,7 @@ import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.con
 
 import { ItemsProvider } from './services/items.provider';
 
-interface Filters {
-  page: number | null;
-  size: number | null;
-  name: string | null;
-  code: string | null;
-  areaMin: number | null,
-  areaMax: number | null,
-  populationMin: number | null,
-  populationMax: number | null,
-  countriesCountMin: number | null,
-  countriesCountMax: number | null,
-  densityMin: number | null,
-  densityMax: number | null,
-}
+import { Filters } from './services/filters.model';
 
 @Component({
   selector: 'app-item',

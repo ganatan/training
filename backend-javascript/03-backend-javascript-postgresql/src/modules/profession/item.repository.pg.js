@@ -33,8 +33,6 @@ class PgRepository {
       filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
 
       const sortMapping = {
-        creationDate: 'creation_date',
-        releaseDate: 'release_date',
       };
       let sortBy = adaptSortField(sort, sortMapping);
       const sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
@@ -49,10 +47,12 @@ class PgRepository {
         pool.query(sqlData, filterParams),
       ]);
 
+      const global = countResult.rows[0];
+
       return this.formatResultItems(dataResult.rows, {
         currentPage: currentPage,
         perPage: perPage,
-        totalItems: parseInt(countResult.rows[0].count, 10),
+        totalItems: parseInt(global.count, 10),
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEM_CONSTANTS.ITEMS_NAME}:`, error);
@@ -87,7 +87,9 @@ class PgRepository {
 
   buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
     return `
-      SELECT id, name
+      SELECT 
+        id, 
+        name
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}

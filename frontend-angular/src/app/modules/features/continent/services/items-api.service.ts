@@ -3,17 +3,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 
 import { environment } from '../../../../../environments/environment';
-import { ITEM_CONSTANTS } from './item.constants';
+import { addFilterParam } from '../../../../shared/utils/query-utils';
 
+import { ITEM_CONSTANTS } from './item.constants';
+import { Filters } from './filters.model';
 import {
-  Filters,
   ItemsResponse,
   ItemsServiceInterface,
   getDefaultItemsResponse
 } from './item.model';
-
-import { addFilterParam } from '../../../../shared/utils/query-utils';
-
 
 @Injectable()
 export class ItemsApiService implements ItemsServiceInterface {
@@ -34,9 +32,6 @@ export class ItemsApiService implements ItemsServiceInterface {
 
     if (filters.page) { queryParams.set('page', filters.page.toString()); }
     if (filters.size) { queryParams.set('size', filters.size.toString()); }
-
-    // if (filters.sort) { queryParams.set('sort', filters.sort); }
-    // if (filters.name) { queryParams.set('name', filters.name); }
 
     addFilterParam(queryParams, 'sort', filters.sort);
 

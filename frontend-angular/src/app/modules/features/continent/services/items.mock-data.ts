@@ -3,7 +3,7 @@ import { Item } from './item.model';
 export const ITEMS_MOCK_DATA: Item[] = [
   {
     id: 1,
-    name: 'Director',
+    name: 'Director Frontend Mock',
     code: 'DIR',
     area: 1000,
     population: 500000,

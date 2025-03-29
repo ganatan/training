@@ -36,13 +36,6 @@ export function getDefaultItemsResponse(): ItemsResponse {
   };
 }
 
-// export interface Filters {
-//   page?: number | null;
-//   size?: number | null;
-//   sort?: string | null;
-//   name?: string | null;
-// }
-
 export interface ItemsServiceInterface {
   getItems(filters?: Filters): Observable<ItemsResponse>;
 }

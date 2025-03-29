@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { inject } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
+import { Item } from './services/item.model';
+import { ITEMS_SERVICE } from './services/items.token';
+
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
-import { SortDirection } from '../../../shared/constants/sort.constants';
 
-import { ITEM_CONSTANTS } from './services/item.constants';
-import { Item } from './services/item.model';
-import { Filters } from './services/filters.model';
-import { ITEMS_SERVICE } from './services/items.token';
+import { URL_ITEMS, NAME_ITEM } from './services/item.constants';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
+
 import { ItemsProvider } from './services/items.provider';
 
 @Component({
@@ -34,11 +35,11 @@ export class ItemComponent implements OnInit {
   private itemsService = inject(ITEMS_SERVICE);
   private paginationService = inject(PaginationService);
 
-  name_default = ITEM_CONSTANTS.ROUTE_PATH;
+  name_default = NAME_ITEM;
   defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
-  sortDirection: SortDirection.ASC | SortDirection.DESC | null = null;
+  sortDirection: 'asc' | 'desc' | null = null;
 
   items: Item[] | undefined;
   loading = false;
@@ -48,7 +49,7 @@ export class ItemComponent implements OnInit {
     countAll: 0,
   };
 
-  filters: Filters = {
+  filters = {
     page: null,
     size: null,
     name: null,
@@ -62,9 +63,6 @@ export class ItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
-    this.sortColumn = 'name';
-    this.sortDirection = SortDirection.ASC;
-
     this.selectedPerPage = this.defaultSelectedPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
   }
@@ -74,7 +72,7 @@ export class ItemComponent implements OnInit {
   }
 
   getItems(filters: any): void {
-    const sort = this.sortColumn ? (this.sortDirection === SortDirection.ASC ? this.sortColumn : `-${this.sortColumn}`) : null;
+    const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
@@ -93,8 +91,8 @@ export class ItemComponent implements OnInit {
 
   setTotals(response: any): void {
     this.totals = {
-      count: response.metadata.pagination.perPage,
-      countAll: response.metadata.pagination.totalItems,
+      count: response.totals.currentPage.count,
+      countAll: response.totals.global.count,
     };
   }
 
@@ -110,7 +108,7 @@ export class ItemComponent implements OnInit {
       sanitizedFilters.sort = null;
     }
     const queryParams = { ...this.filters, ...sanitizedFilters };
-    const url = ITEM_CONSTANTS.RESOURCE_NAME;
+    const url = URL_ITEMS;
     this.router.navigate([url], { queryParams });
     this.getItems(this.filters);
   }
@@ -121,7 +119,7 @@ export class ItemComponent implements OnInit {
       page: this.pagination.currentPage,
       size: this.pagination.perPage
     };
-    const sort = this.sortColumn ? (this.sortDirection === SortDirection.ASC ? this.sortColumn : `-${this.sortColumn}`) : null;
+    const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
@@ -153,12 +151,16 @@ export class ItemComponent implements OnInit {
     this.setPagination();
   }
 
-  createItem() {
-    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, 0]);
+  create() {
+    this.router.navigate([URL_ITEMS, 0]);
   }
 
+  // selectItem(item: Item) {
+  //   this.router.navigate([URL_ITEMS, item.id]);
+  // }
+
   selectItem(item: any) {
-    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, item.id]);
+    this.router.navigate([URL_ITEMS, item.id]);
   }
 
   selectPagination() {
@@ -188,19 +190,19 @@ export class ItemComponent implements OnInit {
 
   setSort(column: string, field?: string): void {
     if (this.sortColumn === column) {
-      if (this.sortDirection === SortDirection.ASC) {
-        this.sortDirection = SortDirection.DESC;
-      } else if (this.sortDirection === SortDirection.DESC) {
+      if (this.sortDirection === 'asc') {
+        this.sortDirection = 'desc';
+      } else if (this.sortDirection === 'desc') {
         this.sortDirection = null;
         this.sortColumn = null;
         this.sortField = null;
       } else {
-        this.sortDirection = SortDirection.ASC;
+        this.sortDirection = 'asc';
       }
     } else {
       this.sortColumn = column;
       this.sortField = field ? field : column;
-      this.sortDirection = SortDirection.ASC;
+      this.sortDirection = 'asc';
     }
     this.search();
   }

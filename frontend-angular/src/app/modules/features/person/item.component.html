@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row pt-5">
     <div class="col-12 d-flex flex-wrap align-items-center justify-content-between">
       <div class="d-flex align-items-center mb-2 mb-sm-0">
@@ -12,7 +12,7 @@
           class="btn nga-btn-search nga-btn-search-primary btn-sm d-flex align-items-center me-3">
           Filters <i class="fa-solid fa-arrow-up-wide-short ms-1"></i>
         </button>
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm" (click)="create()">
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm" (click)="createItem()">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
@@ -75,38 +75,6 @@
                 <label for="name" class="text-primary font-weight-bold form-label">Name</label>
                 <input [(ngModel)]="filters.name" type="text" class="form-control text-primary" id="name">
               </div>
-              <div class="col-md-2">
-                <label for="code" class="font-weight-bold form-label">Code</label>
-                <input [(ngModel)]="filters.code" type="text" class="form-control" id="code">
-              </div>
-              <div class="col-md-2">
-                <label for="areaMin" class="form-label">Area (km²)</label>
-                <input [(ngModel)]="filters.areaMin" type="number" class="form-control mb-2" id="areaMin" min="0"
-                  oninput="validity.valid||(value='');">
-                <input [(ngModel)]="filters.areaMax" type="number" class="form-control" id="areaMax" min="0"
-                  oninput="validity.valid||(value='');">
-              </div>
-              <div class="col-md-2">
-                <label for="populationMin" class="form-label">Population<i class="mx-2 fa-solid fa-user"></i></label>
-                <input [(ngModel)]="filters.populationMin" type="number" class="form-control mb-2" id="populationMin"
-                  min="0" oninput="validity.valid||(value='');">
-                <input [(ngModel)]="filters.populationMax" type="number" class="form-control" id="populationMax" min="0"
-                  oninput="validity.valid||(value='');">
-              </div>
-              <div class="col-md-2">
-                <label for="countriesCountMin" class="form-label">Countries<i class="mx-2 far fa-flag"></i></label>
-                <input [(ngModel)]="filters.countriesCountMin" type="number" class="form-control mb-2"
-                  id="countriesCountMin" min="0" oninput="validity.valid||(value='');">
-                <input [(ngModel)]="filters.countriesCountMax" type="number" class="form-control"
-                  id="countriesCountMax" min="0" oninput="validity.valid||(value='');">
-              </div>
-              <div class="col-md-2">
-                <label for="densityMin" class="form-label">Density</label>
-                <input [(ngModel)]="filters.densityMin" type="number" class="form-control mb-2" id="densityMin" min="0"
-                  oninput="validity.valid||(value='');">
-                <input [(ngModel)]="filters.densityMax" type="number" class="form-control" id="densityMax" min="0"
-                  oninput="validity.valid||(value='');">
-              </div>
             </div>
           </div>
         </div>
@@ -124,64 +92,33 @@
             <th class="d-none d-md-table-cell text-secondary font-weight-bold text-center">
               Total Rank
             </th>
-            <th class="d-none d-md-table-cell text-secondary font-weight-bold text-center">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                'fa-sort': sortColumn !== 'id' || sortDirection === null,
-                'fa-sort-up': sortColumn === 'id' && sortDirection === 'asc',
-                'fa-sort-down': sortColumn === 'id' && sortDirection === 'desc'
-              }" (click)="setSort('id')" (keydown.enter)="setSort('id')" tabindex="0">
-              </i>Id
+            <th class="d-none d-md-table-cell font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null
+            }">
+              <span role="button" tabindex="0" (click)="setSort('id')" (keydown.enter)="setSort('id')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'id' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'id' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'id' && sortDirection === 'desc'
+                }"></i>
+                Id
+              </span>
             </th>
-            <th class="text-primary font-weight-bold text-center">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null
+            }">
+              <span role="button" tabindex="0" (click)="setSort('name')" (keydown.enter)="setSort('name')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
                   'fa-sort': sortColumn !== 'name' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'name' && sortDirection === 'asc',
                   'fa-sort-down': sortColumn === 'name' && sortDirection === 'desc'
-                }" (click)="setSort('name')" (keydown.enter)="setSort('name')" tabindex="0">
-              </i>Name
-            </th>
-            <th class="text-secondary font-weight-bold text-center">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                  'fa-sort': sortColumn !== 'code' || sortDirection === null,
-                  'fa-sort-up': sortColumn === 'code' && sortDirection === 'asc',
-                  'fa-sort-down': sortColumn === 'code' && sortDirection === 'desc'
-                }" (click)="setSort('code')" (keydown.enter)="setSort('code')" tabindex="0">
-              </i>Code
-            </th>
-            <th class="d-none d-md-table-cell text-center text-secondary">
-              Wiki
-            </th>
-            <th class="d-none d-md-table-cell text-center text-secondary">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                'fa-sort': sortColumn !== 'area' || sortDirection === null,
-                'fa-sort-up': sortColumn === 'area' && sortDirection === 'asc',
-                'fa-sort-down': sortColumn === 'area' && sortDirection === 'desc'
-              }" (click)="setSort('area')" (keydown.enter)="setSort('area')" tabindex="0">
-              </i>Area (km²)
-            </th>
-            <th class="d-none d-md-table-cell text-center text-secondary">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                'fa-sort': sortColumn !== 'population' || sortDirection === null,
-                'fa-sort-up': sortColumn === 'population' && sortDirection === 'asc',
-                'fa-sort-down': sortColumn === 'population' && sortDirection === 'desc'
-              }" (click)="setSort('population')" (keydown.enter)="setSort('population')" tabindex="0">
-              </i>Population
-            </th>
-            <th class="d-none d-md-table-cell text-center text-secondary">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                  'fa-sort': sortColumn !== 'countries_count' || sortDirection === null,
-                  'fa-sort-up': sortColumn === 'countriesCount' && sortDirection === 'asc',
-                  'fa-sort-down': sortColumn === 'countriesCount' && sortDirection === 'desc'
-                }" (click)="setSort('countriesCount')" (keydown.enter)="setSort('countriesCount')" tabindex="0">
-              </i>Countries
-            </th>
-            <th class="d-none d-md-table-cell text-center text-secondary">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                  'fa-sort': sortColumn !== 'density' || sortDirection === null,
-                  'fa-sort-up': sortColumn === 'density' && sortDirection === 'asc',
-                  'fa-sort-down': sortColumn === 'density' && sortDirection === 'desc'
-                }" (click)="setSort('density')" (keydown.enter)="setSort('density')" tabindex="0">
-              </i>Density
+                }"></i>
+                Name
+              </span>
             </th>
           </tr>
         </thead>
@@ -192,18 +129,18 @@
           <tr *ngFor="let item of items; let i = index" (click)="selectItem(item)">
             <td class="d-none d-md-table-cell text-center">{{ i + 1 }}</td>
             <td class="d-none d-md-table-cell text-center">{{ getGlobalPosition(i) }}</td>
-            <td class="d-none d-md-table-cell text-center">{{ item.id }}</td>
-            <td style="cursor: pointer" class="text-primary text-center">{{ item.name }}</td>
-            <td class="text-end text-center">{{ item.code }}</td>
-            <td class="d-none d-md-table-cell text-center">
-              <a href="https://en.wikipedia.org/wiki/{{ item.wikipediaLink }}" target="_blank" class="text-secondary">
-                <i class="fab fa-wikipedia-w"></i>
-              </a>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null
+            }">
+              {{ item.id }}
             </td>
-            <td class="d-none d-md-table-cell text-end">{{ item.area | number:'1.0-0':'fr' }}</td>
-            <td class="d-none d-md-table-cell text-end">{{ item.population | number:'1.0-0':'fr' }}</td>
-            <td class="d-none d-md-table-cell text-end">{{ item.countriesCount }}</td>
-            <td class="d-none d-md-table-cell text-end">{{ item.density | number:'1.5-5' }}</td>
+            <td class="text-center" [ngClass]="{
+              'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null
+            }">
+              {{ item.name }}
+            </td>
           </tr>
           <tr>
             <td colspan="10" class="text-center"><strong></strong></td>
@@ -216,28 +153,15 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="6" class="d-none d-md-table-cell text-center"><strong>Page Totals : {{ totals.count }}</strong></td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{ totals.area | number:'1.0-0':'fr' }}</td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{ totals.population | number:'1.0-0':'fr' }}
+            <td colspan="6" class="d-none d-md-table-cell text-center"><strong>Page Totals : {{ totals.count }}</strong>
             </td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{ totals.countriesCount }}</td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{ totals.density }}</td>
           </tr>
           <tr>
-            <td colspan="6" class="d-none d-md-table-cell text-center"><strong>Search Totals : {{ totals.countAll }}</strong></td>
-            <td class="text-end d-none d-lg-table-cell d-xl-table-cell text-secondary">{{ totals.areaAll |
-              number:'1.0-0':'fr'
-              }}</td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{
-              totals.populationAll
-              | number:'1.0-0':'fr' }}</td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{
-              totals.countriesCountAll }}</td>
-            <td class="d-none d-md-table-cell text-end text-secondary">{{
-              totals.densityAll }}</td>
+            <td colspan="6" class="d-none d-md-table-cell text-center"><strong>Search Totals : {{ totals.countAll
+                }}</strong></td>
           </tr>
         </tfoot>
       </table>
     </div>
   </div>
-</div> -->
+</div>

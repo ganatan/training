@@ -1,8 +1,5 @@
 import { HTTP_STATUS } from '../../shared/constants/http-status.js';
-
-const MESSAGES = {
-  ITEM_ALREADY_EXISTS: 'Profession already exists',
-};
+import { ITEM_CONSTANTS } from './item.constant.js';
 
 import { validateItem } from './item.schema.js';
 
@@ -16,7 +13,15 @@ class Service {
   }
 
   async getItemById(id) {
-    return await this.repository.getItemById(id);
+    const item = await this.repository.getItemById(id);
+
+    if (!item) {
+      const error = new Error(ITEM_CONSTANTS.NOT_FOUND);
+      error.status = HTTP_STATUS.NOT_FOUND;
+      throw error;
+    }
+
+    return item;
   }
 
   async createItem(data) {
@@ -29,7 +34,7 @@ class Service {
 
     const exists = await this.repository.existsByName(data.name);
     if (exists) {
-      const error = new Error(MESSAGES.ITEM_ALREADY_EXISTS);
+      const error = new Error(ITEM_CONSTANTS.ALREADY_EXISTS);
       error.status = HTTP_STATUS.CONFLICT;
       throw error;
     }

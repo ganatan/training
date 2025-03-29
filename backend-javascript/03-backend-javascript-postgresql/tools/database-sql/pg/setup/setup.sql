@@ -130,8 +130,6 @@ VALUES ('NA', 'North America', 'North_America', 24709000, 587615000, 23);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('SA', 'South America', 'South_America', 17840000, 428240000, 12);
 
-
-
 INSERT INTO country (name,wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,flag,continent_id) 
 VALUES('United States','United_States','US','USA','660','us.png',
 (select id from continent where code='NA'));
@@ -165,6 +163,15 @@ INSERT INTO city ( name,wikipedia_link,capital,country_id)
 VALUES('Detroit','Detroit',true,
 (select id from country where iso_numeric='US'));
 
+INSERT INTO city (name, wikipedia_link, capital, country_id)
+VALUES('Evanston', 'Evanston,_Illinois', false,
+  (SELECT id FROM country WHERE iso_numeric = 'US'));
+
+INSERT INTO city (name, wikipedia_link, capital, country_id)
+VALUES('Amsterdam', 'Amsterdam,_New_York', false,
+  (SELECT id FROM country WHERE iso_numeric = 'US'));
+
+
 INSERT INTO person (name,wikipedia_link,birth_date,birth_city_id) 
 VALUES('Robert Downey Jr.','Robert_Downey_Jr.','1965-04-04',
 (select id from city where wikipedia_link='New_York_City'));
@@ -173,6 +180,14 @@ INSERT INTO person (name,wikipedia_link,birth_date,birth_city_id)
 VALUES('Jeremy Renner','Jeremy_Renner','1971-01-07',
 (select id from city where wikipedia_link='Modesto,_California')
 );
+
+INSERT INTO person (name, wikipedia_link, birth_date, death_date, birth_city_id)
+VALUES('Charlton Heston', 'Charlton_Heston', '1923-10-04', '2008-04-05',
+  (SELECT id FROM city WHERE wikipedia_link = 'Evanston,_Illinois'));
+
+INSERT INTO person (name, wikipedia_link, birth_date, death_date, birth_city_id)
+VALUES('Kirk Douglas', 'Kirk_Douglas', '1916-12-09', '2020-02-05',
+  (SELECT id FROM city WHERE wikipedia_link = 'Amsterdam,_New_York'));
 
 
 INSERT INTO profession (name) VALUES ('Actor');

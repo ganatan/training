@@ -155,6 +155,7 @@ class MockRepository {
       item => item.name.toLowerCase() === name.toLowerCase(),
     );
   }
+
 }
 
 export default MockRepository;

@@ -6,6 +6,7 @@ import {
 } from '../../shared/utils/query/query-utils.js';
 
 import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
+import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
 
 const ITEMS_NAME = 'country';
 const TABLE_NAME = 'country';
@@ -35,7 +36,7 @@ class PgRepository {
         releaseDate: 'release_date',
       };
       let sortBy = adaptSortField(sort, sortMapping);
-      const sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
+      const sortOrder = sort.startsWith('-') ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
       if (sort.startsWith('-')) {
         sortBy = sortBy.substring(1);
       }
@@ -84,7 +85,7 @@ class PgRepository {
     `;
   }
 
-  buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
+  buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = SORT_DIRECTION.ASC) {
     return `
       SELECT 
         t1.id, 

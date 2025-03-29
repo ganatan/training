@@ -6,12 +6,12 @@ import {
   addRangeCondition,
   addDensityCondition,
 } from '../../shared/utils/query/query-utils.js';
-
 import { MAX_INTEGER } from '../../shared/constants/limits.constants.js';
 import {
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_MIN_ENTITY_ID,
 } from '../../shared/constants/pagination.constants.js';
+import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
 
 import { ITEM_CONSTANTS } from './item.constant.js';
 
@@ -53,7 +53,7 @@ class PgRepository {
         countriesCount: 'countries_count',
       };
       let sortBy = adaptSortField(sort, sortMapping);
-      const sortOrder = sort.startsWith('-') ? 'DESC' : 'ASC';
+      const sortOrder = sort.startsWith('-') ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
       if (sort.startsWith('-')) {
         sortBy = sortBy.substring(1);
       }
@@ -142,7 +142,7 @@ class PgRepository {
     `;
   }
 
-  buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
+  buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = SORT_DIRECTION.ASC) {
     return `
       SELECT 
         id, 

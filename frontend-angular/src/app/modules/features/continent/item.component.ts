@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { inject } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { Item } from './services/item.model';
-import { ITEMS_SERVICE } from './services/items.token';
-
+import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
+import { SortDirection } from '../../../shared/constants/sort.constants';
 
 import { ITEM_CONSTANTS } from './services/item.constants';
-import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
-
-import { ItemsProvider } from './services/items.provider';
-
+import { Item } from './services/item.model';
 import { Filters } from './services/filters.model';
+import { ITEMS_SERVICE } from './services/items.token';
+import { ItemsProvider } from './services/items.provider';
 
 @Component({
   selector: 'app-item',
@@ -41,7 +38,7 @@ export class ItemComponent implements OnInit {
   defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
-  sortDirection: 'asc' | 'desc' | null = null;
+  sortDirection: SortDirection.ASC | SortDirection.DESC | null = null;
 
   items: Item[] | undefined;
   loading = false;
@@ -83,7 +80,7 @@ export class ItemComponent implements OnInit {
     private router: Router) {
 
     this.sortColumn = 'name';
-    this.sortDirection = 'asc';
+    this.sortDirection = SortDirection.ASC;
 
     this.selectedPerPage = this.defaultSelectedPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
@@ -94,7 +91,7 @@ export class ItemComponent implements OnInit {
   }
 
   getItems(filters: any): void {
-    const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
+    const sort = this.sortColumn ? (this.sortDirection === SortDirection.ASC ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
@@ -150,7 +147,7 @@ export class ItemComponent implements OnInit {
       page: this.pagination.currentPage,
       size: this.pagination.perPage
     };
-    const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
+    const sort = this.sortColumn ? (this.sortDirection === SortDirection.ASC ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
@@ -217,19 +214,19 @@ export class ItemComponent implements OnInit {
 
   setSort(column: string, field?: string): void {
     if (this.sortColumn === column) {
-      if (this.sortDirection === 'asc') {
-        this.sortDirection = 'desc';
-      } else if (this.sortDirection === 'desc') {
+      if (this.sortDirection === SortDirection.ASC) {
+        this.sortDirection = SortDirection.DESC;
+      } else if (this.sortDirection === SortDirection.DESC) {
         this.sortDirection = null;
         this.sortColumn = null;
         this.sortField = null;
       } else {
-        this.sortDirection = 'asc';
+        this.sortDirection = SortDirection.ASC;
       }
     } else {
       this.sortColumn = column;
       this.sortField = field ? field : column;
-      this.sortDirection = 'asc';
+      this.sortDirection = SortDirection.ASC;
     }
     this.search();
   }

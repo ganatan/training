@@ -72,7 +72,6 @@ export class ItemComponent implements OnInit {
     densityAll: 0
   };
 
-
   filters: Filters = {
     page: null,
     size: null,

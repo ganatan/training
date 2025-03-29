@@ -69,6 +69,9 @@ export class ItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
+    this.sortColumn = 'name';
+    this.sortDirection = 'asc';
+
     this.selectedPerPage = this.defaultSelectedPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
   }

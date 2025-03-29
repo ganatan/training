@@ -187,6 +187,7 @@ class PgRepository {
       if (!rows.length) {
         return null;
       }
+
       return rows[0];
     } catch (error) {
       throw new Error(`Failed to fetch item by ID ${id} - ${error.message}`);

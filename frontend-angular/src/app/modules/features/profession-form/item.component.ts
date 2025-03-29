@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
@@ -9,8 +9,6 @@ import { ItemService } from './services/item.service';
 import { Item } from './services/item';
 
 import { DEFAULT_ITEM, NAME_ITEM } from './services/item.constants';
-import { getCurrentDate } from '../../../shared/utils/date-utils';
-
 
 @Component({
   selector: 'app-item',

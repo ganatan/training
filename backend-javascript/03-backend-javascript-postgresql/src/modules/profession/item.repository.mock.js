@@ -1,8 +1,6 @@
 import { ITEMS_MOCK_DATA } from '../../mocks/profession.mock-data.js';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
 
-import createItem from './item.model.js';
-
 class MockRepository {
   constructor() {
     this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
@@ -31,7 +29,7 @@ class MockRepository {
   }
 
   async createItem(data) {
-    const newItem = createItem({ id: this.items.length + 1, ...data });
+    const newItem = { id: this.items.length + 1, ...data };
     this.items.push(newItem);
 
     return newItem;

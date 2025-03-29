@@ -38,7 +38,7 @@ export class ItemComponent {
       wikipediaLink: DEFAULT_ITEM.wikipediaLink,
       area: [DEFAULT_ITEM.area, [Validators.required, Validators.pattern("^[0-9]*$")]],
       population: [DEFAULT_ITEM.population, [Validators.required, Validators.pattern("^[0-9]*$")]],
-      countriesNumber: [DEFAULT_ITEM.countriesNumber, [Validators.required, Validators.pattern("^[0-9]*$")]],
+      countriesCount: [DEFAULT_ITEM.countriesCount, [Validators.required, Validators.pattern("^[0-9]*$")]],
       density: DEFAULT_ITEM.density,
     });
 
@@ -49,7 +49,7 @@ export class ItemComponent {
   get code() { return this.formItem.get('code'); }
   get area() { return this.formItem.get('area'); }
   get population() { return this.formItem.get('population'); }
-  get countriesNumber() { return this.formItem.get('countriesNumber'); }
+  get countriesCount() { return this.formItem.get('countriesCount'); }
   get density() { return this.formItem.get('density'); }
 
   getItemById(): void {

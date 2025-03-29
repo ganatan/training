@@ -51,3 +51,35 @@ export function addDensityCondition(condition, params, densityMin, densityMax) {
 
   return condition;
 }
+
+export function addRangeDateCondition(condition, params, column, minDate, maxDate) {
+  const parseDate = (dateString, time) => {
+    if (!dateString) {
+      return null;
+    };
+    const decodedDate = decodeURIComponent(dateString);
+    const [day, month, year] = decodedDate.split('/');
+    const isoDate = `${year}-${month}-${day} ${time}+01`;
+
+    return !isNaN(Date.parse(isoDate)) ? isoDate : null;
+  };
+
+  if (minDate) {
+    const parsedMinDate = parseDate(minDate, '00:00:00');
+    if (parsedMinDate) {
+      params.push(parsedMinDate);
+      condition += ` AND ${column} >= $${params.length}`;
+    }
+  }
+
+  if (maxDate) {
+    const parsedMaxDate = parseDate(maxDate, '23:59:59');
+    if (parsedMaxDate) {
+      params.push(parsedMaxDate);
+      condition += ` AND ${column} <= $${params.length}`;
+    }
+  }
+
+  return condition;
+}
+

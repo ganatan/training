@@ -14,7 +14,7 @@ describe('ItemService', () => {
     wikipediaLink: 'https://example.com',
     area: 12345,
     population: 1000000,
-    countriesNumber: 10,
+    countriesCount: 10,
     density: 80,
   };
 
@@ -55,7 +55,7 @@ describe('ItemService', () => {
           wikipediaLink: '',
           area: 0,
           population: 0,
-          countriesNumber: 0,
+          countriesCount: 0,
           density: 0,
         });
       });

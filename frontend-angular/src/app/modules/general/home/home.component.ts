@@ -32,6 +32,18 @@ export class HomeComponent {
       link: '/continents'
     },
     {
+      icon: "fa-solid fa-user",
+      name: "persons",
+      description: "persons",
+      link: '/persons'
+    },
+    {
+      icon: "fa-solid fa-flag",
+      name: "countries",
+      description: "countries",
+      link: '/countries'
+    },
+    {
       icon: "fa-solid fa-city",
       name: "cities",
       description: "cities",

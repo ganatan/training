@@ -1,51 +1,51 @@
-import { HTTP_STATUS } from '../../shared/constants/http.js';
+import { HTTP_STATUS } from '../../shared/constants/http-status.js';
 
 const MESSAGES = {
-  ITEM_ALREADY_EXISTS: 'Person already exists',
+  ITEM_ALREADY_EXISTS: 'Profession already exists',
 };
 
-import { validateItem } from './person.schema.js';
+import { validateItem } from './item.schema.js';
 
 class Service {
   constructor(repository) {
     this.repository = repository;
   }
 
-  async getItems() {
-    return await this.repository.getItems();
+  async getItems(query) {
+    return await this.repository.getItems(query);
   }
 
   async getItemById(id) {
     return await this.repository.getItemById(id);
   }
 
-  async createItem(createdData) {
+  async createItem(data) {
     try {
-      validateItem(createdData);
+      validateItem(data);
     } catch (error) {
       error.status = HTTP_STATUS.BAD_REQUEST;
       throw error;
     }
 
-    const exists = await this.repository.existsByName(createdData.name);
+    const exists = await this.repository.existsByName(data.name);
     if (exists) {
       const error = new Error(MESSAGES.ITEM_ALREADY_EXISTS);
       error.status = HTTP_STATUS.CONFLICT;
       throw error;
     }
 
-    return await this.repository.createItem(createdData);
+    return await this.repository.createItem(data);
   }
 
-  async updateItem(id, updatedData) {
+  async updateItem(id, data) {
     try {
-      validateItem(updatedData);
+      validateItem(data);
     } catch (error) {
       error.status = HTTP_STATUS.BAD_REQUEST;
       throw error;
     }
 
-    return await this.repository.updateItem(id, updatedData);
+    return await this.repository.updateItem(id, data);
   }
 
   async deleteItem(id) {

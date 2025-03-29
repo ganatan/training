@@ -8,6 +8,6 @@ export const DEFAULT_ITEM = {
   wikipediaLink: '',
   area: 0,
   population: 0,
-  countriesNumber: 0,
+  countriesCount: 0,
   density: 0,
 };

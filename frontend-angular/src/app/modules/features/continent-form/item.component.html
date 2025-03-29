@@ -84,18 +84,18 @@
               </div>
             </div>
             <div class="col-md-3">
-              <label for="countriesNumber" class="form-label">Nb de Pays</label>
-              <input type="text" class="form-control" id="countriesNumber" formControlName="countriesNumber">
-              <div *ngIf="countriesNumber?.errors?.['required']">
+              <label for="countriesCount" class="form-label">Nb de Pays</label>
+              <input type="text" class="form-control" id="countriesCount" formControlName="countriesCount">
+              <div *ngIf="countriesCount?.errors?.['required']">
                 <span class="pt-2 text-danger">Nb de Pays est obligatoire</span>
               </div>
-              <div *ngIf="countriesNumber?.errors?.['pattern']">
+              <div *ngIf="countriesCount?.errors?.['pattern']">
                 <span class="pt-2 text-danger">Nombre uniquement</span>
               </div>
             </div>
             <div class="col-md-3">
               <label for="density" class="form-label">Density</label>
-              <input type="text" class="form-control" id="countriesNumber" formControlName="density" readonly>
+              <input type="text" class="form-control" id="countriesCount" formControlName="density" readonly>
             </div>
           </form>
         </div>

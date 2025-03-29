@@ -1,11 +1,16 @@
 import pool from '../../core/database/database.js';
 
-import { addFilterCondition, adaptSortField } from '../../shared/utils/query/query-utils.js';
+import {
+  addFilterCondition,
+  adaptSortField,
+} from '../../shared/utils/query/query-utils.js';
 
-import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
+import { 
+  DEFAULT_ITEMS_PER_PAGE,
+  DEFAULT_MIN_ENTITY_ID,
+} from '../../shared/constants/pagination.constants.js';
 
-const ITEMS_NAME = 'profession';
-const TABLE_NAME = 'profession';
+import { ITEM_CONSTANTS } from './item.constant.js';
 
 class PgRepository {
 
@@ -17,12 +22,12 @@ class PgRepository {
         sort = 'name',
         name = '',
       } = filters;
-      
+
       const currentPage = Math.max(1, parseInt(page, 10));
       const perPage = Math.max(1, parseInt(size, 10));
       const offset = (currentPage - 1) * perPage;
 
-      let filterConditions = 'WHERE (1 = 1) AND (id >= 1000)';
+      let filterConditions = `WHERE (1 = 1) AND (id >= ${DEFAULT_MIN_ENTITY_ID})`;
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
@@ -50,7 +55,7 @@ class PgRepository {
         totalItems: parseInt(countResult.rows[0].count, 10),
       });
     } catch (error) {
-      console.error(`Error retrieving ${ITEMS_NAME}:`, error);
+      console.error(`Error retrieving ${ITEM_CONSTANTS.ITEMS_NAME}:`, error);
 
       return null;
     }
@@ -75,7 +80,7 @@ class PgRepository {
   buildQueryCount(filterConditions) {
     return `
       SELECT COUNT(*) AS count
-      FROM ${TABLE_NAME}
+      FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions};
     `;
   }
@@ -83,7 +88,7 @@ class PgRepository {
   buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
     return `
       SELECT id, name
-      FROM ${TABLE_NAME}
+      FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}
       LIMIT ${limit}
@@ -92,40 +97,51 @@ class PgRepository {
   }
 
   async getItemById(id) {
-    const { rows } = await pool.query(`SELECT * FROM ${TABLE_NAME} WHERE id = $1`, [id]);
-    if (!rows.length) { return null; }
+    if (!Number.isInteger(id) || id <= 0) {
+      throw new Error(ITEM_CONSTANTS.INVALID_ID);
+    }
 
-    const row = rows[0];
+    const query = `
+      SELECT 
+        *
+      FROM ${ITEM_CONSTANTS.TABLE_NAME}
+      WHERE id = $1
+    `;
 
-    return {
-      id: row.id,
-      name: row.name,
-    };
+    try {
+      const { rows } = await pool.query(query, [id]);
+      if (!rows.length) {
+        return null;
+      }
+      return rows[0];
+    } catch (error) {
+      throw new Error(`Failed to fetch item by ID ${id} - ${error.message}`);
+    }
   }
 
   async createItem(data) {
     const { name } = data;
-    const { rows } = await pool.query(`INSERT INTO ${TABLE_NAME} (name) VALUES ($1) RETURNING *`, [name]);
+    const { rows } = await pool.query(`INSERT INTO ${ITEM_CONSTANTS.TABLE_NAME} (name) VALUES ($1) RETURNING *`, [name]);
 
     return rows[0];
   }
 
   async updateItem(id, data) {
     const { name } = data;
-    const { rows } = await pool.query(`UPDATE ${TABLE_NAME} SET name = $1 WHERE id = $2 RETURNING *`, [name, id]);
+    const { rows } = await pool.query(`UPDATE ${ITEM_CONSTANTS.TABLE_NAME} SET name = $1 WHERE id = $2 RETURNING *`, [name, id]);
 
     return rows.length ? rows[0] : null;
   }
 
   async deleteItem(id) {
-    const { rows } = await pool.query(`DELETE FROM ${TABLE_NAME} WHERE id = $1 RETURNING *`, [id]);
+    const { rows } = await pool.query(`DELETE FROM ${ITEM_CONSTANTS.TABLE_NAME} WHERE id = $1 RETURNING *`, [id]);
 
     return rows.length ? rows[0] : null;
   }
 
   async existsByName(name) {
     const { rows } = await pool.query(
-      `SELECT 1 FROM ${TABLE_NAME}  WHERE LOWER(name) = LOWER($1) LIMIT 1`,
+      `SELECT 1 FROM ${ITEM_CONSTANTS.TABLE_NAME}  WHERE LOWER(name) = LOWER($1) LIMIT 1`,
       [name],
     );
 

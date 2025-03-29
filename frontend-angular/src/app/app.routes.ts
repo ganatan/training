@@ -18,6 +18,18 @@ export const routes: Routes = [
   },
 
   {
+    path: 'persons',
+    loadComponent: () => import('./modules/features/person/item.component')
+      .then(mod => mod.ItemComponent)
+  },
+
+  {
+    path: 'countries',
+    loadComponent: () => import('./modules/features/country/item.component')
+      .then(mod => mod.ItemComponent)
+  },
+
+  {
     path: 'professions',
     loadComponent: () => import('./modules/features/profession/item.component')
       .then(mod => mod.ItemComponent)

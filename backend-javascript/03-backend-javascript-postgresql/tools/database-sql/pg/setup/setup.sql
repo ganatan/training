@@ -57,7 +57,7 @@ CREATE TABLE continent (
   wikipedia_link dom_lib DEFAULT '',
   area dom_integer DEFAULT 0,
   population dom_bigint DEFAULT 0,
-  countries_number dom_integer DEFAULT 0
+  countries_count dom_integer DEFAULT 0
 );
 
 CREATE SEQUENCE country_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
@@ -115,19 +115,19 @@ CREATE TABLE profession (
 
 
 
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('AF', 'Africa', 'Africa', 30370000, 1287920000, 54);
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('AN', 'Antarctica', 'Antarctica', 14000000, 4490, 0);
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('AS', 'Asia', 'Asia', 44579000, 4545133000, 47);
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('OC', 'Australia', 'Australia_(continent)', 8600000, 41261000, 14);
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('EU', 'Europe', 'Europe', 10180000, 742648000, 45);
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('NA', 'North America', 'North_America', 24709000, 587615000, 23);
-INSERT INTO continent (code, name, wikipedia_link, area, population, countries_number) 
+INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('SA', 'South America', 'South_America', 17840000, 428240000, 12);
 
 

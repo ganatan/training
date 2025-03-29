@@ -1,3 +1,5 @@
-export const URL_ITEMS = 'continents';
-export const NAME_ITEM = 'continents';
-export const RESPONSE_ITEM = 'continents';
+export const ITEM_CONSTANTS = {
+  RESOURCE_NAME: 'continents',
+  ROUTE_PATH: 'continents',
+  RESPONSE_KEY: 'continents',
+};

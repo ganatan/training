@@ -6,7 +6,7 @@ export interface Item {
   code: string;
   area: number;
   population: number;
-  countriesNumber: number;
+  countriesCount: number;
   wikipediaLink: string;
   density: number;
 }
@@ -21,7 +21,7 @@ export interface Pagination {
 export interface TotalsGroup {
   area: number;
   population: number;
-  countriesNumber: number;
+  countriesCount: number;
   density: number;
 }
 
@@ -54,13 +54,13 @@ export function getDefaultItemsResponse(): ItemsResponse {
       currentPage: {
         area: 0,
         population: 0,
-        countriesNumber: 0,
+        countriesCount: 0,
         density: 0
       },
       global: {
         area: 0,
         population: 0,
-        countriesNumber: 0,
+        countriesCount: 0,
         density: 0
       }
     },
@@ -78,8 +78,8 @@ export interface Filters {
   areaMax?: number | null;
   populationMin?: number | null;
   populationMax?: number | null;
-  countriesNumberMin?: number | null;
-  countriesNumberMax?: number | null;
+  countriesCountMin?: number | null;
+  countriesCountMax?: number | null;
   densityMin?: number | null;
   densityMax?: number | null;
 }
@@ -98,7 +98,7 @@ export interface ItemsServiceInterface {
 //   code: string;
 //   area: number;
 //   population: number;
-//   countriesNumber: number;
+//   countriesCount: number;
 //   wikipediaLink: string;
 //   density: number;
 // }

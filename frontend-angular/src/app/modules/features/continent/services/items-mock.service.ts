@@ -49,10 +49,10 @@ export class ItemsMockService implements ItemsServiceInterface {
   private computeTotals(items: Item[]) {
     const area = items.reduce((sum, item) => sum + (item.area || 0), 0);
     const population = items.reduce((sum, item) => sum + (item.population || 0), 0);
-    const countriesNumber = items.reduce((sum, item) => sum + (item.countriesNumber || 0), 0);
+    const countriesCount = items.reduce((sum, item) => sum + (item.countriesCount || 0), 0);
     const density = area > 0 ? parseFloat((population / area).toFixed(5)) : 0;
 
-    return { area, population, countriesNumber, density };
+    return { area, population, countriesCount, density };
   }
 }
 

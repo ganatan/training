@@ -3,7 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 
 import { environment } from '../../../../../environments/environment';
-import { URL_ITEMS } from './item.constants';
+import { ITEM_CONSTANTS } from './item.constants';
+
 import {
   Filters,
   ItemsResponse,
@@ -21,7 +22,7 @@ export class ItemsApiService implements ItemsServiceInterface {
 
   getItems(filters: Filters = {}): Observable<ItemsResponse> {
     const params = this.buildQueryParams(filters);
-    const url = `${this.backendUrl}/${URL_ITEMS}${params}`;
+    const url = `${this.backendUrl}/${ITEM_CONSTANTS.RESOURCE_NAME}${params}`;
 
     return this.http.get<ItemsResponse>(url).pipe(
       catchError(this.handleError('getItems', getDefaultItemsResponse()))
@@ -45,8 +46,8 @@ export class ItemsApiService implements ItemsServiceInterface {
     addFilterParam(queryParams, 'areaMax', filters.areaMax);
     addFilterParam(queryParams, 'populationMin', filters.populationMin);
     addFilterParam(queryParams, 'populationMax', filters.populationMax);
-    addFilterParam(queryParams, 'countriesNumberMin', filters.countriesNumberMin);
-    addFilterParam(queryParams, 'countriesNumberMax', filters.countriesNumberMax);
+    addFilterParam(queryParams, 'countriesCountMin', filters.countriesCountMin);
+    addFilterParam(queryParams, 'countriesCountMax', filters.countriesCountMax);
     addFilterParam(queryParams, 'densityMin', filters.densityMin);
     addFilterParam(queryParams, 'densityMax', filters.densityMax);
 
@@ -56,6 +57,7 @@ export class ItemsApiService implements ItemsServiceInterface {
   private handleError<T>(operation: string, result: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
+
       return of(result);
     };
   }

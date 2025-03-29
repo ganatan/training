@@ -5,7 +5,7 @@ export interface Item {
   wikipediaLink: string;
   area: number;
   population: number;
-  countriesNumber: number;
+  countriesCount: number;
   density: number;
 }
 

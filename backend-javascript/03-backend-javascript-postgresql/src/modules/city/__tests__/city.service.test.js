@@ -1,6 +1,6 @@
 import CityService from '../city.service.js';
 import * as schema from '../city.schema.js';
-import { HTTP_STATUS } from '../../../shared/constants/http.js';
+import { HTTP_STATUS } from '../../../shared/constants/http-status.js';
 
 jest.mock('../city.schema.js');
 

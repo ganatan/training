@@ -1,4 +1,4 @@
-import { HTTP_STATUS } from '../../shared/constants/http.js';
+import { HTTP_STATUS } from '../../shared/constants/http-status.js';
 
 const MESSAGES = {
   ITEM_NOT_FOUND: 'City not found',

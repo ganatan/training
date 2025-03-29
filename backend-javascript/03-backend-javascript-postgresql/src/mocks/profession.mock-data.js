@@ -8,5 +8,5 @@ export const ITEMS_MOCK_DATA = [
   { id: 7, name: 'Camera Operator Backend Mock' },
   { id: 8, name: 'Casting Director Backend Mock' },
   { id: 9, name: 'Cinematographer Backend Mock' },
-  { id: 10, name: 'Co-Writer Backend Mock' }
+  { id: 10, name: 'Co-Writer Backend Mock' },
 ];

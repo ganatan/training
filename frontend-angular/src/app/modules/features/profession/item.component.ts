@@ -84,7 +84,7 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    this.itemsService.getItems(filters)
+    this.itemsService.getItems(sortFilters)
       .subscribe(response => {
         const count = response.metadata.pagination.totalItems;
         this.pagination.totalItems = count;
@@ -157,13 +157,9 @@ export class ItemComponent implements OnInit {
     this.setPagination();
   }
 
-  create() {
+  createItem() {
     this.router.navigate([URL_ITEMS, 0]);
   }
-
-  // selectItem(item: Item) {
-  //   this.router.navigate([URL_ITEMS, item.id]);
-  // }
 
   selectItem(item: any) {
     this.router.navigate([URL_ITEMS, item.id]);

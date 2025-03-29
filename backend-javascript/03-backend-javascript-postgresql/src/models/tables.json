@@ -25,5 +25,11 @@
   },
   {
     "name": "media_person"
+  },
+  {
+    "name": "playlist"
+  },
+  {
+    "name": "playlist_element"
   }
 ]

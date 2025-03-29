@@ -3,16 +3,12 @@ import pool from '../../core/database/database.js';
 import {
   addFilterCondition,
   adaptSortField,
-  addRangeCondition,
-  addDensityCondition,
 } from '../../shared/utils/query/query-utils.js';
 
-import {
-  MAX_INTEGER,
-} from '../../shared/constants/data-limits.constants.js';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
 
-const ITEMS_NAME = 'continent';
-const TABLE_NAME = 'continent';
+const ITEMS_NAME = 'country';
+const TABLE_NAME = 'country';
 
 class PgRepository {
 
@@ -20,34 +16,19 @@ class PgRepository {
     try {
       const {
         page = 1,
-        size = 10,
+        size = DEFAULT_ITEMS_PER_PAGE,
         sort = 'name',
         name = '',
-        code = '',
-        areaMin = null,
-        areaMax = null,
-        populationMin = null,
-        populationMax = null,
-        countriesNumberMin = null,
-        countriesNumberMax = null,
-        densityMin = null,
-        densityMax = null,
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
       const perPage = Math.max(1, parseInt(size, 10));
       const offset = (currentPage - 1) * perPage;
 
-      let filterConditions = 'WHERE (1 = 1) AND (id >= 1000)';
+      let filterConditions = 'WHERE (1 = 1) AND (t1.id >= 1000)';
       const filterParams = [];
 
-      filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
-      filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
-      filterConditions = addFilterCondition(filterConditions, filterParams, 'code', code);
-      filterConditions = addRangeCondition(filterConditions, filterParams, 'area', areaMin, areaMax, 0, MAX_INTEGER);
-      filterConditions = addRangeCondition(filterConditions, filterParams, 'population', populationMin, populationMax);
-      filterConditions = addRangeCondition(filterConditions, filterParams, 'countries_number', countriesNumberMin, countriesNumberMax);
-      filterConditions = addDensityCondition(filterConditions, filterParams, densityMin, densityMax);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 't1.name', name);
 
       const sortMapping = {
         creationDate: 'creation_date',
@@ -59,62 +40,24 @@ class PgRepository {
         sortBy = sortBy.substring(1);
       }
 
-      const sqlGlobal = this.buildQueryTotals(filterConditions);
+      const sqlCount = this.buildQueryCount(filterConditions);
       const sqlData = this.buildQueryData(filterConditions, perPage, offset, sortBy, sortOrder);
 
-      const [globalResult, dataResult] = await Promise.all([
-        pool.query(sqlGlobal, filterParams),
+      const [countResult, dataResult] = await Promise.all([
+        pool.query(sqlCount, filterParams),
         pool.query(sqlData, filterParams),
       ]);
-
-      const global = globalResult.rows[0];
-
-      global.density = global.area > 0
-        ? parseFloat((parseFloat(global.population) / parseFloat(global.area)).toFixed(5))
-        : 0;
-
-      const currentPageStats = this.computeCurrentPageTotals(dataResult.rows);
 
       return this.formatResultItems(dataResult.rows, {
         currentPage: currentPage,
         perPage: perPage,
-        totalItems: parseInt(global.count, 10),
-        totals: {
-          global: global,
-          currentPage: currentPageStats,
-        },
+        totalItems: parseInt(countResult.rows[0].count, 10),
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEMS_NAME}:`, error);
 
       return null;
     }
-  }
-
-  computeCurrentPageTotals(rows) {
-    let area = 0;
-    let population = 0;
-    let countriesNumber = 0;
-    let count = 0;
-
-    for (const item of rows) {
-      count += 1;
-      area += parseFloat(item.area || 0);
-      population += parseFloat(item.population || 0);
-      countriesNumber += parseInt(item.countriesNumber || 0);
-    }
-
-    const density = area > 0
-      ? parseFloat((population / area).toFixed(5))
-      : 0;
-
-    return {
-      count,
-      area,
-      population,
-      countriesNumber,
-      density,
-    };
   }
 
   formatResultItems(data, { currentPage, perPage, totalItems, totals }) {
@@ -129,19 +72,14 @@ class PgRepository {
           totalPages: totalPages,
         },
       },
-      totals: totals,
       data: data,
     };
   }
 
-  buildQueryTotals(filterConditions) {
+  buildQueryCount(filterConditions) {
     return `
-      SELECT 
-        COUNT(id) AS count,
-        SUM(area) AS area,
-        SUM(population::BIGINT) AS population,
-        SUM(countries_number) AS "countriesNumber"
-      FROM ${TABLE_NAME}
+      SELECT COUNT(t1.id) AS count
+      FROM ${TABLE_NAME} t1
       ${filterConditions};
     `;
   }
@@ -149,14 +87,15 @@ class PgRepository {
   buildQueryData(filterConditions, limit, offset, sortBy = 'name', sortOrder = 'ASC') {
     return `
       SELECT 
-        id, 
-        name,
-        code,
-        area,
-        population,
-        countries_number AS "countriesNumber",
-        ROUND((population / NULLIF(area, 0))::NUMERIC, 5) as "density"
-      FROM ${TABLE_NAME}
+        t1.id, 
+        t1.name,
+        t1.iso_numeric AS "isoNumeric",
+        t1.iso_alpha2 AS "isoAlpha2",
+        t1.iso_alpha3 AS "isoAlpha3",
+		    t2.name AS "continentName",
+		    t2.code AS "continentCode"
+      FROM country t1
+	    INNER JOIN continent t2 ON  t1.continent_id = t2.id
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}
       LIMIT ${limit}

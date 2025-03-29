@@ -1,5 +1,5 @@
-import MockRepository from './person.repository.mock.js';
-import PgRepository from './person.repository.pg.js';
+import MockRepository from './item.repository.mock.js';
+import PgRepository from './item.repository.pg.js';
 
 class Repository {
   constructor(useDatabase) {
@@ -8,8 +8,8 @@ class Repository {
       : new MockRepository();
   }
 
-  async getItems() {
-    return this.repository.getItems();
+  async getItems(query) {
+    return this.repository.getItems(query);
   }
 
   async getItemById(id) {

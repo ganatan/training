@@ -9,7 +9,7 @@ CREATE TABLE continent (
   wikipedia_link dom_lib DEFAULT '',
   area dom_integer DEFAULT 0,
   population dom_bigint DEFAULT 0,
-  countries_number dom_integer DEFAULT 0
+  countries_count dom_integer DEFAULT 0
 );
 
 CREATE SEQUENCE country_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;

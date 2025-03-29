@@ -1,13 +1,12 @@
-import { HTTP_STATUS } from '../../shared/constants/http.js';
+import { HTTP_STATUS } from '../../shared/constants/http-status.js';
 
 const MESSAGES = {
-  ITEM_NOT_FOUND: 'Person not found',
+  ITEM_NOT_FOUND: 'Profession not found',
 };
 
 class Controller {
   constructor(service) {
     this.service = service;
-
     this.getItems = this.getItems.bind(this);
     this.getItemById = this.getItemById.bind(this);
     this.createItem = this.createItem.bind(this);

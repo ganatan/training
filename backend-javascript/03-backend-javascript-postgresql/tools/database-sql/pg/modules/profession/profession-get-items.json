@@ -12,14 +12,14 @@
       "count": "7",
       "area": "150278000",
       "population": "7632821490",
-      "countriesNumber": "195",
+      "countriesCount": "195",
       "density": 50.79134
     },
     "currentPage": {
       "count": 7,
       "area": 150278000,
       "population": 7632821490,
-      "countriesNumber": 195,
+      "countriesCount": 195,
       "density": 50.79134
     }
   },
@@ -30,7 +30,7 @@
       "code": "SA",
       "area": 17840000,
       "population": "428240000",
-      "countriesNumber": 12,
+      "countriesCount": 12,
       "density": "24.00000"
     },
     {
@@ -39,7 +39,7 @@
       "code": "NA",
       "area": 24709000,
       "population": "587615000",
-      "countriesNumber": 23,
+      "countriesCount": 23,
       "density": "23.00000"
     },
     {
@@ -48,7 +48,7 @@
       "code": "EU",
       "area": 10180000,
       "population": "742648000",
-      "countriesNumber": 45,
+      "countriesCount": 45,
       "density": "72.00000"
     },
     {
@@ -57,7 +57,7 @@
       "code": "OC",
       "area": 8600000,
       "population": "41261000",
-      "countriesNumber": 14,
+      "countriesCount": 14,
       "density": "4.00000"
     },
     {
@@ -66,7 +66,7 @@
       "code": "AS",
       "area": 44579000,
       "population": "4545133000",
-      "countriesNumber": 47,
+      "countriesCount": 47,
       "density": "101.00000"
     },
     {
@@ -75,7 +75,7 @@
       "code": "AN",
       "area": 14000000,
       "population": "4490",
-      "countriesNumber": 0,
+      "countriesCount": 0,
       "density": "0.00000"
     },
     {
@@ -84,7 +84,7 @@
       "code": "AF",
       "area": 30370000,
       "population": "1287920000",
-      "countriesNumber": 54,
+      "countriesCount": 54,
       "density": "42.00000"
     }
   ]

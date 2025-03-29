@@ -11,7 +11,7 @@ import { ITEMS_SERVICE } from './services/items.token';
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
 
-import { URL_ITEMS, NAME_ITEM } from './services/item.constants';
+import { ITEM_CONSTANTS } from './services/item.constants';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 
 import { ItemsProvider } from './services/items.provider';
@@ -20,6 +20,15 @@ interface Filters {
   page: number | null;
   size: number | null;
   name: string | null;
+  code: string | null;
+  areaMin: number | null,
+  areaMax: number | null,
+  populationMin: number | null,
+  populationMax: number | null,
+  countriesCountMin: number | null,
+  countriesCountMax: number | null,
+  densityMin: number | null,
+  densityMax: number | null,
 }
 
 @Component({
@@ -41,7 +50,7 @@ export class ItemComponent implements OnInit {
   private itemsService = inject(ITEMS_SERVICE);
   private paginationService = inject(PaginationService);
 
-  name_default = NAME_ITEM;
+  name_default = ITEM_CONSTANTS.ROUTE_PATH;
   defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
@@ -54,16 +63,17 @@ export class ItemComponent implements OnInit {
     count: 0,
     area: 0,
     population: 0,
-    countriesNumber: 0,
+    countriesCount: 0,
     density: 0,
     countAll: 0,
     areaAll: 0,
     populationAll: 0,
-    countriesNumberAll: 0,
+    countriesCountAll: 0,
     densityAll: 0
   };
 
-  filters = {
+
+  filters: Filters = {
     page: null,
     size: null,
     name: null,
@@ -72,8 +82,8 @@ export class ItemComponent implements OnInit {
     areaMax: null,
     populationMin: null,
     populationMax: null,
-    countriesNumberMin: null,
-    countriesNumberMax: null,
+    countriesCountMin: null,
+    countriesCountMax: null,
     densityMin: null,
     densityMax: null,
   };
@@ -85,6 +95,9 @@ export class ItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router) {
+
+    this.sortColumn = 'name';
+    this.sortDirection = 'asc';
 
     this.selectedPerPage = this.defaultSelectedPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
@@ -101,6 +114,7 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
+    console.log('00000000001:' + JSON.stringify(sortFilters));
     this.itemsService.getItems(sortFilters)
       .subscribe(response => {
         const count = response.metadata.pagination.totalItems;
@@ -117,12 +131,12 @@ export class ItemComponent implements OnInit {
       count: response.totals.currentPage.count,
       area: response.totals.global.area,
       population: response.totals.global.population,
-      countriesNumber: response.totals.global.countriesNumber,
+      countriesCount: response.totals.global.countriesCount,
       density: response.totals.global.density,
       countAll: response.totals.global.count,
       areaAll: response.totals.currentPage.area,
       populationAll: response.totals.currentPage.population,
-      countriesNumberAll: response.totals.currentPage.countriesNumber,
+      countriesCountAll: response.totals.currentPage.countriesCount,
       densityAll: response.totals.currentPage.density,
     };
   }
@@ -139,7 +153,7 @@ export class ItemComponent implements OnInit {
       sanitizedFilters.sort = null;
     }
     const queryParams = { ...this.filters, ...sanitizedFilters };
-    const url = URL_ITEMS;
+    const url = ITEM_CONSTANTS.RESOURCE_NAME;
     this.router.navigate([url], { queryParams });
     this.getItems(this.filters);
   }
@@ -182,16 +196,12 @@ export class ItemComponent implements OnInit {
     this.setPagination();
   }
 
-  create() {
-    this.router.navigate([URL_ITEMS, 0]);
+  createItem() {
+    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, 0]);
   }
 
-  // selectItem(item: Item) {
-  //   this.router.navigate([URL_ITEMS, item.id]);
-  // }
-
-  selectItem(item: any) {
-    this.router.navigate([URL_ITEMS, item.id]);
+  selectItem(item: Item) {
+    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, item.id]);
   }
 
   selectPagination() {

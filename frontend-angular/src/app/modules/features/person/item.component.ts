@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
@@ -14,6 +13,8 @@ import { Item } from './services/item.model';
 import { Filters } from './services/filters.model';
 import { ITEMS_SERVICE } from './services/items.token';
 import { ItemsProvider } from './services/items.provider';
+
+import { Collapse } from 'bootstrap';
 
 @Component({
   selector: 'app-item',
@@ -34,6 +35,7 @@ export class ItemComponent implements OnInit {
   private itemsService = inject(ITEMS_SERVICE);
   private paginationService = inject(PaginationService);
 
+  isFiltersOpen = false;
   name_default = ITEM_CONSTANTS.ROUTE_PATH;
   defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
@@ -117,7 +119,6 @@ export class ItemComponent implements OnInit {
     const queryParams = { ...this.filters, ...sanitizedFilters };
     const url = ITEM_CONSTANTS.RESOURCE_NAME;
     this.router.navigate([url], { queryParams });
-    this.getItems(this.filters);
   }
 
   search() {
@@ -143,9 +144,18 @@ export class ItemComponent implements OnInit {
   getQueryParams() {
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.filters = { ...this.filters, ...queryParams };
-      const { size } = this.filters || {};
+      const { size, sort } = this.filters || {};
       if (size) {
         this.selectedPerPage = size;
+      }
+      if (sort) {
+        if (sort.startsWith('-')) {
+          this.sortColumn = sort.substring(1);
+          this.sortDirection = SortDirection.DESC;
+        } else {
+          this.sortColumn = sort;
+          this.sortDirection = SortDirection.ASC;
+        }
       }
       this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
       this.getItems(this.filters);
@@ -209,5 +219,17 @@ export class ItemComponent implements OnInit {
     }
     this.search();
   }
+
+  toggleFilters() {
+    this.isFiltersOpen = !this.isFiltersOpen;
+    const collapseElement = document.getElementById('collapseFilters');
+    if (collapseElement) {
+      const collapseInstance = new Collapse(collapseElement, {
+        toggle: false
+      });
+      this.isFiltersOpen ? collapseInstance.show() : collapseInstance.hide();
+    }
+  }
+
 
 }

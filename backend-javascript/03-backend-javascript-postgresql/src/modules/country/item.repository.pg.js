@@ -5,7 +5,11 @@ import {
   adaptSortField,
 } from '../../shared/utils/query/query-utils.js';
 
-import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
+import {
+  DEFAULT_ITEMS_PER_PAGE,
+  DEFAULT_MIN_ENTITY_ID,
+  MAX_ITEMS_PER_PAGE,
+} from '../../shared/constants/pagination.constants.js';
 import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
 
 const ITEMS_NAME = 'country';
@@ -23,10 +27,11 @@ class PgRepository {
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
-      const perPage = Math.max(1, parseInt(size, 10));
+      const requestedSize = parseInt(size, 10);
+      const perPage = Math.min(Math.max(1, requestedSize), MAX_ITEMS_PER_PAGE);
       const offset = (currentPage - 1) * perPage;
 
-      let filterConditions = 'WHERE (1 = 1) AND (t1.id >= 1000)';
+      let filterConditions = `WHERE (1 = 1) AND (id >= ${DEFAULT_MIN_ENTITY_ID})`;
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 't1.name', name);

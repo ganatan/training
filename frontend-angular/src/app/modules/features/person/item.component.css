@@ -21,3 +21,9 @@
   color: #4285f4 !important;
   background-color: transparent !important;
 }
+
+.nga-btn-search-black {
+  border: 2px solid #000 !important;
+  color: #000 !important;
+  background-color: transparent !important;
+}

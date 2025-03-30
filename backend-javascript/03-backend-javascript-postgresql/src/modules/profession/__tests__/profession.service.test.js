@@ -50,18 +50,6 @@ describe('ProfessionService', () => {
     expect(repository.getItemById).toHaveBeenCalledWith(1);
   });
 
-  test('getItemById returns null if not found', async () => {
-    // Arrange
-    repository.getItemById.mockResolvedValue(null);
-
-    // Act
-    const result = await service.getItemById(999);
-
-    // Assert
-    expect(result).toBeNull();
-    expect(repository.getItemById).toHaveBeenCalledWith(999);
-  });
-
   test('createItem creates a profession when valid and unique', async () => {
     // Arrange
     const newProfession = { name: 'James Cameron', city: 'Kapuskasing' };

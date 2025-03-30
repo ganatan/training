@@ -8,6 +8,7 @@ import {
 import {
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_MIN_ENTITY_ID,
+  MAX_ITEMS_PER_PAGE,
 } from '../../shared/constants/pagination.constants.js';
 import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
 
@@ -25,7 +26,8 @@ class PgRepository {
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
-      const perPage = Math.max(1, parseInt(size, 10));
+      const requestedSize = parseInt(size, 10);
+      const perPage = Math.min(Math.max(1, requestedSize), MAX_ITEMS_PER_PAGE);
       const offset = (currentPage - 1) * perPage;
 
       let filterConditions = `WHERE (1 = 1) AND (id >= ${DEFAULT_MIN_ENTITY_ID})`;

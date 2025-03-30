@@ -7,8 +7,10 @@ import {
 import {
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_MIN_ENTITY_ID,
+  MAX_ITEMS_PER_PAGE,
 } from '../../shared/constants/pagination.constants.js';
 import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
+import { DATE_FORMAT_FR } from '../../shared/constants/date-format.constants.js';
 
 import { ITEM_CONSTANTS } from './item.constant.js';
 
@@ -24,7 +26,8 @@ class PgRepository {
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
-      const perPage = Math.max(1, parseInt(size, 10));
+      const requestedSize = parseInt(size, 10);
+      const perPage = Math.min(Math.max(1, requestedSize), MAX_ITEMS_PER_PAGE);
       const offset = (currentPage - 1) * perPage;
 
       let filterConditions = `WHERE (1 = 1) AND (id >= ${DEFAULT_MIN_ENTITY_ID})`;
@@ -125,7 +128,9 @@ class PgRepository {
     return `
       SELECT 
         id, 
-        name
+        name,
+        to_char(birth_date, '${DATE_FORMAT_FR}') as "birthDate",
+        to_char(death_date, '${DATE_FORMAT_FR}') as "deathDate"
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}

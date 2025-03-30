@@ -7,10 +7,12 @@
         <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false"
-          aria-controls="collapseFilters"
-          class="btn nga-btn-search nga-btn-search-primary btn-sm d-flex align-items-center me-3">
-          Filters <i class="fa-solid fa-arrow-up-wide-short ms-1"></i>
+        <button type="button" class="btn nga-btn-search btn-sm d-flex align-items-center me-3"
+          [ngClass]="{'nga-btn-search-black': isFiltersOpen,'nga-btn-search-primary': !isFiltersOpen }"
+          (click)="toggleFilters()" [attr.aria-expanded]="isFiltersOpen" aria-controls="collapseFilters">
+          Filters
+          <i class="fa-solid ms-1" [ngClass]="isFiltersOpen ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short'">
+          </i>
         </button>
         <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm" (click)="createItem()">
           <i class="fa-solid fa-plus"></i>
@@ -97,8 +99,8 @@
                 <label for="countriesCountMin" class="form-label">Countries<i class="mx-2 far fa-flag"></i></label>
                 <input [(ngModel)]="filters.countriesCountMin" type="number" class="form-control mb-2"
                   id="countriesCountMin" min="0" oninput="validity.valid||(value='');">
-                <input [(ngModel)]="filters.countriesCountMax" type="number" class="form-control"
-                  id="countriesCountMax" min="0" oninput="validity.valid||(value='');">
+                <input [(ngModel)]="filters.countriesCountMax" type="number" class="form-control" id="countriesCountMax"
+                  min="0" oninput="validity.valid||(value='');">
               </div>
               <div class="col-md-2">
                 <label for="densityMin" class="form-label">Density</label>
@@ -201,8 +203,8 @@
               'text-primary': sortColumn === 'countriesCount' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'countriesCount' || sortDirection === null
             }">
-              <span role="button" tabindex="0" (click)="setSort('countriesCount')" (keydown.enter)="setSort('countriesCount')"
-                style="cursor: pointer">
+              <span role="button" tabindex="0" (click)="setSort('countriesCount')"
+                (keydown.enter)="setSort('countriesCount')" style="cursor: pointer">
                 <i class="fa-solid me-2" [ngClass]="{
                   'fa-sort': sortColumn !== 'countriesCount' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'countriesCount' && sortDirection === 'asc',

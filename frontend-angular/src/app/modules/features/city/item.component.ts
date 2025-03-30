@@ -111,7 +111,6 @@ export class ItemComponent implements OnInit {
     const queryParams = { ...this.filters, ...sanitizedFilters };
     const url = URL_ITEMS;
     this.router.navigate([url], { queryParams });
-    this.getItems(this.filters);
   }
 
   search() {

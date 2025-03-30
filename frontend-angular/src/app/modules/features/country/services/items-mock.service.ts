@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Filters, ItemsResponse, ItemsServiceInterface } from './item.model';
+import { ItemsResponse, ItemsServiceInterface } from './item.model';
+import { Filters } from './filters.model';
 import { ITEMS_MOCK_DATA } from './items.mock-data';
 
 @Injectable()

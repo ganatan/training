@@ -7,12 +7,14 @@
         <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false"
-          aria-controls="collapseFilters"
-          class="btn nga-btn-search nga-btn-search-primary btn-sm d-flex align-items-center me-3">
-          Filters <i class="fa-solid fa-arrow-up-wide-short ms-1"></i>
+        <button type="button" class="btn nga-btn-search btn-sm d-flex align-items-center me-3"
+          [ngClass]="{'nga-btn-search-black': isFiltersOpen,'nga-btn-search-primary': !isFiltersOpen }"
+          (click)="toggleFilters()" [attr.aria-expanded]="isFiltersOpen" aria-controls="collapseFilters">
+          Filters
+          <i class="fa-solid ms-1" [ngClass]="isFiltersOpen ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short'">
+          </i>
         </button>
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-3" (click)="create()">
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-3" (click)="createItem()">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
@@ -163,12 +165,17 @@
             </td>
             <td class="d-none d-md-table-cell text-center">{{ item.id }}</td>
             <td style="cursor: pointer" class="text-primary text-center">{{ item.name }}</td>
-            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.isoNumeric }}</td>
-            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.isoAlpha2 }}</td>
-            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.isoAlpha3 }}</td>
-            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.continentName }}</td>
-            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.continentCode }}</td>
-            
+            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.isoNumeric }}
+            </td>
+            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.isoAlpha2 }}
+            </td>
+            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.isoAlpha3 }}
+            </td>
+            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.continentName }}
+            </td>
+            <td style="cursor: pointer" class="d-none d-md-table-cell text-primary text-center">{{ item.continentCode }}
+            </td>
+
           </tr>
           <tr>
             <td [attr.colspan]="9" class="text-center">

@@ -31,7 +31,7 @@ class PgRepository {
       const perPage = Math.min(Math.max(1, requestedSize), MAX_ITEMS_PER_PAGE);
       const offset = (currentPage - 1) * perPage;
 
-      let filterConditions = `WHERE (1 = 1) AND (id >= ${DEFAULT_MIN_ENTITY_ID})`;
+      let filterConditions = `WHERE (1 = 1) AND (t1.id >= ${DEFAULT_MIN_ENTITY_ID})`;
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 't1.name', name);

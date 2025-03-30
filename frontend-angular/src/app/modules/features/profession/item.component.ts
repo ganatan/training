@@ -81,7 +81,6 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    console.log('00000000001:getItems');
     this.itemsService.getItems(sortFilters)
       .subscribe(response => {
         const count = response.metadata.pagination.totalItems;
@@ -197,7 +196,6 @@ export class ItemComponent implements OnInit {
   }
 
   setSort(column: string, field?: string): void {
-    console.log('00000000001:setSort');
     if (this.sortColumn === column) {
       if (this.sortDirection === SortDirection.ASC) {
         this.sortDirection = SortDirection.DESC;

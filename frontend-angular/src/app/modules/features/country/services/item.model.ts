@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { Filters } from './filters.model';
 
 export interface Item {
   id: number;
@@ -38,13 +39,6 @@ export function getDefaultItemsResponse(): ItemsResponse {
     },
     data: []
   };
-}
-
-export interface Filters {
-  page?: number | null;
-  size?: number | null;
-  sort?: string | null;
-  name?: string | null;
 }
 
 export interface ItemsServiceInterface {

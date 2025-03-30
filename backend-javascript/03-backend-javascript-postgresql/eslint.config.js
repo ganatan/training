@@ -41,7 +41,7 @@ export default [
       'handle-callback-err': ['error', '^.*(e|E)rr'],
       'no-new-require': 'error',
       'no-path-concat': 'error',
-      'no-process-exit': 'error',
+      'no-process-exit': 'off',
       'no-eval': 'error',
       'no-implied-eval': 'error',
       'strict': 'error',

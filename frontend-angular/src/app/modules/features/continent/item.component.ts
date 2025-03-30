@@ -83,7 +83,6 @@ export class ItemComponent implements OnInit {
 
     this.sortColumn = 'name';
     this.sortDirection = SortDirection.ASC;
-
     this.selectedPerPage = this.defaultSelectedPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
   }
@@ -99,7 +98,6 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    console.log('00000000001:' + JSON.stringify(sortFilters));
     this.itemsService.getItems(sortFilters)
       .subscribe(response => {
         const count = response.metadata.pagination.totalItems;
@@ -248,7 +246,11 @@ export class ItemComponent implements OnInit {
       const collapseInstance = new Collapse(collapseElement, {
         toggle: false
       });
-      this.isFiltersOpen ? collapseInstance.show() : collapseInstance.hide();
+      if (this.isFiltersOpen) {
+        collapseInstance.show();
+      } else {
+        collapseInstance.hide();
+      }
     }
   }
 

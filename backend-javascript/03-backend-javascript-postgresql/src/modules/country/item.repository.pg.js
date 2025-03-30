@@ -24,6 +24,11 @@ class PgRepository {
         size = DEFAULT_ITEMS_PER_PAGE,
         sort = 'name',
         name = '',
+        isoNumeric = '',
+        isoAlpha2 = '',
+        isoAlpha3 = '',
+        continentName = '',
+        continentCode = '',
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
@@ -35,10 +40,18 @@ class PgRepository {
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 't1.name', name);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 't1.iso_numeric', isoNumeric);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 't1.iso_alpha2', isoAlpha2);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 't1.iso_alpha3', isoAlpha3);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 't2.name', continentName);
+      filterConditions = addFilterCondition(filterConditions, filterParams, 't2.code', continentCode);
 
       const sortMapping = {
-        creationDate: 'creation_date',
-        releaseDate: 'release_date',
+        isoNumeric: 't1.iso_numeric',
+        isoAlpha2: 't1.iso_alpha2',
+        isoAlpha3: 't1.iso_alpha3',
+        continentName: 't2.name',
+        continentCode: 't2.code',
       };
       let sortBy = adaptSortField(sort, sortMapping);
       const sortOrder = sort.startsWith('-') ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;

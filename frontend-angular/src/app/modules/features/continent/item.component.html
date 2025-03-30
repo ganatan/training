@@ -238,14 +238,12 @@
             <td class="d-none d-md-table-cell text-center">{{ getGlobalPosition(i) }}</td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null
-            }">
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null }">
               {{ item.id }}
             </td>
             <td class="text-center" [ngClass]="{
               'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null
-            }">
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }">
               {{ item.name }}
             </td>
             <td class="text-center" [ngClass]="{

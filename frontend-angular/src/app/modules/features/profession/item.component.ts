@@ -221,7 +221,11 @@ export class ItemComponent implements OnInit {
       const collapseInstance = new Collapse(collapseElement, {
         toggle: false
       });
-      this.isFiltersOpen ? collapseInstance.show() : collapseInstance.hide();
+      if (this.isFiltersOpen) {
+        collapseInstance.show();
+      } else {
+        collapseInstance.hide();
+      }
     }
   }
 

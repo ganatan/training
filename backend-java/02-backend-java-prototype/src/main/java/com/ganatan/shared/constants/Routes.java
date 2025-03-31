@@ -9,7 +9,7 @@ public class Routes {
         "persons", new RouteDefinition("/persons", List.of("GET", "POST", "PUT", "DELETE")),
         "cities", new RouteDefinition("/cities", List.of("GET", "POST", "PUT", "DELETE")),
         "professions", new RouteDefinition("/professions", List.of("GET", "POST", "PUT", "DELETE")),
-        "works", new RouteDefinition("/works", List.of("GET", "POST", "PUT", "DELETE"))
+        "medias", new RouteDefinition("/medias", List.of("GET", "POST", "PUT", "DELETE"))
     );
 
     public record RouteDefinition(String path, List<String> methods) {}

@@ -1,3 +1,5 @@
-export const URL_ITEMS = 'cities';
-export const NAME_ITEM = 'cities';
-export const RESPONSE_ITEM = 'cities';
+export const ITEM_CONSTANTS = {
+  RESOURCE_NAME: 'cities',
+  ROUTE_PATH: 'cities',
+  RESPONSE_KEY: 'cities',
+};

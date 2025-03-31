@@ -90,7 +90,6 @@ export class ItemComponent implements OnInit {
       sort,
     };
     this.loading = true;
-    console.log('00000000001:' + JSON.stringify(sortFilters));
     this.itemsService.getItems(sortFilters)
       .subscribe(response => {
         const count = response.metadata.pagination.totalItems;

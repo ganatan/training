@@ -6,7 +6,7 @@ export const environment = {
     ...applicationBase,
     angular: `${applicationBase.angular} DEV`,
   },
-  useDatabase: false,
+  useDatabase: true,
   backend: 'http://localhost:3000',
   urlNews: './assets/params/json/mock/trailers.json',
   urlMovies: './assets/params/json/mock/movies.json',

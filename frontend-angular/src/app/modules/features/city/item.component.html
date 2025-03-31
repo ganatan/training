@@ -1,22 +1,24 @@
 <div class="container">
   <div class="row pt-5">
     <div class="col-12 d-flex flex-wrap align-items-center justify-content-between">
-      <div class="d-flex align-items-center me-3">
-        <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name"
-          placeholder="" (keydown)="onKeydown($event)">
+      <div class="d-flex align-items-center mb-2 mb-sm-0">
+        <input [(ngModel)]="filters.name" type="text" class="form-control form-control-sm me-2" id="name" placeholder=""
+          (keydown)="onKeydown($event)">
         <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-1" (click)="search()">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false"
-          aria-controls="collapseFilters"
-          class="btn nga-btn-search nga-btn-search-primary btn-sm d-flex align-items-center me-3">
-          Filters <i class="fa-solid fa-arrow-up-wide-short ms-1"></i>
+        <button type="button" class="btn nga-btn-search btn-sm d-flex align-items-center me-3"
+          [ngClass]="{'nga-btn-search-black': isFiltersOpen,'nga-btn-search-primary': !isFiltersOpen }"
+          (click)="toggleFilters()" [attr.aria-expanded]="isFiltersOpen" aria-controls="collapseFilters">
+          Filters
+          <i class="fa-solid ms-1" [ngClass]="isFiltersOpen ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short'">
+          </i>
         </button>
-        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-3" (click)="create()">
+        <button type="button" class="btn nga-btn-search nga-btn-search-primary btn-sm me-3" (click)="createItem()">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
-      <nav class="d-flex align-items-center me-3" aria-label="Page navigation" *ngIf="pagination.useful">
+      <nav class="d-flex align-items-center" aria-label="Page navigation" *ngIf="pagination.useful">
         <ul class="pagination pagination-sm mb-0">
           <li class="page-item" [ngClass]="{disabled: pagination.currentPage === 1}">
             <a class="page-link cursor-pointer" (click)="changePage(1)" (keydown)="changePage(1)" tabindex="0">
@@ -48,14 +50,13 @@
           </li>
         </ul>
       </nav>
-
       <div class="d-none d-md-flex align-items-center">
         <b><span style="color:gray;">{{ totals.count }} sur {{ totals.countAll }}</span></b>
       </div>
       <div class="d-flex align-items-center">
-        <select class="form-select form-select-sm" aria-label="Items per page"
-          (ngModelChange)="changePerPage($event)" [(ngModel)]="selectedPerPage">
-          <option *ngFor="let count of [5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500, 1000, 2000]" [value]="count">{{
+        <select class="form-select form-select-sm" aria-label="Items per page" (ngModelChange)="changePerPage($event)"
+          [(ngModel)]="selectedPerPage">
+          <option *ngFor="let count of [1, 2, 3, 4, 5, 10, 20, 30, 40, 50]" [value]="count">{{
             count }}
           </option>
         </select>
@@ -91,47 +92,151 @@
               Page Rank
             </th>
             <th class="d-none d-md-table-cell text-secondary font-weight-bold text-center">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
-                'fa-sort': sortColumn !== 'id' || sortDirection === null,
-                'fa-sort-up': sortColumn === 'id' && sortDirection === 'asc',
-                'fa-sort-down': sortColumn === 'id' && sortDirection === 'desc'
-              }" (click)="setSort('id')" (keydown.enter)="setSort('id')" tabindex="0">
-              </i>Id
+              Total Rank
             </th>
-            <th class="text-primary font-weight-bold text-center">
-              <i style="cursor: pointer" class="text-body-tertiary fa-solid me-2" [ngClass]="{
+            <th class="d-none d-md-table-cell font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null
+            }">
+              <span role="button" tabindex="0" (click)="setSort('id')" (keydown.enter)="setSort('id')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'id' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'id' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'id' && sortDirection === 'desc'
+                }"></i>
+                Id
+              </span>
+            </th>
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('name')" (keydown.enter)="setSort('name')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
                   'fa-sort': sortColumn !== 'name' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'name' && sortDirection === 'asc',
-                  'fa-sort-down': sortColumn === 'name' && sortDirection === 'desc'
-                }" (click)="setSort('name')" (keydown.enter)="setSort('name')" tabindex="0">
-              </i>Name
+                  'fa-sort-down': sortColumn === 'name' && sortDirection === 'desc' }"></i>
+                Name
+              </span>
+            </th>
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'countryName' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'countryName' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('countryName')" (keydown.enter)="setSort('countryName')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'countryName' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'countryName' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'countryName' && sortDirection === 'desc' }"></i>
+                  countryName
+              </span>
+            </th>
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'countryIsoNumeric' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'countryIsoNumeric' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('countryIsoNumeric')" (keydown.enter)="setSort('countryIsoNumeric')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'countryIsoNumeric' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'countryIsoNumeric' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'countryIsoNumeric' && sortDirection === 'desc' }"></i>
+                  countryIsoNumeric
+              </span>
+            </th>
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'isoAlpha3' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'continentName' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('continentName')" (keydown.enter)="setSort('continentName')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'continentName' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'continentName' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'continentName' && sortDirection === 'desc' }"></i>
+                  Continent Name
+              </span>
+            </th>
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'isoAlpha3' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'continentCode' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('continentCode')" (keydown.enter)="setSort('continentCode')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'continentCode' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'continentCode' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'continentCode' && sortDirection === 'desc' }"></i>
+                  Continent Code
+              </span>
             </th>
           </tr>
         </thead>
         <tbody *ngIf="items && items.length > 0">
           <tr>
-            <td [attr.colspan]="14" class="text-center">
+            <td [attr.colspan]="9" class="text-center">
               <strong></strong>
             </td>
           </tr>
           <tr *ngFor="let item of items; let i = index" (click)="selectItem(item)">
             <td class="d-none d-md-table-cell text-center">{{ i + 1 }}</td>
-            <td class="d-none d-md-table-cell text-center">{{ item.id }}</td>
-            <td class="d-none d-md-table-cell text-center">{{ item.name }}</td>
+            <td class="d-none d-md-table-cell text-center">
+              {{ (pagination.currentPage - 1) * pagination.perPage + i + 1 }}
+            </td>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null }">
+              {{ item.id }}
+            </td>
+            <td class="text-center" [ngClass]="{
+              'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }">
+              {{ item.name }}
+            </td>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'countryName' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'countryName' || sortDirection === null }">
+              {{ item.countryName }}
+            </td>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'countryIsoNumeric' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'countryIsoNumeric' || sortDirection === null }">
+              {{ item.countryIsoNumeric }}
+            </td>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'continentName' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'continentName' || sortDirection === null }">
+              {{ item.continentName }}
+            </td>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'continentCode' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'continentCode' || sortDirection === null }">
+              {{ item.continentCode }}
+            </td>
           </tr>
           <tr>
-            <td [attr.colspan]="14" class="text-center">
+            <td [attr.colspan]="9" class="text-center">
               <strong></strong>
             </td>
           </tr>
         </tbody>
         <tbody *ngIf="!items || items.length === 0">
           <tr>
-            <td [attr.colspan]="14" class="text-center">
+            <td [attr.colspan]="9" class="text-center">
               <strong>No {{ name_default }} available</strong>
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="1" class="d-none d-md-table-cell text-center"><strong>Page Totals : {{ totals.count }}</strong>
+            </td>
+            <td colspan="8" class="d-none d-md-table-cell text-end text-secondary"></td>
+          </tr>
+          <tr>
+            <td colspan="1" class="d-none d-md-table-cell text-center"><strong>Search Totals : {{ totals.countAll
+                }}</strong></td>
+            <td colspan="8" class="text-end d-none d-lg-table-cell d-xl-table-cell text-secondary"></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>

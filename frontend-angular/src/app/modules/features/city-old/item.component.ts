@@ -1,22 +1,23 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Inject, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
+import { ItemsService } from './services/items.service';
+import { Item } from './services/item';
+
 import { PaginationService } from '../../../shared/services/pagination/pagination.service';
 import { Pagination } from '../../../shared/services/pagination/pagination';
-import { SortDirection } from '../../../shared/constants/sort.constants';
 
-import { ITEM_CONSTANTS } from './services/item.constants';
-import { Item } from './services/item.model';
-import { Filters } from './services/filters.model';
-import { ITEMS_SERVICE } from './services/items.token';
-import { ItemsProvider } from './services/items.provider';
+import { URL_ITEMS, NAME_ITEM, RESPONSE_ITEM } from './services/item.constants';
+import { DEFAULT_ITEMS_PER_PAGE } from '../../../shared/constants/pagination.constants';
 
-declare const bootstrap: any;
+interface Filters {
+  page: number | null;
+  size: number | null;
+  name: string | null;
+}
 
 @Component({
   selector: 'app-item',
@@ -27,22 +28,17 @@ declare const bootstrap: any;
   ],
   providers: [
     PaginationService,
-    ItemsProvider,
   ],
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
 
-  private itemsService = inject(ITEMS_SERVICE);
-  private paginationService = inject(PaginationService);
-
-  isFiltersOpen = false;
-  name_default = ITEM_CONSTANTS.ROUTE_PATH;
+  name_default = NAME_ITEM;
   defaultSelectedPerPage = DEFAULT_ITEMS_PER_PAGE;
   sortColumn: string | null = null;
   sortField: string | null = null;
-  sortDirection: SortDirection.ASC | SortDirection.DESC | null = null;
+  sortDirection: 'asc' | 'desc' | null = null;
 
   items: Item[] | undefined;
   loading = false;
@@ -63,13 +59,11 @@ export class ItemComponent implements OnInit {
   pagination: Pagination;
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private itemsService: ItemsService,
+    private paginationService: PaginationService) {
 
-    this.sortColumn = 'name';
-    this.sortDirection = SortDirection.ASC;
     this.selectedPerPage = this.defaultSelectedPerPage;
     this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
   }
@@ -79,7 +73,7 @@ export class ItemComponent implements OnInit {
   }
 
   getItems(filters: any): void {
-    const sort = this.sortColumn ? (this.sortDirection === SortDirection.ASC ? this.sortColumn : `-${this.sortColumn}`) : null;
+    const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
@@ -87,9 +81,9 @@ export class ItemComponent implements OnInit {
     this.loading = true;
     this.itemsService.getItems(sortFilters)
       .subscribe(response => {
-        const count = response.metadata.pagination.totalItems;
+        const count = response.totals.globalTotals.count;
         this.pagination.totalItems = count;
-        this.items = response.data;
+        this.items = response[RESPONSE_ITEM];
         this.setTotals(response);
         this.loading = false;
         this.updatePagination();
@@ -98,8 +92,8 @@ export class ItemComponent implements OnInit {
 
   setTotals(response: any): void {
     this.totals = {
-      count: response.metadata.pagination.perPage,
-      countAll: response.metadata.pagination.totalItems,
+      count: response.totals.currentPageTotals.count,
+      countAll: response.totals.globalTotals.count,
     };
   }
 
@@ -115,7 +109,7 @@ export class ItemComponent implements OnInit {
       sanitizedFilters.sort = null;
     }
     const queryParams = { ...this.filters, ...sanitizedFilters };
-    const url = ITEM_CONSTANTS.RESOURCE_NAME;
+    const url = URL_ITEMS;
     this.router.navigate([url], { queryParams });
   }
 
@@ -125,7 +119,7 @@ export class ItemComponent implements OnInit {
       page: this.pagination.currentPage,
       size: this.pagination.perPage
     };
-    const sort = this.sortColumn ? (this.sortDirection === SortDirection.ASC ? this.sortColumn : `-${this.sortColumn}`) : null;
+    const sort = this.sortColumn ? (this.sortDirection === 'asc' ? this.sortColumn : `-${this.sortColumn}`) : null;
     const sortFilters = {
       ...filters,
       sort,
@@ -142,18 +136,9 @@ export class ItemComponent implements OnInit {
   getQueryParams() {
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.filters = { ...this.filters, ...queryParams };
-      const { size, sort } = this.filters || {};
+      const { size } = this.filters || {};
       if (size) {
         this.selectedPerPage = size;
-      }
-      if (sort) {
-        if (sort.startsWith('-')) {
-          this.sortColumn = sort.substring(1);
-          this.sortDirection = SortDirection.DESC;
-        } else {
-          this.sortColumn = sort;
-          this.sortDirection = SortDirection.ASC;
-        }
       }
       this.pagination = this.paginationService.initializePagination(this.selectedPerPage);
       this.getItems(this.filters);
@@ -166,12 +151,12 @@ export class ItemComponent implements OnInit {
     this.setPagination();
   }
 
-  createItem() {
-    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, 0]);
+  create() {
+    this.router.navigate([URL_ITEMS, 0]);
   }
 
-  selectItem(item: any) {
-    this.router.navigate([ITEM_CONSTANTS.RESOURCE_NAME, item.id]);
+  selectItem(item: Item) {
+    this.router.navigate([URL_ITEMS, item.id]);
   }
 
   selectPagination() {
@@ -201,38 +186,21 @@ export class ItemComponent implements OnInit {
 
   setSort(column: string, field?: string): void {
     if (this.sortColumn === column) {
-      if (this.sortDirection === SortDirection.ASC) {
-        this.sortDirection = SortDirection.DESC;
-      } else if (this.sortDirection === SortDirection.DESC) {
+      if (this.sortDirection === 'asc') {
+        this.sortDirection = 'desc';
+      } else if (this.sortDirection === 'desc') {
         this.sortDirection = null;
         this.sortColumn = null;
         this.sortField = null;
       } else {
-        this.sortDirection = SortDirection.ASC;
+        this.sortDirection = 'asc';
       }
     } else {
       this.sortColumn = column;
       this.sortField = field ? field : column;
-      this.sortDirection = SortDirection.ASC;
+      this.sortDirection = 'asc';
     }
     this.search();
-  }
-
-  toggleFilters() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isFiltersOpen = !this.isFiltersOpen;
-      const collapseElement = this.document.getElementById('collapseFilters');
-      if (collapseElement) {
-        const collapseInstance = new bootstrap.Collapse(collapseElement, {
-          toggle: false
-        });
-        if (this.isFiltersOpen) {
-          collapseInstance.show();
-        } else {
-          collapseInstance.hide();
-        }
-      }
-    }
   }
 
 }

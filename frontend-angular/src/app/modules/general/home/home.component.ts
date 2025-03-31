@@ -22,31 +22,31 @@ export class HomeComponent {
     {
       icon: "fa-solid fa-user-tie",
       name: "professions",
-      description: "professions",
+      description: "Professions List",
       link: '/professions'
-    },
-    {
-      icon: "fa-solid fa-globe",
-      name: "continents",
-      description: "continents",
-      link: '/continents'
     },
     {
       icon: "fa-solid fa-user",
       name: "persons",
-      description: "persons",
+      description: "Persons List",
       link: '/persons'
+    },
+    {
+      icon: "fa-solid fa-globe",
+      name: "continents",
+      description: "Continents List",
+      link: '/continents'
     },
     {
       icon: "fa-solid fa-flag",
       name: "countries",
-      description: "countries",
+      description: "Countries List",
       link: '/countries'
     },
     {
       icon: "fa-solid fa-city",
       name: "cities",
-      description: "cities",
+      description: "Cities List",
       link: '/cities'
     },
   ]

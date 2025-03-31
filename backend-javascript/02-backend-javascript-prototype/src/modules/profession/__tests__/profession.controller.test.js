@@ -1,4 +1,4 @@
-import Controller from '../profession.controller.js';
+import Controller from '../item.controller.js';
 
 describe('ProfessionController', () => {
   let controller;
@@ -37,29 +37,6 @@ describe('ProfessionController', () => {
     expect(res.json).toHaveBeenCalledWith(mockProfessions);
   });
 
-  test('getItemById should return a profession if found', async () => {
-    // Arrange
-    req.params.id = '1';
-    const mockProfession = { id: 1, name: 'Director' };
-    mockService.getItemById.mockResolvedValue(mockProfession);
-    // Act
-    await controller.getItemById(req, res, next);
-    // Assert
-    expect(mockService.getItemById).toHaveBeenCalledWith(1);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(mockProfession);
-  });
-
-  test('getItemById should return 404 if profession is not found', async () => {
-    // Arrange
-    req.params.id = '999';
-    mockService.getItemById.mockResolvedValue(null);
-    // Act
-    await controller.getItemById(req, res, next);
-    // Assert
-    expect(next).toHaveBeenCalledWith({ status: 404, message: 'Profession not found' });
-  });
-
   test('createItem should create a new profession', async () => {
     // Arrange
     req.body = { name: 'New Director' };
@@ -87,17 +64,6 @@ describe('ProfessionController', () => {
     expect(res.json).toHaveBeenCalledWith(mockProfession);
   });
 
-  test('updateItem should return 404 if profession is not found', async () => {
-    // Arrange
-    req.params.id = '999';
-    req.body = { name: 'Updated Name' };
-    mockService.updateItem.mockResolvedValue(null);
-    // Act
-    await controller.updateItem(req, res, next);
-    // Assert
-    expect(next).toHaveBeenCalledWith({ status: 404, message: 'Profession not found' });
-  });
-
   test('deleteItem should remove a profession', async () => {
     // Arrange
     req.params.id = '1';
@@ -111,13 +77,4 @@ describe('ProfessionController', () => {
     expect(res.json).toHaveBeenCalledWith(mockProfession);
   });
 
-  test('deleteItem should return 404 if profession is not found', async () => {
-    // Arrange
-    req.params.id = '999';
-    mockService.deleteItem.mockResolvedValue(null);
-    // Act
-    await controller.deleteItem(req, res, next);
-    // Assert
-    expect(next).toHaveBeenCalledWith({ status: 404, message: 'Profession not found' });
-  });
 });

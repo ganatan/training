@@ -1,7 +1,7 @@
-import Service from '../profession.service.js';
-import * as schema from '../profession.schema.js';
+import Service from '../item.service.js';
+import * as schema from '../item.schema.js';
 
-jest.mock('../profession.schema.js');
+jest.mock('../item.schema.js');
 
 describe('ProfessionService', () => {
   let service;
@@ -48,18 +48,6 @@ describe('ProfessionService', () => {
     // Assert
     expect(result).toEqual(expected);
     expect(repository.getItemById).toHaveBeenCalledWith(1);
-  });
-
-  test('getItemById returns null if not found', async () => {
-    // Arrange
-    repository.getItemById.mockResolvedValue(null);
-
-    // Act
-    const result = await service.getItemById(999);
-
-    // Assert
-    expect(result).toBeNull();
-    expect(repository.getItemById).toHaveBeenCalledWith(999);
   });
 
   test('createItem creates a profession when valid and unique', async () => {

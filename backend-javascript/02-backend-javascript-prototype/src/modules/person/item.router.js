@@ -2,9 +2,9 @@ import express from 'express';
 
 import responseHandler from '../../infrastructure/logger/response-handler.js';
 
-import Repository from './city.repository.js';
-import Service from './city.service.js';
-import Controller from './city.controller.js';
+import Repository from './item.repository.js';
+import Service from './item.service.js';
+import Controller from './item.controller.js';
 
 import config from '../../core/config/config.js';
 

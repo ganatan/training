@@ -1,4 +1,4 @@
-import MockRepository from './profession.repository.mock.js';
+import MockRepository from './item.repository.mock.js';
 
 class Repository {
   constructor(useDatabase) {
@@ -7,12 +7,8 @@ class Repository {
       : new MockRepository();
   }
 
-  async getItems() {
-    return this.repository.getItems();
-  }
-
-  async getItemsCount() {
-    return this.repository.getItemsCount();
+  async getItems(query) {
+    return this.repository.getItems(query);
   }
 
   async getItemById(id) {

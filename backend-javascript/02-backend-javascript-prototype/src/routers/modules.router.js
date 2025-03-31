@@ -1,13 +1,13 @@
 import express from 'express';
 
-import personRouter from '../modules/person/person.router.js';
-import cityRouter from '../modules/city/city.router.js';
-import professionRouter from '../modules/profession/profession.router.js';
+import cityRouter from '../modules/city/item.router.js';
+import personRouter from '../modules/person/item.router.js';
+import professionRouter from '../modules/profession/item.router.js';
 
 const router = express.Router();
 
-router.use('/persons', personRouter);
 router.use('/cities', cityRouter);
+router.use('/persons', personRouter);
 router.use('/professions', professionRouter);
 
 export default router;

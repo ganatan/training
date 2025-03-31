@@ -1,4 +1,5 @@
-import { ITEMS_MOCK_DATA } from '../../data/mocks/person.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../data/mocks/city.mock-data.js';
+import createItem from './item.model.js';
 
 class MockRepository {
   constructor() {
@@ -11,6 +12,15 @@ class MockRepository {
       size = 10,
       sort = '-name',
       name = '',
+      code = '',
+      areaMin = null,
+      areaMax = null,
+      populationMin = null,
+      populationMax = null,
+      countriesCountMin = null,
+      countriesCountMax = null,
+      densityMin = null,
+      densityMax = null,
     } = filters;
 
     const currentPage = Math.max(1, parseInt(page, 10));
@@ -21,6 +31,38 @@ class MockRepository {
 
     if (name) {
       filteredItems = filteredItems.filter(item => item.name.toLowerCase().includes(name.toLowerCase()));
+    }
+
+    if (code) {
+      filteredItems = filteredItems.filter(item => item.code.toLowerCase().includes(code.toLowerCase()));
+    }
+
+    if (areaMin !== null) {
+      filteredItems = filteredItems.filter(item => parseFloat(item.area) >= parseFloat(areaMin));
+    }
+    if (areaMax !== null) {
+      filteredItems = filteredItems.filter(item => parseFloat(item.area) <= parseFloat(areaMax));
+    }
+
+    if (populationMin !== null) {
+      filteredItems = filteredItems.filter(item => parseFloat(item.population) >= parseFloat(populationMin));
+    }
+    if (populationMax !== null) {
+      filteredItems = filteredItems.filter(item => parseFloat(item.population) <= parseFloat(populationMax));
+    }
+
+    if (countriesCountMin !== null) {
+      filteredItems = filteredItems.filter(item => parseInt(item.countriesCount) >= parseInt(countriesCountMin));
+    }
+    if (countriesCountMax !== null) {
+      filteredItems = filteredItems.filter(item => parseInt(item.countriesCount) <= parseInt(countriesCountMax));
+    }
+
+    if (densityMin !== null) {
+      filteredItems = filteredItems.filter(item => parseFloat(item.density) >= parseFloat(densityMin));
+    }
+    if (densityMax !== null) {
+      filteredItems = filteredItems.filter(item => parseFloat(item.density) <= parseFloat(densityMax));
     }
 
     const sortField = sort.replace(/^-/, '');
@@ -88,7 +130,7 @@ class MockRepository {
   }
 
   async createItem(data) {
-    const newItem = { id: this.items.length + 1, ...data };
+    const newItem = createItem({ id: this.items.length + 1, ...data });
     this.items.push(newItem);
 
     return newItem;
@@ -114,7 +156,6 @@ class MockRepository {
       item => item.name.toLowerCase() === name.toLowerCase(),
     );
   }
-
 }
 
 export default MockRepository;

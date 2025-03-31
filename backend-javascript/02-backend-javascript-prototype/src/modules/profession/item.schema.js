@@ -6,10 +6,6 @@ const schema = z.object({
     invalid_type_error: 'Name must be a string',
   }).min(2, 'Name must be a string of at least 2 characters'),
 
-  city: z.string({
-    required_error: 'City is required',
-    invalid_type_error: 'City must be a string',
-  }).min(2, 'City must be a string of at least 2 characters'),
 });
 
 function validateItem(data) {

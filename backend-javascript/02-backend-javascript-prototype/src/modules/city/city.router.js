@@ -1,6 +1,6 @@
 import express from 'express';
 
-import responseHandler from '../../middlewares/response-handler.js';
+import responseHandler from '../../infrastructure/logger/response-handler.js';
 
 import Repository from './city.repository.js';
 import Service from './city.service.js';

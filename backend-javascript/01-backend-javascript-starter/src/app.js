@@ -52,7 +52,7 @@ const root = {
       url: `${url}/professions`,
     },
     {
-      url: `${url}/works`,
+      url: `${url}/medias`,
     },
   ],
 };

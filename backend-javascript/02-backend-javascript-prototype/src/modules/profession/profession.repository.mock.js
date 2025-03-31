@@ -15,14 +15,14 @@ class MockRepository {
       totals: {
         currentPageTotals: {
           count: data.length,
-          offset,
-          limit
+          offset: offset,
+          limit: limit,
         },
         globalTotals: {
           count: total,
-          totalPages
-        }
-      }
+          totalPages: totalPages,
+        },
+      },
     };
 
     return { metadata, data };

@@ -1,6 +1,10 @@
 export const ROUTES = {
-  persons: {
-    path: '/persons',
+  continents: {
+    path: '/continents',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  countries: {
+    path: '/countries',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
   cities: {
@@ -11,8 +15,24 @@ export const ROUTES = {
     path: '/professions',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
-  works: {
-    path: '/works',
+  persons: {
+    path: '/persons',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  'person-professions': {
+    path: '/person-professions',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  medias: {
+    path: '/medias',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  'media-types': {
+    path: '/media-types',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  'media-persons': {
+    path: '/media-persons',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 };

@@ -2,6 +2,7 @@ import pool from '../../core/database/database.js';
 
 import {
   addFilterCondition,
+  addRangeDateCondition,
   adaptSortField,
 } from '../../shared/utils/query/query-utils.js';
 import {
@@ -10,7 +11,7 @@ import {
   MAX_ITEMS_PER_PAGE,
 } from '../../shared/constants/pagination.constants.js';
 import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
-import { DATE_FORMAT_FR } from '../../shared/constants/date-format.constants.js';
+import { DATE_FORMAT_ISO } from '../../shared/constants/date-format.constants.js';
 
 import { ITEM_CONSTANTS } from './item.constant.js';
 
@@ -23,6 +24,10 @@ class PgRepository {
         size = DEFAULT_ITEMS_PER_PAGE,
         sort = 'name',
         name = '',
+        birthDateMin = null,
+        birthDateMax = null,
+        deathDateMin = null,
+        deathDateMax = null,
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
@@ -34,8 +39,12 @@ class PgRepository {
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
+      filterConditions = addRangeDateCondition(filterConditions, filterParams, 'birthDate', birthDateMin, birthDateMax);
+      filterConditions = addRangeDateCondition(filterConditions, filterParams, 'deathDate', deathDateMin, deathDateMax);
 
       const sortMapping = {
+        birthDate: 'birth_date',
+        deathDate: 'death_date',
       };
       let sortBy = adaptSortField(sort, sortMapping);
       const sortOrder = sort.startsWith('-') ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
@@ -51,19 +60,11 @@ class PgRepository {
       ]);
 
       const global = globalResult.rows[0];
-      global.density = global.area > 0
-        ? parseFloat((parseFloat(global.population) / parseFloat(global.area)).toFixed(5))
-        : 0;
-      const currentPageTotals = this.buildCurrentPageTotals(dataResult.rows);
 
       return this.formatResultItems(dataResult.rows, {
         currentPage: currentPage,
         perPage: perPage,
         totalItems: parseInt(global.count, 10),
-        totals: {
-          global: global,
-          currentPage: currentPageTotals,
-        },
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEM_CONSTANTS.ITEMS_NAME}:`, error);
@@ -129,8 +130,8 @@ class PgRepository {
       SELECT 
         id, 
         name,
-        to_char(birth_date, '${DATE_FORMAT_FR}') as "birthDate",
-        to_char(death_date, '${DATE_FORMAT_FR}') as "deathDate"
+        to_char(birth_date, '${DATE_FORMAT_ISO}') as "birthDate",
+        to_char(death_date, '${DATE_FORMAT_ISO}') as "deathDate"
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}

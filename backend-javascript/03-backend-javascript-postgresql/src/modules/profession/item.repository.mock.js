@@ -1,4 +1,4 @@
-import { ITEMS_MOCK_DATA } from '../../mocks/profession.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../data/mocks/profession.mock-data.js';
 import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
 
 class MockRepository {

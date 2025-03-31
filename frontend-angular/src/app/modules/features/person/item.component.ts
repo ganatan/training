@@ -103,8 +103,8 @@ export class ItemComponent implements OnInit {
 
   setTotals(response: any): void {
     this.totals = {
-      count: response.totals.currentPage.count,
-      countAll: response.totals.global.count,
+      count: response.metadata.pagination.perPage,
+      countAll: response.metadata.pagination.totalItems,
     };
   }
 

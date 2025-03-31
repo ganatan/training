@@ -1,4 +1,4 @@
-import { ITEMS_MOCK_DATA } from '../../mocks/continent.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../data/mocks/continent.mock-data.js';
 
 class MockRepository {
   constructor() {

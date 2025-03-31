@@ -1,4 +1,4 @@
-import { ITEMS_MOCK_DATA } from '../../mocks/city.mock-data.js';
+import { ITEMS_MOCK_DATA } from '../../data/mocks/city.mock-data.js';
 import createItem from './item.model.js';
 
 class MockRepository {

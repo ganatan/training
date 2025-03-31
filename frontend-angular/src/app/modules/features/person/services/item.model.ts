@@ -4,6 +4,8 @@ import { Filters } from './filters.model';
 export interface Item {
   id: number;
   name: string;
+  birthDate: string;
+  deathDate: string | null;
 }
 
 export interface Pagination {

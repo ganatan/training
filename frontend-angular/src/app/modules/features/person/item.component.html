@@ -122,6 +122,30 @@
                 Name
               </span>
             </th>
+            <th class="font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'birthDate' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'birthDate' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('birthDate')" (keydown.enter)="setSort('birthDate')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'birthDate' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'birthDate' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'birthDate' && sortDirection === 'desc' }"></i>
+                Birth Date
+              </span>
+            </th>
+            <th class="d-none d-md-table-cell font-weight-bold text-center" [ngClass]="{
+              'text-primary': sortColumn === 'deathDate' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'deathDate' || sortDirection === null }">
+              <span role="button" tabindex="0" (click)="setSort('deathDate')" (keydown.enter)="setSort('deathDate')"
+                style="cursor: pointer">
+                <i class="fa-solid me-2" [ngClass]="{
+                  'fa-sort': sortColumn !== 'deathDate' || sortDirection === null,
+                  'fa-sort-up': sortColumn === 'deathDate' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'deathDate' && sortDirection === 'desc' }"></i>
+                Death Date
+              </span>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="items && items.length > 0">
@@ -139,9 +163,18 @@
             </td>
             <td class="text-center" [ngClass]="{
               'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null
-            }">
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }">
               {{ item.name }}
+            </td>
+            <td class="text-center" [ngClass]="{
+              'text-primary': sortColumn === 'birthDate' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'birthDate' || sortDirection === null }">
+              {{ item.birthDate | date: 'dd/MM/yyyy' }}
+            </td>
+            <td class="d-none d-md-table-cell text-center" [ngClass]="{
+              'text-primary': sortColumn === 'deathDate' && (sortDirection === 'asc' || sortDirection === 'desc'),
+              'text-body-tertiary': sortColumn !== 'deathDate' || sortDirection === null }">
+              {{ item.deathDate | date: 'dd/MM/yyyy' }}
             </td>
           </tr>
           <tr>

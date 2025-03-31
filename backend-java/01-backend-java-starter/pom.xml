@@ -17,7 +17,6 @@
   </properties>
 
   <dependencies>
-    <!-- Jakarta EE 10 -->
     <dependency>
       <groupId>jakarta.platform</groupId>
       <artifactId>jakarta.jakartaee-web-api</artifactId>
@@ -32,7 +31,6 @@
   <version>2.15.3</version>
 </dependency>
 
-    <!-- JUnit 5 -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -46,7 +44,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Mockito -->
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
@@ -64,21 +61,18 @@
   <build>
     <finalName>backend-java-starter</finalName>
     <plugins>
-      <!-- Compilation -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
       </plugin>
 
-      <!-- Build WAR -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
       </plugin>
 
-      <!-- JaCoCo (Coverage) -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -99,7 +93,6 @@
         </executions>
       </plugin>
 
-      <!-- Tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>

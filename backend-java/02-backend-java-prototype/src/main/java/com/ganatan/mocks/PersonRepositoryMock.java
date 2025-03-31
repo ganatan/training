@@ -1,4 +1,4 @@
-package com.ganatan.mocks.person;
+package com.ganatan.mocks;
 
 import java.util.List;
 

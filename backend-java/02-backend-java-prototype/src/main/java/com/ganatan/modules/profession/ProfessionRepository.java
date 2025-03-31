@@ -2,7 +2,7 @@ package com.ganatan.modules.profession;
 
 import java.util.List;
 
-import com.ganatan.mocks.profession.ProfessionRepositoryMock;
+import com.ganatan.mocks.ProfessionRepositoryMock;
 
 public class ProfessionRepository {
 

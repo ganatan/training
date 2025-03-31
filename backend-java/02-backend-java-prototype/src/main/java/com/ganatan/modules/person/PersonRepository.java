@@ -2,7 +2,7 @@ package com.ganatan.modules.person;
 
 import java.util.List;
 
-import com.ganatan.mocks.person.PersonRepositoryMock;
+import com.ganatan.mocks.PersonRepositoryMock;
 
 public class PersonRepository {
 

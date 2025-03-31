@@ -1,4 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +16,7 @@ import { Filters } from './services/filters.model';
 import { ITEMS_SERVICE } from './services/items.token';
 import { ItemsProvider } from './services/items.provider';
 
-import { Collapse } from 'bootstrap';
+declare const bootstrap: any;
 
 @Component({
   selector: 'app-item',
@@ -65,6 +67,8 @@ export class ItemComponent implements OnInit {
   pagination: Pagination;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
     private router: Router) {
 
@@ -221,19 +225,20 @@ export class ItemComponent implements OnInit {
   }
 
   toggleFilters() {
-    this.isFiltersOpen = !this.isFiltersOpen;
-    const collapseElement = document.getElementById('collapseFilters');
-    if (collapseElement) {
-      const collapseInstance = new Collapse(collapseElement, {
-        toggle: false
-      });
-      if (this.isFiltersOpen) {
-        collapseInstance.show();
-      } else {
-        collapseInstance.hide();
+    if (isPlatformBrowser(this.platformId)) {
+      this.isFiltersOpen = !this.isFiltersOpen;
+      const collapseElement = this.document.getElementById('collapseFilters');
+      if (collapseElement) {
+        const collapseInstance = new bootstrap.Collapse(collapseElement, {
+          toggle: false
+        });
+        if (this.isFiltersOpen) {
+          collapseInstance.show();
+        } else {
+          collapseInstance.hide();
+        }
       }
     }
   }
-
 
 }

@@ -18,7 +18,7 @@ export class HomeComponent {
   bootstrap = environment.application.bootstrap;
   fontawesome = environment.application.fontawesome;
 
-  items = [
+  itemsFeatures = [
     {
       icon: "fa-solid fa-user-tie",
       name: "professions",
@@ -48,6 +48,69 @@ export class HomeComponent {
       name: "cities",
       description: "cities",
       link: '/cities'
+    },
+  ]
+
+  itemsExamples = [
+    {
+      icon: "fa-solid fa-file-lines",
+      name: "Landing Page",
+      description: "Css linear-gradient",
+      link: '/landing-page'
+    },
+    {
+      icon: "fa-solid fa-address-card",
+      name: "Images Cards",
+      description: "Cascade Cards",
+      link: '/cards'
+    },
+    {
+      icon: "fa-brands fa-bootstrap",
+      name: "bootstrap",
+      description: "UI and components",
+      link: '/bootstrap'
+    },
+    {
+      icon: "fa-sharp fa-solid fa-newspaper",
+      name: "News",
+      description: "Trailers and youtube",
+      link: '/news'
+    },
+    {
+      icon: "fa-solid fa-chart-simple",
+      name: "Boxoffice",
+      description: "Movies boxoffice",
+      link: '/boxoffice'
+    },
+    {
+      icon: "fa-solid fa-blender-phone",
+      name: "Services",
+      description: "angular Services",
+      link: '/services'
+    },
+    {
+      icon: "fa-solid fa-screwdriver-wrench",
+      name: "Components",
+      description: "Angular components",
+      link: '/components'
+    },
+    {
+      icon: "fa-solid fa-network-wired",
+      name: "HttpClient",
+      description: "Httpclient library",
+      link: '/httpclient'
+    },
+    {
+      icon: "fa-regular fa-rectangle-list",
+      name: "forms",
+      description: "Reactive & Template",
+      link: '/forms'
+    },
+    {
+      icon: "fa-solid fa-spell-check",
+      name: "Prism",
+      description: "Syntax highlighter",
+      link: '/prism'
     },
   ]
 

@@ -233,23 +233,25 @@
           <tr>
             <td colspan="10" class="text-center"><strong></strong></td>
           </tr>
-          <tr *ngFor="let item of items; let i = index" (click)="selectItem(item)">
+          <tr *ngFor="let item of items; let i = index">
             <td class="d-none d-md-table-cell text-center">{{ i + 1 }}</td>
             <td class="d-none d-md-table-cell text-center">{{ getGlobalPosition(i) }}</td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null }" style="cursor: pointer"
+              (click)="selectItem(item)">
               {{ item.id }}
             </td>
             <td class="text-center" [ngClass]="{
               'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }" style="cursor: pointer"
+              (click)="selectItem(item)">
               {{ item.name }}
             </td>
             <td class="text-center" [ngClass]="{
               'text-primary': sortColumn === 'code' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'code' || sortDirection === null
-            }">
+            }" style="cursor: pointer" (click)="selectItem(item)">
               {{ item.code }}
             </td>
             <td class="d-none d-md-table-cell text-center">
@@ -260,25 +262,25 @@
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'area' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'area' || sortDirection === null
-            }">
+            }" style="cursor: pointer" (click)="selectItem(item)">
               {{ item.area | number:'1.0-0':'fr' }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'population' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'population' || sortDirection === null
-            }">
+            }" style="cursor: pointer" (click)="selectItem(item)">
               {{ item.population | number:'1.0-0':'fr' }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'countriesCount' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'countriesCount' || sortDirection === null
-            }">
+            }" style="cursor: pointer" (click)="selectItem(item)">
               {{ item.countriesCount }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'density' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'density' || sortDirection === null
-            }">
+            }" style="cursor: pointer" (click)="selectItem(item)">
               {{ item.density | number:'1.5-5' }}
             </td>
           </tr>

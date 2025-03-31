@@ -129,43 +129,43 @@
                   'fa-sort': sortColumn !== 'countryName' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'countryName' && sortDirection === 'asc',
                   'fa-sort-down': sortColumn === 'countryName' && sortDirection === 'desc' }"></i>
-                  countryName
+                countryName
               </span>
             </th>
             <th class="font-weight-bold text-center" [ngClass]="{
               'text-primary': sortColumn === 'countryIsoNumeric' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'countryIsoNumeric' || sortDirection === null }">
-              <span role="button" tabindex="0" (click)="setSort('countryIsoNumeric')" (keydown.enter)="setSort('countryIsoNumeric')"
-                style="cursor: pointer">
+              <span role="button" tabindex="0" (click)="setSort('countryIsoNumeric')"
+                (keydown.enter)="setSort('countryIsoNumeric')" style="cursor: pointer">
                 <i class="fa-solid me-2" [ngClass]="{
                   'fa-sort': sortColumn !== 'countryIsoNumeric' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'countryIsoNumeric' && sortDirection === 'asc',
                   'fa-sort-down': sortColumn === 'countryIsoNumeric' && sortDirection === 'desc' }"></i>
-                  countryIsoNumeric
+                countryIsoNumeric
               </span>
             </th>
             <th class="font-weight-bold text-center" [ngClass]="{
               'text-primary': sortColumn === 'isoAlpha3' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'continentName' || sortDirection === null }">
-              <span role="button" tabindex="0" (click)="setSort('continentName')" (keydown.enter)="setSort('continentName')"
-                style="cursor: pointer">
+              <span role="button" tabindex="0" (click)="setSort('continentName')"
+                (keydown.enter)="setSort('continentName')" style="cursor: pointer">
                 <i class="fa-solid me-2" [ngClass]="{
                   'fa-sort': sortColumn !== 'continentName' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'continentName' && sortDirection === 'asc',
                   'fa-sort-down': sortColumn === 'continentName' && sortDirection === 'desc' }"></i>
-                  Continent Name
+                Continent Name
               </span>
             </th>
             <th class="font-weight-bold text-center" [ngClass]="{
               'text-primary': sortColumn === 'isoAlpha3' && (sortDirection === 'asc' || sortDirection === 'desc'),
               'text-body-tertiary': sortColumn !== 'continentCode' || sortDirection === null }">
-              <span role="button" tabindex="0" (click)="setSort('continentCode')" (keydown.enter)="setSort('continentCode')"
-                style="cursor: pointer">
+              <span role="button" tabindex="0" (click)="setSort('continentCode')"
+                (keydown.enter)="setSort('continentCode')" style="cursor: pointer">
                 <i class="fa-solid me-2" [ngClass]="{
                   'fa-sort': sortColumn !== 'continentCode' || sortDirection === null,
                   'fa-sort-up': sortColumn === 'continentCode' && sortDirection === 'asc',
                   'fa-sort-down': sortColumn === 'continentCode' && sortDirection === 'desc' }"></i>
-                  Continent Code
+                Continent Code
               </span>
             </th>
           </tr>
@@ -183,32 +183,35 @@
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'id' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'id' || sortDirection === null }" style="cursor: pointer">
               {{ item.id }}
             </td>
             <td class="text-center" [ngClass]="{
               'text-primary': sortColumn === 'name' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'name' || sortDirection === null }" style="cursor: pointer">
               {{ item.name }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'countryName' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'countryName' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'countryName' || sortDirection === null }" style="cursor: pointer">
               {{ item.countryName }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'countryIsoNumeric' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'countryIsoNumeric' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'countryIsoNumeric' || sortDirection === null }"
+              style="cursor: pointer">
               {{ item.countryIsoNumeric }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'continentName' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'continentName' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'continentName' || sortDirection === null }"
+              style="cursor: pointer">
               {{ item.continentName }}
             </td>
             <td class="d-none d-md-table-cell text-center" [ngClass]="{
               'text-primary': sortColumn === 'continentCode' && (sortDirection === 'asc' || sortDirection === 'desc'),
-              'text-body-tertiary': sortColumn !== 'continentCode' || sortDirection === null }">
+              'text-body-tertiary': sortColumn !== 'continentCode' || sortDirection === null }"
+              style="cursor: pointer">
               {{ item.continentCode }}
             </td>
           </tr>

@@ -85,11 +85,6 @@ export const routes: Routes = [
       .then(mod => mod.ItemComponent)
   },
   {
-    path: 'cities/:id',
-    loadComponent: () => import('./modules/features/city-form/item.component')
-      .then(mod => mod.ItemComponent)
-  },
-  {
     path: 'persons',
     loadComponent: () => import('./modules/features/person/item.component')
       .then(mod => mod.ItemComponent)

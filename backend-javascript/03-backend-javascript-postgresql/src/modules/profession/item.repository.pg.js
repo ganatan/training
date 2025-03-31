@@ -2,6 +2,7 @@ import pool from '../../core/database/database.js';
 
 import {
   addFilterCondition,
+  addRangeCondition,
   adaptSortField,
 } from '../../shared/utils/query/query-utils.js';
 
@@ -23,6 +24,8 @@ class PgRepository {
         size = DEFAULT_ITEMS_PER_PAGE,
         sort = 'name',
         name = '',
+        idMin = null,
+        idMax = null,
       } = filters;
 
       const currentPage = Math.max(1, parseInt(page, 10));
@@ -34,6 +37,7 @@ class PgRepository {
       const filterParams = [];
 
       filterConditions = addFilterCondition(filterConditions, filterParams, 'name', name);
+      filterConditions = addRangeCondition(filterConditions, filterParams, 'id', idMin, idMax);
 
       const sortMapping = {
       };

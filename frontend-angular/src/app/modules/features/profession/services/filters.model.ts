@@ -3,4 +3,6 @@ export interface Filters {
   size?: number | null;
   sort?: string | null;
   name?: string | null;
+  idMin?: number | null;
+  idMax?: number | null;
 }

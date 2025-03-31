@@ -21,29 +21,29 @@
       <nav class="d-flex align-items-center" aria-label="Page navigation" *ngIf="pagination.useful">
         <ul class="pagination pagination-sm mb-0">
           <li class="page-item" [ngClass]="{disabled: pagination.currentPage === 1}">
-            <a class="page-link cursor-pointer" (click)="changePage(1)" (keydown)="changePage(1)" tabindex="0">
+            <a class="page-link" (click)="changePage(1)" (keydown)="changePage(1)" tabindex="0">
               <span>&laquo;</span>
             </a>
           </li>
           <li class="page-item" [ngClass]="{disabled: pagination.currentPage === 1}">
-            <a class="page-link cursor-pointer" (click)="changePage(pagination.currentPage - 1)"
+            <a class="page-link" (click)="changePage(pagination.currentPage - 1)"
               (keydown)="changePage(pagination.currentPage - 1)" tabindex="0">
               <span>&lsaquo;</span>
             </a>
           </li>
           <li class="page-item" *ngFor="let page of pagination.pages"
             [ngClass]="{'active': page === pagination.currentPage}">
-            <a class="page-link cursor-pointer" (click)="changePage(page)" (keydown)="changePage(page)" tabindex="0">{{
+            <a class="page-link" (click)="changePage(page)" (keydown)="changePage(page)" tabindex="0">{{
               page }}</a>
           </li>
           <li class="page-item" [ngClass]="{disabled: pagination.currentPage === pagination.totalPages}">
-            <a class="page-link cursor-pointer" (click)="changePage(pagination.currentPage + 1)"
+            <a class="page-link" (click)="changePage(pagination.currentPage + 1)"
               (keydown)="changePage(pagination.currentPage + 1)" tabindex="0">
               <span>&rsaquo;</span>
             </a>
           </li>
           <li class="page-item" [ngClass]="{disabled: pagination.currentPage === pagination.totalPages}">
-            <a class="page-link cursor-pointer" (click)="changePage(pagination.totalPages)"
+            <a class="page-link" (click)="changePage(pagination.totalPages)"
               (keydown)="changePage(pagination.totalPages)" tabindex="0">
               <span>&raquo;</span>
             </a>
@@ -75,8 +75,8 @@
           <div class="card card-body">
             <h5 class="card-title border-bottom pb-2">Search Filters</h5>
             <div class="col-md-2">
-              <label for="name" class="font-weight-bold form-label">Name</label>
-              <input [(ngModel)]="filters.name" type="text" class="form-control" id="name">
+              <label for="filtersName" class="font-weight-bold form-label">Name</label>
+              <input [(ngModel)]="filters.name" type="text" class="form-control" id="filtersName">
             </div>
           </div>
         </div>

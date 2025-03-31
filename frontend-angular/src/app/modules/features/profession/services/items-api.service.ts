@@ -36,6 +36,8 @@ export class ItemsApiService implements ItemsServiceInterface {
     addFilterParam(queryParams, 'sort', filters.sort);
 
     addFilterParam(queryParams, 'name', filters.name);
+    addFilterParam(queryParams, 'idMin', filters.idMin);
+    addFilterParam(queryParams, 'idMax', filters.idMax);
 
     return queryParams.toString() ? `?${queryParams.toString()}` : '';
   }

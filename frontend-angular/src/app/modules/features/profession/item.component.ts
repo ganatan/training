@@ -56,6 +56,8 @@ export class ItemComponent implements OnInit {
     page: null,
     size: null,
     name: null,
+    idMin: null,
+    idMax: null,
   };
 
   selectedPerPage: number;

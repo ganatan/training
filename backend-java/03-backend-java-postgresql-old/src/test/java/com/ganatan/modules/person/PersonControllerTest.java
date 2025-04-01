@@ -24,5 +24,6 @@ public class PersonControllerTest {
         String json = writer.toString();
         assertTrue(json.contains("\"name\":\"Steven Spielberg\""));
         assertTrue(json.contains("\"city\":\"Cincinnati\""));
+        assertTrue(json.contains("\"name\":\"Quentin Tarantino\""));
     }
 }

@@ -9,22 +9,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-import com.ganatan.config.AppConfig;
-
 @WebServlet("/persons")
 public class PersonController extends HttpServlet {
 
-    private final PersonService service;
+    private final PersonService personService;
 
     public PersonController() {
-        PersonRepository repository = new PersonRepository(AppConfig.useDatabase());
-        this.service= new PersonService(repository);
+        PersonRepository repository = new PersonRepository();
+        this.personService = new PersonService(repository);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<Person> items = service.getItems();
+    	List<Person> items = personService.getItems();
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

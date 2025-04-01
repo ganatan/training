@@ -1,12 +1,23 @@
 package com.ganatan.modules.city;
 
 import java.util.List;
-import java.util.Arrays;
+
+import com.ganatan.mocks.CityRepositoryMock;
 
 public class CityRepository {
 
-	public List<City> getItems() {
-		return Arrays.asList(new City(1, "Cincinnati"), new City(2, "London"), new City(3, "New York"),
-				new City(4, "Knoxville"));
-	}
+    private final Object repository;
+
+    public CityRepository(boolean useDatabase) {
+        if (useDatabase) {
+            this.repository = new CityRepositoryMock();
+        } else {
+            this.repository = new CityRepositoryMock();
+        }
+    }
+
+    public List<City> getItems() {
+        return ((CityRepositoryMock) repository).getItems();
+    }
 }
+

@@ -6,5 +6,24 @@
     xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
   
   <display-name>backend-java-postgresql</display-name>
+  
+<!--   <servlet> -->
+<!--     <servlet-name>PersonsServlet</servlet-name> -->
+<!--     <servlet-class>com.ganatan.modules.person.PersonController</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>PersonsServlet</servlet-name> -->
+<!--     <url-pattern>/persons</url-pattern> -->
+<!--   </servlet-mapping> -->
+
+
+<!--   <servlet> -->
+<!--     <servlet-name>MainServlet</servlet-name> -->
+<!--     <servlet-class>com.ganatan.modules.person.PersonController</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>MainServlet</servlet-name> -->
+<!--     <url-pattern>/</url-pattern> -->
+<!--   </servlet-mapping> -->
 
 </web-app>

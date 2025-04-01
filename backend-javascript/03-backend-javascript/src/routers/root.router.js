@@ -1,26 +1,24 @@
 import express from 'express';
-import { ROUTES } from '../shared/constants/routes.js';
+import { ROUTES } from '../shared/constants/routes.constants.js';
 
 const router = express.Router();
 
-const endpoints = Object.entries(ROUTES).reduce((acc, [key, route]) => {
-  acc[key] = {
-    url: route.path,
-    methods: route.methods,
-  };
-
-  return acc;
-}, {});
-
-const root = {
-  version: '1.0.0',
-  status: 'ok',
-  timestamp: new Date().toISOString(),
-  endpoints: endpoints,
-};
-
 router.get('/', (req, res) => {
-  res.status(200).json(root);
+  const endpoints = {};
+
+  Object.entries(ROUTES).forEach(([key, { path, methods }]) => {
+    endpoints[key] = {
+      url: path,
+      methods: methods,
+    };
+  });
+
+  res.json({
+    version: '1.0.0',
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    endpoints: endpoints,
+  });
 });
 
 router.use((req, res) => {

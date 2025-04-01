@@ -15,7 +15,7 @@ public class AppConfig {
         }
     }
 
-    public static boolean useDatabase() {
-        return Boolean.parseBoolean(properties.getProperty("use.database", "false"));
+    public static String useDbClient() {
+        return properties.getProperty("db.client", "mock");
     }
 }

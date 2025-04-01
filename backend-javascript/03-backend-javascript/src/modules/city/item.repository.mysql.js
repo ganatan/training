@@ -51,7 +51,7 @@ class MysqlRepository {
       };
       let sortBy = adaptSortField(sort, sortMapping);
       const sortOrder = sort.startsWith('-') ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
-      if (sort.startsWith('-')) sortBy = sortBy.substring(1);
+      if (sort.startsWith('-')) { sortBy = sortBy.substring(1); }
 
       const sqlCount = this.buildQueryCount(filterConditions);
       const sqlData = this.buildQueryData(filterConditions, perPage, offset, sortBy, sortOrder);
@@ -60,18 +60,20 @@ class MysqlRepository {
       const [dataRows] = await pool.query(sqlData, filterParams);
 
       return this.formatResultItems(dataRows, {
-        currentPage,
-        perPage,
+        currentPage: currentPage,
+        perPage: perPage,
         totalItems: parseInt(countRows[0].count, 10),
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEMS_NAME}:`, error);
+
       return null;
     }
   }
 
   formatResultItems(data, { currentPage, perPage, totalItems }) {
     const totalPages = Math.ceil(totalItems / perPage);
+
     return {
       metadata: {
         pagination: {
@@ -81,7 +83,7 @@ class MysqlRepository {
           totalPages,
         },
       },
-      data,
+      data: data,
     };
   }
 
@@ -116,33 +118,38 @@ class MysqlRepository {
 
   async getItemById(id) {
     const [rows] = await pool.query(`SELECT id, name FROM ${TABLE_NAME} WHERE id = ?`, [id]);
+
     return rows.length ? rows[0] : null;
   }
 
   async createItem(data) {
     const { name } = data;
     const [result] = await pool.query(`INSERT INTO ${TABLE_NAME} (name) VALUES (?)`, [name]);
+
     return this.getItemById(result.insertId);
   }
 
   async updateItem(id, data) {
     const { name } = data;
     await pool.query(`UPDATE ${TABLE_NAME} SET name = ? WHERE id = ?`, [name, id]);
+
     return this.getItemById(id);
   }
 
   async deleteItem(id) {
     const item = await this.getItemById(id);
-    if (!item) return null;
+    if (!item) { return null; }
     await pool.query(`DELETE FROM ${TABLE_NAME} WHERE id = ?`, [id]);
+
     return item;
   }
 
   async existsByName(name) {
     const [rows] = await pool.query(
       `SELECT 1 FROM ${TABLE_NAME} WHERE LOWER(name) = LOWER(?) LIMIT 1`,
-      [name]
+      [name],
     );
+
     return rows.length > 0;
   }
 }

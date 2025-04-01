@@ -72,11 +72,11 @@ class MysqlRepository {
     const currentPageTotals = this.buildCurrentPageTotals(dataResult);
 
     return this.formatResultItems(dataResult, {
-      currentPage,
-      perPage,
+      currentPage: currentPage,
+      perPage: perPage,
       totalItems: parseInt(global.count, 10),
       totals: {
-        global,
+        global: global,
         currentPage: currentPageTotals,
       },
     });
@@ -120,8 +120,8 @@ class MysqlRepository {
           totalPages,
         },
       },
-      totals,
-      data,
+      totals: totals,
+      data: data,
     };
   }
 
@@ -172,6 +172,7 @@ class MysqlRepository {
     `;
 
     const [rows] = await pool.query(query, [id]);
+
     return rows.length ? rows[0] : null;
   }
 
@@ -179,19 +180,22 @@ class MysqlRepository {
     const query = `INSERT INTO ${ITEM_CONSTANTS.TABLE_NAME} (name) VALUES (?)`;
     const [result] = await pool.query(query, [data.name]);
     const id = result.insertId;
+
     return this.getItemById(id);
   }
 
   async updateItem(id, data) {
     const query = `UPDATE ${ITEM_CONSTANTS.TABLE_NAME} SET name = ? WHERE id = ?`;
     await pool.query(query, [data.name, id]);
+
     return this.getItemById(id);
   }
 
   async deleteItem(id) {
     const item = await this.getItemById(id);
-    if (!item) return null;
+    if (!item) { return null; }
     await pool.query(`DELETE FROM ${ITEM_CONSTANTS.TABLE_NAME} WHERE id = ?`, [id]);
+
     return item;
   }
 
@@ -201,6 +205,7 @@ class MysqlRepository {
       WHERE LOWER(name) = LOWER(?) LIMIT 1
     `;
     const [rows] = await pool.query(query, [name]);
+
     return rows.length > 0;
   }
 }

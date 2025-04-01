@@ -18,7 +18,7 @@ public class CityController extends HttpServlet {
     private final CityService service;
 
     public CityController() {
-        CityRepository repository = new CityRepository(AppConfig.useDatabase());
+        CityRepository repository = new CityRepository(AppConfig.useDbClient());
         this.service= new CityService(repository);
     }
 

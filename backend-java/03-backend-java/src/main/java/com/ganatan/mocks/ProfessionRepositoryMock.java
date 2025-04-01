@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Optional;
 
 import com.ganatan.modules.profession.Profession;
@@ -15,16 +14,20 @@ public class ProfessionRepositoryMock {
     private int nextId = 1;
 
     public ProfessionRepositoryMock() {
-        items.add(new Profession(nextId++, "Actor Backend Mock"));
-        items.add(new Profession(nextId++, "Actress Backend Mock"));
-        items.add(new Profession(nextId++, "Animator Backend Mock"));
-        items.add(new Profession(nextId++, "Art Director Backend Mock"));
-        items.add(new Profession(nextId++, "Associate Producer Backend Mock"));
-        items.add(new Profession(nextId++, "Cinematographer Backend Mock"));
-        items.add(new Profession(nextId++, "Composer Backend Mock"));
-        items.add(new Profession(nextId++, "Costume Designer Backend Mock"));
-        items.add(new Profession(nextId++, "Editor Backend Mock"));
-        items.add(new Profession(nextId++, "Executive Producer Backend Mock"));
+        add("Actor");
+        add("Actress");
+        add("Animator");
+        add("Art Director");
+        add("Associate Producer");
+        add("Cinematographer");
+        add("Composer");
+        add("Costume Designer");
+        add("Editor");
+        add("Executive Producer");
+    }
+
+    private void add(String name) {
+        items.add(new Profession(nextId++, name + " Backend Mock"));
     }
 
     public Map<String, Object> getItems(int offset, int limit) {

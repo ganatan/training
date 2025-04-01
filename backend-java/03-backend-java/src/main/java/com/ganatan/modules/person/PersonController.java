@@ -18,7 +18,7 @@ public class PersonController extends HttpServlet {
     private final PersonService service;
 
     public PersonController() {
-        PersonRepository repository = new PersonRepository(AppConfig.useDatabase());
+        PersonRepository repository = new PersonRepository(AppConfig.useDbClient());
         this.service= new PersonService(repository);
     }
 

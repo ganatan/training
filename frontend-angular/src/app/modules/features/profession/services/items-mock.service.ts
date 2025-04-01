@@ -7,6 +7,7 @@ import { ITEMS_MOCK_DATA } from './items.mock-data';
 
 @Injectable()
 export class ItemsMockService implements ItemsServiceInterface {
+
   getItems(filters: Filters = {}): Observable<ItemsResponse> {
     const currentPage = filters.page ?? 1;
     const perPage = filters.size ?? ITEMS_MOCK_DATA.length;
@@ -33,4 +34,5 @@ export class ItemsMockService implements ItemsServiceInterface {
 
     return of(response);
   }
+
 }

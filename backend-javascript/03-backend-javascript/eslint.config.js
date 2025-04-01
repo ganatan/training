@@ -21,7 +21,7 @@ export default [
   pluginJs.configs.recommended,
   {
     rules: {
-      "indent": ["error", 2],
+      "indent": "off",
       "quotes": ["error", "single"],
       "semi": ["error", "always"],
       "no-unused-vars": ["warn"],

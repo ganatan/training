@@ -19,7 +19,7 @@ class Repository {
         break;
     }
   }
-  
+
   async getItems(query) {
     return this.repository.getItems(query);
   }

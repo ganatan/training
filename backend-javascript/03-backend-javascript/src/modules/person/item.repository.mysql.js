@@ -60,18 +60,20 @@ class MysqlRepository {
       const global = countRows[0];
 
       return this.formatResultItems(dataRows, {
-        currentPage,
-        perPage,
+        currentPage: currentPage,
+        perPage: perPage,
         totalItems: parseInt(global.count, 10),
       });
     } catch (error) {
       console.error(`Error retrieving ${ITEM_CONSTANTS.ITEMS_NAME}:`, error);
+
       return null;
     }
   }
 
   formatResultItems(data, { currentPage, perPage, totalItems }) {
     const totalPages = Math.ceil(totalItems / perPage);
+
     return {
       metadata: {
         pagination: {
@@ -81,7 +83,7 @@ class MysqlRepository {
           totalPages,
         },
       },
-      data,
+      data: data,
     };
   }
 
@@ -120,6 +122,7 @@ class MysqlRepository {
     `;
 
     const [rows] = await pool.query(query, [id]);
+
     return rows.length ? rows[0] : null;
   }
 
@@ -127,6 +130,7 @@ class MysqlRepository {
     const { name } = data;
     const query = `INSERT INTO ${ITEM_CONSTANTS.TABLE_NAME} (name) VALUES (?)`;
     const [result] = await pool.query(query, [name]);
+
     return this.getItemById(result.insertId);
   }
 
@@ -134,14 +138,16 @@ class MysqlRepository {
     const { name } = data;
     const query = `UPDATE ${ITEM_CONSTANTS.TABLE_NAME} SET name = ? WHERE id = ?`;
     await pool.query(query, [name, id]);
+
     return this.getItemById(id);
   }
 
   async deleteItem(id) {
     const item = await this.getItemById(id);
-    if (!item) return null;
+    if (!item) { return null; }
 
     await pool.query(`DELETE FROM ${ITEM_CONSTANTS.TABLE_NAME} WHERE id = ?`, [id]);
+
     return item;
   }
 
@@ -153,6 +159,7 @@ class MysqlRepository {
       LIMIT 1
     `;
     const [rows] = await pool.query(query, [name]);
+
     return rows.length > 0;
   }
 }

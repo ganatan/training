@@ -1,17 +1,17 @@
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('AF', 'Africa', 'Africa', 30370000, 1287920000, 54);
+VALUES ('AF', 'Africa-pg', 'Africa', 30370000, 1287920000, 54);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('AN', 'Antarctica', 'Antarctica', 14000000, 4490, 0);
+VALUES ('AN', 'Antarctica-pg', 'Antarctica', 14000000, 4490, 0);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('AS', 'Asia', 'Asia', 44579000, 4545133000, 47);
+VALUES ('AS', 'Asia-pg', 'Asia', 44579000, 4545133000, 47);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('OC', 'Australia', 'Australia_(continent)', 8600000, 41261000, 14);
+VALUES ('OC', 'Australia-pg', 'Australia_(continent)', 8600000, 41261000, 14);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('EU', 'Europe', 'Europe', 10180000, 742648000, 45);
+VALUES ('EU', 'Europe-pg', 'Europe', 10180000, 742648000, 45);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('NA', 'North America', 'North_America', 24709000, 587615000, 23);
+VALUES ('NA', 'North America-pg', 'North_America', 24709000, 587615000, 23);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
-VALUES ('SA', 'South America', 'South_America', 17840000, 428240000, 12);
+VALUES ('SA', 'South America-pg', 'South_America', 17840000, 428240000, 12);
 
 INSERT INTO country (name,wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,flag,continent_id) 
 VALUES('United States','United_States','US','USA','660','us.png',

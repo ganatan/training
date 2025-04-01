@@ -1,4 +1,4 @@
-import pool from '../../core/database/database.js';
+import pool from '../../core/database/database-pg.js';
 
 import {
   addFilterCondition,

@@ -1,7 +1,7 @@
 export const ITEMS_MOCK_DATA = [
   {
     id: 1000,
-    name: 'Africa',
+    name: 'Africa Backend Mock',
     code: 'AF',
     area: 30370000,
     population: 1287920000,
@@ -10,7 +10,7 @@ export const ITEMS_MOCK_DATA = [
   },
   {
     id: 1001,
-    name: 'Antarctica',
+    name: 'Antarctica Backend Mock',
     code: 'AN',
     area: 14000000,
     population: 4490,
@@ -19,7 +19,7 @@ export const ITEMS_MOCK_DATA = [
   },
   {
     id: 1002,
-    name: 'Asia',
+    name: 'Asia Backend Mock',
     code: 'AS',
     area: 44579000,
     population: 4545133000,
@@ -28,7 +28,7 @@ export const ITEMS_MOCK_DATA = [
   },
   {
     id: 1003,
-    name: 'Australia',
+    name: 'Australia Backend Mock',
     code: 'OC',
     area: 8600000,
     population: 41261000,
@@ -37,7 +37,7 @@ export const ITEMS_MOCK_DATA = [
   },
   {
     id: 1004,
-    name: 'Europe',
+    name: 'Europe Backend Mock',
     code: 'EU',
     area: 10180000,
     population: 742648000,

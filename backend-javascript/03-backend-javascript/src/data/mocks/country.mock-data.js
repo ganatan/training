@@ -1,7 +1,7 @@
 export const ITEMS_MOCK_DATA = [
   {
     id: 1,
-    name: 'France Backend Mock',
+    name: 'France',
     wikipediaLink: 'France',
     isoAlpha2: 'FR',
     isoAlpha3: 'FRA',
@@ -12,7 +12,7 @@ export const ITEMS_MOCK_DATA = [
     },
   },
   {
-    name: 'Spain Backend Mock',
+    name: 'Spain',
     wikipediaLink: 'Spain',
     isoAlpha2: 'ES',
     isoAlpha3: 'ESP',

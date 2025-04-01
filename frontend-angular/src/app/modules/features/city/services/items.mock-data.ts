@@ -3,7 +3,7 @@ import { Item } from './item.model';
 export const ITEMS_MOCK_DATA: Item[] = [
   {
     "id": 1008,
-    "name": "Amsterdam Frontend Mock",
+    "name": "Amsterdam",
     "countryName": "United States",
     "countryIsoNumeric": "US",
     "continentName": "North America",
@@ -11,7 +11,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     "id": 1006,
-    "name": "Detroit Frontend Mock",
+    "name": "Detroit",
     "countryName": "United States",
     "countryIsoNumeric": "US",
     "continentName": "North America",
@@ -19,7 +19,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     "id": 1007,
-    "name": "Evanston Frontend Mock",
+    "name": "Evanston",
     "countryName": "United States",
     "countryIsoNumeric": "US",
     "continentName": "North America",
@@ -27,7 +27,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     "id": 1005,
-    "name": "Fresno, California Frontend Mock",
+    "name": "Fresno, California",
     "countryName": "United States",
     "countryIsoNumeric": "US",
     "continentName": "North America",
@@ -35,7 +35,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     "id": 1001,
-    "name": "Modesto Frontend Mock",
+    "name": "Modesto",
     "countryName": "United States",
     "countryIsoNumeric": "US",
     "continentName": "North America",

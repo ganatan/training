@@ -3,7 +3,7 @@ import { Item } from './item.model';
 export const ITEMS_MOCK_DATA: Item[] = [
   {
     id: 1000,
-    name: 'Africa Frontend Mock',
+    name: 'Africa',
     code: 'AF',
     wikipediaLink: 'Africa',
     area: 30370000,
@@ -13,7 +13,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     id: 1001,
-    name: 'Antarctica Frontend Mock',
+    name: 'Antarctica',
     code: 'AN',
     wikipediaLink: 'Antarctica',
     area: 14000000,
@@ -23,7 +23,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     id: 1002,
-    name: 'Asia Frontend Mock',
+    name: 'Asia',
     code: 'AS',
     wikipediaLink: 'Asia',
     area: 44579000,
@@ -33,7 +33,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     id: 1003,
-    name: 'Australia Frontend Mock',
+    name: 'Australia',
     code: 'OC',
     wikipediaLink: 'Australia_(continent)',
     area: 8600000,
@@ -43,7 +43,7 @@ export const ITEMS_MOCK_DATA: Item[] = [
   },
   {
     id: 1004,
-    name: 'Europe Frontend Mock',
+    name: 'Europe',
     code: 'EU',
     wikipediaLink: 'Europe',
     area: 10180000,

@@ -12,7 +12,9 @@ export class ItemsMockService implements ItemsServiceInterface {
     const perPage = filters.size ?? ITEMS_MOCK_DATA.length;
     const offset = (currentPage - 1) * perPage;
 
-    const pagedItems = ITEMS_MOCK_DATA.slice(offset, offset + perPage);
+    const pagedItems = ITEMS_MOCK_DATA
+      .slice(offset, offset + perPage)
+      .map(item => ({ ...item, name: `${item.name} Frontend Mock` }));
 
     const totalItems = ITEMS_MOCK_DATA.length;
     const totalPages = Math.ceil(totalItems / perPage);

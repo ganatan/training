@@ -23,8 +23,7 @@ CREATE TABLE country (
   continent_id dom_fk,
   iso_numeric dom_lib NOT NULL,
   iso_alpha2 dom_lib NOT NULL,
-  iso_alpha3 dom_lib NOT NULL,
-  flag dom_lib
+  iso_alpha3 dom_lib NOT NULL
 );
 
 CREATE SEQUENCE city_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
@@ -51,7 +50,6 @@ CREATE TABLE person (
   birth_city_id dom_fk,
   death_date dom_date,
   death_city_id dom_fk,
-  gender_id dom_fk,
   image dom_lib
 );
 

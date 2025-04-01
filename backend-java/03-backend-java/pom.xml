@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ganatan</groupId>
-	<artifactId>backend-java-postgresql</artifactId>
+	<artifactId>backend-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -72,7 +72,7 @@
 	</dependencies>
 
   <build>
-    <finalName>backend-java-postgresql</finalName>
+    <finalName>backend-java</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

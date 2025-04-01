@@ -1,13 +1,25 @@
+import DB_CLIENTS from '../../core/config/db-clients.js';
+
 import MockRepository from './item.repository.mock.js';
 import PgRepository from './item.repository.pg.js';
+import MysqlRepository from './item.repository.mysql.js';
 
 class Repository {
-  constructor(useDatabase) {
-    this.repository = useDatabase
-      ? new PgRepository()
-      : new MockRepository();
+  constructor(dbClient) {
+    switch (dbClient) {
+      case DB_CLIENTS.PG:
+        this.repository = new PgRepository();
+        break;
+      case DB_CLIENTS.MYSQL:
+        this.repository = new MysqlRepository();
+        break;
+      case DB_CLIENTS.MOCK:
+      default:
+        this.repository = new MockRepository();
+        break;
+    }
   }
-
+  
   async getItems(query) {
     return this.repository.getItems(query);
   }

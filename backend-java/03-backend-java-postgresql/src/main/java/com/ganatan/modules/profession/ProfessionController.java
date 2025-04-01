@@ -20,6 +20,7 @@ public class ProfessionController extends HttpServlet {
 
     public ProfessionController() {
         ProfessionRepository repository = new ProfessionRepository(AppConfig.useDatabase());
+        System.out.println("00000000001:ProfessionController");
         this.service = new ProfessionService(repository);
     }
 
@@ -31,6 +32,7 @@ public class ProfessionController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.println("00000000001:ProfessionController:doGet");
         setCorsHeaders(response);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

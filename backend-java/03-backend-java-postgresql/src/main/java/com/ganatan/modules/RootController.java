@@ -21,7 +21,9 @@ public class RootController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+    	
+    	System.out.println("00000000001:RootController");
+    	
         Map<String, Object> endpoints = Routes.ROUTES.entrySet().stream()
             .collect(Collectors.toMap(
                 Map.Entry::getKey,

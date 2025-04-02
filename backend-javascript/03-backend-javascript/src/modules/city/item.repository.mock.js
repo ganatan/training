@@ -83,9 +83,6 @@ class MockRepository {
       .slice(offset, offset + perPage)
       .map(item => ({ ...item, name: `${item.name} ${BACKEND_MOCK_SUFFIX}` }));
 
-    const global = this.computeTotals(filteredItems);
-    const current = this.computeTotals(data);
-
     return {
       metadata: {
         pagination: {
@@ -95,35 +92,7 @@ class MockRepository {
           totalPages,
         },
       },
-      totals: {
-        global: global,
-        currentPage: current,
-      },
       data: data,
-    };
-  }
-
-  computeTotals(rows) {
-    let area = 0;
-    let population = 0;
-    let countriesCount = 0;
-    let count = 0;
-
-    for (const item of rows) {
-      count += 1;
-      area += parseFloat(item.area || 0);
-      population += parseFloat(item.population || 0);
-      countriesCount += parseInt(item.countriesCount || 0);
-    }
-
-    const density = area > 0 ? parseFloat((population / area).toFixed(5)) : 0;
-
-    return {
-      count,
-      area,
-      population,
-      countriesCount,
-      density,
     };
   }
 

@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
+import DB_CLIENTS from './db-clients.js';
 
 dotenv.config();
 
 export default {
   port: process.env.PORT || 3000,
-  useDatabase: process.env.USE_DATABASE === 'true',
+  dbClient: process.env.DB_CLIENT || DB_CLIENTS.MOCK,
 };

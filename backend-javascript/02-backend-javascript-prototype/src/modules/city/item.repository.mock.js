@@ -1,5 +1,5 @@
 import { ITEMS_MOCK_DATA } from '../../data/mocks/city.mock-data.js';
-import createItem from './item.model.js';
+import { BACKEND_MOCK_SUFFIX } from '../../shared/constants/backend-mock.constants.js';
 
 class MockRepository {
   constructor() {
@@ -79,7 +79,9 @@ class MockRepository {
 
     const totalItems = filteredItems.length;
     const totalPages = Math.ceil(totalItems / perPage);
-    const data = filteredItems.slice(offset, offset + perPage);
+    const data = filteredItems
+      .slice(offset, offset + perPage)
+      .map(item => ({ ...item, name: `${item.name} ${BACKEND_MOCK_SUFFIX}` }));
 
     const global = this.computeTotals(filteredItems);
     const current = this.computeTotals(data);
@@ -130,7 +132,7 @@ class MockRepository {
   }
 
   async createItem(data) {
-    const newItem = createItem({ id: this.items.length + 1, ...data });
+    const newItem = { id: this.items.length + 1, ...data };
     this.items.push(newItem);
 
     return newItem;

@@ -1,27 +1,58 @@
 import { ITEMS_MOCK_DATA } from '../../data/mocks/profession.mock-data.js';
-import { DEFAULT_ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants.js';
+import { BACKEND_MOCK_SUFFIX } from '../../shared/constants/backend-mock.constants.js';
 
 class MockRepository {
   constructor() {
     this.items = JSON.parse(JSON.stringify(ITEMS_MOCK_DATA));
   }
 
-  async getItems({ offset = 0, limit = DEFAULT_ITEMS_PER_PAGE } = {}) {
-    const totalItems = this.items.length;
-    const totalPages = Math.ceil(totalItems / limit);
-    const currentPage = Math.floor(offset / limit) + 1;
-    const data = this.items.slice(offset, offset + limit);
+  async getItems(filters = {}) {
+    const {
+      page = 1,
+      size = 10,
+      sort = '-name',
+      name = '',
+    } = filters;
 
-    const metadata = {
-      pagination: {
-        currentPage: currentPage,
-        perPage: limit,
-        totalItems: totalItems,
-        totalPages: totalPages,
+    const currentPage = Math.max(1, parseInt(page, 10));
+    const perPage = Math.max(1, parseInt(size, 10));
+    const offset = (currentPage - 1) * perPage;
+
+    let filteredItems = [...this.items];
+
+    if (name) {
+      filteredItems = filteredItems.filter(item => item.name.toLowerCase().includes(name.toLowerCase()));
+    }
+
+    const sortField = sort.replace(/^-/, '');
+    const sortOrder = sort.startsWith('-') ? -1 : 1;
+
+    filteredItems.sort((itemA, itemB) => {
+      const valueA = itemA[sortField];
+      const valueB = itemB[sortField];
+      if (valueA < valueB) { return -1 * sortOrder; };
+      if (valueA > valueB) { return 1 * sortOrder; };
+
+      return 0;
+    });
+
+    const totalItems = filteredItems.length;
+    const totalPages = Math.ceil(totalItems / perPage);
+    const data = filteredItems
+      .slice(offset, offset + perPage)
+      .map(item => ({ ...item, name: `${item.name} ${BACKEND_MOCK_SUFFIX}` }));
+
+    return {
+      metadata: {
+        pagination: {
+          currentPage,
+          perPage,
+          totalItems,
+          totalPages,
+        },
       },
+      data: data,
     };
-
-    return { metadata, data };
   }
 
   async getItemById(id) {

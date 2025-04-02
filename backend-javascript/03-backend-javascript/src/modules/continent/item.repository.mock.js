@@ -1,4 +1,5 @@
 import { ITEMS_MOCK_DATA } from '../../data/mocks/continent.mock-data.js';
+import { BACKEND_MOCK_SUFFIX } from '../../shared/constants/backend-mock.constants.js';
 
 class MockRepository {
   constructor() {
@@ -80,7 +81,7 @@ class MockRepository {
     const totalPages = Math.ceil(totalItems / perPage);
     const data = filteredItems
       .slice(offset, offset + perPage)
-      .map(item => ({ ...item, name: `${item.name} Backend Mock` }));
+      .map(item => ({ ...item, name: `${item.name} ${BACKEND_MOCK_SUFFIX}` }));
 
     const global = this.computeTotals(filteredItems);
     const current = this.computeTotals(data);

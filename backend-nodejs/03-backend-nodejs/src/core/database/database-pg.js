@@ -13,5 +13,4 @@ const pool = new Pool({
   port: process.env.DB_PORT || 5432,
 });
 
-console.log('00000000001:' + JSON.stringify(pool));
 export default pool;

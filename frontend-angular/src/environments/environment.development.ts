@@ -8,9 +8,11 @@ export const environment = {
   },
   urlNews: './assets/params/json/mock/trailers.json',
   urlMovies: './assets/params/json/mock/movies.json',
-  useDatabase: true,
-  // backend-javascript
+  useDatabase: false,
+  // backend-nodejs
   backend: 'http://localhost:3000',
-  // backend-java
-  // backend: 'http://localhost:8089/backend-java-prototype',
+  // backend-typescript
+  // backend: 'http://localhost:3000',
+  // backend-springboot
+  // backend: 'http://localhost:8089/backend-springboot',
 };

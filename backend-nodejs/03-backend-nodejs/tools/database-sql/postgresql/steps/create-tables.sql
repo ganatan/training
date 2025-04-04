@@ -12,6 +12,9 @@ CREATE TABLE continent (
   countries_count dom_integer DEFAULT 0
 );
 
+
+
+
 CREATE SEQUENCE country_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
 
 ALTER SEQUENCE country_id_seq OWNER TO postgres;
@@ -26,6 +29,9 @@ CREATE TABLE country (
   iso_alpha3 dom_lib NOT NULL
 );
 
+
+
+
 CREATE SEQUENCE city_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
 
 ALTER SEQUENCE city_id_seq OWNER TO postgres;
@@ -37,6 +43,9 @@ CREATE TABLE city (
   country_id dom_fk,
   capital dom_boolean DEFAULT false
 );
+
+
+
 
 CREATE SEQUENCE person_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
 
@@ -52,6 +61,8 @@ CREATE TABLE person (
   death_city_id dom_fk,
   image dom_lib
 );
+
+
 
 
 CREATE SEQUENCE profession_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;

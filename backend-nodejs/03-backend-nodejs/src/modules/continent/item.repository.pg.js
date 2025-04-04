@@ -154,7 +154,7 @@ class PgRepository {
         area :: int AS area,
         population :: float AS "population",
         countries_count :: int AS "countriesCount",
-        ROUND((population / NULLIF(area, 0))::NUMERIC, 5) AS "density"
+        ROUND((population::numeric / NULLIF(area, 0)::numeric), 5)::float8 AS "density"
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions}
       ORDER BY ${sortBy} ${sortOrder}
@@ -177,7 +177,7 @@ class PgRepository {
         area::int AS area,
         population::float AS "population",
         countries_count::int AS "countriesCount",
-        ROUND((population / NULLIF(area, 0))::NUMERIC, 5) AS "density"
+        ROUND((population::float8 / NULLIF(area, 0)::float8), 5)::float8 AS "density"
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       WHERE id = $1
     `;

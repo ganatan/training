@@ -129,9 +129,9 @@ class MysqlRepository {
     return `
       SELECT 
         COUNT(id) AS count,
-        SUM(area) AS area,
-        SUM(population) AS population,
-        SUM(countries_count) AS countriesCount
+        CAST(SUM(area) AS UNSIGNED) AS area,
+        CAST(SUM(population) AS UNSIGNED) AS population,
+        CAST(SUM(countries_count) AS UNSIGNED) AS countriesCount
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${conditions};
     `;
@@ -147,7 +147,7 @@ class MysqlRepository {
         area,
         population,
         countries_count AS countriesCount,
-        ROUND((population / NULLIF(area, 0)), 5) AS density
+        CAST(ROUND(population / NULLIF(area, 0), 5) AS DECIMAL(10,5)) AS density
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${conditions}
       ORDER BY ${sortBy} ${sortOrder}

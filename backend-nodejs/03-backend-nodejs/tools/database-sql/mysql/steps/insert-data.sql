@@ -13,14 +13,14 @@ VALUES ('NA', 'North America-mysql', 'North_America', 24709000, 587615000, 23);
 INSERT INTO continent (code, name, wikipedia_link, area, population, countries_count) 
 VALUES ('SA', 'South America-mysql', 'South_America', 17840000, 428240000, 12);
 
-INSERT INTO country (name,wikipedia_link,fr_name,fr_wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,flag,continent_id) 
-VALUES('United States','United_States','États-Unis','États-Unis','US','USA','660','us.png',
+INSERT INTO country (name,wikipedia_link,fr_name,fr_wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,continent_id) 
+VALUES('United States','United_States','États-Unis','États-Unis','US','USA','660',
 (select id from continent where code='NA'));
-INSERT INTO country (name,wikipedia_link,fr_name,fr_wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,flag,continent_id) 
-VALUES('Jersey','Jersey','Jersey','Jersey','JE','JEY','832','je.png',
+INSERT INTO country (name,wikipedia_link,fr_name,fr_wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,continent_id) 
+VALUES('Jersey','Jersey','Jersey','Jersey','JE','JEY','832',
 (select id from continent where code='EU'));
-INSERT INTO country (name,wikipedia_link,fr_name,fr_wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,flag,continent_id) 
-VALUES('Sweden','Sweden','Suède','Suède','SE','SWE','752','se.png',
+INSERT INTO country (name,wikipedia_link,fr_name,fr_wikipedia_link,iso_numeric,iso_alpha2,iso_alpha3,continent_id) 
+VALUES('Sweden','Sweden','Suède','Suède','SE','SWE','752',
 (select id from continent where code='EU'));
 
 

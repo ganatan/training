@@ -81,37 +81,37 @@ export const routes: Routes = [
 
   {
     path: 'cities',
-    loadComponent: () => import('./modules/features/city/item.component')
+    loadComponent: () => import('./modules/features/crud/city/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
     path: 'persons',
-    loadComponent: () => import('./modules/features/person/item.component')
+    loadComponent: () => import('./modules/features/crud/person/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
     path: 'countries',
-    loadComponent: () => import('./modules/features/country/item.component')
+    loadComponent: () => import('./modules/features/crud/country/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
     path: 'professions',
-    loadComponent: () => import('./modules/features/profession/item.component')
+    loadComponent: () => import('./modules/features/crud/profession/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
     path: 'professions/:id',
-    loadComponent: () => import('./modules/features/profession-form/item.component')
+    loadComponent: () => import('./modules/features/crud/profession-form/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
     path: 'continents',
-    loadComponent: () => import('./modules/features/continent/item.component')
+    loadComponent: () => import('./modules/features/crud/continent/item.component')
       .then(mod => mod.ItemComponent)
   },
   {
     path: 'continents/:id',
-    loadComponent: () => import('./modules/features/continent-form/item.component')
+    loadComponent: () => import('./modules/features/crud/continent-form/item.component')
       .then(mod => mod.ItemComponent)
   },
 

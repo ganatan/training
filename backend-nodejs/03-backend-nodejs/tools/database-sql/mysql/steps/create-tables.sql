@@ -12,6 +12,9 @@ CREATE TABLE continent (
 ALTER TABLE
      continent AUTO_INCREMENT = 1000;
 
+
+
+
 CREATE TABLE country (
      id MEDIUMINT NOT NULL AUTO_INCREMENT,
      name CHAR(50) NOT NULL,
@@ -26,6 +29,9 @@ CREATE TABLE country (
 ALTER TABLE
      country AUTO_INCREMENT = 1000;
 
+
+
+
 CREATE TABLE city (
      id MEDIUMINT NOT NULL AUTO_INCREMENT,
      name CHAR(50) NOT NULL,
@@ -37,6 +43,9 @@ CREATE TABLE city (
 
 ALTER TABLE
      city AUTO_INCREMENT = 1000;
+
+
+
 
 CREATE TABLE person (
      id MEDIUMINT NOT NULL AUTO_INCREMENT,
@@ -52,6 +61,9 @@ CREATE TABLE person (
 
 ALTER TABLE
      person AUTO_INCREMENT = 1000;
+
+
+
 
 CREATE TABLE profession (
      id MEDIUMINT NOT NULL AUTO_INCREMENT,

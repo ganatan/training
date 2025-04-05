@@ -1,8 +1,6 @@
 import { HTTP_STATUS } from '../../shared/constants/http-status.js';
-
-const MESSAGES = {
-  ITEM_NOT_FOUND: 'Country not found',
-};
+import { ITEM_CONSTANTS } from './item.constant.js';
+import { validateItem } from './item.schema.js';
 
 class Controller {
   constructor(service) {
@@ -20,7 +18,6 @@ class Controller {
 
       return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
-
       return next(error);
     }
   }
@@ -28,12 +25,12 @@ class Controller {
   async getItemById(req, res, next) {
     try {
       const result = await this.service.getItemById(parseInt(req.params.id));
-      if (!result) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
-      }
 
       return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
+      if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
+        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+      }
 
       return next(error);
     }
@@ -41,10 +38,18 @@ class Controller {
 
   async createItem(req, res, next) {
     try {
+      validateItem(req.body);
+
       const result = await this.service.createItem(req.body);
 
       return res.status(HTTP_STATUS.CREATED).json(result);
     } catch (error) {
+      if (error.message === ITEM_CONSTANTS.ALREADY_EXISTS) {
+        return next({ status: HTTP_STATUS.CONFLICT, message: error.message });
+      }
+      if (error.name === 'ValidationError') {
+        return next({ status: HTTP_STATUS.BAD_REQUEST, message: error.message });
+      }
 
       return next(error);
     }
@@ -52,13 +57,18 @@ class Controller {
 
   async updateItem(req, res, next) {
     try {
+      validateItem(req.body);
+
       const result = await this.service.updateItem(parseInt(req.params.id), req.body);
-      if (!result) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
-      }
 
       return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
+      if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
+        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+      }
+      if (error.name === 'ValidationError') {
+        return next({ status: HTTP_STATUS.BAD_REQUEST, message: error.message });
+      }
 
       return next(error);
     }
@@ -67,12 +77,12 @@ class Controller {
   async deleteItem(req, res, next) {
     try {
       const result = await this.service.deleteItem(parseInt(req.params.id));
-      if (!result) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: MESSAGES.ITEM_NOT_FOUND });
-      }
 
       return res.status(HTTP_STATUS.OK).json(result);
     } catch (error) {
+      if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
+        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+      }
 
       return next(error);
     }
@@ -80,3 +90,4 @@ class Controller {
 }
 
 export default Controller;
+

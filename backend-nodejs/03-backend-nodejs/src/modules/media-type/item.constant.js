@@ -1,7 +1,7 @@
 export const ITEM_CONSTANTS = {
-  ALREADY_EXISTS: 'Profession already exists',
-  NOT_FOUND: 'Profession not found',
-  NAME: 'profession',
-  TABLE_NAME: 'profession',
-  INVALID_ID: 'Invalid profession Id',
+  ALREADY_EXISTS: 'MediaType already exists',
+  NOT_FOUND: 'MediaType not found',
+  NAME: 'media-type',
+  TABLE_NAME: 'media-type',
+  INVALID_ID: 'Invalid media-type Id',
 };

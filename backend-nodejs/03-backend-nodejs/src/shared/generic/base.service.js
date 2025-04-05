@@ -1,27 +1,76 @@
 class BaseService {
-  constructor(repository) {
+  constructor(repository, constants = {}) {
     this.repository = repository;
+    this.constants = constants;
   }
 
   async getItems(query) {
-    return this.repository.findAll(query);
+    return await this.repository.getItems(query);
   }
 
   async getItemById(id) {
-    return this.repository.findOne(id);
+    const item = await this.repository.getItemById(id);
+    if (!item) {
+      throw new Error(this.constants.NOT_FOUND || 'Not found');
+    }
+    return item;
   }
 
   async createItem(data) {
-    return this.repository.create(data);
+    if (await this.repository.existsByName?.(data.name)) {
+      throw new Error(this.constants.ALREADY_EXISTS || 'Already exists');
+    }
+
+    return await this.repository.createItem(data);
   }
 
   async updateItem(id, data) {
-    return this.repository.update(id, data);
+    const updated = await this.repository.updateItem(id, data);
+    if (!updated) {
+      throw new Error(this.constants.NOT_FOUND || 'Not found');
+    }
+
+    return updated;
   }
 
   async deleteItem(id) {
-    return this.repository.delete(id);
+    const deleted = await this.repository.deleteItem(id);
+    if (!deleted) {
+      throw new Error(this.constants.NOT_FOUND || 'Not found');
+    }
+
+    return deleted;
   }
 }
 
 export default BaseService;
+
+
+
+// class BaseService {
+//   constructor(repository) {
+//     this.repository = repository;
+//   }
+
+//   async getItems(query) {
+//     return this.repository.findAll(query);
+//   }
+
+//   async getItemById(id) {
+//     return this.repository.findOne(id);
+//   }
+
+//   async createItem(data) {
+//     return this.repository.create(data);
+//   }
+
+//   async updateItem(id, data) {
+//     return this.repository.update(id, data);
+//   }
+
+//   async deleteItem(id) {
+//     return this.repository.delete(id);
+//   }
+// }
+
+// export default BaseService;

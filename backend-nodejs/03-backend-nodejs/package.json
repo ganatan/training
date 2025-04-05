@@ -13,7 +13,6 @@
     "audit": "npm audit",
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",
     "generate-professions": "node tools/scripts/generate-professions.js 10",
-    "generate-module": "node tools/scripts/generate-module.js continent",
     "test:city:repository": "npm test -- city.repository.test.js",
     "test:city:service": "npm test -- city.service.test.js",
     "test:city:controller": "npm test -- city.controller.test.js",

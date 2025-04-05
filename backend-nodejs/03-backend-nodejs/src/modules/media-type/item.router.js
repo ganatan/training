@@ -1,15 +1,19 @@
 import express from 'express';
-
+import config from '../../core/config/config.js';
 import responseHandler from '../../infrastructure/logger/response-handler.js';
 
-import { Controller, Service, Repository } from './index.js';
+import Repository from './item.repository.js';
 
-import config from '../../core/config/config.js';
+import BaseController from '../../shared/generic/base.controller.js';
+import BaseService from '../../shared/generic/base.service.js';
+
+import { ITEM_CONSTANTS } from './item.constant.js';
+
 const router = express.Router();
 
-const repository = new Repository(config.dbClient);
-const service = new Service(repository);
-const controller = new Controller(service);
+const repository = new Repository(config.useDatabase);
+const service = new BaseService(repository);
+const controller = new BaseController(service, ITEM_CONSTANTS);
 
 router.get('/', controller.getItems, responseHandler);
 router.get('/:id', controller.getItemById, responseHandler);

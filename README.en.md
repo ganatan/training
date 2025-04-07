@@ -1,4 +1,4 @@
-# Angular Application – Fullstack with Angular 19 & Node.js  
+# Angular 19 – Fullstack Application 
 
 **👉 Si vous ne parlez pas anglais, la version française est ici** : [![Français](./ui/version-fr.png)](./README.md)
 

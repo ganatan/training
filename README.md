@@ -1,59 +1,61 @@
 
-# Angular App – Fullstack with Angular 19 & Node.js  
-[🇬🇧 English] | [🇫🇷 Si vous parlez français, c’est ici ➝ README.fr.md](./README.fr.md)
+# Angular App – Fullstack avec Angular 19 & Node.js  
+[🇫🇷 Français] | [🇬🇧 If you don’t speak français, c’est ici ➝ README.md](./README.md)
 
-This repository contains a **fullstack web application** made up of two separate projects:
+<img src="./ui/ganatan-about-github.png" align="right" width="140" height="140" alt="logo ganatan">
 
-- **frontend-angular**: Angular 19 frontend application  
-- **backend-nodesjs**: Node.js API using mocked or real data (PostgreSQL/MySQL)
+Ce dépôt contient une **application web fullstack** composée de deux projets distincts :
 
----
-
-## 🌐 Live Demo  
-[Check the demo](https://angular.ganatan.com)
+- **frontend-angular** : application Angular 19  
+- **backend-nodesjs** : API Express.js (Node.js) avec gestion de données mockées ou réelles (PostgreSQL/MySQL)
 
 ---
 
-## 🔧 Frontend behavior (Angular)
+## 🌐 Démo en ligne  
+[Voir la démo](https://angular.ganatan.com)
 
-The Angular app uses the `environment.ts` file:
+---
+
+## 🔧 Fonctionnement du frontend (Angular)
+
+Par défaut, l'application Angular utilise le fichier `environment.ts` :
 
 ```ts
 useDatabase: false,
 backend: 'http://localhost:3000',
 ```
 
-### Two modes available:
+### Deux modes disponibles :
 
-| `useDatabase` | Behavior                                  |
-|---------------|-------------------------------------------|
-| `false`       | Uses **mock data** from the frontend      |
-| `true`        | Uses **real data** from the backend (`http://localhost:3000`) |
+| `useDatabase` | Fonctionnement                         |
+|---------------|----------------------------------------|
+| `false`       | Utilise des **données mockées** côté frontend |
+| `true`        | Utilise des **données réelles** fournies par le backend (`http://localhost:3000`) |
 
 ---
 
-## 🛠️ Backend behavior (Node.js)
+## 🛠️ Fonctionnement du backend (Node.js)
 
-The backend uses a `.env` configuration file:
+Le backend est configuré via le fichier `.env` :
 
 ```env
 PORT=3000
 DB_CLIENT=mock
 ```
 
-### Behavior based on `DB_CLIENT`:
+### Comportement en fonction du `DB_CLIENT` :
 
-| `DB_CLIENT` | Data source           | Setup required        |
-|-------------|------------------------|------------------------|
-| `mock`      | Mocked data            | None                   |
-| `pg`        | PostgreSQL             | Run SQL scripts        |
-| `mysql`     | MySQL                  | Run SQL scripts        |
+| `DB_CLIENT` | Données utilisées     | Remplissage de la base |
+|-------------|------------------------|--------------------------|
+| `mock`      | Données simulées (mock)| Aucun                   |
+| `pg`        | PostgreSQL              | Lancer les scripts SQL  |
+| `mysql`     | MySQL                   | Lancer les scripts SQL  |
 
 ---
 
-## 🔗 Available API endpoints
+## 🔗 API disponibles
 
-Default backend endpoints are:
+Les URL disponibles par défaut via le backend sont :
 
 - [http://localhost:3000/continents](http://localhost:3000/continents)
 - [http://localhost:3000/cities](http://localhost:3000/cities)
@@ -63,7 +65,7 @@ Default backend endpoints are:
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Démarrage rapide
 
 ### Frontend
 
@@ -74,7 +76,7 @@ npm install
 npm start
 ```
 
-Accessible at: [http://localhost:4200](http://localhost:4200)
+Accessible via : [http://localhost:4200](http://localhost:4200)
 
 ---
 
@@ -86,11 +88,11 @@ npm install
 npm start
 ```
 
-Accessible at: [http://localhost:3000](http://localhost:3000)
+Accessible via : [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 👤 Author
+## 👤 Auteur
 
 - **Danny** – [www.ganatan.com](https://www.ganatan.com)
 
@@ -98,5 +100,5 @@ Accessible at: [http://localhost:3000](http://localhost:3000)
 
 ## 📚 Documentation
 
-- 🇬🇧 [Tutorials in English](https://www.ganatan.com/tutorials/en)
 - 🇫🇷 [Tutoriels en français](https://www.ganatan.com/tutorials)
+- 🇬🇧 [Tutorials in English](https://www.ganatan.com/tutorials/en)

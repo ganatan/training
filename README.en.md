@@ -98,5 +98,5 @@ Accessible at: [http://localhost:3000](http://localhost:3000)
 
 ## 📚 Documentation
 
-- 🇬🇧 [Tutorials in English](https://www.ganatan.com/tutorials/en)
+- 🇬🇧 [Tutorials in English](https://www.ganatan.com//en/tutorials)
 - 🇫🇷 [Tutoriels en français](https://www.ganatan.com/tutorials)

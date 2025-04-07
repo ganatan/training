@@ -102,4 +102,4 @@ Accessible via : [http://localhost:3000](http://localhost:3000)
 ## 📚 Documentation
 
 - 🇫🇷 [Tutoriels en français](https://www.ganatan.com/tutorials)
-- 🇬🇧 [Tutorials in English](https://www.ganatan.com/tutorials/en)
+- 🇬🇧 [Tutorials in English](https://www.ganatan.com/en/tutorials)

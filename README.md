@@ -1,6 +1,6 @@
 
-# Angular App – Fullstack avec Angular 19 & Node.js  
-[🇫🇷 Français] | [🇬🇧 If you don’t speak français, c’est ici ➝ README.md](./README.md)
+# Application Angular – Fullstack avec Angular 19 & Node.js  
+[If you don’t speak French, it's here ➝ README.en.md][![English](./ui/version-en.png) English](./README.en.md)
 
 <img src="./ui/ganatan-about-github.png" align="right" width="140" height="140" alt="logo ganatan">
 

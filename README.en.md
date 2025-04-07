@@ -1,6 +1,5 @@
-
-# Angular App – Fullstack with Angular 19 & Node.js  
-[🇬🇧 English] | [🇫🇷 Si vous parlez français, c’est ici ➝ README.fr.md](./README.fr.md)
+# Angular Application – Fullstack with Angular 19 & Node.js  
+[![English](./ui/version-en.png) English](./README.en.md)
 
 This repository contains a **fullstack web application** made up of two separate projects:
 

@@ -22,6 +22,10 @@ app.get('/persons', (req, res) => {
   res.json(directors);
 });
 
+app.get('*', (req, res) => {
+  res.json({ aaaa: 1111111 });
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

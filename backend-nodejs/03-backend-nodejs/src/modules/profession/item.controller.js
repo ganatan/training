@@ -22,6 +22,22 @@ class Controller {
     }
   }
 
+  // async getItems(req, res, next) {
+  //   console.log('00000000001');
+  //   try {
+  //     const result = await this.service.getItems(req.query)
+  
+  //     res.locals = {
+  //       data: result,
+  //       statusCode: HTTP_STATUS.OK
+  //     }
+  //     console.log('00000000002');
+  //     next()
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }  
+
   async getItemById(req, res, next) {
     try {
       const result = await this.service.getItemById(parseInt(req.params.id));

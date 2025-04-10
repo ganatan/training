@@ -1,4 +1,5 @@
 const responseHandler = (err, req, res, next) => {
+  console.log('00000000002');
   if (err) {
     const { status = 500, message = 'Internal Server Error' } = err;
     console.error(`[ERROR] ${status}: ${message}`);

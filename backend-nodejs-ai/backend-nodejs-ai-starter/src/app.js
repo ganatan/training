@@ -1,22 +1,49 @@
 import express from 'express'
 
-import aiRouter from './modules/ai/ai.router.js'
+// import llmRouter from './modules/llm/llm.router.js'
+
+import responseHandler from './infrastructure/logger/response-handler.js'
+import errorHandler from './infrastructure/logger/error-handler.js'
+import notFoundHandler from './infrastructure/logger/not-found-handler.js'
 
 process.removeAllListeners('warning')
 
 const app = express()
 app.use(express.json())
 
-app.use('/persons', aiRouter)
+// app.use('/llm', llmRouter)
 
-// app.get('/ai', async (req, res) => {
-//   const { summarizeHello } = await import('./modules/ai/ai.controller.js')
-//   const result = await summarizeHello()
-//   res.json(result)
-// })
+app.use((req, res, next) => {
+  res.locals = res.locals || {};
+  next();
+});
 
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' })
+app.get('/', (req, res) => {
+  res.status(200).json(
+    {
+      "success": true,
+      "message": "Welcome to the API. See /api-docs for usage."
+    })
+
 })
+
+app.get('/persons', (req, res, next) => {
+  res.locals = {
+    data: { url: 'persons' },
+    statusCode: 200
+  }
+  next()
+})
+
+app.get('/cities', (req, res, next) => {
+  const error = new Error('Erreur volontaire dans /cities')
+  error.statusCode = 500
+  error.context = 'GET /cities'
+  next(error)
+})
+
+app.use(notFoundHandler)
+app.use(responseHandler)
+app.use(errorHandler)
 
 export default app

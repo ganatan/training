@@ -20,4 +20,10 @@ router.post('/', controller.createItem, responseHandler);
 router.put('/:id', controller.updateItem, responseHandler);
 router.delete('/:id', controller.deleteItem, responseHandler);
 
+// router.get('/', controller.getItems);
+// router.get('/:id', controller.getItemById);
+// router.post('/', controller.createItem);
+// router.put('/:id', controller.updateItem);
+// router.delete('/:id', controller.deleteItem);
+
 export default router;

@@ -12,43 +12,68 @@ class Controller {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
+  // async getItems(req, res, next) {
+  //   try {
+  //     const result = await this.service.getItems(req.query);
+
+  //     return res.status(HTTP_STATUS.OK).json(result);
+  //   } catch (error) {
+  //     return next(error);
+  //   }
+  // }
+
   async getItems(req, res, next) {
     try {
-      const result = await this.service.getItems(req.query);
-
-      return res.status(HTTP_STATUS.OK).json(result);
+      const result = await this.service.getItems(req.query)
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.OK
+      }
+      next()
     } catch (error) {
-      return next(error);
+      next(error)
     }
-  }
+  }  
 
-  // async getItems(req, res, next) {
-  //   console.log('00000000001');
+  // async getItemById(req, res, next) {
   //   try {
-  //     const result = await this.service.getItems(req.query)
-  
-  //     res.locals = {
-  //       data: result,
-  //       statusCode: HTTP_STATUS.OK
-  //     }
-  //     console.log('00000000002');
-  //     next()
+  //     const result = await this.service.getItemById(parseInt(req.params.id));
+
+  //     return res.status(HTTP_STATUS.OK).json(result);
   //   } catch (error) {
-  //     next(error)
+  //     if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
+  //       return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+  //     }
+
+  //     return next(error);
   //   }
-  // }  
+  // }
 
   async getItemById(req, res, next) {
     try {
       const result = await this.service.getItemById(parseInt(req.params.id));
-
-      return res.status(HTTP_STATUS.OK).json(result);
+  
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.OK
+      }
+  
+      next()
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+        return next({
+          statusCode: HTTP_STATUS.NOT_FOUND,
+          message: error.message,
+          context: `${req.method} ${req.originalUrl}`,
+          details: {
+            path: req.originalUrl,
+            errorCode: HTTP_STATUS.NOT_FOUND,
+            timestamp: new Date().toISOString()
+          }
+        })
       }
-
-      return next(error);
+  
+      next(error)
     }
   }
 

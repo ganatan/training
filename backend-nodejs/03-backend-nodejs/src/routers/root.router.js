@@ -37,19 +37,19 @@ router.get('/', (req, res) => {
 // });
 
 
-router.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    error: {
-      message: 'Resource not found',
-      context: `${req.method} ${req.originalUrl}`,
-      details: {
-        path: req.originalUrl,
-        errorCode: 404,
-        timestamp: new Date().toISOString()
-      }
-    }
-  });
-});
+// router.use((req, res) => {
+//   res.status(404).json({
+//     success: false,
+//     error: {
+//       message: 'Resource not found',
+//       context: `${req.method} ${req.originalUrl}`,
+//       details: {
+//         path: req.originalUrl,
+//         errorCode: 404,
+//         timestamp: new Date().toISOString()
+//       }
+//     }
+//   });
+// });
 
 export default router;

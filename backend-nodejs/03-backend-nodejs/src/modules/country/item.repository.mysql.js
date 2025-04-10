@@ -80,6 +80,7 @@ class MysqlRepository {
     const totalPages = Math.ceil(totalItems / perPage);
 
     return {
+      success: true,
       metadata: {
         pagination: {
           currentPage,

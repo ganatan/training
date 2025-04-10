@@ -29,7 +29,9 @@ app.get('/', (req, res) => {
 
 app.get('/persons', (req, res, next) => {
   res.locals = {
-    data: { url: 'persons' },
+    data: {
+      name: 'spielberg'
+    },
     statusCode: 200
   }
   next()

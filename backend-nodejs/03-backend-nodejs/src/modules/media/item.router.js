@@ -11,7 +11,7 @@ import { validateItem } from './item.schema.js';
 
 const router = express.Router();
 
-const repository = new Repository(config.useDatabase);
+const repository = new Repository(config.dbClient);
 const service = new BaseService(repository, ITEM_CONSTANTS);
 const controller = new BaseController(service, ITEM_CONSTANTS, { validateItem });
 

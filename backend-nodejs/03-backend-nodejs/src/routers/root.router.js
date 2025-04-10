@@ -13,21 +13,42 @@ router.get('/', (req, res) => {
     };
   });
 
-  res.json({
-    version: '1.0.0',
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-    endpoints: endpoints,
-  });
+  res.json(
+    {
+      success: true,
+      data: {
+        version: '1.0.0',
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        endpoints: endpoints,
+      }
+    }
+  );
 });
+
+// router.use((req, res) => {
+//   res.status(404).json({
+//     status: 'error',
+//     message: 'Resource not found',
+//     path: req.originalUrl,
+//     errorCode: 404,
+//     timestamp: new Date().toISOString(),
+//   });
+// });
+
 
 router.use((req, res) => {
   res.status(404).json({
-    status: 'error',
-    message: 'Resource not found',
-    path: req.originalUrl,
-    errorCode: 404,
-    timestamp: new Date().toISOString(),
+    success: false,
+    error: {
+      message: 'Resource not found',
+      context: `${req.method} ${req.originalUrl}`,
+      details: {
+        path: req.originalUrl,
+        errorCode: 404,
+        timestamp: new Date().toISOString()
+      }
+    }
   });
 });
 

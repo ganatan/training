@@ -10,7 +10,7 @@ import config from '../../core/config/config.js';
 
 const router = express.Router();
 
-const repository = new Repository(config.useDatabase);
+const repository = new Repository(config.dbClient);
 const service = new Service(repository);
 const controller = new Controller(service);
 

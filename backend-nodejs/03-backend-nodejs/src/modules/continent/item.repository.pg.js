@@ -66,7 +66,6 @@ class PgRepository {
         pool.query(sqlCount, filterParams),
         pool.query(sqlData, filterParams),
       ]);
-      console.log('00000000001:'+ JSON.stringify(globalResult));
 
       const global = globalResult.rows[0];
       global.density = global.area > 0
@@ -120,7 +119,6 @@ class PgRepository {
     const totalPages = Math.ceil(totalItems / perPage);
 
     return {
-      success: true,
       metadata: {
         pagination: {
           currentPage: currentPage,

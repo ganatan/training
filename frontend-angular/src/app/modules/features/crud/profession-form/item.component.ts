@@ -52,13 +52,12 @@ export class ItemComponent {
   }
 
   getItem(id: number): void {
-    if (id !== 0) {
-      this.itemService.getItem(id)
-        .subscribe(item => {
-          this.item = item;
-          this.setForm(this.formItem, item);
-        });
-    }
+    if (id === 0) return;
+  
+    this.itemService.getItem(id).subscribe(item => {
+      this.item = item;
+      this.formItem.setValue(item);
+    });
   }
 
   setForm(form: FormGroup, item: Item) {
@@ -79,19 +78,20 @@ export class ItemComponent {
     this.formItem.patchValue({ id: 0 });
   }
 
-  onUpdate() {
-    const id = this.formItem.value['id'];
-    if (id > 0) {
-      this.updateItem(this.formItem.value);
+  onUpdate(): void {
+    const item: Item = this.formItem.value;
+  
+    if (item.id > 0) {
+      this.updateItem(item);
     } else {
-      this.createItem(this.formItem.value);
+      this.createItem(item);
     }
-  }
+  }  
 
   updateItem(item: Item) {
     this.itemService.updateItem(item)
-      .subscribe(dataUpdate => {
-        this.setForm(this.formItem, dataUpdate);
+      .subscribe(updatedItem => {
+        this.setForm(this.formItem, updatedItem);
       });
   }
 
@@ -115,28 +115,5 @@ export class ItemComponent {
       this.deleteItem(this.item);
     }
   }
-
-  /*
-  onDelete() {
-    this.openDelete();
-  }
-
-  openDelete() {
-    this.showDelete = true;
-  }
-
-  closeDelete() {
-    this.showDelete = false;
-  }
-
-  confirmDeletion() {
-    this.showDelete = false;
-    const id = this.formItem.value['id'];
-    if ((id != undefined) && (id != null)) {
-      this.deleteItem(this.item);
-    }
-  }
-    */
-
 
 }

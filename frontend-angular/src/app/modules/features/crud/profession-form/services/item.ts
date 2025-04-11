@@ -3,4 +3,7 @@ export interface Item {
   name: string;
 }
 
-
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+}

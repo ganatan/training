@@ -103,7 +103,6 @@ class PgRepository {
     const totalPages = Math.ceil(totalItems / perPage);
 
     return {
-      success: true,
       metadata: {
         pagination: {
           currentPage: currentPage,

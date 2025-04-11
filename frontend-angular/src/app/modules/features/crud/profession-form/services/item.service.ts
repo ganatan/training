@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../../../../../environments/environment';
 
-import { Item } from './item';
+import { Item, ApiResponse } from './item';
 import { URL_ITEMS, DEFAULT_ITEM } from './item.constants';
 
 const httpOptions = {
@@ -34,8 +34,9 @@ export class ItemService {
   getItem(id: number): Observable<Item> {
     const url = `${this.backendUrl}/${URL_ITEMS}/${id}`;
 
-    return this.http.get<Item>(url).pipe(
-      catchError(this.handleError(`getItem id=${id}`, DEFAULT_ITEM))
+    return this.http.get<ApiResponse<Item>>(url).pipe(
+      map((response: ApiResponse<Item>) => response.data),
+      catchError(() => of(DEFAULT_ITEM))
     );
   }
 

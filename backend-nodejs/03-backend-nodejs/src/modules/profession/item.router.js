@@ -10,17 +10,9 @@ import config from '../../core/config/config.js';
 
 const router = express.Router();
 
-console.log('00000000001:' + JSON.stringify(config))
-
 const repository = new Repository(config.dbClient);
 const service = new Service(repository);
 const controller = new Controller(service);
-
-// router.get('/', controller.getItems, responseHandler);
-// router.get('/:id', controller.getItemById, responseHandler);
-// router.post('/', controller.createItem, responseHandler);
-// router.put('/:id', controller.updateItem, responseHandler);
-// router.delete('/:id', controller.deleteItem, responseHandler);
 
 router.get('/', controller.getItems);
 router.get('/:id', controller.getItemById);

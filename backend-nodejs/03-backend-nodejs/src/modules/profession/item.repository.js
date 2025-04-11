@@ -6,7 +6,6 @@ import MysqlRepository from './item.repository.mysql.js';
 
 class Repository {
   constructor(dbClient) {
-    console.log('00000000001:' + dbClient)
     switch (dbClient) {
       case DB_CLIENTS.PG:
         this.repository = new PgRepository();

@@ -8,7 +8,7 @@ export const environment = {
   },
   urlNews: './assets/params/json/mock/trailers.json',
   urlMovies: './assets/params/json/mock/movies.json',
-  useDatabase: false,
+  useDatabase: true,
   // backend-nodejs
   backend: 'http://localhost:3000',
   // backend-typescript

@@ -66,6 +66,7 @@ class PgRepository {
         pool.query(sqlCount, filterParams),
         pool.query(sqlData, filterParams),
       ]);
+      console.log('00000000001:'+ JSON.stringify(globalResult));
 
       const global = globalResult.rows[0];
       global.density = global.area > 0
@@ -136,10 +137,10 @@ class PgRepository {
   buildQueryCount(filterConditions) {
     return `
       SELECT 
-        COUNT(id) AS count,
-        SUM(area) :: int AS area,
-        SUM(population) :: float AS population,
-        SUM(countries_count) :: int AS countriesCount
+        COUNT(id) AS "count",
+        SUM(area) :: int AS "area",
+        SUM(population) :: float AS "population",
+        SUM(countries_count) :: int AS "countriesCount"
       FROM ${ITEM_CONSTANTS.TABLE_NAME}
       ${filterConditions};
     `;

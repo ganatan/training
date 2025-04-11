@@ -15,17 +15,3 @@ const notFoundHandler = (req, res, next) => {
 }
 
 export default notFoundHandler
-
-
-
-// const notFoundHandler = (req, res, next) => {
-//   if (res.locals.data === undefined) {
-//     const error = new Error('not found')
-//     error.statusCode = 500
-//     error.context = 'GET /not-found' + req.originalUrl,
-//     next(error)
-//   }
-//   next()
-
-// }
-

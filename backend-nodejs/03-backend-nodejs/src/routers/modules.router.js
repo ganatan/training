@@ -16,8 +16,8 @@ router.use('/countries', countryRouter);
 router.use('/persons', personRouter);
 router.use('/professions', professionRouter);
 
-router.use('/media', mediaRouter);
-router.use('/media-type', mediaTypeRouter);
+router.use('/medias', mediaRouter);
+router.use('/media-types', mediaTypeRouter);
 
 export default router;
 

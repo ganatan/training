@@ -12,7 +12,6 @@ class Controller {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
-
   async getItems(req, res, next) {
     try {
       const result = await this.service.getItems(req.query)

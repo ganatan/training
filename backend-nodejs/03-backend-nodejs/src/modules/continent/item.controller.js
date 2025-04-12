@@ -12,81 +12,101 @@ class Controller {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
+
   async getItems(req, res, next) {
     try {
-      const result = await this.service.getItems(req.query);
-
-      return res.status(HTTP_STATUS.OK).json(result);
+      const result = await this.service.getItems(req.query)
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.OK
+      }
+      next()
     } catch (error) {
-      return next(error);
+      next(error)
     }
   }
 
   async getItemById(req, res, next) {
     try {
-      const result = await this.service.getItemById(parseInt(req.params.id));
-
-      return res.status(HTTP_STATUS.OK).json(result);
+      const result = await this.service.getItemById(parseInt(req.params.id))
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.OK
+      }
+      next()
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+        return next({
+          statusCode: HTTP_STATUS.NOT_FOUND,
+          message: error.message,
+          context: `${req.method} ${req.originalUrl}`,
+          details: {
+            path: req.originalUrl,
+            errorCode: HTTP_STATUS.NOT_FOUND,
+            timestamp: new Date().toISOString()
+          }
+        })
       }
-
-      return next(error);
+      next(error)
     }
   }
 
   async createItem(req, res, next) {
     try {
-      validateItem(req.body);
-
-      const result = await this.service.createItem(req.body);
-
-      return res.status(HTTP_STATUS.CREATED).json(result);
+      validateItem(req.body)
+      const result = await this.service.createItem(req.body)
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.CREATED
+      }
+      next()
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.ALREADY_EXISTS) {
-        return next({ status: HTTP_STATUS.CONFLICT, message: error.message });
+        return next({ statusCode: HTTP_STATUS.CONFLICT, message: error.message })
       }
       if (error.name === 'ValidationError') {
-        return next({ status: HTTP_STATUS.BAD_REQUEST, message: error.message });
+        return next({ statusCode: HTTP_STATUS.BAD_REQUEST, message: error.message })
       }
-
-      return next(error);
+      next(error)
     }
   }
 
   async updateItem(req, res, next) {
     try {
-      validateItem(req.body);
-
-      const result = await this.service.updateItem(parseInt(req.params.id), req.body);
-
-      return res.status(HTTP_STATUS.OK).json(result);
+      validateItem(req.body)
+      const result = await this.service.updateItem(parseInt(req.params.id), req.body)
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.OK
+      }
+      next()
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+        return next({ statusCode: HTTP_STATUS.NOT_FOUND, message: error.message })
       }
       if (error.name === 'ValidationError') {
-        return next({ status: HTTP_STATUS.BAD_REQUEST, message: error.message });
+        return next({ statusCode: HTTP_STATUS.BAD_REQUEST, message: error.message })
       }
-
-      return next(error);
+      next(error)
     }
   }
 
   async deleteItem(req, res, next) {
     try {
-      const result = await this.service.deleteItem(parseInt(req.params.id));
-
-      return res.status(HTTP_STATUS.OK).json(result);
+      const result = await this.service.deleteItem(parseInt(req.params.id))
+      res.locals = {
+        data: result,
+        statusCode: HTTP_STATUS.OK
+      }
+      next()
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
-        return next({ status: HTTP_STATUS.NOT_FOUND, message: error.message });
+        return next({ statusCode: HTTP_STATUS.NOT_FOUND, message: error.message })
       }
-
-      return next(error);
+      next(error)
     }
   }
+
 }
 
 export default Controller;

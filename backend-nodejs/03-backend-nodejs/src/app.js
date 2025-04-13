@@ -8,6 +8,8 @@ import responseHandler from './infrastructure/middleware/response-handler.js';
 import errorHandler from './infrastructure/middleware/error-handler.js';
 import notFoundHandler from './infrastructure/middleware/not-found-handler.js';
 
+import swaggerRouter from './infrastructure/swagger/swagger.router.js';
+
 const app = express();
 
 app.use(cors());
@@ -18,6 +20,8 @@ app.use((req, res, next) => {
   res.locals = res.locals || {};
   next();
 });
+
+app.use('/api-docs', swaggerRouter);
 
 app.use(rootRouter);
 

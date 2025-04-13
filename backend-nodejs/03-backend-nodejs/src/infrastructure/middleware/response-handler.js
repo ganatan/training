@@ -17,7 +17,7 @@ const responseHandler = (req, res, next) => {
 
   res.status(statusCode).json(response);
 
-  return;
+  return next();
 };
 
 export default responseHandler;

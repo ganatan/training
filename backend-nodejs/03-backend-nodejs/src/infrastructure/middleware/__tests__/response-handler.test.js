@@ -1,11 +1,14 @@
 import responseHandler from '../response-handler.js';
 
 describe('responseHandler', () => {
-  let req, res, next;
+  let req;
+  let res;
+  let next;
 
   beforeEach(() => {
     req = {};
     res = {
+      headersSent: false,
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
       locals: {},
@@ -13,63 +16,84 @@ describe('responseHandler', () => {
     next = jest.fn();
   });
 
-  test('returns an error response when an error is passed', () => {
+  test('should call next if headers are already sent', () => {
     // Arrange
-    const error = { status: 404, message: 'Not Found' };
+    res.headersSent = true;
 
     // Act
-    responseHandler(error, req, res, next);
+    responseHandler(req, res, next);
 
     // Assert
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Not Found' });
+    expect(next).toHaveBeenCalled();
+    expect(res.status).not.toHaveBeenCalled();
+    expect(res.json).not.toHaveBeenCalled();
   });
 
-  test('returns data with status 200 if res.locals.data is set', () => {
+  test('should respond with status 200 and data if res.locals.data is set', () => {
     // Arrange
     res.locals.data = { name: 'Test' };
 
     // Act
-    responseHandler(null, req, res, next);
+    responseHandler(req, res, next);
 
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ name: 'Test' });
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      data: { name: 'Test' },
+    });
+    expect(next).toHaveBeenCalled();
   });
 
-  test('respects the existing statusCode if valid', () => {
+  test('should respond with status 200 and metadata if both metadata and data are provided', () => {
     // Arrange
-    res.locals.data = { name: 'Test' };
-    res.statusCode = 201;
+    res.locals.data = {
+      metadata: { count: 1 },
+      data: [{ id: 1 }],
+    };
 
     // Act
-    responseHandler(null, req, res, next);
+    responseHandler(req, res, next);
+
+    // Assert
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      metadata: { count: 1 },
+      data: [{ id: 1 }],
+    });
+    expect(next).toHaveBeenCalled();
+  });
+
+  test('should respect res.locals.statusCode if defined', () => {
+    // Arrange
+    res.locals.statusCode = 201;
+    res.locals.data = { name: 'Created' };
+
+    // Act
+    responseHandler(req, res, next);
 
     // Assert
     expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith({ name: 'Test' });
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      data: { name: 'Created' },
+    });
+    expect(next).toHaveBeenCalled();
   });
 
-  test('defaults to status 200 if res.statusCode is invalid', () => {
+  test('should default to status 200 and null data if res.locals is empty', () => {
     // Arrange
-    res.locals.data = { name: 'Test' };
-    res.statusCode = 999;
 
     // Act
-    responseHandler(null, req, res, next);
+    responseHandler(req, res, next);
 
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ name: 'Test' });
-  });
-
-  test('calls next() if no error and no data', () => {
-    // Arrange
-
-    // Act
-    responseHandler(null, req, res, next);
-
-    // Assert
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      data: null,
+    });
     expect(next).toHaveBeenCalled();
   });
 });

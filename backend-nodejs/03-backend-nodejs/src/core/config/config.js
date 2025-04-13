@@ -11,5 +11,5 @@ export default {
   fakeUser: {
     username: process.env.FAKE_USER_NAME || 'default_user',
     role: process.env.FAKE_USER_ROLE || 'viewer',
-  }
+  },
 };

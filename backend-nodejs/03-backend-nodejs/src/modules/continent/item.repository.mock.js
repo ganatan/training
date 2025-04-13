@@ -1,5 +1,5 @@
 import { ITEMS_MOCK_DATA } from '../../data/mocks/continent.mock-data.js';
-import { BACKEND_MOCK_SUFFIX } from '../../shared/constants/backend-mock.constants.js';
+import { BACKEND_MOCK_SUFFIX } from '../../shared/constants/routes/backend-mock.constants.js';
 
 class MockRepository {
   constructor() {

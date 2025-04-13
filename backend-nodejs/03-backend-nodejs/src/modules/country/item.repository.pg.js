@@ -9,8 +9,8 @@ import {
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_MIN_ENTITY_ID,
   MAX_ITEMS_PER_PAGE,
-} from '../../shared/constants/pagination.constants.js';
-import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
+} from '../../shared/constants/pagination/pagination.constants.js';
+import { SORT_DIRECTION } from '../../shared/constants/sort/sort.constants.js';
 
 const ITEMS_NAME = 'country';
 const TABLE_NAME = 'country';

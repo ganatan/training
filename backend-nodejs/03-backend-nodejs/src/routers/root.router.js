@@ -1,5 +1,5 @@
 import express from 'express';
-import { ROUTES } from '../shared/constants/routes.constants.js';
+import { ROUTES } from '../shared/constants/routes/routes.constants.js';
 
 import config from '../core/config/config.js';
 

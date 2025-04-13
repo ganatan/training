@@ -10,9 +10,9 @@ import {
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_MIN_ENTITY_ID,
   MAX_ITEMS_PER_PAGE,
-} from '../../shared/constants/pagination.constants.js';
-import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
-import { DATE_FORMAT_ISO } from '../../shared/constants/date-format.constants.js';
+} from '../../shared/constants/pagination/pagination.constants.js';
+import { SORT_DIRECTION } from '../../shared/constants/sort/sort.constants.js';
+import { DATE_FORMAT_ISO } from '../../shared/constants/date/date-format.constants.js';
 
 import { ITEM_CONSTANTS } from './item.constant.js';
 

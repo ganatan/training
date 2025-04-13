@@ -1,4 +1,4 @@
-import { HTTP_STATUS } from '../../shared/constants/http-status.js';
+import { HTTP_STATUS } from '../../shared/constants/http/http-status.js';
 import { ITEM_CONSTANTS } from './item.constant.js';
 import { validateItem } from './item.schema.js';
 

@@ -6,13 +6,13 @@ import {
   addRangeCondition,
   addDensityCondition,
 } from '../../shared/utils/query/query-utils.js';
-import { MAX_INTEGER } from '../../shared/constants/limits.constants.js';
+import { MAX_INTEGER } from '../../shared/constants/pagination/limits.constants.js';
 import {
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_MIN_ENTITY_ID,
   MAX_ITEMS_PER_PAGE,
-} from '../../shared/constants/pagination.constants.js';
-import { SORT_DIRECTION } from '../../shared/constants/sort.constants.js';
+} from '../../shared/constants/pagination/pagination.constants.js';
+import { SORT_DIRECTION } from '../../shared/constants/sort/sort.constants.js';
 
 import { ITEM_CONSTANTS } from './item.constant.js';
 

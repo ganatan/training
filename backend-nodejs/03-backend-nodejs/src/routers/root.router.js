@@ -8,10 +8,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const endpoints = {};
 
-  for (const [key, config] of Object.entries(ROUTES)) {
+  for (const [key, item] of Object.entries(ROUTES)) {
     endpoints[key] = {
-      url: config.path,
-      methods: config.methods,
+      url: item.path,
+      methods: item.methods,
     };
   }
 

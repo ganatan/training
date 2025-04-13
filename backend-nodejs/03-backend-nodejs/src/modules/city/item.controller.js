@@ -12,28 +12,24 @@ class Controller {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
-
   async getItems(req, res, next) {
     try {
-      const result = await this.service.getItems(req.query)
-      res.locals = {
-        data: result,
-        statusCode: HTTP_STATUS.OK
-      }
-      next()
+      const result = await this.service.getItems(req.query);
+      res.locals = { data: result, statusCode: HTTP_STATUS.OK };
+
+      return next();
     } catch (error) {
-      next(error)
+
+      return next(error);
     }
   }
 
   async getItemById(req, res, next) {
     try {
-      const result = await this.service.getItemById(parseInt(req.params.id))
-      res.locals = {
-        data: result,
-        statusCode: HTTP_STATUS.OK
-      }
-      next()
+      const result = await this.service.getItemById(parseInt(req.params.id));
+      res.locals = { data: result, statusCode: HTTP_STATUS.OK };
+
+      return next();
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
         return next({
@@ -43,70 +39,67 @@ class Controller {
           details: {
             path: req.originalUrl,
             errorCode: HTTP_STATUS.NOT_FOUND,
-            timestamp: new Date().toISOString()
-          }
-        })
+            timestamp: new Date().toISOString(),
+          },
+        });
       }
-      next(error)
+
+      return next(error);
     }
   }
 
   async createItem(req, res, next) {
     try {
-      validateItem(req.body)
-      const result = await this.service.createItem(req.body)
-      res.locals = {
-        data: result,
-        statusCode: HTTP_STATUS.CREATED
-      }
-      next()
+      validateItem(req.body);
+      const result = await this.service.createItem(req.body);
+      res.locals = { data: result, statusCode: HTTP_STATUS.CREATED };
+
+      return next();
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.ALREADY_EXISTS) {
-        return next({ statusCode: HTTP_STATUS.CONFLICT, message: error.message })
+        return next({ statusCode: HTTP_STATUS.CONFLICT, message: error.message });
       }
       if (error.name === 'ValidationError') {
-        return next({ statusCode: HTTP_STATUS.BAD_REQUEST, message: error.message })
+        return next({ statusCode: HTTP_STATUS.BAD_REQUEST, message: error.message });
       }
-      next(error)
+
+      return next(error);
     }
   }
 
   async updateItem(req, res, next) {
     try {
-      validateItem(req.body)
-      const result = await this.service.updateItem(parseInt(req.params.id), req.body)
-      res.locals = {
-        data: result,
-        statusCode: HTTP_STATUS.OK
-      }
-      next()
+      validateItem(req.body);
+      const result = await this.service.updateItem(parseInt(req.params.id), req.body);
+      res.locals = { data: result, statusCode: HTTP_STATUS.OK };
+
+      return next();
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
-        return next({ statusCode: HTTP_STATUS.NOT_FOUND, message: error.message })
+        return next({ statusCode: HTTP_STATUS.NOT_FOUND, message: error.message });
       }
       if (error.name === 'ValidationError') {
-        return next({ statusCode: HTTP_STATUS.BAD_REQUEST, message: error.message })
+        return next({ statusCode: HTTP_STATUS.BAD_REQUEST, message: error.message });
       }
-      next(error)
+
+      return next(error);
     }
   }
 
   async deleteItem(req, res, next) {
     try {
-      const result = await this.service.deleteItem(parseInt(req.params.id))
-      res.locals = {
-        data: result,
-        statusCode: HTTP_STATUS.OK
-      }
-      next()
+      const result = await this.service.deleteItem(parseInt(req.params.id));
+      res.locals = { data: result, statusCode: HTTP_STATUS.OK };
+
+      return next();
     } catch (error) {
       if (error.message === ITEM_CONSTANTS.NOT_FOUND) {
-        return next({ statusCode: HTTP_STATUS.NOT_FOUND, message: error.message })
+        return next({ statusCode: HTTP_STATUS.NOT_FOUND, message: error.message });
       }
-      next(error)
+
+      return next(error);
     }
   }
-
 }
 
 export default Controller;

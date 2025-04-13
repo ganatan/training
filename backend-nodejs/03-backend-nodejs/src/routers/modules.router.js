@@ -15,7 +15,6 @@ router.use('/continents', continentRouter);
 router.use('/countries', countryRouter);
 router.use('/persons', personRouter);
 router.use('/professions', professionRouter);
-
 router.use('/medias', mediaRouter);
 router.use('/media-types', mediaTypeRouter);
 

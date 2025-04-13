@@ -11,8 +11,4 @@ export const environment = {
   useDatabase: true,
   // backend-nodejs
   backend: 'http://localhost:3000',
-  // backend-typescript
-  // backend: 'http://localhost:3000',
-  // backend-springboot
-  // backend: 'http://localhost:8089/backend-springboot',
 };

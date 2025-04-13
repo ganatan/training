@@ -24,17 +24,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/api-docs', swaggerRouter);
-
-// app.use(rootRouter);
-
-// app.use(modulesRouter);
-
-// app.use(notFoundHandler);
-// app.use(responseHandler);
-// app.use(errorHandler);
-
-
 app.use(requestLogger);
 
 app.use('/api-docs', swaggerRouter);

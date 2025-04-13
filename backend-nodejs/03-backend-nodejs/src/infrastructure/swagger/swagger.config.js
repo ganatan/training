@@ -14,6 +14,6 @@ const swaggerDefinition = {
 };
 
 export const swaggerOptions = {
-  swaggerDefinition,
+  swaggerDefinition: swaggerDefinition,
   apis: ['src/modules/**/*.swagger.js'],
 };

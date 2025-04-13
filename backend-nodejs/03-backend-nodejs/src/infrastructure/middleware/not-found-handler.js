@@ -1,43 +1,18 @@
 const notFoundHandler = (req, res, next) => {
   if (res.locals.data === undefined) {
-    const error = new Error('Resource not found')
-    error.statusCode = 404
-    error.context = `${req.method} ${req.originalUrl}`
+    const error = new Error('Resource not found');
+    error.statusCode = 404;
+    error.context = `${req.method} ${req.originalUrl}`;
     error.details = {
       path: req.originalUrl,
       errorCode: 404,
-      timestamp: new Date().toISOString()
-    }
-    next(error)
+      timestamp: new Date().toISOString(),
+    };
+
+    return next(error);
   } else {
-    next()
+    return next();
   }
-}
+};
 
-export default notFoundHandler
-
-
-
-// const notFoundHandler = (req, res, next) => {
-//   if (res.locals.data === undefined) {
-//     res.locals = {
-//       statusCode: 404,
-//       data: {
-//         success: false,
-//         error: {
-//           message: 'Resource not found',
-//           details: {
-//             path: req.originalUrl,
-//             errorCode: 404,
-//             timestamp: new Date().toISOString()
-//           }
-//         }
-//       }
-//     }
-//   }
-//   next()
-// }
-
-// export default notFoundHandler
-
-
+export default notFoundHandler;

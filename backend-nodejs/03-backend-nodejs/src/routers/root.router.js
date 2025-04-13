@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
       version: config.version,
       status: 'ok',
       timestamp: new Date().toISOString(),
-      endpoints,
+      endpoints: endpoints,
     },
   });
 });

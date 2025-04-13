@@ -1,6 +1,6 @@
-import Controller from './item.controller.js';
-import Service from './item.service.js';
-import Repository from './item.repository.js';
+import Controller from './continent.controller.js';
+import Service from './continent.service.js';
+import Repository from './continent.repository.js';
 
 export {
   Controller,

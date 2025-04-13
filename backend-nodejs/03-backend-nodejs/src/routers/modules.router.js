@@ -1,12 +1,12 @@
 import express from 'express';
 
-import cityRouter from '../modules/city/item.router.js';
-import continentRouter from '../modules/continent/item.router.js';
-import countryRouter from '../modules/country/item.router.js';
-import personRouter from '../modules/person/item.router.js';
-import professionRouter from '../modules/profession/item.router.js';
-import mediaTypeRouter from '../modules/media-type/item.router.js';
-import mediaRouter from '../modules/media/item.router.js';
+import cityRouter from '../modules/city/city.router.js';
+import continentRouter from '../modules/continent/continent.router.js';
+import countryRouter from '../modules/country/country.router.js';
+import personRouter from '../modules/person/person.router.js';
+import professionRouter from '../modules/profession/profession.router.js';
+import mediaTypeRouter from '../modules/media-type/media-type.router.js';
+import mediaRouter from '../modules/media/media.router.js';
 
 const router = express.Router();
 

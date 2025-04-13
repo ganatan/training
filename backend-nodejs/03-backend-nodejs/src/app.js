@@ -10,6 +10,9 @@ import notFoundHandler from './infrastructure/middleware/not-found-handler.js';
 
 import swaggerRouter from './infrastructure/swagger/swagger.router.js';
 
+import requestLogger from './infrastructure/logger/request-logger.js';
+import errorLogger from './infrastructure/logger/error-logger.js';
+
 const app = express();
 
 app.use(cors());
@@ -21,14 +24,26 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.use('/api-docs', swaggerRouter);
+
+// app.use(rootRouter);
+
+// app.use(modulesRouter);
+
+// app.use(notFoundHandler);
+// app.use(responseHandler);
+// app.use(errorHandler);
+
+
+app.use(requestLogger);
+
 app.use('/api-docs', swaggerRouter);
-
 app.use(rootRouter);
-
 app.use(modulesRouter);
 
 app.use(notFoundHandler);
 app.use(responseHandler);
+app.use(errorLogger);
 app.use(errorHandler);
 
 export default app;

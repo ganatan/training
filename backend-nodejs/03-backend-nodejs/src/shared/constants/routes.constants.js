@@ -35,4 +35,12 @@ export const ROUTES = {
     path: '/media-persons',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
+  playlists: {
+    path: '/playlists',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  'playlist-elements': {
+    path: '/playlist-elements',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
 };

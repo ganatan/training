@@ -1,5 +1,5 @@
+-- continent
 CREATE SEQUENCE continent_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
-
 ALTER SEQUENCE continent_id_seq OWNER TO postgres;
 
 CREATE TABLE continent (
@@ -13,10 +13,8 @@ CREATE TABLE continent (
 );
 
 
-
-
+-- country
 CREATE SEQUENCE country_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
-
 ALTER SEQUENCE country_id_seq OWNER TO postgres;
 
 CREATE TABLE country (
@@ -30,10 +28,8 @@ CREATE TABLE country (
 );
 
 
-
-
+-- city
 CREATE SEQUENCE city_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
-
 ALTER SEQUENCE city_id_seq OWNER TO postgres;
 
 CREATE TABLE city (
@@ -45,10 +41,8 @@ CREATE TABLE city (
 );
 
 
-
-
+-- person
 CREATE SEQUENCE person_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
-
 ALTER SEQUENCE person_id_seq OWNER TO postgres;
 
 CREATE TABLE person (
@@ -63,13 +57,81 @@ CREATE TABLE person (
 );
 
 
-
-
+-- profession
 CREATE SEQUENCE profession_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
-
 ALTER SEQUENCE profession_id_seq OWNER TO postgres;
 
 CREATE TABLE profession (
   id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('profession_id_seq' :: regclass),
   name dom_lib NOT NULL
+);
+
+
+-- person_profession
+CREATE SEQUENCE person_profession_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
+ALTER SEQUENCE person_profession_id_seq OWNER TO postgres;
+
+CREATE TABLE person_profession (
+  id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('person_profession_id_seq' :: regclass),
+  person_id dom_fk NOT NULL,
+  profession_id dom_fk NOT NULL
+);
+
+
+-- media_type
+CREATE SEQUENCE media_type_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
+ALTER SEQUENCE media_type_id_seq OWNER TO postgres;
+
+CREATE TABLE media_type (
+  id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('media_type_id_seq' :: regclass),
+  name dom_lib NOT NULL
+);
+
+
+-- media
+CREATE SEQUENCE media_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
+ALTER SEQUENCE media_id_seq OWNER TO postgres;
+
+CREATE TABLE media (
+  id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('media_id_seq' :: regclass),
+  name dom_lib NOT NULL,
+  release_date dom_date,
+  media_type_id dom_fk,
+  wikipedia_link dom_lib DEFAULT ''
+);
+
+
+-- media_person
+CREATE SEQUENCE media_person_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
+ALTER SEQUENCE media_person_id_seq OWNER TO postgres;
+
+CREATE TABLE media_person (
+  id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('media_person_id_seq' :: regclass),
+  media_id dom_fk NOT NULL,
+  person_id dom_fk NOT NULL,
+  profession_id dom_fk NOT NULL
+);
+
+
+-- playlist
+CREATE SEQUENCE playlist_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
+ALTER SEQUENCE playlist_id_seq OWNER TO postgres;
+
+CREATE TABLE playlist (
+  id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('playlist_id_seq' :: regclass),
+  name dom_lib NOT NULL,
+  description dom_comment DEFAULT '',
+  creation_date dom_date DEFAULT now()
+);
+
+
+-- playlist_element
+CREATE SEQUENCE playlist_element_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1000 CACHE 1;
+ALTER SEQUENCE playlist_element_id_seq OWNER TO postgres;
+
+CREATE TABLE playlist_element (
+  id dom_pk PRIMARY KEY NOT NULL DEFAULT nextval('playlist_element_id_seq' :: regclass),
+  playlist_id dom_fk NOT NULL,
+  media_id dom_fk NOT NULL,
+  position dom_integer DEFAULT 0
 );

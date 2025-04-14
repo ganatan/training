@@ -161,3 +161,18 @@
 {"level":"info","message":"[GET] /qsdfgsdfgdfs","timestamp":"2025-04-14T11:14:29.752Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T11:14:29.754Z","url":"/qsdfgsdfgdfs"}
 {"level":"info","message":"[GET] /professions","timestamp":"2025-04-14T11:14:48.918Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-14T13:38:42.968Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-14T13:38:46.271Z"}
+{"level":"info","message":"[GET] /professions/1000","timestamp":"2025-04-14T13:38:54.537Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:38:54.539Z","url":"/professions/1000"}
+{"level":"info","message":"[GET] /professions/1000","timestamp":"2025-04-14T13:38:55.414Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:38:55.415Z","url":"/professions/1000"}
+{"level":"info","message":"[GET] /professions/1000","timestamp":"2025-04-14T13:39:37.344Z"}
+{"level":"error","message":"Error: Profession not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:39:37.348Z","url":"/professions/1000"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-14T13:39:41.676Z"}
+{"level":"info","message":"[GET] /professions/1000","timestamp":"2025-04-14T13:39:46.067Z"}
+{"level":"error","message":"Error: Profession not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:39:46.069Z","url":"/professions/1000"}
+{"level":"info","message":"[GET] /professions/10","timestamp":"2025-04-14T13:39:47.992Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-14T13:40:19.617Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:40:19.623Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-14T13:40:19.639Z"}

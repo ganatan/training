@@ -14,8 +14,8 @@ import errorLogger from './infrastructure/logger/error-logger.js';
 
 import swaggerRouter from './infrastructure/swagger/swagger.router.js';
 
-import modulesRouter from './routers/modules.router.js';
 import rootRouter from './routers/root.router.js';
+import modulesRouter from './routers/modules.router.js';
 
 const app = express();
 

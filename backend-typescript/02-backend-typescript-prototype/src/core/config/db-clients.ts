@@ -1,8 +1,9 @@
-const DB_CLIENTS = {
-  PG: 'pg',
-  MYSQL: 'mysql',
+export const DB_CLIENTS = {
   MOCK: 'mock',
+  MYSQL: 'mysql',
+  PG: 'pg',
 } as const;
 
-export default DB_CLIENTS;
 export type DbClientType = typeof DB_CLIENTS[keyof typeof DB_CLIENTS];
+
+export default DB_CLIENTS;

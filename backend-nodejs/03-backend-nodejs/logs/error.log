@@ -51,3 +51,4 @@
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T15:06:38.551Z","url":"/unknown-route"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T15:10:16.760Z","url":"/unknown-route"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T15:18:41.182Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T15:28:28.768Z","url":"/dfgsdgsd"}

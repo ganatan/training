@@ -210,3 +210,9 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-14T15:18:41.175Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T15:18:41.182Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-14T15:18:41.195Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-14T15:28:24.003Z"}
+{"level":"info","message":"[GET] /dfgsdgsd","timestamp":"2025-04-14T15:28:28.768Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T15:28:28.768Z","url":"/dfgsdgsd"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-14T15:28:32.765Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-14T15:28:34.627Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-14T15:28:46.693Z"}

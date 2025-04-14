@@ -20,6 +20,11 @@
     "test:profession:controller": "npm test -- profession.controller.test.js",
     "test:profession:router": "npm test -- profession.router.test.js",
     "test:response-handler": "npm test -- response-handler.test.js",
+    "test:not-found-handler": "npm test -- not-found-handler.test.js",
+    "test:error-logger": "npm test -- error-logger.test.js",
+    "test:error-handler": "npm test -- error-handler.test.js",
+    "test:permission-handler": "npm test -- permission-handler.test.js",
+    "test:query-utils": "npm test -- query-utils.test.js",
     "test:app": "npm test -- app.test.js",
     "test:server": "npm test -- server.test.js"
   },

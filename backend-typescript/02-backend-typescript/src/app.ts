@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express from 'express';
 import cors from 'cors';
 
 import initLocals from './infrastructure/middleware/core/init-locals';
@@ -10,7 +10,7 @@ import errorHandler from './infrastructure/middleware/error/error-handler';
 import rootRouter from './routers/root.router';
 import modulesRouter from './routers/modules.router';
 
-const app: Application = express();
+const app = express();
 
 app.use(cors());
 

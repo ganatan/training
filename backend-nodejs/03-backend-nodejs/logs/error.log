@@ -40,3 +40,5 @@
 {"level":"error","message":"Error: Profession not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:39:37.348Z","url":"/professions/1000"}
 {"level":"error","message":"Error: Profession not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:39:46.069Z","url":"/professions/1000"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:40:19.623Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T14:27:35.636Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T14:29:53.557Z","url":"/unknown-route"}

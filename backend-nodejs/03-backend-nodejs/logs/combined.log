@@ -176,3 +176,9 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-14T13:40:19.617Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T13:40:19.623Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-14T13:40:19.639Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-14T14:27:35.633Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T14:27:35.636Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-14T14:27:35.685Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-14T14:29:53.554Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-14T14:29:53.557Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-14T14:29:53.603Z"}

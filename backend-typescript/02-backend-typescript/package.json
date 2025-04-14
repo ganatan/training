@@ -12,6 +12,7 @@
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
     "generate-project-structure": "ts-node tools/scripts/generate-project-structure.ts",
+    "test:app": "npm test -- app.test",
     "test:server": "npm test -- server.test"
   },
   "keywords": [],

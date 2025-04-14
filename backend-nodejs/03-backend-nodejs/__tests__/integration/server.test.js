@@ -1,4 +1,4 @@
-import server from '../src/server.js';
+import server from '../../src/server.js';
 
 describe('Server startup', () => {
   it('should start and listen correctly', async () => {

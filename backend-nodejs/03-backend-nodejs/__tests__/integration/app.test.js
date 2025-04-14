@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../src/app.js';
+import app from '../../src/app.js';
 
 describe('GET /unknown-route', () => {
   it('should return 404 for unknown routes', async () => {

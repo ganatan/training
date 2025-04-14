@@ -55,6 +55,7 @@ class ProfessionService {
     if (!deleted) {
       throw new Error(ITEM_CONSTANTS.NOT_FOUND);
     }
+
     return deleted;
   }
 }

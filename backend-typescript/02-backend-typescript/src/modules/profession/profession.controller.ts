@@ -29,6 +29,7 @@ class Controller {
     try {
       const result = await this.service.getItems(req.query);
       res.locals = { data: result, statusCode: HTTP_STATUS.OK };
+
       return next();
     } catch (error) {
       return next(error);

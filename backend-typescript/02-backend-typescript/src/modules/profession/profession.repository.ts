@@ -1,7 +1,5 @@
 import DB_CLIENTS from '../../core/config/db-clients';
 import MockRepository from './profession.repository.mock';
-// import MySQLRepository from './profession.repository.mysql';
-// import PGRepository from './profession.repository.pg';
 
 interface Profession {
   id: number;

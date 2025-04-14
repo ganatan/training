@@ -25,15 +25,5 @@ router.get('/', (req: Request, res: Response) => {
   });
 });
 
-router.use('*', (req: Request, res: Response) => {
-  res.status(404).json({
-    status: 'error',
-    message: 'Resource not found',
-    path: req.originalUrl,
-    errorCode: 404,
-    timestamp: new Date().toISOString(),
-  });
-});
-
 export default router;
 

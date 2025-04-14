@@ -2,7 +2,7 @@ import express from 'express';
 
 import config from '../../core/config/config.js';
 
-import permissionHandler from '../../infrastructure/middleware/permission-handler.js';
+import permissionHandler from '../../infrastructure/middleware/security/permission-handler.js';
 
 import Repository from './profession.repository.js';
 import Service from './profession.service.js';

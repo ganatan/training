@@ -6,7 +6,6 @@ interface MetadataPayload {
 }
 
 const responseHandler = (req: Request, res: Response, next: NextFunction): void => {
-  console.log('00000000001:responseHandler');
   if (res.headersSent) {
     return next();
   }

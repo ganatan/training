@@ -11,7 +11,6 @@ interface CustomError extends Error {
 }
 
 const errorHandler = (err: CustomError, req: Request, res: Response, next: NextFunction): void => {
-  console.log('00000000001:errorHandler');
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
   const context = err.context || `${req.method} ${req.originalUrl}`;

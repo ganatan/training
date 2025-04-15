@@ -15,3 +15,17 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-15T09:45:39.732Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:45:39.740Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-15T09:45:39.756Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-15T13:19:29.206Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-15T13:19:31.762Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-15T13:19:36.548Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-15T13:19:54.265Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-15T13:19:57.764Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-15T13:20:13.624Z"}
+{"level":"info","message":"[GET] /v1/analytics/realtime-users","timestamp":"2025-04-15T13:20:15.248Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:20:15.249Z","url":"/v1/analytics/realtime-users"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-15T13:20:27.128Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-15T13:20:32.425Z"}
+{"level":"info","message":"[GET] /continents","timestamp":"2025-04-15T13:20:32.590Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-15T13:21:15.711Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:21:15.718Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-15T13:21:15.731Z"}

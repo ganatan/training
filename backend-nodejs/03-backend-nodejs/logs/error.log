@@ -1,2 +1,4 @@
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:33:15.961Z","url":"/unknown-route"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:45:39.740Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:20:15.249Z","url":"/v1/analytics/realtime-users"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:21:15.718Z","url":"/unknown-route"}

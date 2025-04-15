@@ -1,0 +1,1 @@
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:33:15.961Z","url":"/unknown-route"}

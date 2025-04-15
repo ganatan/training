@@ -10,3 +10,8 @@
 {"level":"info","message":"[GET] /","timestamp":"2025-04-15T09:35:53.933Z"}
 {"level":"info","message":"[GET] /cities","timestamp":"2025-04-15T09:35:56.819Z"}
 {"level":"info","message":"[GET] /continents","timestamp":"2025-04-15T09:35:56.945Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-15T09:41:33.649Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-15T09:41:35.777Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-15T09:45:39.732Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:45:39.740Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-15T09:45:39.756Z"}

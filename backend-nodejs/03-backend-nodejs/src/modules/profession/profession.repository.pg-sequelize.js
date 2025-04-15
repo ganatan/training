@@ -1,16 +1,22 @@
+import { fn, col, where } from 'sequelize';
 import Profession from './profession.model.pg-sequelize.js';
 
 class PgSequelizeRepository {
-  async getItems() {
-    console.log('00000000001:getItems');
-    const rows = await Profession.findAll({ raw: true });
+  async getItems({ page = 1, size = 100 } = {}) {
+    const offset = (page - 1) * size;
+    const { count, rows } = await Profession.findAndCountAll({
+      offset: offset,
+      limit: size,
+      raw: true,
+    });
+
     return {
       metadata: {
         pagination: {
-          currentPage: 1,
-          perPage: rows.length,
-          totalItems: rows.length,
-          totalPages: 1,
+          currentPage: page,
+          perPage: size,
+          totalItems: count,
+          totalPages: Math.ceil(count / size),
         },
       },
       data: rows,
@@ -18,34 +24,45 @@ class PgSequelizeRepository {
   }
 
   async getItemById(id) {
+    if (!Number.isInteger(id) || id <= 0) {
+      throw new Error('Invalid id');
+    }
+
     return await Profession.findByPk(id, { raw: true });
   }
 
   async createItem(data) {
     const created = await Profession.create(data);
+
     return created.get({ plain: true });
   }
 
   async updateItem(id, data) {
-    await Profession.update(data, { where: { id } });
+    if (!Number.isInteger(id) || id <= 0) {
+      throw new Error('Invalid id');
+    }
+
+    const [updatedCount] = await Profession.update(data, { where: { id } });
+    if (updatedCount === 0) { return null; }
+
     return await this.getItemById(id);
   }
 
   async deleteItem(id) {
     const item = await this.getItemById(id);
-    if (!item) return null;
+    if (!item) { return null; }
+
     await Profession.destroy({ where: { id } });
+
     return item;
   }
 
   async existsByName(name) {
     const found = await Profession.findOne({
-      where: sequelize.where(
-        sequelize.fn('LOWER', sequelize.col('name')),
-        name.toLowerCase()
-      ),
+      where: where(fn('LOWER', col('name')), name.toLowerCase()),
     });
-    return !!found;
+
+    return Boolean(found);
   }
 }
 

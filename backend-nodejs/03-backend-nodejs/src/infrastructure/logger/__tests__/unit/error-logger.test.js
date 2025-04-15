@@ -26,7 +26,7 @@ describe('errorLogger', () => {
         method: 'GET',
         url: '/test-url',
         statusCode: 500,
-      }
+      },
     );
 
     expect(next).toHaveBeenCalledWith(error);
@@ -49,7 +49,7 @@ describe('errorLogger', () => {
         method: 'POST',
         url: '/no-status',
         statusCode: 500,
-      }
+      },
     );
 
     expect(next).toHaveBeenCalledWith(error);

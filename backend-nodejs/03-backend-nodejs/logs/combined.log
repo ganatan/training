@@ -29,3 +29,20 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-15T13:21:15.711Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:21:15.718Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-15T13:21:15.731Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-16T05:00:38.702Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:00:38.711Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:00:38.727Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:23:35.908Z"}
+{"level":"info","message":"[GET] /favicon.ico","timestamp":"2025-04-16T05:23:36.024Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:23:36.026Z","url":"/favicon.ico"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:23:39.182Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-16T05:23:46.498Z"}
+{"level":"info","message":"[GET] /continents","timestamp":"2025-04-16T05:23:46.646Z"}
+{"level":"info","message":"[GET] /continents","timestamp":"2025-04-16T05:24:03.262Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:24:05.911Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:24:28.511Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-16T05:24:31.766Z"}
+{"level":"info","message":"[GET] /continents","timestamp":"2025-04-16T05:24:36.362Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-16T05:24:56.075Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:24:56.081Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:24:56.097Z"}

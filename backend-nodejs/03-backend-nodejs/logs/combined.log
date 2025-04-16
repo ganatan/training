@@ -46,3 +46,16 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-16T05:24:56.075Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:24:56.081Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:24:56.097Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:32:52.585Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:32:55.830Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:34:18.649Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:34:23.180Z"}
+{"level":"error","message":"Error: Access denied for user ''@'localhost' (using password: NO)","method":"GET","statusCode":500,"timestamp":"2025-04-16T05:34:23.215Z","url":"/professions"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:34:24.889Z"}
+{"level":"error","message":"Error: Access denied for user ''@'localhost' (using password: NO)","method":"GET","statusCode":500,"timestamp":"2025-04-16T05:34:24.901Z","url":"/professions"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:35:04.082Z"}
+{"level":"error","message":"Error: Access denied for user ''@'localhost' (using password: NO)","method":"GET","statusCode":500,"timestamp":"2025-04-16T05:35:04.110Z","url":"/professions"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T05:36:26.951Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-16T05:36:46.358Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:36:46.366Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-16T05:36:46.382Z"}

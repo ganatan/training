@@ -1,6 +1,6 @@
 import { HTTP_STATUS } from '../../../shared/constants/http/http-status.js';
-import { ITEM_CONSTANTS } from './constants/continent.constant.js';
-import { validateItem } from './schemas/scontinent.schema.js';
+import { ITEM_CONSTANTS } from '../constants/continent.constant.js';
+import { validateItem } from '../schemas/continent.schema.js';
 
 class Controller {
   constructor(service) {

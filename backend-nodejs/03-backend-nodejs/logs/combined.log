@@ -68,3 +68,6 @@
 {"level":"info","message":"[GET] /continents","timestamp":"2025-04-16T06:30:30.509Z"}
 {"level":"info","message":"[GET] /continents","timestamp":"2025-04-16T06:30:47.007Z"}
 {"level":"info","message":"[GET] /professions","timestamp":"2025-04-16T06:30:51.202Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-17T08:03:59.476Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:03:59.487Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T08:03:59.521Z"}

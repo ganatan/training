@@ -14,8 +14,8 @@ import {
   MAX_ITEMS_PER_PAGE,
 } from '../../../shared/constants/pagination/pagination.constants.js';
 
-import { SORT_DIRECTION } from '../../shared/constants/sort/sort.constants.js';
-import { ITEM_CONSTANTS } from './continent.constant.js';
+import { SORT_DIRECTION } from '../../../shared/constants/sort/sort.constants.js';
+import { ITEM_CONSTANTS } from '../constants/continent.constant.js';
 
 class MysqlRepository {
   async getItems(filters = {}) {

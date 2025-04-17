@@ -1,8 +1,9 @@
 import express from 'express';
 
-import { Controller, Service, Repository } from './index.js';
+import { Controller, Service, Repository } from '../index.js';
 
-import config from '../../../../core/config/config.js';
+import config from '../../../core/config/config.js';
+
 const router = express.Router();
 
 const repository = new Repository(config.dbClient);

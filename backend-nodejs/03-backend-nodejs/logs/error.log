@@ -13,3 +13,6 @@
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:03:59.487Z","url":"/unknown-route"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:04:36.494Z","url":"/favicon.ico"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:43:33.470Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:12:04.091Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:13:52.508Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:15:26.054Z","url":"/unknown-route"}

@@ -83,3 +83,14 @@
 {"level":"info","message":"[GET] /","timestamp":"2025-04-17T09:58:40.315Z"}
 {"level":"info","message":"[GET] /professions","timestamp":"2025-04-17T09:58:44.318Z"}
 {"level":"info","message":"[GET] /professions","timestamp":"2025-04-17T10:00:36.541Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T10:10:12.762Z"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-17T10:10:16.793Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-17T10:12:04.081Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:12:04.091Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T10:12:04.108Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-17T10:13:52.502Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:13:52.508Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T10:13:52.521Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-17T10:15:26.048Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:15:26.054Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T10:15:26.070Z"}

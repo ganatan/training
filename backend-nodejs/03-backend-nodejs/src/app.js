@@ -15,8 +15,8 @@ import fakeAuth from './infrastructure/middleware/auth/fake-auth.js';
 
 import swaggerRoutes from './infrastructure/swagger/swagger.routes.js';
 
-import rootRoutes from './routes/root.routes.js';
-import appRoutes from './routes/app.routes.js';
+import rootRoutes from './routers/root.routes.js';
+import appRoutes from './routers/app.routes.js';
 
 const app = express();
 

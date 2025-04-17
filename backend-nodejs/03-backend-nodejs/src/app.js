@@ -16,7 +16,7 @@ import fakeAuth from './infrastructure/middleware/auth/fake-auth.js';
 import swaggerRouter from './infrastructure/swagger/swagger.router.js';
 
 import rootRouter from './routers/root.router.js';
-import modulesRouter from './routers/modules.router.js';
+import appRouter from './routers/app.router.js';
 
 const app = express();
 
@@ -35,7 +35,7 @@ app.use(requestLogger);
 app.use('/api-docs', swaggerRouter);
 
 app.use(rootRouter);
-app.use(modulesRouter);
+app.use(appRouter);
 
 app.use(notFoundHandler);
 app.use(responseHandler);

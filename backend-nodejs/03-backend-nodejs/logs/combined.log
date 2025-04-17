@@ -71,3 +71,12 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-17T08:03:59.476Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:03:59.487Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-17T08:03:59.521Z"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T08:04:36.292Z"}
+{"level":"info","message":"[GET] /favicon.ico","timestamp":"2025-04-17T08:04:36.493Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:04:36.494Z","url":"/favicon.ico"}
+{"level":"info","message":"[GET] /professions","timestamp":"2025-04-17T08:04:42.503Z"}
+{"level":"info","message":"[GET] /cities","timestamp":"2025-04-17T08:04:52.445Z"}
+{"level":"info","message":"[GET] /continents","timestamp":"2025-04-17T08:04:56.882Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-17T08:43:33.464Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:43:33.470Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-17T08:43:33.484Z"}

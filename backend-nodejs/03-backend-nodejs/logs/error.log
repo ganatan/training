@@ -1,19 +1,4 @@
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:33:15.961Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T09:45:39.740Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:20:15.249Z","url":"/v1/analytics/realtime-users"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-15T13:21:15.718Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:00:38.711Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:23:36.026Z","url":"/favicon.ico"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:24:56.081Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Access denied for user ''@'localhost' (using password: NO)","method":"GET","statusCode":500,"timestamp":"2025-04-16T05:34:23.215Z","url":"/professions"}
-{"level":"error","message":"Error: Access denied for user ''@'localhost' (using password: NO)","method":"GET","statusCode":500,"timestamp":"2025-04-16T05:34:24.901Z","url":"/professions"}
-{"level":"error","message":"Error: Access denied for user ''@'localhost' (using password: NO)","method":"GET","statusCode":500,"timestamp":"2025-04-16T05:35:04.110Z","url":"/professions"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T05:36:46.366Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-16T06:29:55.296Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:03:59.487Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:04:36.494Z","url":"/favicon.ico"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T08:43:33.470Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:12:04.091Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:13:52.508Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-17T10:15:26.054Z","url":"/unknown-route"}
-{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-18T05:16:22.795Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-19T12:35:24.668Z","url":"/unknown-route"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-19T12:36:30.070Z","url":"/favicon.ico"}
+{"level":"error","message":"Error: Cannot read properties of undefined (reading 'getItems')","method":"GET","statusCode":500,"timestamp":"2025-04-19T12:49:44.204Z","url":"/professions"}
+{"level":"error","message":"Error: Cannot read properties of undefined (reading 'getItems')","method":"GET","statusCode":500,"timestamp":"2025-04-19T12:51:42.293Z","url":"/professions"}

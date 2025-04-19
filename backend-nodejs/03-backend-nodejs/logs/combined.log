@@ -109,3 +109,6 @@
 {"level":"info","message":"[GET] /professions","timestamp":"2025-04-19T14:08:00.996Z"}
 {"level":"info","message":"[GET] /professions","timestamp":"2025-04-19T14:08:01.197Z"}
 {"level":"info","message":"[GET] /cities","timestamp":"2025-04-19T14:08:05.642Z"}
+{"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-19T14:10:11.069Z"}
+{"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-19T14:10:11.076Z","url":"/unknown-route"}
+{"level":"info","message":"[GET] /","timestamp":"2025-04-19T14:10:11.092Z"}

@@ -52,7 +52,7 @@
   Ctrl + Shift + F
 
 
-# Commeantaires
+# Commentaires
   Ctrl + Shift + / (pour commenter)
   Ctrl + Shift + \ (pour décommenter)  
 

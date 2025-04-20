@@ -112,3 +112,9 @@
 {"level":"info","message":"[GET] /unknown-route","timestamp":"2025-04-19T14:10:11.069Z"}
 {"level":"error","message":"Error: Resource not found","method":"GET","statusCode":404,"timestamp":"2025-04-19T14:10:11.076Z","url":"/unknown-route"}
 {"level":"info","message":"[GET] /","timestamp":"2025-04-19T14:10:11.092Z"}
+{"level":"info","message":"[GET] /api-docs/","timestamp":"2025-04-20T04:50:22.647Z"}
+{"level":"info","message":"[GET] /api-docs/swagger-ui.css","timestamp":"2025-04-20T04:50:22.682Z"}
+{"level":"info","message":"[GET] /api-docs/swagger-ui-bundle.js","timestamp":"2025-04-20T04:50:22.685Z"}
+{"level":"info","message":"[GET] /api-docs/swagger-ui-standalone-preset.js","timestamp":"2025-04-20T04:50:22.687Z"}
+{"level":"info","message":"[GET] /api-docs/swagger-ui-init.js","timestamp":"2025-04-20T04:50:22.689Z"}
+{"level":"info","message":"[GET] /api-docs/favicon-32x32.png","timestamp":"2025-04-20T04:50:22.898Z"}

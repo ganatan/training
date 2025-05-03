@@ -1,7 +1,10 @@
 
+Je suis developpeur web debutant.
+Je veux que tu sois tres simple et precis dans tes explications.
+
 Je veux ecrire un backend-javascript
 
-Je veux un fichier app.js ecrit en Javascript en commonJS
+Je un fichier app.js ecrit en Javascript en commonJS
 
 Ce fichier Tres simple ne contient que deux routes
 

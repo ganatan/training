@@ -1,9 +1,13 @@
 Passons maintenant à la partie frontend-angular
 
 Je veux que tu me donnes les etapes tres simples
-Je veux une application angular derniere version (version 19)
+Je veux une application angular derniere version
 Donc je veux desinstaller les versions precedents avant
+
 Je veux aussi verifier que Angular a ete installe
+
+Je veux une application angular standard avec parametres automatique (css html et test)
+
 
 Je veux une seule page qui contiennent
 

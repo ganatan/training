@@ -39,3 +39,4 @@ dev pour le resultat qui evolue en fonction des modifications
 
 je veux que le code soit prêt à copier-coller
 
+Je veux aussi qu'on puisse l'appeler d'un frontend donc gere les cors

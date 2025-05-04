@@ -1,20 +1,14 @@
-## ✅ Créer une application Angular 19 avec une page HTML minimaliste
+## ✅ Angular – Application standard avec interface simple (sans CSS)
 
 | Étape | Action                                                                                          |
 |-------|-------------------------------------------------------------------------------------------------|
-| 1     | Supprimer Angular CLI existant : `npm uninstall -g @angular/cli`                               |
-| 2     | Installer Angular 19 : `npm install -g @angular/cli@19`                                        |
-| 3     | Vérifier l'installation : `ng version` (doit afficher Angular CLI: 19.x.x)                     |
-| 4     | Créer le projet : `ng new frontend-angular --defaults --skip-tests`                            |
-| 5     | Aller dans le dossier : `cd frontend-angular`                                                  |
-| 6     | Modifier `src/app/app.component.html` → insérer le paragraphe                                  |
-| 7     | Modifier `src/app/app.component.css` → ajouter style minimaliste                               |
-| 8     | Lancer l'application : `ng serve`                                                              |
-| 9     | Accéder à l'application dans le navigateur : `http://localhost:4200`                           |
-
----
-
-### ✍️ `src/app/app.component.html`
+| 1     | Supprimer Angular CLI : `npm uninstall -g @angular/cli`                                        |
+| 2     | Installer Angular CLI : `npm install -g @angular/cli`                                          |
+| 3     | Vérifier Angular : `ng version`                                                                |
+| 4     | Créer un projet standard : `ng new frontend-angular`                                           |
+|       | Choix : HTML / CSS / Tests (répondre par défaut = oui)                                         |
+| 5     | Aller dans le projet : `cd frontend-angular`                                                   |
+| 6     | Modifier le fichier `src/app/app.component.html` avec ce contenu :                             |
 
 ```html
 <div align="center">
@@ -32,6 +26,7 @@ bâtissant des univers visuels puissants, d’Alien à Blade Runner, de Gladiato
 
   <button>openAI</button>
 </div>
+
 
 
 Modifier app.ts

@@ -5,10 +5,13 @@ npm init -y
 
 npm install express
 npm install --save-dev nodemon
-
+npm install cors
 
 const express = require('express')
 const app = express()
+
+const cors = require('cors')
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('application backend-javascript')

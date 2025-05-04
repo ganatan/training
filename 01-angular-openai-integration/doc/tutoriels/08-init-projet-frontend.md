@@ -17,15 +17,22 @@
 ### ✍️ `src/app/app.component.html`
 
 ```html
-<div style="text-align: center;">
+<div align="center">
+  <h1>angular-openai-integration</h1>
+
+  <input type="text" value="Ridley Scott" size="80">
+  <br><br>
+
   <textarea rows="10" cols="80">
 Ridley Scott, c’est l’obsession du cadre parfait au service de mondes inoubliables.
 Réalisateur britannique né en 1937, il s’impose comme un architecte du cinéma,
 bâtissant des univers visuels puissants, d’Alien à Blade Runner, de Gladiator à The Martian.
   </textarea>
   <br><br>
+
   <button>openAI</button>
 </div>
+
 
 Modifier app.ts
 

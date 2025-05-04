@@ -12,6 +12,8 @@ un titre
 
 et dessous 
 
+- Une zone de texte type input rempli avec Ridley Scott
+
 - Un zone de texte rempli avec 
 Ridley Scott, c’est l’obsession du cadre parfait au service de mondes inoubliables. Réalisateur britannique né en 1937, il s’impose comme un architecte du cinéma, bâtissant des univers visuels puissants, d’Alien à Blade Runner, de Gladiator à The Martian.
 - Un bouton avec ecrit openAI

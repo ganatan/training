@@ -1,3 +1,9 @@
+
+npm install axios
+
+app.js
+
+
 const express = require('express')
 const axios = require('axios')
 const app = express()
@@ -19,7 +25,7 @@ app.get('/person/:name', async (req, res) => {
     },
     {
       headers: {
-        Authorization: 'Bearer 1234567890-1234567890-1234567890-1234567890-1234567890-1234567890JuBXldWDZe-vSvgu4T3BlbkFJNs4amEXT9qTYT06iQLcd-123456789-123456789-123456789-123456789-123456789-123',
+        Authorization: 'Bearer 1234567890-1234567890-1234567890-1234567890-1234567890-1234567890-XXXXXXXXX-XXXXXXXXX-XXXXXXXXX-XXXXXXXXX-1234-123456789-123456789-123456789-123456789-123456789-123',
         'Content-Type': 'application/json'
       }
     }
@@ -30,4 +36,8 @@ app.get('/person/:name', async (req, res) => {
 app.listen(3000, () => {
   console.log('Serveur démarré sur http://localhost:3000')
 })
+
+node app.js
+
+http://localhost:3000/person/ridley-scott
 

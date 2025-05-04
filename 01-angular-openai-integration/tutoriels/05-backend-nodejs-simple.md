@@ -1,10 +1,12 @@
+mkdir backend-javascript
+cd backend-javascript
+
 npm init -y
 
 npm install express
 npm install --save-dev nodemon
 
 
-// app.js
 const express = require('express')
 const app = express()
 
@@ -14,11 +16,12 @@ app.get('/', (req, res) => {
 
 app.get('/person/:name', (req, res) => {
   const name = req.params.name
-  res.send(`Nom demandé : ${name}`)
+  const formatted = name.replace('-', ' ')
+  res.send('biographie de ' + formatted)
 })
 
 app.listen(3000, () => {
-  console.log('Serveur lancé sur http://localhost:3000')
+  console.log('Serveur démarré sur http://localhost:3000')
 })
 
 

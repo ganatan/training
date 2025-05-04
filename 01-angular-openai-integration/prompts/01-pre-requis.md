@@ -8,8 +8,8 @@ Qui communique avec open-API pour poser une question
 
 Ne me dis pas encore comment on fait
 
-Mais dis moi ce dont j'ai besoin
-que les essentielles
+Mais dis moi seulement ce dont j'ai besoin
+Et l'essentiel uniquement.
 
 Explications tres simple et tres courte
 

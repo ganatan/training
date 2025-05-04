@@ -2,11 +2,14 @@
 Je suis developpeur web debutant.
 Je veux que tu sois tres simple et precis dans tes explications.
 
-Je veux ecrire un backend-javascript
+Je veux un tutoriel étape par étape.
 
-Je un fichier app.js ecrit en Javascript en commonJS
+Je veux ecrire un backend-javascript avec le framework express.
+
+Je veux fichier app.js ecrit en Javascript en commonJS
 
 Ce fichier Tres simple ne contient que deux routes
+Je veux pour faire simple pour l'instant la method GET.
 
 route de base
 qui renvoie l'information application backend-javascript
@@ -25,13 +28,14 @@ biographie de Steven spielberg
 je veux pouvoir creer ce projet à partir de rien
 
 je n'ai que node et vscode
-je ne veux pas de commenataires dans le code
+je ne veux pas de commentaires dans le code
 
-donne moi toutes étapes pour faire cela
+Donne moi toutes étapes pour faire cela
 
-Je veux pouvoir executer ce programme
-avec une commande 
+Je veux pouvoir executer ce programme avec deux commandes
 start pour le resultat
 dev pour le resultat qui evolue en fonction des modifications
 
+
+je veux que le code soit prêt à copier-coller
 

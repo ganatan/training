@@ -37,4 +37,5 @@ bâtissant des univers visuels puissants, d’Alien à Blade Runner, de Gladiato
 </div>
 
 
-je veux que l'appel au backend se fasse sur le click sur input
+je veux que l'appel au backend se fasse sur le click du button
+Depuis Angular  19 La gestion de HttpClient se fait dans app.config.ts et non dans app.component.ts

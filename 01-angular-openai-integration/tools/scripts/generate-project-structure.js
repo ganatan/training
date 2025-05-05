@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const excludedDirs = ['coverage', 'dist', 'logs', 'node_modules']
+const excludedDirs = ['coverage', 'dist', 'logs', 'node_modules','.angular','.vscode']
 
 function printStructure(dir, prefix = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true })

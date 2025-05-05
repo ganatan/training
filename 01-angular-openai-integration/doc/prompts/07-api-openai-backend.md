@@ -40,6 +40,8 @@ app.listen(3000, () => {
 Je veux que tu adaptes ce code avec les ajouts demandés
 Je veux tout le code dans app.js sans aucun autre fichier.
 
+Je veux que la clé soit une constante dans le code
+
 En example prends cette clé fictive
 
 1234567890-1234567890-1234567890-1234567890-1234567890-1234567890-XXXXXXXXX-XXXXXXXXX-XXXXXXXXX-XXXXXXXXX-1234-123456789-123456789-123456789-123456789-123456789-123

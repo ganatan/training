@@ -9,27 +9,36 @@ async function generateImagePrompt(message, speaker) {
 
   const userPrompt = `Personnage : ${speaker}\nMessage : "${message}"\nQuel prompt DALL·E utiliser ?`
 
-  const response = await axios.post(
-    CLAUDE_API_URL,
-    {
-      model: 'claude-3-sonnet-20240229',
-      max_tokens: 200,
-      temperature: 0.7,
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: userPrompt }
-      ]
-    },
-    {
-      headers: {
-        'x-api-key': API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json'
-      }
-    }
-  )
+  const url = 'https://api.anthropic.com/v1/messages'
 
-  return response.data.content[0].text.trim()
+  const headers = {
+    'x-api-key': process.env.ANTHROPIC_API_KEY,
+    'anthropic-version': '2023-06-01',
+    'Content-Type': 'application/json'
+  }
+
+  const body = {
+    model: 'claude-3-5-sonnet-20240620',
+    max_tokens: 1000,
+    temperature: 0.7,
+    messages: [
+      {
+        role: 'user',
+        content: userPrompt
+      }
+    ]
+  }
+
+  try {
+    const response = await axios.post(url, body, { headers })
+    console.log('Claude reply OK')
+    return response.data.content[0].text
+  } catch (err) {
+    console.error('Claude API Error:', err.response?.data || err.message)
+    throw err
+  }
+
+
 }
 
 module.exports = { generateImagePrompt }

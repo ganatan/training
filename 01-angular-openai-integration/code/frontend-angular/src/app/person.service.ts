@@ -7,6 +7,7 @@ export class PersonService {
   constructor(private http: HttpClient) {}
 
   getBiography(name: string): Observable<string> {
-    return this.http.get(`http://localhost:3000/person/${name}`, { responseType: 'text' })
+    // return this.http.get(`http://localhost:3000/openai/person/${name}`, { responseType: 'text' })
+    return this.http.get(`http://localhost:3000/claude/person/${name}`, { responseType: 'text' })
   }
 }

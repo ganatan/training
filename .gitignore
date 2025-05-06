@@ -15,6 +15,10 @@
 **/.project
 **/.settings/
 
+# dotenv files
+**/.env
+**/.env.*
+
 # --- Jar, war, etc ---
 **/*.jar
 **/*.war

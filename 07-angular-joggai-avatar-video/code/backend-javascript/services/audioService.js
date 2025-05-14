@@ -7,18 +7,14 @@ require('dotenv').config()
 
 const VOICES = {
   Animateur: '101A8UFM73tcrunWGirw',
-  // Claude: 'D6VK2PsbVdaFL5aALfRc',
   Claude: 'MF3mGyEYCl7XYWbV9V6O',
   GPT: 'TTtB1x9U8PF0Vgf20IAP',
 }
 
 async function generateSpeech(text, voiceId, outputPath) {
-  let url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
-  console.log('00000000001:' + url);
-  console.log('00000000002:' + text);
-  console.log('00000000003:' + outputPath);
   const response = await axios.post(
-    url,
+    // `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`,
+    `https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128`,
     {
       text,
       model_id: 'eleven_multilingual_v2'
@@ -45,25 +41,25 @@ function concatAudioFiles(folderPath) {
   return new Promise((resolve, reject) => {
     const listFilePath = path.join(folderPath, 'filelist.txt')
     const outputFilePath = path.join(folderPath, 'podcast-final.mp3')
-
+    
     if (!fs.existsSync(listFilePath)) {
       return reject(new Error('Fichier filelist.txt non trouvé'))
     }
-
+    
     console.log(`🔄 Concaténation des fichiers audio...`)
-
+    
     const ffmpeg = spawn(ffmpegPath, [
-      '-f', 'concat',
-      '-safe', '0',
+      '-f', 'concat',     
+      '-safe', '0',       
       '-i', 'filelist.txt',
-      '-c', 'copy',
-      'podcast-final.mp3'
+      '-c', 'copy',       
+      'podcast-final.mp3' 
     ], { cwd: folderPath })
-
+    
     ffmpeg.stderr.on('data', (data) => {
       console.log(`FFmpeg: ${data}`)
     })
-
+    
     ffmpeg.on('close', (code) => {
       if (code === 0) {
         console.log(`✅ Podcast concaténé: ${outputFilePath}`)
@@ -124,11 +120,11 @@ async function generateAllAudioFromJson(filename) {
 
     fs.writeFileSync(listFilePath, listLines.join('\n'))
     console.log(`📄 Liste des fichiers générée : ${listFilePath}`)
-
+    
     try {
       await concatAudioFiles(outputDir)
       console.log(`🎧 Podcast final généré : /audios/${baseName}/podcast-final.mp3`)
-
+      
       return {
         folder: baseName,
         items: result,

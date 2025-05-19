@@ -16,12 +16,10 @@ app.get('/', (req, res) => {
 })
 
 async function generateSpeech(text, voiceId, outputPath) {
-  console.log('00000000004:' + process.env.ELEVENLABS_API_KEY);
-
+  // let url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128'
   let url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128'
-  text = "Bienvenue dans notre podcast Cinéma. Sujet : Dune de Denis Villeneuve : chef-d'œuvre de science-fiction ou exercice de style surcoté ?. Claude, tu commences."
+  // text = "Bienvenue dans notre podcast Cinéma. Sujet : Dune de Denis Villeneuve : chef-d'œuvre de science-fiction ou exercice de style surcoté ?. Claude, tu commences."
   // outputPath = "D:\Chendra\04-tutorials\312-fullstack\03-angular-node-multi-llm-podcast\code\backend-javascript\audios\mock-podcast\01-animateur.mp3";
-
   const response = await axios.post(
     // `https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128`,
     url,
@@ -37,7 +35,6 @@ async function generateSpeech(text, voiceId, outputPath) {
       responseType: 'stream'
     }
   )
-  console.log('00000000005:' + outputPath);
   const writer = fs.createWriteStream(outputPath)
   response.data.pipe(writer)
 
@@ -47,10 +44,8 @@ async function generateSpeech(text, voiceId, outputPath) {
   })
 }
 
-
 app.get('/generate-text', async (req, res) => {
   try {
-    console.log('00000000004');
     const prompt = 'Donne une biographie courte de Ridley Scott 20 mots maximum'
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -65,7 +60,6 @@ app.get('/generate-text', async (req, res) => {
         }
       }
     )
-    console.log('00000000005');
     const result = response.data.choices[0].message.content
     res.send(result)
   } catch (error) {
@@ -76,7 +70,6 @@ app.get('/generate-text', async (req, res) => {
 
 app.get('/generate-audio', async (req, res) => {
   try {
-    console.log('00000000001');
     // const inputPath = path.join(__dirname, '../audios', filename)
     // if (!fs.existsSync(inputPath)) throw new Error('Fichier JSON introuvable : ' + filename)
 
@@ -88,9 +81,7 @@ app.get('/generate-audio', async (req, res) => {
     //   fs.mkdirSync(outputDir, { recursive: true })
     // }
     const audiosDir = path.join(__dirname, './audios')
-    console.log('00000000002');
     if (!fs.existsSync(audiosDir)) {
-      console.log('00000000003');
       fs.mkdirSync(audiosDir, { recursive: true })
     }
     let message = "Ridley Scott, né le 30 novembre 1937 à South Shields, est un réalisateur britannique célèbre pour Alien, Blade Runner, Gladiator."
@@ -134,6 +125,32 @@ app.get('/generate-audio', async (req, res) => {
   // }
 })
 
+app.get('/generate-video', async (req, res) => {
+  try {
+    let avatarId = 1025;
+    console.log('00000000001');
+    // const prompt = 'Donne une biographie courte de Ridley Scott 20 mots maximum'
+    // const response = await axios.post(
+    //   'https://api.openai.com/v1/chat/completions',
+    //   {
+    //     model: 'gpt-4-turbo',
+    //     messages: [{ role: 'user', content: prompt }]
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    //       'Content-Type': 'application/json'
+    //     }
+    //   }
+    // )
+    let result = "video";
+    res.send(result)
+  } catch (error) {
+    console.error('Erreur lors de l’appel à l’API OpenAI:', error.message)
+    res.status(500).send('Erreur interne lors de la génération du texte.')
+  }
+})
+
 app.listen(3000, () => {
   console.log('Serveur démarré sur http://localhost:3000')
 })
@@ -157,7 +174,6 @@ app.listen(3000, () => {
 // // app.use('/ai', podcastRoute)
 
 // app.get('/generate-text', async (req, res) => {
-//   console.log('00000000001');
 //   // const name = req.params.name
 //   const prompt = 'Donne une biographie courte de Ridley Scott';
 //   const response = await axios.post(

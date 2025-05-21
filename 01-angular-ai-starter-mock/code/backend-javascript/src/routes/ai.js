@@ -10,14 +10,10 @@ const router = express.Router()
 const useMock = process.env.USE_MOCK === 'true'
 
 router.get('/:type', async (req, res) => {
-  console.log('00000000001:' + JSON.stringify(req.params));
   const { type } = req.params
   const input = req.body
-  console.log('00000000002:' + useMock);
-  console.log('00000000002:' + typeof useMock);
   if (useMock) {
     let response
-    console.log('00000000002:' + typeof type);
     switch (type) {
       case 'chatgpt':
         response = chatgptMock.reply(input)

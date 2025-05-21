@@ -1,11 +1,67 @@
-<div align="center">
-  <h1>angular-openai-integration</h1>
+<div class="container my-5">
 
-  <input type="text" [(ngModel)]="name" size="80">
-  <br><br>
+  <h1 class="text-center mb-4">angular-ai-chatgpt-claude</h1>
 
-  <textarea rows="10" cols="80">{{ biography }}</textarea>
-  <br><br>
+  <div class="row g-3 align-items-center mb-4">
+    <div class="col-12 col-md-4">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control text-center" [(ngModel)]="name" placeholder="Director name">
+    </div>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Style</label>
+      <select class="form-select" [(ngModel)]="style">
+        <option value="neutral">Neutral</option>
+        <option value="casual">Casual</option>
+        <option value="technical">Technical</option>
+        <option value="narrative">Narrative</option>
+        <option value="press">Press</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Length</label>
+      <select class="form-select" [(ngModel)]="length">
+        <option value="short">Short</option>
+        <option value="medium">Medium</option>
+        <option value="long">Long</option>
+      </select>
+    </div>
+  </div>
 
-  <button (click)="loadBiography()">openAI</button>
+  <div class="row g-3 mb-3 text-center">
+    <div class="col">
+      <button class="btn btn-primary w-100" (click)="loadBiography('chatgpt')">BIOGRAPHY - ChatGPT</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-success w-100" (click)="loadBiography('claude')">BIOGRAPHY - Claude</button>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col">
+      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="4"></textarea>
+    </div>
+    <div class="col">
+      <textarea class="form-control" [value]="biographyClaude" readonly rows="4"></textarea>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3 text-center">
+    <div class="col">
+      <button class="btn btn-primary w-100" disabled>SYNTHESIS - ChatGPT</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-success w-100" disabled>SYNTHESIS - Claude</button>
+    </div>
+  </div>
+
+  <!-- Résultats SYNTHESIS -->
+  <div class="row g-3">
+    <div class="col">
+      <textarea class="form-control" readonly rows="4"></textarea>
+    </div>
+    <div class="col">
+      <textarea class="form-control" readonly rows="4"></textarea>
+    </div>
+  </div>
+
 </div>

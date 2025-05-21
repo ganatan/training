@@ -1,7 +1,7 @@
 export function reply(data) {
   return {
-    model: 'chatgpt',
-    input: data,
-    output: 'Voici une réponse simulée de ChatGPT.'
+    success: true,
+    llm: "chatgpt",
+    data: "This is a simulated response from ChatGPT."
   }
 }

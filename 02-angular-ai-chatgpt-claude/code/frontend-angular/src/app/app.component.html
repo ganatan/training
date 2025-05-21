@@ -40,7 +40,7 @@
 
   <div class="row g-3 mb-4">
     <div class="col position-relative">
-      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="6"></textarea>
+      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="10"></textarea>
       <div *ngIf="chatgptLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
         <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
           <span class="visually-hidden">Chargement...</span>
@@ -48,30 +48,12 @@
       </div>
     </div>
     <div class="col position-relative">
-      <textarea class="form-control" [value]="biographyClaude" readonly rows="6"></textarea>
+      <textarea class="form-control" [value]="biographyClaude" readonly rows="10"></textarea>
       <div *ngIf="claudeLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
         <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
           <span class="visually-hidden">Chargement...</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="row g-3 mb-3 text-center">
-    <div class="col">
-      <button class="btn btn-primary w-100" disabled>Résumé - ChatGPT</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-success w-100" disabled>Résumé - Claude</button>
-    </div>
-  </div>
-
-  <div class="row g-3">
-    <div class="col">
-      <textarea class="form-control" readonly rows="6"></textarea>
-    </div>
-    <div class="col">
-      <textarea class="form-control" readonly rows="6"></textarea>
     </div>
   </div>
 

@@ -1,28 +1,25 @@
 import express from 'express'
-import { aiServices } from '../config/ai-services.js'
+import * as chatgptMock from '../mock/llm/chatgpt.mock.js'
+import * as claudeMock from '../mock/llm/claude.mock.js'
 
 const router = express.Router()
-const useMock = process.env.USE_MOCK === 'true'
 
-router.get('/:type', async (req, res) => {
-  const { type } = req.params
+const providers = {
+  chatgpt: chatgptMock.reply,
+  claude: claudeMock.reply
+}
+
+router.get('/biography/:llm', (req, res) => {
+  const { llm } = req.params
   const input = req.body
-  const service = aiServices[type]
+  const handler = providers[llm]
 
-  if (!service) {
-    return res.status(404).json({ error: `Unknown service: ${type}` })
+  if (!handler) {
+    return res.status(404).json({ error: `Unknown provider: ${llm}` })
   }
 
-  if (useMock && service.mock) {
-    const response = service.mock(input)
-    return res.json(response)
-  }
-
-  if (!service.available) {
-    return res.status(501).json({ error: `Service ${type} not yet implemented` })
-  }
-
-  return res.status(501).json({ error: `Real mode for ${type} not yet available` })
+  const result = handler(input)
+  res.json({ llm, result })
 })
 
 export default router

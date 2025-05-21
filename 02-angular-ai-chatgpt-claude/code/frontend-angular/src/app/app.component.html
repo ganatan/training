@@ -4,63 +4,74 @@
 
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-md-4">
-      <label class="form-label">Name</label>
-      <input type="text" class="form-control text-center" [(ngModel)]="name" placeholder="Director name">
+      <label class="form-label">Nom du réalisateur</label>
+      <input type="text" class="form-control text-center" [(ngModel)]="name" placeholder="Nom du réalisateur">
     </div>
     <div class="col-12 col-md-4">
-      <label class="form-label">Style</label>
+      <label class="form-label">Style de réponse</label>
       <select class="form-select" [(ngModel)]="style">
-        <option value="neutral">Neutral</option>
-        <option value="casual">Casual</option>
-        <option value="technical">Technical</option>
-        <option value="narrative">Narrative</option>
-        <option value="press">Press</option>
+        <option value="neutral">Neutre</option>
+        <option value="casual">Décontracté</option>
+        <option value="technical">Technique</option>
+        <option value="narrative">Narratif</option>
+        <option value="press">Journalistique</option>
       </select>
     </div>
     <div class="col-12 col-md-4">
-      <label class="form-label">Length</label>
+      <label class="form-label">Longueur</label>
       <select class="form-select" [(ngModel)]="length">
-        <option value="short">Short</option>
-        <option value="medium">Medium</option>
-        <option value="long">Long</option>
+        <option value="short">Courte</option>
+        <option value="medium">Moyenne</option>
+        <option value="long">Longue</option>
       </select>
     </div>
   </div>
 
   <div class="row g-3 mb-3 text-center">
-    <div class="col">
-      <button class="btn btn-primary w-100" (click)="loadBiography('chatgpt')">BIOGRAPHY - ChatGPT</button>
+    <div class="col d-flex gap-2">
+      <button class="btn btn-primary flex-fill" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
+      <button class="btn btn-outline-secondary" (click)="biographyChatGPT = ''">Réinitialiser</button>
     </div>
-    <div class="col">
-      <button class="btn btn-success w-100" (click)="loadBiography('claude')">BIOGRAPHY - Claude</button>
+    <div class="col d-flex gap-2">
+      <button class="btn btn-success flex-fill" (click)="loadBiography('claude')">Biographie - Claude</button>
+      <button class="btn btn-outline-secondary" (click)="biographyClaude = ''">Réinitialiser</button>
     </div>
   </div>
 
   <div class="row g-3 mb-4">
-    <div class="col">
-      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="4"></textarea>
+    <div class="col position-relative">
+      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="6"></textarea>
+      <div *ngIf="chatgptLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
+        <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <textarea class="form-control" [value]="biographyClaude" readonly rows="4"></textarea>
+    <div class="col position-relative">
+      <textarea class="form-control" [value]="biographyClaude" readonly rows="6"></textarea>
+      <div *ngIf="claudeLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
+        <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row g-3 mb-3 text-center">
     <div class="col">
-      <button class="btn btn-primary w-100" disabled>SYNTHESIS - ChatGPT</button>
+      <button class="btn btn-primary w-100" disabled>Résumé - ChatGPT</button>
     </div>
     <div class="col">
-      <button class="btn btn-success w-100" disabled>SYNTHESIS - Claude</button>
+      <button class="btn btn-success w-100" disabled>Résumé - Claude</button>
     </div>
   </div>
 
-  <!-- Résultats SYNTHESIS -->
   <div class="row g-3">
     <div class="col">
-      <textarea class="form-control" readonly rows="4"></textarea>
+      <textarea class="form-control" readonly rows="6"></textarea>
     </div>
     <div class="col">
-      <textarea class="form-control" readonly rows="4"></textarea>
+      <textarea class="form-control" readonly rows="6"></textarea>
     </div>
   </div>
 

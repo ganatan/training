@@ -4,7 +4,9 @@ dotenv.config()
 
 import * as chatgptMock from '../mock/llm/chatgpt.mock.js'
 import * as claudeMock from '../mock/llm/claude.mock.js'
+
 import * as chatgptReal from '../services/llm/chatgpt.service.js'
+import * as claudeReal from '../services/llm/claude.service.js'
 
 const router = express.Router()
 const useMock = process.env.USE_MOCK === 'true'
@@ -16,7 +18,7 @@ const providers = {
   },
   claude: {
     mock: claudeMock.reply,
-    real: null 
+    real: claudeReal.reply
   }
 }
 
@@ -26,31 +28,31 @@ router.post('/biography/:llm', async (req, res) => {
   const provider = providers[llm]
 
   if (!provider) {
-    return res.status(404).json({ success: false, error: `Unknown provider: ${llm}` })
+    return res.json({ success: false, llm, data: 'unknown-provider' })
   }
 
   try {
     const reply = useMock
       ? await provider.mock(input)
-      : await provider.real?.(input)
-
-    if (!reply) {
-      return res.status(501).json({ success: false, error: `Real service for ${llm} not implemented` })
-    }
+      : await provider.real(input)
 
     res.json({
       success: true,
       llm,
-      data: reply
+      data: reply || ''
     })
+
   } catch (err) {
-    res.status(500).json({
+    console.log('00000000001');
+    const message = err.message.toLowerCase()
+    const isUnauthorized = message.includes('unauthorized') || message.includes('401')
+
+    return res.json({
       success: false,
       llm,
-      error: err.message || 'Unexpected error'
+      data: isUnauthorized ? 'unauthorized API KEY' : 'error'
     })
   }
 })
 
 export default router
-

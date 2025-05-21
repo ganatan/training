@@ -43,7 +43,6 @@ router.post('/biography/:llm', async (req, res) => {
     })
 
   } catch (err) {
-    console.log('00000000001');
     const message = err.message.toLowerCase()
     const isUnauthorized = message.includes('unauthorized') || message.includes('401')
 

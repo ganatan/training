@@ -24,10 +24,6 @@ export async function reply(input) {
     const length = lengthMap[rawLength] || 'moyenne'
 
     const prompt = `Écris une biographie de ${name} en style ${style}, de longueur ${length}`
-
-    console.log('📤 Prompt :', prompt)
-    console.log('🔑 OpenAI Key (début) :', process.env.OPENAI_API_KEY?.slice(0, 10) + '...')
-
     const response = await axios.post(
       'https://api.anthropic.com/v1/messages',
       {

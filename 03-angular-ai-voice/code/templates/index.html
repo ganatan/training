@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>angular-ai-chatgpt-claude</title>
+  <title>angular-ai-voice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     textarea {
       resize: vertical;
       min-height: 150px;
+    }
+    audio {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .status-badge {
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
     }
   </style>
 </head>
@@ -19,45 +24,79 @@
 
 <div class="container my-5">
 
-  <h1 class="text-center mb-4">angular-ai-conversation-elevenlabs</h1>
+  <h1 class="text-center mb-4 text-primary">angular-ai-voice</h1>
 
-  <div class="mb-4">
-    <input type="text" class="form-control text-center" placeholder="Enter a director's name">
-  </div>
-
-  <div class="row g-3 mb-3 text-center">
-    <div class="col">
-      <button class="btn btn-primary w-100">BIOGRAPHY - ChatGPT</button>
+  <div class="row g-3 align-items-center mb-4">
+    <div class="col-12 col-md-4">
+      <label class="form-label">Nom du réalisateur</label>
+      <input type="text" class="form-control text-center" placeholder="Nom du réalisateur" value="Ridley Scott">
     </div>
-    <div class="col">
-      <button class="btn btn-primary w-100">BIOGRAPHY - Claude</button>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Style de réponse</label>
+      <select class="form-select">
+        <option>Neutre</option>
+        <option>Décontracté</option>
+        <option>Technique</option>
+        <option>Narratif</option>
+        <option>Journalistique</option>
+      </select>
     </div>
-  </div>
-
-  <div class="row g-3 mb-4">
-    <div class="col">
-      <textarea class="form-control" placeholder="ChatGPT biography" readonly></textarea>
-    </div>
-    <div class="col">
-      <textarea class="form-control" placeholder="Claude biography" readonly></textarea>
-    </div>
-  </div>
-
-  <div class="row g-3 mb-3 text-center">
-    <div class="col">
-      <button class="btn btn-success w-100">Text to Speech - ElevenLabs</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-success w-100">Text to Speech - ElevenLabs</button>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Longueur</label>
+      <select class="form-select">
+        <option>Courte</option>
+        <option>Moyenne</option>
+        <option>Longue</option>
+      </select>
     </div>
   </div>
 
-  <div class="row g-3">
+  <div class="row g-4">
     <div class="col">
-      <textarea class="form-control" placeholder="ChatGPT synthesis" readonly></textarea>
+      <h5 class="mb-2">ChatGPT</h5>
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <button class="btn btn-primary">Biographie</button>
+        <button class="btn btn-outline-secondary">Réinitialiser</button>
+        <span class="badge bg-success status-badge">✓</span>
+      </div>
+      <textarea class="form-control mb-3" placeholder="Biographie générée..." readonly></textarea>
+
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <button class="btn btn-outline-primary">Voix - ElevenLabs</button>
+        <span class="badge bg-success status-badge">Voix OK</span>
+      </div>
+    </div>
+
+    <div class="col">
+      <h5 class="mb-2">Claude</h5>
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <button class="btn btn-success">Biographie</button>
+        <button class="btn btn-outline-secondary">Réinitialiser</button>
+        <span class="badge bg-success status-badge">✓</span>
+      </div>
+      <textarea class="form-control mb-3" placeholder="Biographie générée..." readonly></textarea>
+
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <button class="btn btn-outline-success">Voix - ElevenLabs</button>
+        <span class="badge bg-success status-badge">Voix OK</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-4">
+    <div class="col">
+      <h6>Lecture audio - ChatGPT</h6>
+      <audio controls>
+        <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'audio.
+      </audio>
     </div>
     <div class="col">
-      <textarea class="form-control" placeholder="Claude synthesis" readonly></textarea>
+      <h6>Lecture audio - Claude</h6>
+      <audio controls>
+        <source src="audios/ridley-scott-claude.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'audio.
+      </audio>
     </div>
   </div>
 

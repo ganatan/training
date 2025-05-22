@@ -7,7 +7,8 @@ import { PersonService, BiographyResponse } from './person.service'
   selector: 'app-root',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   name = 'ridley scott'
@@ -16,26 +17,39 @@ export class AppComponent {
 
   biographyChatGPT = ''
   biographyClaude = ''
-  chatgptLoading = false;
-  claudeLoading = false;
+  chatgptLoading = false
+  claudeLoading = false
+
+  chatgptDuration = 0
+  claudeDuration = 0
 
   constructor(private personService: PersonService) { }
 
   loadBiography(llm: 'chatgpt' | 'claude') {
+    const start = performance.now()
+
     if (llm === 'chatgpt') {
-      this.chatgptLoading = true;
+      this.biographyChatGPT = ''
+      this.chatgptLoading = true
     } else {
-      this.claudeLoading = true;
+      this.biographyClaude = ''
+      this.claudeLoading = true
     }
-    this.personService.postBiography(llm, this.name, this.length, this.style).subscribe((response: BiographyResponse) => {
-      console.log('00000000001:' + JSON.stringify(response));
-      if (llm === 'chatgpt') {
-        this.biographyChatGPT = response.data
-      } else {
-        this.biographyClaude = response.data
-      }
-      this.chatgptLoading = false;
-      this.claudeLoading = false;
-    })
+
+    this.personService
+      .postBiography(llm, this.name, this.length, this.style)
+      .subscribe((response: BiographyResponse) => {
+        const duration = (performance.now() - start) / 1000
+
+        if (llm === 'chatgpt') {
+          this.biographyChatGPT = response.data
+          this.chatgptDuration = duration
+          this.chatgptLoading = false
+        } else {
+          this.biographyClaude = response.data
+          this.claudeDuration = duration
+          this.claudeLoading = false
+        }
+      })
   }
 }

@@ -74,12 +74,8 @@ export class AppComponent {
       })
   }
 
-  // playAudio(url: string) {
-  //   console.log('00000000001:' + url);
-  //   const audio = new Audio(url)
-  //   audio.play()
-  // }
   playAudio(url: string) {
+    url = 'http://localhost:3000/api/audio';
     console.log('000000000001:' + url);
     if (this.audioPlayer) {
       this.audioPlayer.pause()

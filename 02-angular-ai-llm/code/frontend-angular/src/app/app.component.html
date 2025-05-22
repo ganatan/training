@@ -1,11 +1,11 @@
 <div class="container my-5">
 
-  <h1 class="text-center mb-4">angular-ai-chatgpt-claude</h1>
+  <h1 class="text-center mb-4 text-primary">angular-ai-llm</h1>
 
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-md-4">
       <label class="form-label">Nom du réalisateur</label>
-      <input type="text" class="form-control text-center" [(ngModel)]="name" placeholder="Nom du réalisateur">
+      <input type="text" class="form-control text-start" [(ngModel)]="name" placeholder="Nom du réalisateur">
     </div>
     <div class="col-12 col-md-4">
       <label class="form-label">Style de réponse</label>
@@ -27,34 +27,48 @@
     </div>
   </div>
 
-  <div class="row g-3 mb-3 text-center">
-    <div class="col d-flex gap-2">
-      <button class="btn btn-primary flex-fill" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
-      <button class="btn btn-outline-secondary" (click)="biographyChatGPT = ''">Réinitialiser</button>
-    </div>
-    <div class="col d-flex gap-2">
-      <button class="btn btn-success flex-fill" (click)="loadBiography('claude')">Biographie - Claude</button>
-      <button class="btn btn-outline-secondary" (click)="biographyClaude = ''">Réinitialiser</button>
-    </div>
-  </div>
+  <div class="row g-4 mb-3">
 
-  <div class="row g-3 mb-4">
-    <div class="col position-relative">
-      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="10"></textarea>
-      <div *ngIf="chatgptLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
-        <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
-          <span class="visually-hidden">Chargement...</span>
+    <!-- ChatGPT -->
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
+        <button class="btn btn-primary" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
+        <button class="btn btn-outline-secondary" (click)="biographyChatGPT = ''">Réinitialiser</button>
+        <span *ngIf="biographyChatGPT && !chatgptLoading" class="badge bg-success">✓</span>
+        <span *ngIf="chatgptDuration > 0" class="text-muted ms-auto small-text">
+          Réponse en {{ chatgptDuration.toFixed(1) }}s
+        </span>
+      </div>
+      <div class="position-relative">
+        <textarea class="form-control" [value]="biographyChatGPT" readonly rows="6"></textarea>
+        <div *ngIf="chatgptLoading" class="loading">
+          <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+            <span class="visually-hidden">Chargement...</span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col position-relative">
-      <textarea class="form-control" [value]="biographyClaude" readonly rows="10"></textarea>
-      <div *ngIf="claudeLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
-        <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
-          <span class="visually-hidden">Chargement...</span>
+
+    <!-- Claude -->
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
+        <button class="btn btn-success" (click)="loadBiography('claude')">Biographie - Claude</button>
+        <button class="btn btn-outline-secondary" (click)="biographyClaude = ''">Réinitialiser</button>
+        <span *ngIf="biographyClaude && !claudeLoading" class="badge bg-success">✓</span>
+        <span *ngIf="claudeDuration > 0" class="text-muted ms-auto small-text">
+          Réponse en {{ claudeDuration.toFixed(1) }}s
+        </span>
+      </div>
+      <div class="position-relative">
+        <textarea class="form-control" [value]="biographyClaude" readonly rows="6"></textarea>
+        <div *ngIf="claudeLoading" class="loading">
+          <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+            <span class="visually-hidden">Chargement...</span>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
 </div>

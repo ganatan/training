@@ -8,7 +8,8 @@ import { PersonService, BiographyResponse } from './person.service'
   selector: 'app-root',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   name = 'ridley scott'

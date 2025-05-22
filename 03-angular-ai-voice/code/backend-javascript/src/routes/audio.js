@@ -13,7 +13,6 @@ const audioDirectory = path.resolve(__dirname, '../../public/audios')
 // router.get('/:llm/:filename', (req, res) => {
 router.get('/', (req, res) => {
   // const { filename } = req.params
-  console.log('00000000001');
   const filename = 'ridley-scott-chatgpt.mp3';
   const filePath = path.join(audioDirectory, filename)
 

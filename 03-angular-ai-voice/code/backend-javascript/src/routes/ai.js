@@ -65,7 +65,6 @@ router.post('/biography/:llm', async (req, res) => {
 })
 
 router.post('/voice/:llm', async (req, res) => {
-  console.log('00000000001');
   const { llm } = req.params
   const { name } = req.body
 

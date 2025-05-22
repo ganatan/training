@@ -3,7 +3,6 @@ import axios from 'axios'
 export async function testElevenLabsAPI(voiceId) {
   try {
     const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`
-
     const response = await axios.post(
       url,
       {
@@ -15,7 +14,6 @@ export async function testElevenLabsAPI(voiceId) {
           'xi-api-key': process.env.ELEVENLABS_API_KEY,
           'Content-Type': 'application/json'
         },
-        // Ne demande pas le stream ici, pour juste tester la connexion
         responseType: 'arraybuffer',
         timeout: 5000
       }

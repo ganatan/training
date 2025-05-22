@@ -3,17 +3,16 @@ import path from 'path'
 import axios from 'axios'
 
 export async function generateSpeech(text, voiceId, fileName) {
-  console.log('00000000001:' + text);
-  console.log('00000000002:' + voiceId);
-  console.log('00000000003:' + fileName);
-  const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`
-
+  // console.log('00000000001:' + text);
+  // console.log('00000000002:' + voiceId);
+  // console.log('00000000003:' + fileName);
+  // const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
+  const url = `https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128`;
   const outputDir = path.join(process.cwd(), 'public', 'audios')
   await fs.promises.mkdir(outputDir, { recursive: true })
 
   const outputPath = path.join(outputDir, fileName)
-  console.log('00000000004:' + outputPath);
-
+  console.log('00000000001:');
   const response = await axios.post(
     url,
     {
@@ -28,7 +27,7 @@ export async function generateSpeech(text, voiceId, fileName) {
       responseType: 'stream'
     }
   )
-
+  console.log('00000000004:' + outputPath);
   const writer = fs.createWriteStream(outputPath)
   response.data.pipe(writer)
 

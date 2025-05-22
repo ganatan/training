@@ -23,7 +23,7 @@ export class AppComponent {
   chatgptLoading = false
   claudeLoading = false
 
-  constructor(private personService: PersonService) {}
+  constructor(private personService: PersonService) { }
 
   loadBiography(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
@@ -72,6 +72,7 @@ export class AppComponent {
   }
 
   playAudio(url: string) {
+    console.log('00000000001:' + url);
     const audio = new Audio(url)
     audio.play()
   }

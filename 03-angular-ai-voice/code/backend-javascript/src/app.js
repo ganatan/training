@@ -5,6 +5,7 @@ dotenv.config()
 
 import aiRoutes from './routes/ai.js'
 import { aiServices } from './config/ai-services.js'
+import audioRoutes from './routes/audio.js'
 
 const app = express()
 const port = 3000
@@ -12,6 +13,7 @@ const port = 3000
 app.use(cors())
 app.use(express.json())
 
+app.use('/api/audio', audioRoutes)
 app.use('/api/ai', aiRoutes)
 
 app.get('/api/ai/services', (req, res) => {

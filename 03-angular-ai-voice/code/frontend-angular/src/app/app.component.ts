@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { PersonService, BiographyResponse } from './person.service'
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,6 +23,8 @@ export class AppComponent {
 
   chatgptLoading = false
   claudeLoading = false
+
+  private audioPlayer?: HTMLAudioElement
 
   constructor(private personService: PersonService) { }
 
@@ -71,10 +74,20 @@ export class AppComponent {
       })
   }
 
+  // playAudio(url: string) {
+  //   console.log('00000000001:' + url);
+  //   const audio = new Audio(url)
+  //   audio.play()
+  // }
   playAudio(url: string) {
-    console.log('00000000001:' + url);
-    const audio = new Audio(url)
-    audio.play()
+    console.log('000000000001:' + url);
+    if (this.audioPlayer) {
+      this.audioPlayer.pause()
+      this.audioPlayer.currentTime = 0
+    }
+
+    this.audioPlayer = new Audio(url)
+    this.audioPlayer.play()
   }
 
   reset(llm: 'chatgpt' | 'claude') {

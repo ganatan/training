@@ -1,0 +1,60 @@
+<div class="container my-5">
+
+  <h1 class="text-center mb-4">angular-ai-chatgpt-claude</h1>
+
+  <div class="row g-3 align-items-center mb-4">
+    <div class="col-12 col-md-4">
+      <label class="form-label">Nom du réalisateur</label>
+      <input type="text" class="form-control text-center" [(ngModel)]="name" placeholder="Nom du réalisateur">
+    </div>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Style de réponse</label>
+      <select class="form-select" [(ngModel)]="style">
+        <option value="neutral">Neutre</option>
+        <option value="casual">Décontracté</option>
+        <option value="technical">Technique</option>
+        <option value="narrative">Narratif</option>
+        <option value="press">Journalistique</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-4">
+      <label class="form-label">Longueur</label>
+      <select class="form-select" [(ngModel)]="length">
+        <option value="short">Courte</option>
+        <option value="medium">Moyenne</option>
+        <option value="long">Longue</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3 text-center">
+    <div class="col d-flex gap-2">
+      <button class="btn btn-primary flex-fill" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
+      <button class="btn btn-outline-secondary" (click)="biographyChatGPT = ''">Réinitialiser</button>
+    </div>
+    <div class="col d-flex gap-2">
+      <button class="btn btn-success flex-fill" (click)="loadBiography('claude')">Biographie - Claude</button>
+      <button class="btn btn-outline-secondary" (click)="biographyClaude = ''">Réinitialiser</button>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col position-relative">
+      <textarea class="form-control" [value]="biographyChatGPT" readonly rows="10"></textarea>
+      <div *ngIf="chatgptLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
+        <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+    </div>
+    <div class="col position-relative">
+      <textarea class="form-control" [value]="biographyClaude" readonly rows="10"></textarea>
+      <div *ngIf="claudeLoading" class="position-absolute top-50 end-0 translate-middle-y me-3">
+        <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

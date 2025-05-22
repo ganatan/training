@@ -6,15 +6,25 @@ export interface BiographyResponse {
   success: boolean
   llm: string
   data: string
+  audioUrl?: string
 }
 
 @Injectable({ providedIn: 'root' })
 export class PersonService {
+  private baseUrl = 'http://localhost:3000/api/ai'
+
   constructor(private http: HttpClient) {}
 
   postBiography(llm: string, name: string, length: string, style: string): Observable<BiographyResponse> {
     return this.http.post<BiographyResponse>(
-      `http://localhost:3000/api/ai/biography/${llm}`,
+      `${this.baseUrl}/biography/${llm}`,
+      { name, length, style }
+    )
+  }
+
+  postVoice(llm: string, name: string, length: string, style: string): Observable<BiographyResponse> {
+    return this.http.post<BiographyResponse>(
+      `${this.baseUrl}/voice/${llm}`,
       { name, length, style }
     )
   }

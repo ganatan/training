@@ -16,26 +16,73 @@ export class AppComponent {
 
   biographyChatGPT = ''
   biographyClaude = ''
-  chatgptLoading = false;
-  claudeLoading = false;
 
-  constructor(private personService: PersonService) { }
+  audioChatGPT = ''
+  audioClaude = ''
+
+  chatgptLoading = false
+  claudeLoading = false
+
+  constructor(private personService: PersonService) {}
 
   loadBiography(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
-      this.chatgptLoading = true;
+      this.chatgptLoading = true
     } else {
-      this.claudeLoading = true;
+      this.claudeLoading = true
     }
-    this.personService.postBiography(llm, this.name, this.length, this.style).subscribe((response: BiographyResponse) => {
-      console.log('00000000001:' + JSON.stringify(response));
-      if (llm === 'chatgpt') {
-        this.biographyChatGPT = response.data
-      } else {
-        this.biographyClaude = response.data
-      }
-      this.chatgptLoading = false;
-      this.claudeLoading = false;
-    })
+
+    this.personService
+      .postBiography(llm, this.name, this.length, this.style)
+      .subscribe((response: BiographyResponse) => {
+        console.log('BIO:', response)
+        if (llm === 'chatgpt') {
+          this.biographyChatGPT = response.data
+        } else {
+          this.biographyClaude = response.data
+        }
+
+        this.chatgptLoading = false
+        this.claudeLoading = false
+      })
+  }
+
+  loadVoice(llm: 'chatgpt' | 'claude') {
+    if (llm === 'chatgpt') {
+      this.chatgptLoading = true
+    } else {
+      this.claudeLoading = true
+    }
+
+    this.personService
+      .postVoice(llm, this.name, this.length, this.style)
+      .subscribe((response: BiographyResponse) => {
+        console.log('VOICE:', response)
+        if (llm === 'chatgpt') {
+          this.biographyChatGPT = response.data;
+          this.audioChatGPT = response.audioUrl!;
+        } else {
+          this.biographyClaude = response.data;
+          this.audioClaude = response.audioUrl!;
+        }
+
+        this.chatgptLoading = false
+        this.claudeLoading = false
+      })
+  }
+
+  playAudio(url: string) {
+    const audio = new Audio(url)
+    audio.play()
+  }
+
+  reset(llm: 'chatgpt' | 'claude') {
+    if (llm === 'chatgpt') {
+      this.biographyChatGPT = ''
+      this.audioChatGPT = ''
+    } else {
+      this.biographyClaude = ''
+      this.audioClaude = ''
+    }
   }
 }

@@ -1,7 +1,8 @@
 <div class="container my-5">
 
-  <h1 class="text-center mb-3 h2 text-primary">angular-ai-conversation-elevenlabs</h1>
+  <h1 class="text-center mb-3 h2 text-primary">angular-ai-voice</h1>
 
+  <!-- Saisie -->
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-md-4">
       <label class="form-label">Nom du réalisateur</label>
@@ -27,17 +28,32 @@
     </div>
   </div>
 
+  <!-- Actions -->
   <div class="row g-3 mb-3 text-center">
-    <div class="col d-flex gap-2">
-      <button class="btn btn-primary flex-fill" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
-      <button class="btn btn-outline-secondary" (click)="biographyChatGPT = ''">Réinitialiser</button>
+    <div class="col d-flex flex-column gap-2">
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary flex-fill" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
+        <button class="btn btn-outline-secondary" (click)="reset('chatgpt')">Réinitialiser</button>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-primary flex-fill" (click)="loadVoice('chatgpt')">Voix - ChatGPT</button>
+        <button class="btn btn-outline-dark" [disabled]="!audioChatGPT" (click)="playAudio(audioChatGPT)">▶️</button>
+      </div>
     </div>
-    <div class="col d-flex gap-2">
-      <button class="btn btn-success flex-fill" (click)="loadBiography('claude')">Biographie - Claude</button>
-      <button class="btn btn-outline-secondary" (click)="biographyClaude = ''">Réinitialiser</button>
+
+    <div class="col d-flex flex-column gap-2">
+      <div class="d-flex gap-2">
+        <button class="btn btn-success flex-fill" (click)="loadBiography('claude')">Biographie - Claude</button>
+        <button class="btn btn-outline-secondary" (click)="reset('claude')">Réinitialiser</button>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-success flex-fill" (click)="loadVoice('claude')">Voix - Claude</button>
+        <button class="btn btn-outline-dark" [disabled]="!audioClaude" (click)="playAudio(audioClaude)">▶️</button>
+      </div>
     </div>
   </div>
 
+  <!-- Résultats -->
   <div class="row g-3 mb-4">
     <div class="col position-relative">
       <textarea class="form-control" [value]="biographyChatGPT" readonly rows="10"></textarea>
@@ -56,5 +72,15 @@
       </div>
     </div>
   </div>
+
+<div class="row g-3">
+  <div class="col">
+    <audio *ngIf="audioChatGPT" [src]="audioChatGPT" controls class="w-100 mt-2"></audio>
+  </div>
+  <div class="col">
+    <audio *ngIf="audioClaude" [src]="audioClaude" controls class="w-100 mt-2"></audio>
+  </div>
+</div>
+
 
 </div>

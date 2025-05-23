@@ -21,9 +21,10 @@ export async function reply(input) {
     }
 
     const style = styleMap[rawStyle] || 'neutre'
-    const length = lengthMap[rawLength] || 'moyenne'
+    const length = lengthMap[rawLength] || '50 mots maximum'
 
     const prompt = `Écris une biographie de ${name} en style ${style}, de longueur ${length}`
+
     const response = await axios.post(
       'https://api.anthropic.com/v1/messages',
       {
@@ -40,11 +41,25 @@ export async function reply(input) {
       }
     )
 
-    return response.data.content[0].text
+    const result = response.data.content?.[0]?.text
+    if (!result) throw new Error('Réponse vide de Claude.')
+
+    return result
 
   } catch (error) {
-    console.error('❌ Erreur Claude:', error.response?.data || error.message)
-    throw new Error('Erreur Claude : ' + (error.response?.data?.error?.message || error.message))
+    const code = error.response?.status
+    const data = error.response?.data
+
+    if (code === 401) {
+      console.error('❌ Erreur 401 : Clé API Claude manquante ou invalide.')
+    } else {
+      console.error('❌ Erreur Claude :', code, data || error.message)
+    }
+
+    throw new Error(
+      code === 401
+        ? 'Erreur 401 : clé API Claude absente ou invalide.'
+        : 'Erreur Claude : ' + (data?.error?.message || error.message)
+    )
   }
 }
-

@@ -57,6 +57,12 @@
           </div>
         </div>
         }
+        @if (chatgptLoading) {
+        <div class="progress mt-2">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+            [style.width.%]="chatgptProgress"></div>
+        </div>
+        }
       </div>
     </div>
 
@@ -80,6 +86,12 @@
           <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
             <span class="visually-hidden">Chargement...</span>
           </div>
+        </div>
+        }
+        @if (claudeLoading) {
+        <div class="progress mt-2">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            [style.width.%]="claudeProgress"></div>
         </div>
         }
       </div>

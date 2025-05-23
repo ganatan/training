@@ -2,26 +2,36 @@ export function reply(data) {
   const name = (data.name || 'Inconnu').replace('-', ' ')
   const length = data.length || 'medium'
   const style = data.style || 'neutral'
-
-  const base = `${name} est un cinéaste britannique né en 1937, maître du cinéma épique et de science-fiction. Connu pour Alien (1979), Blade Runner (1982), Gladiator (2000) et Seul sur Mars (2015), il excelle dans la création d'univers visuels immersifs et de récits grandioses.`
-
-  const styles = {
-    neutral: base,
-    casual: `${name} ? Un génie du cinéma ! Le type qui a créé Alien, l'univers cyberpunk de Blade Runner, et qui nous a fait pleurer avec Gladiator. Toujours des films visuellement époustouflants, même à 87 ans il continue de tourner.`,
-    technical: `${name} (1937-) est un réalisateur britannique reconnu pour sa maîtrise de la direction artistique et sa capacité à combiner effets pratiques et numériques. Ses films se caractérisent par une photographie soignée, des décors monumentaux et une attention méticuleuse aux détails visuels. Il a remporté plusieurs nominations aux Oscars.`,
-    narrative: `Dans le nord de l'Angleterre naissait ${name}, qui deviendrait l'un des architectes visuels les plus influents du cinéma. De ses débuts publicitaires à Hollywood, il a forgé des mondes inoubliables, transformant chaque film en une expérience visuelle unique qui transcende les époques.`,
-    press: `Le réalisateur britannique ${name}, lauréat de nombreux prix internationaux, demeure une figure incontournable du cinéma contemporain. Avec plus de 25 longs-métrages à son actif, il continue d'influencer les nouvelles générations de cinéastes par son approche visionnaire de la mise en scène.`
+  
+  const descriptions = {
+    neutral: {
+      short: `${name} est un réalisateur britannique visionnaire connu pour Alien, Blade Runner et Gladiator.`,
+      medium: `${name} est un réalisateur britannique visionnaire, créateur d'univers cinématographiques mémorables comme Alien, Blade Runner et Gladiator. Son style unique allie esthétique visuelle soignée et narration puissante.`,
+      long: `${name} est un réalisateur britannique visionnaire, créateur d'univers cinématographiques mémorables comme Alien, Blade Runner et Gladiator. Son style unique allie esthétique visuelle soignée et narration puissante. Formé en arts graphiques, il apporte une précision technique et un sens esthétique remarquable à chacun de ses films.`
+    },
+    casual: {
+      short: `${name} ? Ce réalisateur génial qui nous a donné Alien et Blade Runner !`,
+      medium: `${name} ? Ah, ce réalisateur britannique génial qui nous a donné Alien et Blade Runner ! Ses films sont toujours visuellement époustouflants et racontent des histoires qui restent gravées dans la mémoire.`,
+      long: `${name} ? Ah, ce réalisateur britannique génial qui nous a donné Alien et Blade Runner ! Ses films sont toujours visuellement époustouflants et racontent des histoires qui restent gravées dans la mémoire. Il a commencé dans la pub avant de devenir une légende du cinéma avec son style hyper reconnaissable.`
+    },
+    technical: {
+      short: `Sir ${name}, cinéaste britannique né en 1937, maître de la direction artistique et de l'éclairage.`,
+      medium: `Sir ${name}, cinéaste britannique né en 1937, est reconnu pour sa maîtrise technique exceptionnelle et son approche visuelle distinctive. Son utilisation innovante de l'éclairage et sa direction artistique méticuleuse définissent son style cinématographique.`,
+      long: `Sir ${name}, cinéaste britannique né en 1937, est reconnu pour sa maîtrise technique exceptionnelle et son approche visuelle distinctive. Son utilisation innovante de l'éclairage et sa direction artistique méticuleuse définissent son style cinématographique. Utilisant souvent des storyboards détaillés qu'il dessine lui-même, il supervise minutieusement chaque aspect visuel de ses productions.`
+    },
+    narrative: {
+      short: `Le jeune ${name} commença sa carrière dans la publicité avant de révolutionner le cinéma avec ses visions uniques.`,
+      medium: `Le jeune ${name} ne se doutait pas, en commençant sa carrière dans la publicité, qu'il deviendrait l'un des réalisateurs les plus influents de sa génération, créant des mondes visuels qui redéfiniraient le cinéma de science-fiction et historique.`,
+      long: `Le jeune ${name} ne se doutait pas, en commençant sa carrière dans la publicité, qu'il deviendrait l'un des réalisateurs les plus influents de sa génération, créant des mondes visuels qui redéfiniraient le cinéma de science-fiction et historique. De l'espace claustrophobique d'Alien aux arènes de Gladiator, ses œuvres ont transcendé leurs genres pour devenir des références culturelles incontournables.`
+    },
+    press: {
+      short: `Le cinéaste britannique ${name} continue d'impressionner avec sa vision artistique unique et son perfectionnisme.`,
+      medium: `Le légendaire cinéaste britannique ${name}, dont la filmographie comprend des chefs-d'œuvre comme Alien et Gladiator, continue d'impressionner critiques et public avec sa vision artistique unique et son perfectionnisme légendaire.`,
+      long: `Le légendaire cinéaste britannique ${name}, dont la filmographie comprend des chefs-d'œuvre comme Alien et Gladiator, continue d'impressionner critiques et public avec sa vision artistique unique et son perfectionnisme légendaire. À une époque où le cinéma évolue rapidement, Scott reste fidèle à son approche méticuleuse tout en embrassant les nouvelles technologies pour servir ses récits ambitieux.`
+    }
   }
 
-  const texte = styles[style] || base
-
-  const répétitions = {
-    short: 1,
-    medium: 2,
-    long: 4
-  }
-
-  const fois = répétitions[length] || 2
-
-  return `${texte} `.repeat(fois).trim()
+  const texte = descriptions[style]?.[length] || descriptions.neutral[length] || descriptions.neutral.medium
+  
+  return texte
 }

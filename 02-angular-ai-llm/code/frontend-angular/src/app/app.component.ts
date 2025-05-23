@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { PersonService, BiographyResponse } from './person.service'
 
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,6 +24,7 @@ export class AppComponent {
 
   chatgptDuration = 0
   claudeDuration = 0
+  useMock = environment.useMock;
 
   constructor(private personService: PersonService) { }
 
@@ -52,4 +55,22 @@ export class AppComponent {
         }
       })
   }
+
+  onStyleChange(newStyle: string) {
+    this.style = newStyle
+    this.resetBiographies()
+  }
+
+  onLengthChange(newLength: string) {
+    this.length = newLength
+    this.resetBiographies()
+  }
+
+  private resetBiographies() {
+    this.biographyChatGPT = ''
+    this.biographyClaude = ''
+    this.chatgptDuration = 0
+    this.claudeDuration = 0
+  }
+  
 }

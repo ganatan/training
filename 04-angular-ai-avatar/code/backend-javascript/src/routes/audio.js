@@ -10,8 +10,10 @@ const __dirname = path.dirname(__filename)
 
 const audioDirectory = path.resolve(__dirname, '../../public/audios')
 
-router.get('/:llm/:filename', (req, res) => {
-  const { filename } = req.params
+// router.get('/:llm/:filename', (req, res) => {
+router.get('/', (req, res) => {
+  // const { filename } = req.params
+  const filename = 'ridley-scott-chatgpt.mp3';
   const filePath = path.join(audioDirectory, filename)
 
   if (!fs.existsSync(filePath)) {

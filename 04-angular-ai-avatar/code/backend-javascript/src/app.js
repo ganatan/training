@@ -14,7 +14,6 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/audio', audioRoutes)
-
 app.use('/api/ai', aiRoutes)
 
 app.get('/api/ai/services', (req, res) => {

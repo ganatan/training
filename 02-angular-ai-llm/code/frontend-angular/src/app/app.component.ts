@@ -29,24 +29,24 @@ export class AppComponent {
   useMock = environment.useMock;
 
   styleOptions = [
-    { value: 'neutral', label: 'Neutre' },
     { value: 'casual', label: 'Décontracté' },
-    { value: 'technical', label: 'Technique' },
-    { value: 'narrative', label: 'Narratif' },
-    { value: 'press', label: 'Journalistique' },
-    { value: 'humorous', label: 'Humoristique' },
-    { value: 'poetic', label: 'Poétique' },
+    { value: 'cinematic', label: 'Cinématographique' },
+    { value: 'dialog', label: 'Dialogué' },
     { value: 'dramatic', label: 'Dramatique' },
     { value: 'emotional', label: 'Émotionnel' },
-    { value: 'cinematic', label: 'Cinématographique' },
     { value: 'historical', label: 'Historique' },
-    { value: 'marketing', label: 'Marketing' },
-    { value: 'scientific', label: 'Scientifique' },
-    { value: 'satirical', label: 'Satirique' },
+    { value: 'humorous', label: 'Humoristique' },
     { value: 'inspirational', label: 'Inspirant' },
+    { value: 'interview', label: 'Interview fictive' },
+    { value: 'marketing', label: 'Marketing' },
     { value: 'minimal', label: 'Minimaliste' },
-    { value: 'dialog', label: 'Dialogué' },
-    { value: 'interview', label: 'Interview fictive' }
+    { value: 'narrative', label: 'Narratif' },
+    { value: 'neutral', label: 'Neutre' },
+    { value: 'poetic', label: 'Poétique' },
+    { value: 'press', label: 'Journalistique' },
+    { value: 'satirical', label: 'Satirique' },
+    { value: 'scientific', label: 'Scientifique' },
+    { value: 'technical', label: 'Technique' }
   ]
 
   constructor(private personService: PersonService) { }

@@ -12,7 +12,7 @@
       }
     </div>
 
-    <div class="col-12 col-md-4">
+    <!-- <div class="col-12 col-md-4">
       <label class="form-label">Style de réponse</label>
       <select class="form-select" [(ngModel)]="style" (ngModelChange)="onStyleChange($event)">
         <option value="neutral">Neutre</option>
@@ -20,6 +20,15 @@
         <option value="technical">Technique</option>
         <option value="narrative">Narratif</option>
         <option value="press">Journalistique</option>
+      </select>
+    </div> -->
+
+    <div class="col-12 col-md-4">
+      <label class="form-label">Style de réponse</label>
+      <select class="form-select" [(ngModel)]="style" (ngModelChange)="onStyleChange($event)">
+        <option *ngFor="let s of styleOptions" [value]="s.value">
+          {{ s.label }}
+        </option>
       </select>
     </div>
 
@@ -38,12 +47,12 @@
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
         <button class="btn btn-primary" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
-        <button class="btn btn-outline-secondary" (click)="resetBiography('chatgpt')">Réinitialiser</button>
+        <button class="btn btn-outline-primary" (click)="resetBiography('chatgpt')">Réinitialiser</button>
         @if (biographyChatGPT && !chatgptLoading) {
         <span class="badge bg-primary">✓</span>
         }
         @if (chatgptDuration > 0) {
-        <span class="text-muted ms-auto small-text">
+        <span class="text-primary ms-auto small-text">
           Réponse en {{ chatgptDuration.toFixed(1) }}s
         </span>
         }
@@ -69,12 +78,12 @@
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
         <button class="btn btn-success" (click)="loadBiography('claude')">Biographie - Claude</button>
-        <button class="btn btn-outline-secondary" (click)="resetBiography('claude')">Réinitialiser</button>
+        <button class="btn btn-outline-success" (click)="resetBiography('claude')">Réinitialiser</button>
         @if (biographyClaude && !claudeLoading) {
         <span class="badge bg-success">✓</span>
         }
         @if (claudeDuration > 0) {
-        <span class="text-muted ms-auto small-text">
+        <span class="text-success ms-auto small-text">
           Réponse en {{ claudeDuration.toFixed(1) }}s
         </span>
         }

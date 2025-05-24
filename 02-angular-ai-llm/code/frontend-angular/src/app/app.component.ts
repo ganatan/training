@@ -28,6 +28,27 @@ export class AppComponent {
   claudeProgress = 0
   useMock = environment.useMock;
 
+  styleOptions = [
+    { value: 'neutral', label: 'Neutre' },
+    { value: 'casual', label: 'Décontracté' },
+    { value: 'technical', label: 'Technique' },
+    { value: 'narrative', label: 'Narratif' },
+    { value: 'press', label: 'Journalistique' },
+    { value: 'humorous', label: 'Humoristique' },
+    { value: 'poetic', label: 'Poétique' },
+    { value: 'dramatic', label: 'Dramatique' },
+    { value: 'emotional', label: 'Émotionnel' },
+    { value: 'cinematic', label: 'Cinématographique' },
+    { value: 'historical', label: 'Historique' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'scientific', label: 'Scientifique' },
+    { value: 'satirical', label: 'Satirique' },
+    { value: 'inspirational', label: 'Inspirant' },
+    { value: 'minimal', label: 'Minimaliste' },
+    { value: 'dialog', label: 'Dialogué' },
+    { value: 'interview', label: 'Interview fictive' }
+  ]
+
   constructor(private personService: PersonService) { }
 
   resetBiography(llm: 'chatgpt' | 'claude') {

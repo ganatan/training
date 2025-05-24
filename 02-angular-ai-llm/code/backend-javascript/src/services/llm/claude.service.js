@@ -1,29 +1,43 @@
 import axios from 'axios'
 
+const styleMap = {
+  neutral: 'neutre, objectif, informatif sans émotion',
+  casual: 'décontracté, langage simple et familier',
+  technical: 'axé sur les faits techniques et professionnels',
+  narrative: 'raconté comme une histoire avec du rythme',
+  press: 'journalistique, structuré comme un article de presse',
+  humorous: 'humoristique, ton léger et amusant',
+  poetic: 'poétique, style littéraire et imagé',
+  dramatic: 'dramatique, avec tension et intensité émotionnelle',
+  emotional: 'émotionnel, centré sur les sentiments et l’empathie',
+  cinematic: 'cinématographique, ambiance visuelle et descriptive comme un film',
+  historical: 'historique, avec mise en contexte chronologique',
+  marketing: 'marketing, valorisant avec un ton accrocheur',
+  scientific: 'scientifique, ton analytique et factuel',
+  satirical: 'satirique, critique subtile et ironique',
+  inspirational: 'inspirant, motivant avec des citations et une mise en valeur',
+  minimal: 'très court, phrases simples et dépouillées',
+  dialog: 'rédigé sous forme de dialogue entre deux personnes',
+  interview: 'présenté comme une interview fictive, questions-réponses'
+}
+
+const lengthMap = {
+  short: 'environ 30 mots, réponse très concise',
+  medium: 'environ 60 mots, réponse équilibrée',
+  long: 'environ 100 mots, réponse développée mais synthétique'
+}
+
 export async function reply(input) {
   try {
+
     const name = input.name || 'inconnu'
     const rawStyle = input.style || 'neutral'
-    const rawLength = input.length || 'short'
+    const rawLength = input.length || 'medium'
 
-    const lengthMap = {
-      short: '20 mots maximum',
-      medium: '50 mots maximum',
-      long: '80 mots maximum'
-    }
+    const style = styleMap[rawStyle] || styleMap.neutral
+    const length = lengthMap[rawLength] || lengthMap.medium
 
-    const styleMap = {
-      neutral: 'neutre',
-      casual: 'décontracté',
-      technical: 'technique',
-      narrative: 'narratif',
-      press: 'journalistique'
-    }
-
-    const style = styleMap[rawStyle] || 'neutre'
-    const length = lengthMap[rawLength] || '50 mots maximum'
-
-    const prompt = `Écris une biographie de ${name} en style ${style}, de longueur ${length}`
+    const prompt = `Écris une biographie de ${name} avec un style ${style}, ${length}.`
 
     const response = await axios.post(
       'https://api.anthropic.com/v1/messages',

@@ -30,33 +30,17 @@ export class AppComponent {
 
   constructor(private personService: PersonService) { }
 
-  // loadBiography(llm: 'chatgpt' | 'claude') {
-  //   const start = performance.now()
-
-  //   if (llm === 'chatgpt') {
-  //     this.biographyChatGPT = ''
-  //     this.chatgptLoading = true
-  //   } else {
-  //     this.biographyClaude = ''
-  //     this.claudeLoading = true
-  //   }
-
-  //   this.personService
-  //     .postBiography(llm, this.name, this.length, this.style)
-  //     .subscribe((response: BiographyResponse) => {
-  //       const duration = (performance.now() - start) / 1000
-
-  //       if (llm === 'chatgpt') {
-  //         this.biographyChatGPT = response.data
-  //         this.chatgptDuration = duration
-  //         this.chatgptLoading = false
-  //       } else {
-  //         this.biographyClaude = response.data
-  //         this.claudeDuration = duration
-  //         this.claudeLoading = false
-  //       }
-  //     })
-  // }
+  resetBiography(llm: 'chatgpt' | 'claude') {
+    if (llm === 'chatgpt') {
+      this.chatgptDuration = 0
+      this.biographyChatGPT = '';
+      this.chatgptProgress = 0;
+    } else {
+      this.claudeDuration = 0
+      this.biographyClaude = '';
+      this.claudeProgress = 0;
+    }
+  }
 
   loadBiography(llm: 'chatgpt' | 'claude') {
     const start = performance.now()
@@ -114,7 +98,7 @@ export class AppComponent {
     let progress = 0
     const interval = setInterval(() => {
       progress += 5
-      if (progress >= 95) return // ne pas aller jusqu'à 100
+      if (progress >= 95) return
       if (llm === 'chatgpt') this.chatgptProgress = progress
       else this.claudeProgress = progress
     }, 100)

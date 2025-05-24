@@ -38,7 +38,7 @@
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
         <button class="btn btn-primary" (click)="loadBiography('chatgpt')">Biographie - ChatGPT</button>
-        <button class="btn btn-outline-secondary" (click)="biographyChatGPT = ''">Réinitialiser</button>
+        <button class="btn btn-outline-secondary" (click)="resetBiography('chatgpt')">Réinitialiser</button>
         @if (biographyChatGPT && !chatgptLoading) {
         <span class="badge bg-primary">✓</span>
         }
@@ -69,7 +69,7 @@
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
         <button class="btn btn-success" (click)="loadBiography('claude')">Biographie - Claude</button>
-        <button class="btn btn-outline-secondary" (click)="biographyClaude = ''">Réinitialiser</button>
+        <button class="btn btn-outline-secondary" (click)="resetBiography('claude')">Réinitialiser</button>
         @if (biographyClaude && !claudeLoading) {
         <span class="badge bg-success">✓</span>
         }

@@ -27,8 +27,7 @@ const lengthMap = {
   long: 'environ 100 mots, réponse développée mais synthétique'
 }
 
-
-export async function reply(input) {
+export async function reply(type, input) {
   try {
     const name = input.name || 'inconnu'
     const rawStyle = input.style || 'neutral'
@@ -37,7 +36,9 @@ export async function reply(input) {
     const style = styleMap[rawStyle] || styleMap.neutral
     const length = lengthMap[rawLength] || lengthMap.medium
 
-    const prompt = `Écris une biographie de ${name} avec un style ${style}, ${length}.`
+    const prompt = type === 'summary'
+      ? `Fais un résumé du film "${name}" avec un style ${style}, ${length}.`
+      : `Écris une biographie de ${name} avec un style ${style}, ${length}.`
 
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -72,3 +73,103 @@ export async function reply(input) {
     )
   }
 }
+
+
+
+// import axios from 'axios'
+
+// const styleMap = {
+//   neutral: 'neutre, objectif, informatif sans émotion',
+//   casual: 'décontracté, langage simple et familier',
+//   technical: 'axé sur les faits techniques et professionnels',
+//   narrative: 'raconté comme une histoire avec du rythme',
+//   press: 'journalistique, structuré comme un article de presse',
+//   humorous: 'humoristique, ton léger et amusant',
+//   poetic: 'poétique, style littéraire et imagé',
+//   dramatic: 'dramatique, avec tension et intensité émotionnelle',
+//   emotional: 'émotionnel, centré sur les sentiments et l’empathie',
+//   cinematic: 'cinématographique, ambiance visuelle et descriptive comme un film',
+//   historical: 'historique, avec mise en contexte chronologique',
+//   marketing: 'marketing, valorisant avec un ton accrocheur',
+//   scientific: 'scientifique, ton analytique et factuel',
+//   satirical: 'satirique, critique subtile et ironique',
+//   inspirational: 'inspirant, motivant avec des citations et une mise en valeur',
+//   minimal: 'très court, phrases simples et dépouillées',
+//   dialog: 'rédigé sous forme de dialogue entre deux personnes',
+//   interview: 'présenté comme une interview fictive, questions-réponses'
+// }
+
+// const lengthMap = {
+//   short: 'environ 30 mots, réponse très concise',
+//   medium: 'environ 60 mots, réponse équilibrée',
+//   long: 'environ 100 mots, réponse développée mais synthétique'
+// }
+
+// function buildPrompt(input, isSummary = false) {
+//   const name = input.name || 'inconnu'
+//   const rawStyle = input.style || 'neutral'
+//   const rawLength = input.length || 'medium'
+
+//   const style = styleMap[rawStyle] || styleMap.neutral
+//   const length = lengthMap[rawLength] || lengthMap.medium
+
+//   return isSummary
+//     ? `Fais un résumé du film "${name}" avec un style ${style}, ${length}.`
+//     : `Écris une biographie de ${name} avec un style ${style}, ${length}.`
+// }
+
+// async function callOpenAI(prompt) {
+//   const response = await axios.post(
+//     'https://api.openai.com/v1/chat/completions',
+//     {
+//       model: 'gpt-4-turbo',
+//       messages: [{ role: 'user', content: prompt }]
+//     },
+//     {
+//       headers: {
+//         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+//         'Content-Type': 'application/json'
+//       }
+//     }
+//   )
+
+//   return response.data.choices[0].message.content
+// }
+
+// export async function biography(input) {
+//   try {
+//     const prompt = buildPrompt(input, false)
+//     return await callOpenAI(prompt)
+//   } catch (error) {
+//     handleError(error)
+//   }
+// }
+
+// export async function summary(input) {
+//   try {
+//     const prompt = buildPrompt(input, true)
+//     return await callOpenAI(prompt)
+//   } catch (error) {
+//     handleError(error)
+//   }
+// }
+
+// function handleError(error) {
+//   const code = error.response?.status
+//   const data = error.response?.data
+
+//   if (code === 401) {
+//     console.error('❌ Erreur 401 : Clé API OpenAI manquante ou invalide.')
+//   } else {
+//     console.error('❌ Erreur OpenAI :', code, data || error.message)
+//   }
+
+//   throw new Error(
+//     code === 401
+//       ? 'Erreur 401 : clé OpenAI absente ou invalide.'
+//       : 'Erreur OpenAI : ' + (data?.error?.message || error.message)
+//   )
+// }
+
+
+

@@ -2,23 +2,24 @@ import { Component } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { PersonService, BiographyResponse } from './person.service'
-
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment'
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
   name = 'ridley scott'
-  length = 'short'
+  type = 'biography'
   style = 'neutral'
+  length = 'short'
 
   biographyChatGPT = ''
   biographyClaude = ''
+
   chatgptLoading = false
   claudeLoading = false
 
@@ -26,7 +27,8 @@ export class AppComponent {
   claudeDuration = 0
   chatgptProgress = 0
   claudeProgress = 0
-  useMock = environment.useMock;
+
+  useMock = environment.useMock
 
   styleOptions = [
     { value: 'casual', label: 'Décontracté' },
@@ -51,15 +53,11 @@ export class AppComponent {
 
   constructor(private personService: PersonService) { }
 
-  resetBiography(llm: 'chatgpt' | 'claude') {
-    if (llm === 'chatgpt') {
-      this.chatgptDuration = 0
-      this.biographyChatGPT = '';
-      this.chatgptProgress = 0;
-    } else {
-      this.claudeDuration = 0
-      this.biographyClaude = '';
-      this.claudeProgress = 0;
+  toggleTheme() {
+    const body = document.querySelector('body')
+    if (body) {
+      console.log('00000000001');
+      body.classList.toggle('dark-mode')
     }
   }
 
@@ -78,7 +76,7 @@ export class AppComponent {
     }
 
     this.personService
-      .postBiography(llm, this.name, this.length, this.style)
+      .postBiography(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: BiographyResponse) => {
         const duration = (performance.now() - start) / 1000
         clearInterval(interval)
@@ -97,13 +95,31 @@ export class AppComponent {
       })
   }
 
-  onStyleChange(newStyle: string) {
-    this.style = newStyle
+  resetBiography(llm: 'chatgpt' | 'claude') {
+    if (llm === 'chatgpt') {
+      this.biographyChatGPT = ''
+      this.chatgptDuration = 0
+      this.chatgptProgress = 0
+    } else {
+      this.biographyClaude = ''
+      this.claudeDuration = 0
+      this.claudeProgress = 0
+    }
+  }
+
+  onStyleChange(value: string) {
+    this.style = value
     this.resetBiographies()
   }
 
-  onLengthChange(newLength: string) {
-    this.length = newLength
+  onLengthChange(value: string) {
+    this.length = value
+    this.resetBiographies()
+  }
+
+  onTypeChange(value: string) {
+    this.name = ''
+    this.type = value
     this.resetBiographies()
   }
 
@@ -114,7 +130,6 @@ export class AppComponent {
     this.claudeDuration = 0
   }
 
-
   startProgress(llm: 'chatgpt' | 'claude') {
     let progress = 0
     const interval = setInterval(() => {
@@ -123,8 +138,6 @@ export class AppComponent {
       if (llm === 'chatgpt') this.chatgptProgress = progress
       else this.claudeProgress = progress
     }, 100)
-
     return interval
   }
-
 }

@@ -1,4 +1,5 @@
 export function reply(data) {
+
   const name = (data.name || 'Inconnu').replace('-', ' ')
   const style = data.style || 'neutral'
   const length = data.length || 'medium'

@@ -118,8 +118,12 @@ export class AppComponent {
   }
 
   onTypeChange(value: string) {
-    this.name = ''
     this.type = value
+    if (this.useMock) {
+      this.name = value === 'biography' ? 'Ridley Scott' : 'Alien'
+    } else {
+      this.name = ''
+    }
     this.resetBiographies()
   }
 

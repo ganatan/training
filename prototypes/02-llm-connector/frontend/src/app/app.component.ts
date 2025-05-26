@@ -56,7 +56,6 @@ export class AppComponent {
   toggleTheme() {
     const body = document.querySelector('body')
     if (body) {
-      console.log('00000000001');
       body.classList.toggle('dark-mode')
     }
   }

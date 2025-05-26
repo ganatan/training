@@ -7,7 +7,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-project-structure": "node tools/scripts/generate-project-structure.js"
   },
   "private": true,
   "dependencies": {

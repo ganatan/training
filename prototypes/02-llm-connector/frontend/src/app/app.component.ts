@@ -73,7 +73,9 @@ export class AppComponent {
       this.claudeLoading = true
       this.claudeProgress = 0
     }
-
+    console.log('00000000001:' + this.style)
+    console.log('00000000001:' + this.type)
+    console.log('00000000001:' + this.name)
     this.personService
       .postBiography(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: BiographyResponse) => {

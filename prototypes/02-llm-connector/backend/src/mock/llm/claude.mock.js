@@ -2,7 +2,11 @@ export function reply(data) {
   const name = (data.name || 'Inconnu').replace('-', ' ')
   const length = data.length || 'medium'
   const style = data.style || 'neutral'
-  
+
+  console.log('00000000001:' + name);
+  console.log('00000000001:' + length);
+  console.log('00000000001:' + style);
+
   const descriptions = {
     neutral: {
       short: `${name} est un réalisateur britannique visionnaire connu pour Alien, Blade Runner et Gladiator.`,
@@ -32,6 +36,6 @@ export function reply(data) {
   }
 
   const texte = descriptions[style]?.[length] || descriptions.neutral[length] || descriptions.neutral.medium
-  
+
   return texte
 }

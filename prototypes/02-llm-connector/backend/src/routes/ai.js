@@ -24,7 +24,12 @@ const providers = {
 
 router.post('/:type/:llm', async (req, res) => {
   const { type, llm } = req.params
+
   const input = req.body
+  console.log('00000000001:' + type);
+  console.log('00000000001:' + llm);
+  console.log('00000000001:' + JSON.stringify(input));
+
   const provider = providers[llm]
   if (!provider) {
     return res.json({ success: false, llm, data: 'unknown-provider' })
@@ -32,8 +37,8 @@ router.post('/:type/:llm', async (req, res) => {
 
   try {
     const reply = useMock
-      ? await provider.mock(type,input)
-      : await provider.real(type,input)
+      ? await provider.mock(input)
+      : await provider.real(type, input)
 
     res.json({
       success: true,

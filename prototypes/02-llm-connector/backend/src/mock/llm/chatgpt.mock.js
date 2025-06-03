@@ -1,4 +1,5 @@
 export function reply(data) {
+  console.log('00000000001:reply:' + JSON.stringify(data));
 
   const name = (data.name || 'Inconnu').replace('-', ' ')
   const style = data.style || 'neutral'

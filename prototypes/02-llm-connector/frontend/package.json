@@ -2,6 +2,7 @@
   "name": "angular-starter",
   "version": "20.0.0",
   "scripts": {
+    "generate-project-structure": "node tools/scripts/generate-project-structure.js",
     "ng": "ng",
     "dev": "ng serve --port 4200",
     "start": "ng serve --port 4200",

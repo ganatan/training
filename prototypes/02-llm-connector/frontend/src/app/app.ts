@@ -1,17 +1,17 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
+
 import { PersonService, BiographyResponse } from './person.service'
 import { environment } from '../environments/environment'
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class AppComponent {
+export class App {
   name = 'ridley scott'
   type = 'biography'
   style = 'neutral'

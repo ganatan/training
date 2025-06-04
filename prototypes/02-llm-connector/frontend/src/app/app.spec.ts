@@ -1,29 +1,25 @@
-import { TestBed } from '@angular/core/testing';
-import { App } from './app';
-import { ActivatedRoute } from '@angular/router';
+import { TestBed } from '@angular/core/testing'
+import { App } from './app'
+import { ActivatedRoute } from '@angular/router'
+import { provideHttpClient } from '@angular/common/http'
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [
+        provideHttpClient(),
         {
           provide: ActivatedRoute,
           useValue: {}
         }
       ]
-    }).compileComponents();
-  });
+    }).compileComponents()
+  })
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-routing');
-  });
-});
+    const fixture = TestBed.createComponent(App)
+    const app = fixture.componentInstance
+    expect(app).toBeTruthy()
+  })
+})

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 
@@ -50,8 +50,7 @@ export class App {
     { value: 'scientific', label: 'Scientifique' },
     { value: 'technical', label: 'Technique' }
   ]
-
-  constructor(private person: Person) { }
+  private person = inject(Person)
 
   toggleTheme() {
     const body = document.querySelector('body')
@@ -140,7 +139,7 @@ export class App {
       if (llm === 'chatgpt') this.chatgptProgress = progress
       else this.claudeProgress = progress
     }, 100)
-    
+
     return interval;
   }
 }

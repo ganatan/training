@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 
-import { PersonService, BiographyResponse } from './person.service'
+import { Person, BiographyResponse } from './person'
 import { environment } from '../environments/environment'
 
 @Component({
@@ -51,7 +51,7 @@ export class App {
     { value: 'technical', label: 'Technique' }
   ]
 
-  constructor(private personService: PersonService) { }
+  constructor(private person: Person) { }
 
   toggleTheme() {
     const body = document.querySelector('body')
@@ -73,10 +73,7 @@ export class App {
       this.claudeLoading = true
       this.claudeProgress = 0
     }
-    console.log('00000000001:' + this.style)
-    console.log('00000000001:' + this.type)
-    console.log('00000000001:' + this.name)
-    this.personService
+    this.person
       .postBiography(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: BiographyResponse) => {
         const duration = (performance.now() - start) / 1000
@@ -143,6 +140,7 @@ export class App {
       if (llm === 'chatgpt') this.chatgptProgress = progress
       else this.claudeProgress = progress
     }, 100)
-    return interval
+    
+    return interval;
   }
 }

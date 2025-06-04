@@ -9,7 +9,7 @@ export interface BiographyResponse {
 }
 
 @Injectable({ providedIn: 'root' })
-export class PersonService {
+export class Person {
   constructor(private http: HttpClient) {}
 
   postBiography(
@@ -19,11 +19,8 @@ export class PersonService {
     style: string,
     type: string
   ): Observable<BiographyResponse> {
-    let url = `http://localhost:3000/api/ai/${type}/${llm}`;
-    console.log('00000000001:' + url);
-    console.log('00000000001:' + name);
-    console.log('00000000001:' + length);
-    console.log('00000000001:' + style);
+    const url = `http://localhost:3000/api/ai/${type}/${llm}`;
+    
     return this.http.post<BiographyResponse>(
       url,
       { name, length, style }

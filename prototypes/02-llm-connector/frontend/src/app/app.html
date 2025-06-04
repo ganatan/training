@@ -5,24 +5,24 @@
 
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-lg-3">
-      <label class="form-label">Nom / Titre</label>
+      <label class="form-label" for="title">Nom / Titre</label>
       <input type="text" class="form-control" [(ngModel)]="name" [readonly]="useMock">
     </div>
     <div class="col-12 col-lg-3">
-      <label class="form-label">Type</label>
+      <label class="form-label" for="type">Type</label>
       <select class="form-select" [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
         <option value="biography">Biographie de réalisateur</option>
         <option value="summary">Résumé de film</option>
       </select>
     </div>
     <div class="col-12 col-lg-3">
-      <label class="form-label">Style</label>
+      <label class="form-label" for="style">Style</label>
       <select class="form-select" [(ngModel)]="style" (ngModelChange)="onStyleChange($event)">
         <option *ngFor="let s of styleOptions" [value]="s.value">{{ s.label }}</option>
       </select>
     </div>
     <div class="col-12 col-lg-3">
-      <label class="form-label">Longueur</label>
+      <label class="form-label" for="length">Longueur</label>
       <select class="form-select" [(ngModel)]="length" (ngModelChange)="onLengthChange($event)">
         <option value="short">Courte</option>
         <option value="medium">Moyenne</option>
@@ -51,7 +51,7 @@
           </div>
           <div *ngIf="chatgptLoading" class="progress mt-2">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                 [style.width.%]="chatgptProgress"></div>
+              [style.width.%]="chatgptProgress"></div>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
           </div>
           <div *ngIf="claudeLoading" class="progress mt-2">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                 [style.width.%]="claudeProgress"></div>
+              [style.width.%]="claudeProgress"></div>
           </div>
         </div>
       </div>

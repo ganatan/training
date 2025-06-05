@@ -1,30 +1,49 @@
-import fs from 'fs';
-import path from 'path';
+'use strict';
 
-const excludedDirs = ['coverage', 'dist', 'logs', 'node_modules'];
+const fs = require('fs');
+const path = require('path');
 
 function getDirectoryStructure(dirPath, level = 0) {
-  let structure = '';
   const files = fs.readdirSync(dirPath);
 
-  for (const file of files) {
-    if (excludedDirs.includes(file)) {
-      continue;
-    }
+  let structure = '';
 
+  files.forEach(file => {
     const fullPath = path.join(dirPath, file);
     const isDirectory = fs.lstatSync(fullPath).isDirectory();
 
     structure += `${'  '.repeat(level)}|-- ${file}\n`;
+
     if (isDirectory) {
       structure += getDirectoryStructure(fullPath, level + 1);
     }
-  }
+  });
 
   return structure;
 }
 
-const rootPath = process.cwd();
-const projectStructure = `Structure of project root:\n${getDirectoryStructure(rootPath)}`;
+function generateStructureForFolders(folders) {
+  let fullStructure = '';
+
+  folders.forEach(folder => {
+    const folderPath = path.join(__dirname, '..', '..', folder);
+    if (fs.existsSync(folderPath)) {
+      fullStructure += `\nStructure of ${folder}:\n`;
+      fullStructure += getDirectoryStructure(folderPath);
+    } else {
+      fullStructure += `\n${folder} directory does not exist.\n`;
+    }
+  });
+
+  return fullStructure;
+}
+
+const foldersToInspect = ['src', 'tools', 'design'];
+const projectStructure = generateStructureForFolders(foldersToInspect);
 
 console.log(projectStructure);
+
+module.exports = {
+  getDirectoryStructure,
+  generateStructureForFolders,
+};

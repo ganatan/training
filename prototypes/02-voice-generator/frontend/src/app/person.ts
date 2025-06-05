@@ -10,7 +10,7 @@ export interface BiographyResponse {
 }
 
 @Injectable({ providedIn: 'root' })
-export class PersonService {
+export class Person {
   private baseUrl = 'http://localhost:3000/api/ai'
 
   constructor(private http: HttpClient) {}

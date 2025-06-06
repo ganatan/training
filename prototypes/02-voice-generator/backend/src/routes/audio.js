@@ -20,7 +20,8 @@ router.get('/:llm/:filename', (req, res) => {
   }
 
   res.setHeader('Content-Type', 'audio/mpeg');
-  res.sendFile(filePath);
+
+  return res.sendFile(filePath);
 });
 
 export default router;

@@ -36,7 +36,7 @@ function getProvider(llm) {
 }
 
 function safeFilename(name, llm) {
-  return name.toLowerCase().replace(/\s+/g, '-') + '-' + llm;
+  return `${name.toLowerCase().replace(/\s+/g, '-')}-${llm}`;
 }
 
 router.post('/biography/:llm', async (req, res) => {
@@ -56,12 +56,13 @@ router.post('/biography/:llm', async (req, res) => {
     await fs.mkdir(path.dirname(jsonPath), { recursive: true });
     await fs.writeFile(jsonPath, JSON.stringify({ name: name, llm: llm, text: reply }, null, 2));
 
-    res.json({ success: true, llm: llm, data: reply });
+    return res.json({ success: true, llm: llm, data: reply });
 
   } catch (err) {
     const msg = err.message.toLowerCase();
     const unauthorized = msg.includes('unauthorized') || msg.includes('401');
-    res.json({ success: false, llm: llm, data: unauthorized ? 'unauthorized API KEY' : msg });
+
+    return res.json({ success: false, llm: llm, data: unauthorized ? 'unauthorized API KEY' : msg });
   };
 });
 
@@ -82,12 +83,13 @@ router.post('/voice/:llm', async (req, res) => {
     const voiceId = process.env.ELEVENLABS_VOICE_ID || 'default';
     const audioUrl = await generateSpeech(reply, voiceId, `${fileName}.mp3`);
 
-    res.json({ success: true, llm: llm, data: reply, audioUrl: audioUrl });
+    return res.json({ success: true, llm: llm, data: reply, audioUrl: audioUrl });
 
   } catch (err) {
     const msg = err.message.toLowerCase();
     const unauthorized = msg.includes('unauthorized') || msg.includes('401');
-    res.json({ success: false, llm: llm, data: unauthorized ? 'unauthorized API KEY' : msg });
+
+    return res.json({ success: false, llm: llm, data: unauthorized ? 'unauthorized API KEY' : msg });
   }
 });
 

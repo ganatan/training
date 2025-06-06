@@ -1,34 +1,34 @@
-import { Component, inject } from '@angular/core'
-import { FormsModule } from '@angular/forms'
-import { CommonModule } from '@angular/common'
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
-import { Person, BiographyResponse } from './person'
-import { environment } from '../environments/environment'
+import { Person, BiographyResponse } from './person';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
   imports: [FormsModule, CommonModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  name = 'ridley scott'
-  type = 'biography'
-  style = 'neutral'
-  length = 'short'
+  name = 'ridley scott';
+  type = 'biography';
+  style = 'neutral';
+  length = 'short';
 
-  biographyChatGPT = ''
-  biographyClaude = ''
+  biographyChatGPT = '';
+  biographyClaude = '';
 
-  chatgptLoading = false
-  claudeLoading = false
+  chatgptLoading = false;
+  claudeLoading = false;
 
-  chatgptDuration = 0
-  claudeDuration = 0
-  chatgptProgress = 0
-  claudeProgress = 0
+  chatgptDuration = 0;
+  claudeDuration = 0;
+  chatgptProgress = 0;
+  claudeProgress = 0;
 
-  useMock = environment.useMock
+  useMock = environment.useMock;
 
   styleOptions = [
     { value: 'casual', label: 'Décontracté' },
@@ -48,97 +48,97 @@ export class App {
     { value: 'press', label: 'Journalistique' },
     { value: 'satirical', label: 'Satirique' },
     { value: 'scientific', label: 'Scientifique' },
-    { value: 'technical', label: 'Technique' }
-  ]
-  private person = inject(Person)
+    { value: 'technical', label: 'Technique' },
+  ];
+  private person = inject(Person);
 
   toggleTheme() {
-    const body = document.querySelector('body')
+    const body = document.querySelector('body');
     if (body) {
-      body.classList.toggle('dark-mode')
+      body.classList.toggle('dark-mode');
     }
   }
 
   loadBiography(llm: 'chatgpt' | 'claude') {
-    const start = performance.now()
-    const interval = this.startProgress(llm)
+    const start = performance.now();
+    const interval = this.startProgress(llm);
 
     if (llm === 'chatgpt') {
-      this.biographyChatGPT = ''
-      this.chatgptLoading = true
-      this.chatgptProgress = 0
+      this.biographyChatGPT = '';
+      this.chatgptLoading = true;
+      this.chatgptProgress = 0;
     } else {
-      this.biographyClaude = ''
-      this.claudeLoading = true
-      this.claudeProgress = 0
+      this.biographyClaude = '';
+      this.claudeLoading = true;
+      this.claudeProgress = 0;
     }
     this.person
       .postBiography(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: BiographyResponse) => {
-        const duration = (performance.now() - start) / 1000
-        clearInterval(interval)
+        const duration = (performance.now() - start) / 1000;
+        clearInterval(interval);
 
         if (llm === 'chatgpt') {
-          this.biographyChatGPT = response.data
-          this.chatgptDuration = duration
-          this.chatgptLoading = false
-          this.chatgptProgress = 100
+          this.biographyChatGPT = response.data;
+          this.chatgptDuration = duration;
+          this.chatgptLoading = false;
+          this.chatgptProgress = 100;
         } else {
-          this.biographyClaude = response.data
-          this.claudeDuration = duration
-          this.claudeLoading = false
-          this.claudeProgress = 100
+          this.biographyClaude = response.data;
+          this.claudeDuration = duration;
+          this.claudeLoading = false;
+          this.claudeProgress = 100;
         }
-      })
+      });
   }
 
   resetBiography(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
-      this.biographyChatGPT = ''
-      this.chatgptDuration = 0
-      this.chatgptProgress = 0
+      this.biographyChatGPT = '';
+      this.chatgptDuration = 0;
+      this.chatgptProgress = 0;
     } else {
-      this.biographyClaude = ''
-      this.claudeDuration = 0
-      this.claudeProgress = 0
+      this.biographyClaude = '';
+      this.claudeDuration = 0;
+      this.claudeProgress = 0;
     }
   }
 
   onStyleChange(value: string) {
-    this.style = value
-    this.resetBiographies()
+    this.style = value;
+    this.resetBiographies();
   }
 
   onLengthChange(value: string) {
-    this.length = value
-    this.resetBiographies()
+    this.length = value;
+    this.resetBiographies();
   }
 
   onTypeChange(value: string) {
-    this.type = value
+    this.type = value;
     if (this.useMock) {
-      this.name = value === 'biography' ? 'Ridley Scott' : 'Alien'
+      this.name = value === 'biography' ? 'Ridley Scott' : 'Alien';
     } else {
-      this.name = ''
+      this.name = '';
     }
-    this.resetBiographies()
+    this.resetBiographies();
   }
 
   private resetBiographies() {
-    this.biographyChatGPT = ''
-    this.biographyClaude = ''
-    this.chatgptDuration = 0
-    this.claudeDuration = 0
+    this.biographyChatGPT = '';
+    this.biographyClaude = '';
+    this.chatgptDuration = 0;
+    this.claudeDuration = 0;
   }
 
   startProgress(llm: 'chatgpt' | 'claude') {
-    let progress = 0
+    let progress = 0;
     const interval = setInterval(() => {
-      progress += 5
-      if (progress >= 95) return
-      if (llm === 'chatgpt') this.chatgptProgress = progress
-      else this.claudeProgress = progress
-    }, 100)
+      progress += 5;
+      if (progress >= 95) return;
+      if (llm === 'chatgpt') this.chatgptProgress = progress;
+      else this.claudeProgress = progress;
+    }, 100);
 
     return interval;
   }

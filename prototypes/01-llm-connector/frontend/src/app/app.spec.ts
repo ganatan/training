@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing'
-import { App } from './app'
-import { ActivatedRoute } from '@angular/router'
-import { provideHttpClient } from '@angular/common/http'
+import { TestBed } from '@angular/core/testing';
+import { App } from './app';
+import { ActivatedRoute } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -11,15 +11,15 @@ describe('App', () => {
         provideHttpClient(),
         {
           provide: ActivatedRoute,
-          useValue: {}
-        }
-      ]
-    }).compileComponents()
-  })
+          useValue: {},
+        },
+      ],
+    }).compileComponents();
+  });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App)
-    const app = fixture.componentInstance
-    expect(app).toBeTruthy()
-  })
-})
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+});

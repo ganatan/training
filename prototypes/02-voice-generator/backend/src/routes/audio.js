@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename)
 const audioDirectory = path.resolve(__dirname, '../../public/audios')
 
 router.get('/:llm/:filename', (req, res) => {
+  console.log('00000000001');
   const { filename } = req.params
   const filePath = path.join(audioDirectory, filename)
 

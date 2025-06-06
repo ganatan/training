@@ -4,11 +4,11 @@
 
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-md-4">
-      <label class="form-label">Nom du réalisateur</label>
+      <label class="form-label" for="name">Nom du réalisateur</label>
       <input type="text" class="form-control text-start" [(ngModel)]="name" placeholder="Nom du réalisateur">
     </div>
     <div class="col-12 col-md-4">
-      <label class="form-label">Style de réponse</label>
+      <label class="form-label" for="style">Style de réponse</label>
       <select class="form-select" [(ngModel)]="style">
         <option value="neutral">Neutre</option>
         <option value="casual">Décontracté</option>
@@ -18,7 +18,7 @@
       </select>
     </div>
     <div class="col-12 col-md-4">
-      <label class="form-label">Longueur</label>
+      <label class="form-label" for="length">Longueur</label>
       <select class="form-select" [(ngModel)]="length">
         <option value="short">Courte</option>
         <option value="medium">Moyenne</option>

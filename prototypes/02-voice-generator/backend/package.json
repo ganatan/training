@@ -6,7 +6,8 @@
   "scripts": {
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "dotenv": "16.5.0",
     "express": "5.1.0",
     "nodemon": "3.1.10"
+  },
+  "devDependencies": {
+    "eslint": "^9.28.0"
   }
 }

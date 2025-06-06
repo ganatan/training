@@ -1,26 +1,26 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-import aiRoutes from './routes/ai.js'
-import { aiServices } from './config/ai-services.js'
-import audioRoutes from './routes/audio.js'
+import aiRoutes from './routes/ai.js';
+import { aiServices } from './config/ai-services.js';
+import audioRoutes from './routes/audio.js';
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
-app.use('/api/audio', audioRoutes)
-app.use('/api/ai', aiRoutes)
+app.use('/api/audio', audioRoutes);
+app.use('/api/ai', aiRoutes);
 
 app.get('/api/ai/services', (req, res) => {
-  res.json({ services: aiServices })
-})
+  res.json({ services: aiServices });
+});
 
 app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`)
-})
+  console.log(`Server listening on http://localhost:${port}`);
+});

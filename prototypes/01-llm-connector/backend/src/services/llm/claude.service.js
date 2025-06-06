@@ -27,7 +27,7 @@ const lengthMap = {
   long: 'environ 100 mots, réponse développée mais synthétique',
 };
 
-export async function reply(type, input) {
+async function reply(type, input) {
   try {
 
     const name = input.name || 'inconnu';
@@ -79,3 +79,5 @@ export async function reply(type, input) {
     );
   }
 }
+
+export default reply;

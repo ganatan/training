@@ -1,4 +1,4 @@
-export const aiServices = {
+const aiServices = {
   llm: [
     { type: 'chatgpt', label: 'OpenAI', purpose: 'Text generation, summarization, Q&A, code completion' },
     { type: 'claude', label: 'Claude', purpose: 'Structured reasoning, content writing, safe dialogue' },
@@ -34,3 +34,5 @@ export const aiServices = {
     { type: 'udio', label: 'Udio AI', purpose: 'Generate high-quality vocal music tracks from prompt' },
   ],
 };
+
+export default aiServices;

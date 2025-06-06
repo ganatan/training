@@ -1,4 +1,7 @@
-export function reply(type: string, data: any): string {
+export function reply(
+  type: string,
+  data: { name?: string; style?: string; length?: string; llm?: string },
+): string {
   const name = (data.name || 'Inconnu').replace('-', ' ');
   const style = data.style || 'neutral';
   const length = data.length || 'medium';

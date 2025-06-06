@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import aiRoutes from './routes/ai.js';
-import { aiServices } from './config/ai-services.js';
+import aiServices from './config/ai-services.js';
 
 dotenv.config();
 

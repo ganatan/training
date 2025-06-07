@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",
+    "generate-markdown-docs": "node tools/scripts/generate-markdown-docs.js",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint": "eslint ."
@@ -18,6 +19,7 @@
     "cors": "2.8.5",
     "dotenv": "16.5.0",
     "express": "5.1.0",
+    "fs": "^0.0.1-security",
     "nodemon": "3.1.10"
   },
   "devDependencies": {

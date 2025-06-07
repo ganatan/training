@@ -6,6 +6,8 @@
   "scripts": {
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",
     "generate-markdown-docs": "node tools/scripts/generate-markdown-docs.js",
+    "generate-script-text": "node tools/scripts/generate-script-text.js",
+    "generate-script-text-openai": "node tools/scripts/generate-script-text-openai.js",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint": "eslint ."

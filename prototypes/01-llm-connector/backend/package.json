@@ -6,7 +6,6 @@
   "scripts": {
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",
     "generate-markdown-docs": "node tools/scripts/generate-markdown-docs.js",
-    "generate-script-text": "node tools/scripts/generate-script-text.js",
     "generate-script-text-openai": "node tools/scripts/generate-script-text-openai.js",
     "generate-pdf-from-txt": "node tools/scripts/generate-pdf-from-txt.js",
     "start": "node src/app.js",
@@ -23,6 +22,7 @@
     "dotenv": "16.5.0",
     "express": "5.1.0",
     "fs": "^0.0.1-security",
+    "highlight.js": "^11.11.1",
     "markdown-it": "^14.1.0",
     "markdown-pdf": "^11.0.0",
     "node-fetch": "^3.3.2",

@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SRC_DIR = path.join(__dirname, '../../src');
-const OUT_DIR = path.join(__dirname, '../../docs');
+const OUT_DIR = path.join(__dirname, '../../ai-docs/source');
 
 function walk(dir, filelist = []) {
   const files = fs.readdirSync(dir);

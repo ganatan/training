@@ -1,23 +1,38 @@
-import markdownpdf from 'markdown-pdf';
-import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import PDFDocument from 'pdfkit';
+import hljs from 'highlight.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const mdFile = path.resolve('./scripts/01 - app.js.md');
+const outFile = path.resolve('./scripts/01 - app.js.pdf');
 
-const SOURCE_DIR = path.join(__dirname, '../../scripts');
-const CSS_PATH = path.join(__dirname, 'style.css');
+const raw = fs.readFileSync(mdFile, 'utf-8');
 
-const files = fs.readdirSync(SOURCE_DIR).filter(f => f.endsWith('.md'));
+const doc = new PDFDocument({ margin: 40 });
+doc.pipe(fs.createWriteStream(outFile));
 
-files.forEach(file => {
-  const input = path.join(SOURCE_DIR, file);
-  const output = input.replace(/\.md$/, '.pdf');
+doc.fontSize(20).fillColor('#333').text('Documentation technique', { align: 'center' });
+doc.moveDown();
 
-  markdownpdf({ cssPath: CSS_PATH })
-    .from(input)
-    .to(output, () => {
-      console.log(`📄 PDF généré : ${output}`);
-    });
-});
+const blocks = raw.split(/```js|```/); 
+for (let i = 0; i < blocks.length; i++) {
+  const isCode = i % 2 === 1;
+  const content = blocks[i].trim();
+
+  if (isCode) {
+    const highlighted = hljs.highlight(content, { language: 'javascript' }).value;
+    const plain = highlighted.replace(/<[^>]+>/g, ''); 
+
+    doc.font('Courier').fontSize(9).fillColor('black');
+    doc.text(plain, { lineGap: 2 });
+    doc.moveDown();
+  } else {
+    doc.font('Helvetica').fontSize(11).fillColor('#444');
+    doc.text(content, { lineGap: 4 });
+    doc.moveDown();
+  }
+}
+
+doc.end();
+console.log('✅ PDF généré :', outFile);
+

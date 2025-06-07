@@ -8,6 +8,7 @@
     "generate-markdown-docs": "node tools/scripts/generate-markdown-docs.js",
     "generate-script-text-openai": "node tools/scripts/generate-script-text-openai.js",
     "generate-pdf-from-txt": "node tools/scripts/generate-pdf-from-txt.js",
+    "generate-documentation": "npm run generate-markdown-docs && npm run generate-script-text-openai && npm run generate-pdf-from-txt",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint": "eslint ."

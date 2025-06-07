@@ -1,23 +1,45 @@
 # Tutoriel : Comprendre le code Node.js pour les services d'IA
 
-Dans ce tutoriel, nous allons examiner un bloc de code Node.js qui définit une liste de services d'IA. Nous ne nous concentrerons pas sur chaque ligne, mais plutôt sur les concepts et les rôles clés qui sont en jeu.
+Ce tutoriel va vous aider à comprendre le code Node.js utilisé pour définir une collection de services d'IA. Nous allons examiner le code, puis expliquer les concepts clés et les rôles des différentes sections du code.
 
-## Le code
+## Code
 
 ```js
 const aiServices = {
   llm: [
     { type: 'chatgpt', label: 'OpenAI', purpose: 'Text generation, summarization, Q&A, code completion' },
     { type: 'claude', label: 'Claude', purpose: 'Structured reasoning, content writing, safe dialogue' },
-    //... 
+    { type: 'gemini', label: 'Gemini', purpose: 'Multimodal LLM for text and image understanding' },
+    { type: 'mistral', label: 'Mistral', purpose: 'Open-source LLM for high-performance text/code tasks' },
+    { type: 'perplexity', label: 'Perplexity AI', purpose: 'Web-augmented search engine powered by LLM' },
+    { type: 'deepseek', label: 'DeepSeek', purpose: 'Code generation, explanation and debugging assistant' },
   ],
 
   tts: [
     { type: 'elevenlabs', label: 'ElevenLabs', purpose: 'High-quality voice synthesis from text, multilingual' },
   ],
 
-  //... 
+  avatar: [
+    { type: 'did', label: 'D-ID', purpose: 'Animate a still photo with audio or text' },
+    { type: 'heygen', label: 'Heygen', purpose: 'Generate talking avatar videos from script' },
+    { type: 'jogg', label: 'Jogg AI', purpose: 'Create realistic talking avatars from custom photos' },
+  ],
 
+  image: [
+    { type: 'leonardo', label: 'Leonardo AI', purpose: 'Create illustrations, concept art and product visuals' },
+    { type: 'midjourney', label: 'MidJourney', purpose: 'Stylized artistic image generation from prompt' },
+    { type: 'kling', label: 'Kling AI', purpose: 'Future video generation from text (Sora-level quality)' },
+  ],
+
+  agent: [
+    { type: 'langchain', label: 'LangChain', purpose: 'Chain tools, memory, and LLMs into intelligent agents' },
+    { type: 'llamaindex', label: 'LlamaIndex', purpose: 'Connect LLMs to data sources, documents, and files' },
+  ],
+
+  music: [
+    { type: 'suno', label: 'Suno AI', purpose: 'Generate full songs with lyrics, melody, and vocals' },
+    { type: 'udio', label: 'Udio AI', purpose: 'Generate high-quality vocal music tracks from prompt' },
+  ],
 };
 
 export default aiServices;
@@ -25,22 +47,18 @@ export default aiServices;
 
 ## Explication du code
 
-### Définition des services d'IA
+### Structure de base
 
-Le code commence par définir une constante `aiServices`, qui est un objet JavaScript. Cet objet contient plusieurs clés, chacune représentant une catégorie de services d'IA. Les catégories incluent `llm` (langage et modèles d'apprentissage), `tts` (text-to-speech), `avatar`, `image`, `agent` et `music`.
+Le code définit une constante `aiServices` qui est un objet JavaScript. Cet objet contient plusieurs propriétés qui correspondent à différentes catégories de services d'IA : `llm`, `tts`, `avatar`, `image`, `agent` et `music`. Chaque catégorie contient un tableau d'objets, où chaque objet représente un service d'IA spécifique.
 
-Chaque catégorie est un tableau d'objets. Chaque objet représente un service d'IA spécifique et contient trois propriétés : `type`, `label` et `purpose`.
+### Description des services d'IA
 
-- `type` est un identifiant unique pour le service.
-- `label` est le nom du service.
-- `purpose` décrit ce que fait le service.
+Chaque service d'IA est défini par un objet avec trois propriétés : `type`, `label` et `purpose`.
 
-Par exemple, dans la catégorie `llm`, nous avons un service de type `chatgpt` avec le label `OpenAI` qui est utilisé pour la génération de texte, la résumé, les questions-réponses et la complétion de code.
+- `type` : Il s'agit d'une chaîne de caractères unique qui identifie le service d'IA.
+- `label` : Il s'agit d'un nom plus descriptif ou d'une étiquette pour le service d'IA.
+- `purpose` : Il s'agit d'une description de ce que le service d'IA fait ou de son utilisation prévue.
 
 ### Exportation du module
 
-À la fin du code, nous avons `export default aiServices;`. Cela signifie que nous exportons l'objet `aiServices` comme module par défaut. Cela permet à d'autres fichiers de code d'importer et d'utiliser les données définies dans `aiServices`.
-
-## Conclusion
-
-Ce code est un exemple de comment on peut structurer et organiser des informations sur différents services d'IA dans une application Node.js. En utilisant des objets et des tableaux, nous pouvons créer une structure de données claire et facile à utiliser.
+À la fin du code, nous exportons l'objet `aiServices` en tant que module par défaut. Cela signifie que lorsque ce fichier est importé dans un autre fichier, l'objet `aiServices` sera directement accessible.

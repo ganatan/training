@@ -18,12 +18,4 @@ app.use(express.json());
 
 app.use('/api/ai', aiRoutes);
 
-app.get('/api/ai/services', (req, res) => {
-  res.json({ services: aiServices });
-});
-
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
-});
-
 ```

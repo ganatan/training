@@ -1,67 +1,17 @@
-<voice name="Senior">
-Cette ligne de code importe le module Express dans l'application Node.js pour pouvoir utiliser ses fonctionnalités, comme la création et la gestion de routes HTTP.
-</voice>
+```js
+import express from 'express';
+```
 
-<voice name="Senior">
-Cette ligne de code importe le module 'cors' qui est utilisé pour fournir un middleware Express qui peut être utilisé pour activer les requêtes de partage de ressources cross-origin (CORS) dans une application Node.js.
-</voice>
+**Importation du module Express**
 
-<voice name="Senior">
-Cette ligne de code importe le module 'dotenv' qui permet de charger des variables d'environnement depuis un fichier .env dans Node.js.
-</voice>
+Cette ligne de code est utilisée pour importer le module Express dans votre fichier JavaScript. Express est un framework pour Node.js qui facilite la création d'applications web. Il fournit un ensemble de fonctionnalités pour créer des applications web et mobiles. 
 
-<voice name="Senior">
-Cette ligne de code importe les routes liées à 'ai' depuis le fichier 'ai.js' situé dans le dossier 'routes'.
-</voice>
 
-<voice name="Senior">
-Cette ligne de code importe le module 'ai-services.js' situé dans le répertoire 'config', et l'attribue à la variable 'aiServices' dans le fichier Node.js actuel.
-</voice>
+```js
+import cors from 'cors';
+```
 
-<voice name="Senior">
-Cette ligne de code charge les variables d'environnement du fichier .env dans process.env en Node.js, en utilisant le package dotenv.
-</voice>
+**Importation du module CORS**  
 
-<voice name="Senior">
-Cette ligne de code crée une nouvelle instance de l'application Express, qui est un framework pour construire des applications web sur Node.js.
-</voice>
+Cette ligne de code signifie que nous importons un module appelé `cors` dans notre application Node.js. `cors` est un package Node.js qui fournit un middleware pour activer le partage de ressources entre origines multiples (Cross Origin Resource Sharing). En d'autres termes, il permet à notre application de communiquer et de partager des ressources avec d'autres domaines.
 
-<voice name="Senior">
-Cette ligne de code définit une constante nommée "port" et lui attribue la valeur 3000, qui sera utilisée pour spécifier le port sur lequel le serveur Node.js doit écouter les requêtes entrantes.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code active le middleware CORS (Cross-Origin Resource Sharing) dans l'application Node.js, ce qui permet les requêtes cross-domain, c'est-à-dire les requêtes provenant d'un domaine différent de celui du serveur.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code indique à l'application Node.js d'utiliser le middleware express.json() pour analyser les corps de requêtes HTTP entrantes au format JSON.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code indique à l'application Node.js d'utiliser le routeur 'aiRoutes' pour toutes les requêtes commençant par '/api/ai'.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code crée une route GET sur le serveur Node.js qui répond aux requêtes client à l'URL '/api/ai/services'.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code envoie une réponse au client au format JSON qui contient un objet avec une clé "services" et sa valeur correspondante est la variable "aiServices".
-</voice>
-
-<voice name="Senior">
-Cette ligne de code en Node.js marque la fin d'une fonction, d'un objet ou d'un bloc de code, généralement utilisée pour fermer une fonction callback ou une structure de contrôle comme une boucle ou une condition.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code indique à l'application Node.js d'écouter et de répondre aux requêtes HTTP sur un port spécifique.
-</voice>
-
-<voice name="Senior">
-Cette ligne de code affiche un message dans la console indiquant que le serveur est en écoute sur l'adresse locale et le port spécifié par la variable "port".
-</voice>
-
-<voice name="Senior">
-Cette ligne de code termine généralement une fonction, un rappel (callback) ou une déclaration d'objet en JavaScript, signifiant la fin du bloc de code qui doit être exécuté ensemble.
-</voice>

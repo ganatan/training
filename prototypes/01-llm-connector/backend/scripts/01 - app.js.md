@@ -1,44 +1,48 @@
-# Explication du fichier 01 - app.js.md
+# Tutoriel Node.js avec Express, CORS et dotenv
+
+Dans ce tutoriel, nous allons examiner un exemple de code Node.js utilisant les bibliothèques Express, CORS et dotenv. Le code est structuré en plusieurs sections, chacune ayant une fonction spécifique dans l'application.
+
+## Importation des modules
 
 ```js
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
-import aiRoutes from './routes/ai.js';
-import aiServices from './config/ai-services.js';
-
-dotenv.config();
-
-const app = express();
-const port = 3000;
-
-app.use(cors());
-app.use(express.json());
-
-app.use('/api/ai', aiRoutes);
-
-app.get('/api/ai/services', (req, res) => {
-  res.json({ services: aiServices });
-});
-
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
-});
 ```
 
-Ce bloc de code crée un serveur web avec Node.js en utilisant le framework Express. 
+Dans cette section, nous importons trois modules :
 
-1. Il importe d'abord les modules nécessaires : `express` pour créer le serveur, `cors` pour gérer les requêtes Cross-Origin (qui proviennent d'un autre domaine), `dotenv` pour gérer les variables d'environnement, et des modules personnalisés pour gérer les routes et les services liés à l'IA.
+- `express` : un cadre de travail minimaliste pour Node.js, utilisé pour construire des applications web et API rapidement et facilement.
+- `cors` : un package Node.js pour fournir un middleware Connect/Express qui peut être utilisé pour activer CORS (Cross-Origin Resource Sharing) avec diverses options.
+- `dotenv` : un module qui charge les variables d'environnement d'un fichier `.env` dans `process.env`.
 
-2. Il charge ensuite les variables d'environnement à partir d'un fichier `.env` avec `dotenv.config()`.
+## Configuration de dotenv
 
-3. Il crée une application Express avec `const app = express();` et définit un port sur lequel le serveur va écouter.
+```js
+dotenv.config();
+```
 
-4. Il active ensuite l'utilisation de `cors` et du format JSON pour les requêtes entrantes avec `app.use(cors());` et `app.use(express.json());`.
+Ici, nous appelons la méthode `config()` de `dotenv`, qui charge les variables d'environnement du fichier `.env` dans `process.env`. Cela nous permet d'accéder facilement à ces variables dans notre application.
 
-5. Il définit ensuite une route `/api/ai` qui sera gérée par le module `aiRoutes`.
+## Initialisation de l'application Express
 
-6. Il définit une autre route `/api/ai/services` qui répondra avec un objet JSON contenant les services d'IA disponibles.
+```js
+const app = express();
+const port = 3000;
+```
 
-7. Enfin, il démarre le serveur avec `app.listen(port, ...);` et affiche un message dans la console pour indiquer que le serveur est en écoute.
+Dans cette section, nous initialisons une nouvelle application Express et définissons le port sur lequel notre serveur écoutera.
+
+## Configuration des middleware
+
+```js
+app.use(cors());
+app.use(express.json());
+```
+
+Ici, nous configurons deux middleware pour notre application :
+
+- `cors()` : ce middleware est utilisé pour activer le partage de ressources entre origines (CORS). Cela permet à notre serveur de répondre aux requêtes de différents domaines.
+- `express.json()` : ce middleware est inclus dans Express et analyse les requêtes entrantes avec des charges utiles JSON, ce qui est une étape nécessaire pour que notre serveur puisse interpréter les données JSON envoyées dans les requêtes HTTP.
+
+C'est tout pour ce tutoriel. Vous devriez maintenant avoir une meilleure compréhension de la façon dont ces modules fonctionnent ensemble dans une application Node.js.

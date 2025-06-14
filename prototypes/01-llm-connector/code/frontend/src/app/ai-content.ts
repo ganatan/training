@@ -2,33 +2,25 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environment';
-import { reply as mockReply } from './llm.mock';
+import { reply as mockReply } from './ai-content.mock';
 
-export interface BiographyResponse {
+export interface TextGenerationResponse {
   success: boolean;
   llm: string;
   data: string;
 }
 
 @Injectable({ providedIn: 'root' })
-export class Person {
+export class AiContentService {
   private http = inject(HttpClient);
 
-  postBiography(
-    llm: string,
-    name: string,
-    length: string,
-    style: string,
-    type: string,
-  ): Observable<BiographyResponse> {
+  generate(llm: string, name: string, length: string, style: string, type: string,): Observable<TextGenerationResponse> {
     if (environment.useMock) {
       const mockData = mockReply(type, { llm, name, length, style });
-
       return of({ success: true, llm, data: mockData });
     }
 
     const url = `http://localhost:3000/api/ai/${type}/${llm}`;
-
-    return this.http.post<BiographyResponse>(url, { name, length, style });
+    return this.http.post<TextGenerationResponse>(url, { name, length, style });
   }
 }

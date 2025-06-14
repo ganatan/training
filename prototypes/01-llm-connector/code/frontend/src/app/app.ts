@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { Person, BiographyResponse } from './person';
+import { AiContentService, TextGenerationResponse } from './ai-content';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -17,8 +17,8 @@ export class App {
   style = 'neutral';
   length = 'short';
 
-  biographyChatGPT = '';
-  biographyClaude = '';
+  contentChatGPT = '';
+  contentClaude = '';
 
   chatgptLoading = false;
   claudeLoading = false;
@@ -50,7 +50,8 @@ export class App {
     { value: 'scientific', label: 'Scientifique' },
     { value: 'technical', label: 'Technique' },
   ];
-  private person = inject(Person);
+
+  private aiContentService = inject(AiContentService);
 
   toggleTheme() {
     const body = document.querySelector('body');
@@ -59,33 +60,33 @@ export class App {
     }
   }
 
-  loadBiography(llm: 'chatgpt' | 'claude') {
+  loadContent(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
     const interval = this.startProgress(llm);
 
     if (llm === 'chatgpt') {
-      this.biographyChatGPT = '';
+      this.contentChatGPT = '';
       this.chatgptLoading = true;
       this.chatgptProgress = 0;
     } else {
-      this.biographyClaude = '';
+      this.contentClaude = '';
       this.claudeLoading = true;
       this.claudeProgress = 0;
     }
-    this.person
-      .postBiography(llm, this.name, this.length, this.style, this.type)
-      .subscribe((response: BiographyResponse) => {
-        console.log('00000000001:' + JSON.stringify(response));
+
+    this.aiContentService
+      .generate(llm, this.name, this.length, this.style, this.type)
+      .subscribe((response: TextGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 
         if (llm === 'chatgpt') {
-          this.biographyChatGPT = response.data;
+          this.contentChatGPT = response.data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;
           this.chatgptProgress = 100;
         } else {
-          this.biographyClaude = response.data;
+          this.contentClaude = response.data;
           this.claudeDuration = duration;
           this.claudeLoading = false;
           this.claudeProgress = 100;
@@ -93,13 +94,13 @@ export class App {
       });
   }
 
-  resetBiography(llm: 'chatgpt' | 'claude') {
+  resetContent(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
-      this.biographyChatGPT = '';
+      this.contentChatGPT = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
     } else {
-      this.biographyClaude = '';
+      this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
     }
@@ -107,29 +108,29 @@ export class App {
 
   onStyleChange(value: string) {
     this.style = value;
-    this.resetBiographies();
+    this.resetAll();
   }
 
   onLengthChange(value: string) {
     this.length = value;
-    this.resetBiographies();
+    this.resetAll();
   }
 
   onTypeChange(value: string) {
     this.type = value;
-    if (this.useMock) {
-      this.name = value === 'biography' ? 'Ridley Scott' : 'Alien';
-    } else {
-      this.name = '';
-    }
-    this.resetBiographies();
+    this.name = this.useMock
+      ? value === 'biography' ? 'Ridley Scott' : 'Alien'
+      : '';
+    this.resetAll();
   }
 
-  private resetBiographies() {
-    this.biographyChatGPT = '';
-    this.biographyClaude = '';
+  private resetAll() {
+    this.contentChatGPT = '';
+    this.contentClaude = '';
     this.chatgptDuration = 0;
     this.claudeDuration = 0;
+    this.chatgptProgress = 0;
+    this.claudeProgress = 0;
   }
 
   startProgress(llm: 'chatgpt' | 'claude') {
@@ -140,7 +141,6 @@ export class App {
       if (llm === 'chatgpt') this.chatgptProgress = progress;
       else this.claudeProgress = progress;
     }, 100);
-
     return interval;
   }
 }

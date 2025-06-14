@@ -35,15 +35,15 @@
     <div class="col-12 col-md-6">
       <div class="card p-4">
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
-          <button class="btn btn-primary" (click)="loadBiography('chatgpt')">Générer avec ChatGPT</button>
-          <button class="btn btn-outline-primary" (click)="resetBiography('chatgpt')">Réinitialiser</button>
-          <span *ngIf="biographyChatGPT && !chatgptLoading" class="badge bg-primary">✓</span>
+          <button class="btn btn-primary" (click)="loadContent('chatgpt')">Générer avec ChatGPT</button>
+          <button class="btn btn-outline-primary" (click)="resetContent('chatgpt')">Réinitialiser</button>
+          <span *ngIf="contentChatGPT && !chatgptLoading" class="badge bg-primary">✓</span>
           <span *ngIf="chatgptDuration > 0" class="text-primary ms-auto small-text">
             Réponse en {{ chatgptDuration.toFixed(1) }}s
           </span>
         </div>
         <div class="position-relative">
-          <textarea class="form-control" [value]="biographyChatGPT" readonly rows="6"></textarea>
+          <textarea class="form-control" [value]="contentChatGPT" readonly rows="6"></textarea>
           <div *ngIf="chatgptLoading" class="loading">
             <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>
@@ -60,15 +60,15 @@
     <div class="col-12 col-md-6">
       <div class="card p-4">
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
-          <button class="btn btn-success" (click)="loadBiography('claude')">Générer avec Claude</button>
-          <button class="btn btn-outline-success" (click)="resetBiography('claude')">Réinitialiser</button>
-          <span *ngIf="biographyClaude && !claudeLoading" class="badge bg-success">✓</span>
+          <button class="btn btn-success" (click)="loadContent('claude')">Générer avec Claude</button>
+          <button class="btn btn-outline-success" (click)="resetContent('claude')">Réinitialiser</button>
+          <span *ngIf="contentClaude && !claudeLoading" class="badge bg-success">✓</span>
           <span *ngIf="claudeDuration > 0" class="text-success ms-auto small-text">
             Réponse en {{ claudeDuration.toFixed(1) }}s
           </span>
         </div>
         <div class="position-relative">
-          <textarea class="form-control" [value]="biographyClaude" readonly rows="6"></textarea>
+          <textarea class="form-control" [value]="contentClaude" readonly rows="6"></textarea>
           <div *ngIf="claudeLoading" class="loading">
             <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>

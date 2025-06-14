@@ -2,7 +2,7 @@
 Je suis developpeur web debutant.
 Je veux que tu sois tres simple et precis dans tes explications.
 
-Je veux ecrire un backend en javascript commonJS
+Je veux ecrire un backend en javascript ESM
 
 Je veux qu'il communique avec openAI pour poser une question
 

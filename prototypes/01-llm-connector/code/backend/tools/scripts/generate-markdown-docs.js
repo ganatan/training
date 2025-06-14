@@ -18,6 +18,7 @@ function walk(dir, filelist = []) {
       filelist.push(fullPath);
     }
   }
+
   return filelist;
 }
 

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environment';
-import { reply as mockReply } from './chatgpt.mock';
+import { reply as mockReply } from './llm.mock';
 
 export interface BiographyResponse {
   success: boolean;

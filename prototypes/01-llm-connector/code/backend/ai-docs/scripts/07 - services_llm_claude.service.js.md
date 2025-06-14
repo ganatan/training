@@ -1,8 +1,10 @@
-# Tutoriel Node.js : Création d'une fonction de réponse avec Axios et API
+# Tutoriel : Utilisation de l'API Claude avec Node.js
 
-Dans ce tutoriel, nous allons décomposer un bloc de code Node.js qui utilise le package `axios` pour faire des requêtes HTTP à une API. Le but de ce code est de générer une réponse basée sur différents paramètres d'entrée.
+Ce tutoriel vous guide à travers un exemple de code Node.js qui utilise l'API Claude pour générer des réponses stylisées et de longueur variable.
 
 ## Code complet
+
+Voici le code complet que nous allons décomposer et expliquer dans ce tutoriel.
 
 ```js
 import axios from 'axios';
@@ -22,15 +24,15 @@ async function reply(type, input) {
 export default reply;
 ```
 
-## Importation du package Axios
+## Importation de la bibliothèque Axios
 
 ```js
 import axios from 'axios';
 ```
 
-Nous commençons par importer le package `axios`, qui est une bibliothèque JavaScript promise-based utilisée pour faire des requêtes HTTP.
+Nous commençons par importer la bibliothèque Axios, qui est une bibliothèque JavaScript promise-based utilisée pour faire des requêtes HTTP.
 
-## Définition des cartes de style et de longueur
+## Cartes de style et de longueur
 
 ```js
 const styleMap = {
@@ -42,9 +44,9 @@ const lengthMap = {
 };
 ```
 
-Ensuite, nous définissons deux objets : `styleMap` et `lengthMap`. Ces objets sont utilisés pour mapper les entrées brutes de style et de longueur à leurs descriptions respectives. 
+Ces deux objets sont des cartes de style et de longueur. Ils associent des identifiants de style et de longueur à des descriptions textuelles. Ces descriptions seront utilisées pour construire l'invite que nous allons envoyer à l'API Claude.
 
-## Création de la fonction de réponse
+## Fonction de réponse
 
 ```js
 async function reply(type, input) {
@@ -52,21 +54,26 @@ async function reply(type, input) {
 }
 ```
 
-La fonction `reply` est définie comme une fonction asynchrone, ce qui signifie qu'elle retourne une promesse. Elle prend deux paramètres : `type` et `input`. `type` détermine le type de réponse à générer (par exemple, un résumé ou une biographie) et `input` est un objet contenant des informations supplémentaires nécessaires pour générer la réponse.
+C'est ici que la magie opère. La fonction `reply` est une fonction asynchrone qui prend deux arguments : `type` et `input`. `type` peut être soit 'summary' soit autre chose, et `input` est un objet qui doit contenir les clés `name`, `style` et `length`.
 
-## Gestion des erreurs
+## Construction de l'invite
 
 ```js
-try {
-  //...
-} catch (error) {
-  //...
-}
+const name = input.name || 'inconnu';
+const rawStyle = input.style || 'neutral';
+const rawLength = input.length || 'medium';
+
+const style = styleMap[rawStyle] || styleMap.neutral;
+const length = lengthMap[rawLength] || lengthMap.medium;
+
+const prompt = type === 'summary'
+  ? `Fais un résumé du film "${name}" avec un style ${style}, ${length}.`
+  : `Écris une biographie de ${name} avec un style ${style}, ${length}.`;
 ```
 
-La fonction `reply` utilise un bloc `try...catch` pour gérer les erreurs qui peuvent survenir lors de l'exécution du code. Si une erreur se produit, elle est capturée et traitée dans le bloc `catch`.
+Dans cette section, nous construisons l'invite à envoyer à l'API Claude. Nous utilisons les valeurs de `name`, `style` et `length` fournies dans l'objet `input`, ou des valeurs par défaut si elles ne sont pas fournies.
 
-## Envoi de la requête HTTP
+## Envoi de la requête à l'API Claude
 
 ```js
 const response = await axios.post(
@@ -86,7 +93,18 @@ const response = await axios.post(
 );
 ```
 
-En utilisant `axios.post`, nous envoyons une requête HTTP POST à l'API. Les paramètres de cette méthode comprennent l'URL de l'API, le corps de la requête et les en-têtes de la requête.
+Nous utilisons Axios pour envoyer une requête POST à l'API Claude. Nous passons l'invite que nous avons construite dans la section précédente dans le corps de la requête.
+
+## Gestion des erreurs
+
+```js
+const result = response.data.content?.[0]?.text;
+if (!result) { throw new Error('Réponse vide de Claude.'); }
+
+return result;
+```
+
+Enfin, nous vérifions si nous avons reçu une réponse de l'API Claude. Si ce n'est pas le cas, nous lançons une erreur. Si nous avons reçu une réponse, nous la renvoyons.
 
 ## Exportation de la fonction de réponse
 
@@ -94,4 +112,4 @@ En utilisant `axios.post`, nous envoyons une requête HTTP POST à l'API. Les pa
 export default reply;
 ```
 
-Enfin, nous exportons la fonction `reply` pour qu'elle puisse être utilisée dans d'autres parties de notre application.
+Nous exportons la fonction `reply` pour qu'elle puisse être utilisée dans d'autres parties de notre application.

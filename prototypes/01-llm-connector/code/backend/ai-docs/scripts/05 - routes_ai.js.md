@@ -1,8 +1,8 @@
-# Tutoriel Node.js : Gestion des requêtes avec Express et Dotenv
+# Tutoriel Node.js : Création d'un routeur Express pour les services LLM
 
-Dans ce tutoriel, nous allons décomposer un bloc de code Node.js qui utilise les modules `express` et `dotenv`, ainsi que des services et des mocks spécifiques pour gérer les requêtes.
+Dans ce tutoriel, nous allons décomposer un bloc de code Node.js qui illustre comment créer un routeur Express pour gérer les requêtes vers les services LLM.
 
-## Code complet
+## Importation des modules nécessaires
 
 ```js
 import express from 'express';
@@ -12,12 +12,24 @@ import chatgptMock from '../mock/llm/chatgpt.mock.js';
 import claudeMock from '../mock/llm/claude.mock.js';
 import chatgptReal from '../services/llm/chatgpt.service.js';
 import claudeReal from '../services/llm/claude.service.js';
+```
 
+Dans cette section, nous importons tous les modules nécessaires. `express` pour la création de notre application web, `dotenv` pour la gestion des variables d'environnement. Nous importons également des modules de services mock et réels pour deux fournisseurs LLM, `chatgpt` et `claude`.
+
+## Configuration et initialisation
+
+```js
 dotenv.config();
 
 const router = express.Router();
 const useMock = process.env.USE_MOCK === 'true';
+```
 
+Ici, nous initialisons `dotenv` pour charger les variables d'environnement. Nous créons également une nouvelle instance de routeur Express et déterminons si nous devons utiliser les services mock ou réels en fonction de la variable d'environnement `USE_MOCK`.
+
+## Fonctions auxiliaires
+
+```js
 function isUnauthorizedError(message) {
   return message.includes('unauthorized') || message.includes('401');
 }
@@ -45,7 +57,13 @@ async function handleLLMRequest(type, llm, data) {
 
   return { data: await fn(type, data) };
 }
+```
 
+Dans cette section, nous définissons trois fonctions auxiliaires. `isUnauthorizedError` vérifie si un message d'erreur indique une erreur d'autorisation. `getProvider` retourne le fournisseur LLM approprié en fonction du nom fourni. `handleLLMRequest` gère les requêtes LLM en appelant la fonction appropriée du fournisseur LLM et retourne le résultat.
+
+## Gestion des requêtes
+
+```js
 router.post('/:type/:llm', async (req, res) => {
   const { type, llm } = req.params;
   const input = req.body;
@@ -74,92 +92,6 @@ router.post('/:type/:llm', async (req, res) => {
 export default router;
 ```
 
-## Explications
+Enfin, nous définissons un gestionnaire pour les requêtes POST vers notre routeur. Nous extrayons les paramètres de la requête, appelons notre fonction `handleLLMRequest` et renvoyons une réponse appropriée en fonction du résultat. En cas d'erreur, nous vérifions si c'est une erreur d'autorisation et renvoyons un message d'erreur approprié.
 
-### Importation des modules et configuration
-
-```js
-import express from 'express';
-import dotenv from 'dotenv';
-
-import chatgptMock from '../mock/llm/chatgpt.mock.js';
-import claudeMock from '../mock/llm/claude.mock.js';
-import chatgptReal from '../services/llm/chatgpt.service.js';
-import claudeReal from '../services/llm/claude.service.js';
-
-dotenv.config();
-
-const router = express.Router();
-const useMock = process.env.USE_MOCK === 'true';
-```
-
-Dans cette section, nous importons les modules nécessaires pour notre application. Nous utilisons `express` pour gérer notre serveur HTTP et `dotenv` pour gérer les variables d'environnement. Nous importons également des mocks et des services réels pour deux fournisseurs : `chatgpt` et `claude`.
-
-Nous configurons ensuite `dotenv` pour qu'il puisse lire les variables d'environnement de notre fichier `.env`. Ensuite, nous initialisons un routeur `express` et déterminons si nous devons utiliser des mocks ou des services réels en fonction de la variable d'environnement `USE_MOCK`.
-
-### Fonctions utilitaires
-
-```js
-function isUnauthorizedError(message) {
-  return message.includes('unauthorized') || message.includes('401');
-}
-
-function getProvider(llm) {
-  const providers = {
-    chatgpt: {
-      mock: chatgptMock,
-      real: chatgptReal,
-    },
-    claude: {
-      mock: claudeMock,
-      real: claudeReal,
-    },
-  };
-
-  return providers[llm] || null;
-}
-```
-
-Ici, nous définissons deux fonctions utilitaires. `isUnauthorizedError` vérifie si un message d'erreur contient des indications d'une erreur d'autorisation. `getProvider` récupère le bon fournisseur (mock ou réel) en fonction du paramètre `llm`.
-
-### Gestion des requêtes
-
-```js
-async function handleLLMRequest(type, llm, data) {
-  const provider = getProvider(llm);
-  if (!provider) { return { error: 'unknown-provider' }; }
-
-  const fn = useMock ? provider.mock : provider.real;
-
-  return { data: await fn(type, data) };
-}
-
-router.post('/:type/:llm', async (req, res) => {
-  const { type, llm } = req.params;
-  const input = req.body;
-
-  try {
-    const { data, error } = await handleLLMRequest(type, llm, input);
-
-    if (error) {
-      return res.status(400).json({ success: false, llm: llm, data: error });
-    }
-
-    return res.json({ success: true, llm: llm, data: data });
-
-  } catch (err) {
-    const msg = err.message?.toLowerCase() || '';
-    const isUnauthorized = isUnauthorizedError(msg);
-
-    return res.status(500).json({
-      success: false,
-      llm: llm,
-      data: isUnauthorized ? 'unauthorized API KEY' : 'internal-error',
-    });
-  }
-});
-```
-
-Dans cette section, nous définissons une fonction `handleLLMRequest` pour gérer les requêtes à nos fournisseurs. Elle récupère le bon fournisseur, exécute la fonction appropriée (mock ou réelle) et renvoie les données.
-
-Ensuite, nous définissons une route `POST` pour notre routeur express. Cette route extrait les paramètres de la requête, les passe à `handleLLMRequest`, et renvoie une réponse appropriée en fonction du succès ou de l'échec de la requête. En cas d'erreur, elle vérifie si l'erreur est due à une autorisation non valide et renvoie un message d'erreur approprié.
+Et voilà ! Vous avez maintenant une meilleure compréhension de la façon dont vous pouvez créer un routeur Express pour gérer les requêtes vers les services LLM dans une application Node.js.

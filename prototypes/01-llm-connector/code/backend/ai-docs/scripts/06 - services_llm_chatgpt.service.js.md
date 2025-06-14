@@ -1,10 +1,10 @@
-# Tutoriel : Utilisation de l'API OpenAI avec Node.js
+# Tutoriel : Création d'une fonction de réponse avec Node.js et l'API OpenAI
 
-Dans ce tutoriel, nous allons voir comment utiliser l'API OpenAI pour générer des réponses automatiques en fonction d'un style et d'une longueur définis. Nous utiliserons Node.js et la bibliothèque axios pour effectuer les requêtes HTTP.
+Dans ce tutoriel, nous allons examiner une fonction `reply` qui utilise l'API OpenAI pour générer des réponses en fonction de différents styles et longueurs de réponses. 
 
 ## Code complet
 
-Voici le code complet que nous allons détailler :
+Voici le code complet que nous allons décomposer et expliquer :
 
 ```js
 import axios from 'axios';
@@ -24,17 +24,15 @@ async function reply(type, input) {
 export default reply;
 ```
 
-## Détails du code
-
-### Importation des dépendances
+## Importation de la bibliothèque Axios
 
 ```js
 import axios from 'axios';
 ```
 
-Nous utilisons la bibliothèque `axios` pour effectuer des requêtes HTTP. Elle nous permettra de communiquer avec l'API OpenAI.
+Nous importons la bibliothèque `axios` pour effectuer des requêtes HTTP. Axios est une bibliothèque populaire qui offre une API facile à utiliser pour effectuer des requêtes HTTP.
 
-### Définition des styles et longueurs
+## Définition des mappages de style et de longueur
 
 ```js
 const styleMap = {
@@ -46,9 +44,9 @@ const lengthMap = {
 };
 ```
 
-Ces deux objets définissent les différents styles et longueurs de réponses que notre fonction peut générer. Ils sont utilisés pour construire l'invite que nous enverrons à l'API OpenAI.
+Ces deux objets mappent des chaînes de caractères à des descriptions de styles et de longueurs de réponses. `styleMap` définit différents styles de réponses, tandis que `lengthMap` définit différentes longueurs de réponses.
 
-### Fonction de réponse
+## Fonction de réponse
 
 ```js
 async function reply(type, input) {
@@ -56,26 +54,61 @@ async function reply(type, input) {
 }
 ```
 
-C'est la fonction principale de notre code. Elle prend en entrée un type (qui peut être 'summary' ou autre chose) et un objet `input` qui doit contenir un `name`, un `style` et une `length`. Elle utilise ces informations pour construire une invite et obtenir une réponse de l'API OpenAI.
+C'est la fonction principale qui génère la réponse. Elle est asynchrone car elle effectue une requête HTTP, qui est une opération asynchrone.
 
-### Gestion des erreurs
+## Préparation de la requête
 
 ```js
-catch (error) {
+const name = input.name || 'inconnu';
+const rawStyle = input.style || 'neutral';
+const rawLength = input.length || 'medium';
+
+const style = styleMap[rawStyle] || styleMap.neutral;
+const length = lengthMap[rawLength] || lengthMap.medium;
+
+const prompt = type === 'summary'
+  ? `Fais un résumé du film "${name}" avec un style ${style}, ${length}.`
+  : `Écris une biographie de ${name} avec un style ${style}, ${length}.`;
+```
+
+Dans cette section, nous préparons les données pour la requête. Nous utilisons les valeurs par défaut si certaines données ne sont pas fournies.
+
+## Envoi de la requête
+
+```js
+const response = await axios.post(
+  'https://api.openai.com/v1/chat/completions',
+  {
+    model: 'gpt-4-turbo',
+    messages: [{ role: 'user', content: prompt }],
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+  },
+);
+```
+
+Ici, nous envoyons une requête POST à l'API OpenAI. Nous utilisons le modèle `gpt-4-turbo` et nous passons notre message dans le corps de la requête.
+
+## Gestion des erreurs
+
+```js
+try {
+  //...
+} catch (error) {
   //...
 }
 ```
 
-Cette partie du code gère les erreurs qui peuvent survenir lors de la communication avec l'API OpenAI. Elle affiche un message d'erreur approprié en fonction du code d'erreur reçu.
+Nous utilisons un bloc `try/catch` pour gérer les erreurs qui peuvent se produire lors de l'envoi de la requête. Si une erreur se produit, nous la consignons et la renvoyons pour qu'elle puisse être traitée par le code appelant.
 
-### Exportation de la fonction
+## Exportation de la fonction de réponse
 
 ```js
 export default reply;
 ```
 
-Finalement, nous exportons notre fonction `reply` pour pouvoir l'utiliser dans d'autres parties de notre application.
-
-## Conclusion
-
-Ce code vous permet d'interagir avec l'API OpenAI et de générer des réponses automatiques en fonction de différents styles et longueurs. Vous pouvez l'adapter à vos besoins en ajoutant de nouveaux styles et longueurs, ou en modifiant la fonction `reply` pour qu'elle accepte d'autres types d'entrées.
+Enfin, nous exportons la fonction `reply` pour qu'elle puisse être utilisée dans d'autres modules.

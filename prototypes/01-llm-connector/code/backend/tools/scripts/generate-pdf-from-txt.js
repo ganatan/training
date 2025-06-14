@@ -13,7 +13,6 @@ if (!fs.existsSync(OUT_DIR)) { fs.mkdirSync(OUT_DIR, { recursive: true }); }
 const files = fs.readdirSync(DOCS_DIR).filter(file => file.endsWith('.md'));
 if (files.length === 0) {
   console.log('⚠️ Aucun fichier .md trouvé.');
-  process.exit(0);
 }
 
 const globalDoc = new PDFDocument({ margin: 40 });
@@ -41,7 +40,7 @@ files.forEach((file) => {
   for (let index = 0; index < blocks.length; index++) {
     const isCode = index % 2 === 1;
     const content = blocks[index].trim();
-    if (!content) continue;
+    if (!content) { continue; }
 
     const plainText = safeText(content);
 
@@ -51,8 +50,8 @@ files.forEach((file) => {
         .fontSize(isCode ? 9 : 11)
         .fillColor('#000')
         .text(plainText, { lineGap: 4 })
-        .moveDown()
-    };
+        .moveDown();
+    }
   }
 
   doc.end();

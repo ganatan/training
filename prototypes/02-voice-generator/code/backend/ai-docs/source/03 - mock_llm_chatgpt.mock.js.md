@@ -1,3 +1,6 @@
+# mock\llm\chatgpt.mock.js
+
+```js
 function reply(type, data) {
   const name = (data.name || 'Inconnu').replace('-', ' ');
   const style = data.style || 'neutral';
@@ -9,3 +12,5 @@ function reply(type, data) {
 }
 
 export default reply;
+
+```

@@ -1,3 +1,6 @@
+# routes\ai.js
+
+```js
 import express from 'express';
 import dotenv from 'dotenv';
 
@@ -31,22 +34,12 @@ function getProvider(llm) {
 }
 
 async function handleLLMRequest(type, llm, data) {
-  try {
-    const provider = getProvider(llm);
-    if (!provider) {
-      return { error: 'unknown-provider' };
-    }
+  const provider = getProvider(llm);
+  if (!provider) { return { error: 'unknown-provider' }; }
 
-    const handlerFunction = useMock ? provider.mock : provider.real;
-    const result = await handlerFunction(type, data);
+  const fn = useMock ? provider.mock : provider.real;
 
-    return { data: result };
-
-  } catch (err) {
-    console.error('❌ handleLLMRequest error:', err);
-
-    return { error: 'internal-error' };
-  }
+  return { data: await fn(type, data) };
 }
 
 router.post('/:type/:llm', async (req, res) => {
@@ -63,7 +56,6 @@ router.post('/:type/:llm', async (req, res) => {
     return res.json({ success: true, llm: llm, data: data });
 
   } catch (err) {
-
     const msg = err.message?.toLowerCase() || '';
     const isUnauthorized = isUnauthorizedError(msg);
 
@@ -76,3 +68,5 @@ router.post('/:type/:llm', async (req, res) => {
 });
 
 export default router;
+
+```

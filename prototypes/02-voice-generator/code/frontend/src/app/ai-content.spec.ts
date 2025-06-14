@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { Person } from './person';
+import { AiContentService } from './ai-content';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('Person', () => {
-  let service: Person;
+  let service: AiContentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(),
-        Person,
+        AiContentService,
       ],
     });
-    service = TestBed.inject(Person);
+    service = TestBed.inject(AiContentService);
   });
 
   it('should be created', () => {

@@ -1,3 +1,6 @@
+# services\llm\chatgpt.service.js
+
+```js
 import axios from 'axios';
 
 const styleMap = {
@@ -54,25 +57,26 @@ async function reply(type, input) {
       },
     );
 
-    return response.data.choices[0].message.content.trim();
+    return response.data.choices[0].message.content;
 
   } catch (error) {
-    const status = error.response?.status;
+    const code = error.response?.status;
     const data = error.response?.data;
-    let errorMessage = '';
 
-    if (status === 401) {
-      errorMessage = 'Erreur 401 : Clé API OpenAI manquante ou invalide.';
-    } else if (status) {
-      errorMessage = `Erreur OpenAI (${status}) : ${JSON.stringify(data)}`;
+    if (code === 401) {
+      console.error('❌ Erreur 401 : Clé API OpenAI manquante ou invalide.');
     } else {
-      errorMessage = `Erreur inattendue : ${error.message}`;
+      console.error('❌ Erreur OpenAI :', code, data || error.message);
     }
 
-    console.error(`❌ reply error: ${errorMessage}`);
-
-    return errorMessage;
+    throw new Error(
+      code === 401
+        ? 'Erreur 401 : clé OpenAI absente ou invalide.'
+        : `Erreur OpenAI : ${data?.error?.message || error.message}`,
+    );
   }
 }
 
 export default reply;
+
+```

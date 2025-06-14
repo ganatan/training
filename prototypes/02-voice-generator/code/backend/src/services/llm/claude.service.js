@@ -1,29 +1,46 @@
 import axios from 'axios';
 
-export async function reply(input) {
+const styleMap = {
+  neutral: 'neutre, objectif, informatif sans émotion',
+  casual: 'décontracté, langage simple et familier',
+  technical: 'axé sur les faits techniques et professionnels',
+  narrative: 'raconté comme une histoire avec du rythme',
+  press: 'journalistique, structuré comme un article de presse',
+  humorous: 'humoristique, ton léger et amusant',
+  poetic: 'poétique, style littéraire et imagé',
+  dramatic: 'dramatique, avec tension et intensité émotionnelle',
+  emotional: 'émotionnel, centré sur les sentiments et l’empathie',
+  cinematic: 'cinématographique, ambiance visuelle et descriptive comme un film',
+  historical: 'historique, avec mise en contexte chronologique',
+  marketing: 'marketing, valorisant avec un ton accrocheur',
+  scientific: 'scientifique, ton analytique et factuel',
+  satirical: 'satirique, critique subtile et ironique',
+  inspirational: 'inspirant, motivant avec des citations et une mise en valeur',
+  minimal: 'très court, phrases simples et dépouillées',
+  dialog: 'rédigé sous forme de dialogue entre deux personnes',
+  interview: 'présenté comme une interview fictive, questions-réponses',
+};
+
+const lengthMap = {
+  short: 'environ 30 mots, réponse très concise',
+  medium: 'environ 60 mots, réponse équilibrée',
+  long: 'environ 100 mots, réponse développée mais synthétique',
+};
+
+async function reply(type, input) {
   try {
+
     const name = input.name || 'inconnu';
     const rawStyle = input.style || 'neutral';
-    const rawLength = input.length || 'short';
+    const rawLength = input.length || 'medium';
 
-    const lengthMap = {
-      short: '20 mots maximum',
-      medium: '50 mots maximum',
-      long: '80 mots maximum',
-    };
+    const style = styleMap[rawStyle] || styleMap.neutral;
+    const length = lengthMap[rawLength] || lengthMap.medium;
 
-    const styleMap = {
-      neutral: 'neutre',
-      casual: 'décontracté',
-      technical: 'technique',
-      narrative: 'narratif',
-      press: 'journalistique',
-    };
+    const prompt = type === 'summary'
+      ? `Fais un résumé du film "${name}" avec un style ${style}, ${length}.`
+      : `Écris une biographie de ${name} avec un style ${style}, ${length}.`;
 
-    const style = styleMap[rawStyle] || 'neutre';
-    const length = lengthMap[rawLength] || 'moyenne';
-
-    const prompt = `Écris une biographie de ${name} en style ${style}, de longueur ${length}`;
     const response = await axios.post(
       'https://api.anthropic.com/v1/messages',
       {
@@ -40,11 +57,28 @@ export async function reply(input) {
       },
     );
 
-    return response.data.content[0].text;
+    const result = response.data.content?.[0]?.text;
+    if (!result) { throw new Error('Réponse vide de Claude.'); }
+
+    return result;
 
   } catch (error) {
-    console.error('❌ Erreur Claude:', error.response?.data || error.message);
-    throw new Error(`Erreur Claude : ${error.response?.data?.error?.message || error.message}`);
+    const status = error.response?.status;
+    const data = error.response?.data;
+    let errorMessage = '';
+
+    if (status === 401) {
+      errorMessage = 'Erreur 401 : Clé API Claude manquante ou invalide.';
+    } else if (status) {
+      errorMessage = `Erreur Claude (${status}) : ${JSON.stringify(data)}`;
+    } else {
+      errorMessage = `Erreur inattendue : ${error.message}`;
+    }
+
+    console.error(`❌ reply error: ${errorMessage}`);
+
+    return errorMessage;
   }
 }
 
+export default reply;

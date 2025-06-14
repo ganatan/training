@@ -1,3 +1,6 @@
+# config\ai-services.js
+
+```js
 const aiServices = {
   llm: [
     { type: 'chatgpt', label: 'OpenAI', purpose: 'Text generation, summarization, Q&A, code completion' },
@@ -36,3 +39,5 @@ const aiServices = {
 };
 
 export default aiServices;
+
+```

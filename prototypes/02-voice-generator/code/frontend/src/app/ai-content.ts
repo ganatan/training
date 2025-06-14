@@ -21,7 +21,7 @@ export class AiContentService {
       return of({ success: true, llm, data: mockData });
     }
 
-    const url = `http://localhost:3000/api/llm/${type}/${llm}`;
+    const url = `http://localhost:3000/api/ai/${type}/${llm}`;
 
     return this.http.post<TextGenerationResponse>(url, { name, length, style });
   }

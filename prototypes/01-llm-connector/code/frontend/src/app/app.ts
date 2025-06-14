@@ -75,6 +75,7 @@ export class App {
     this.person
       .postBiography(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: BiographyResponse) => {
+        console.log('00000000001:' + JSON.stringify(response));
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 

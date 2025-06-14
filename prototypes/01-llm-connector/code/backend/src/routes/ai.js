@@ -31,12 +31,21 @@ function getProvider(llm) {
 }
 
 async function handleLLMRequest(type, llm, data) {
-  const provider = getProvider(llm);
-  if (!provider) { return { error: 'unknown-provider' }; }
+  try {
+    const provider = getProvider(llm);
+    if (!provider) {
+      return { error: 'unknown-provider' };
+    }
 
-  const fn = useMock ? provider.mock : provider.real;
+    const handlerFunction = useMock ? provider.mock : provider.real;
+    const result = await handlerFunction(type, data);
 
-  return { data: await fn(type, data) };
+    return { data: result };
+
+  } catch (err) {
+    console.error('❌ handleLLMRequest error:', err);
+    return { error: 'internal-error' };
+  }
 }
 
 router.post('/:type/:llm', async (req, res) => {
@@ -53,6 +62,7 @@ router.post('/:type/:llm', async (req, res) => {
     return res.json({ success: true, llm: llm, data: data });
 
   } catch (err) {
+
     const msg = err.message?.toLowerCase() || '';
     const isUnauthorized = isUnauthorizedError(msg);
 

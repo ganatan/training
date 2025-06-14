@@ -51,27 +51,28 @@ async function reply(type, input) {
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
 
-    return response.data.choices[0].message.content;
+    return response.data.choices[0].message.content.trim();
 
   } catch (error) {
-    const code = error.response?.status;
+    const status = error.response?.status;
     const data = error.response?.data;
+    let errorMessage = '';
 
-    if (code === 401) {
-      console.error('❌ Erreur 401 : Clé API OpenAI manquante ou invalide.');
+    if (status === 401) {
+      errorMessage = 'Erreur 401 : Clé API OpenAI manquante ou invalide.';
+    } else if (status) {
+      errorMessage = `Erreur OpenAI (${status}) : ${JSON.stringify(data)}`;
     } else {
-      console.error('❌ Erreur OpenAI :', code, data || error.message);
+      errorMessage = `Erreur inattendue : ${error.message}`;
     }
 
-    throw new Error(
-      code === 401
-        ? 'Erreur 401 : clé OpenAI absente ou invalide.'
-        : `Erreur OpenAI : ${data?.error?.message || error.message}`,
-    );
+    console.error(`❌ reply error: ${errorMessage}`);
+    return errorMessage;
   }
 }
+
 
 export default reply;

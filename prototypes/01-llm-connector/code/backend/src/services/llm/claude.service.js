@@ -63,20 +63,20 @@ async function reply(type, input) {
     return result;
 
   } catch (error) {
-    const code = error.response?.status;
+    const status = error.response?.status;
     const data = error.response?.data;
+    let errorMessage = '';
 
-    if (code === 401) {
-      console.error('❌ Erreur 401 : Clé API Claude manquante ou invalide.');
+    if (status === 401) {
+      errorMessage = 'Erreur 401 : Clé API Claude manquante ou invalide.';
+    } else if (status) {
+      errorMessage = `Erreur Claude (${status}) : ${JSON.stringify(data)}`;
     } else {
-      console.error('❌ Erreur Claude :', code, data || error.message);
+      errorMessage = `Erreur inattendue : ${error.message}`;
     }
 
-    throw new Error(
-      code === 401
-        ? 'Erreur 401 : clé API Claude absente ou invalide.'
-        : `Erreur Claude : ${data?.error?.message || error.message}`,
-    );
+    console.error(`❌ reply error: ${errorMessage}`);
+    return errorMessage;
   }
 }
 

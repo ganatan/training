@@ -51,7 +51,7 @@ async function reply(type, input) {
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
 
     return response.data.choices[0].message.content.trim();
@@ -70,9 +70,9 @@ async function reply(type, input) {
     }
 
     console.error(`❌ reply error: ${errorMessage}`);
+
     return errorMessage;
   }
 }
-
 
 export default reply;

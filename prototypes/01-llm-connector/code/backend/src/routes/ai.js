@@ -44,6 +44,7 @@ async function handleLLMRequest(type, llm, data) {
 
   } catch (err) {
     console.error('❌ handleLLMRequest error:', err);
+
     return { error: 'internal-error' };
   }
 }

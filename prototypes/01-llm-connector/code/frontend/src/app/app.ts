@@ -141,6 +141,7 @@ export class App {
       if (llm === 'chatgpt') this.chatgptProgress = progress;
       else this.claudeProgress = progress;
     }, 100);
+
     return interval;
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "angular-starter",
+  "name": "voice-generator-frontend",
   "version": "20.0.3",
   "scripts": {
     "generate-project-structure": "node tools/scripts/generate-project-structure.js",

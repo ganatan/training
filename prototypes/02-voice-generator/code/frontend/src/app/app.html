@@ -1,7 +1,7 @@
 <button class="btn btn-sm btn-outline-secondary toggle-mode" (click)="toggleTheme()">Toggle thème</button>
 
 <div class="container my-5">
-  <h1 class="text-center mb-4 text-primary">llm-connector</h1>
+  <h1 class="text-center mb-4 text-primary">voice-generator</h1>
 
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-lg-3">
@@ -33,7 +33,7 @@
 
   <div class="row g-4 mb-3">
     <div class="col-12 col-md-6">
-      <div class="card p-4">
+      <div class="card p-4 m-1">
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
           <button class="btn btn-primary" (click)="loadContent('chatgpt')">Générer avec ChatGPT</button>
           <button class="btn btn-outline-primary" (click)="resetContent('chatgpt')">Réinitialiser</button>
@@ -55,10 +55,24 @@
           </div>
         </div>
       </div>
+      <div class="card p-4">
+        <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <button class="btn btn-outline-primary">Voix - ElevenLabs</button>
+          <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+          <span class="badge bg-primary">Voix OK</span>
+          <span class="text-primary ms-auto small-text">Réponse en 2.1s</span>
+        </div>
+        <div class="mt-2">
+          <audio controls class="w-100">
+            <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'audio.
+          </audio>
+        </div>
+      </div>
     </div>
 
     <div class="col-12 col-md-6">
-      <div class="card p-4">
+      <div class="card p-4 m-1">
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
           <button class="btn btn-success" (click)="loadContent('claude')">Générer avec Claude</button>
           <button class="btn btn-outline-success" (click)="resetContent('claude')">Réinitialiser</button>
@@ -78,6 +92,20 @@
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
               [style.width.%]="claudeProgress"></div>
           </div>
+        </div>
+      </div>
+      <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <button class="btn btn-outline-success">Voix - ElevenLabs</button>
+          <span class="spinner-border spinner-border-sm text-success" role="status"></span>
+          <span class="badge bg-success">Voix OK</span>
+          <span class="text-success ms-auto small-text">Réponse en 1.9s</span>
+        </div>
+        <div class="mt-2">
+          <audio controls class="w-100">
+            <source src="audios/ridley-scott-claude.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'audio.
+          </audio>
         </div>
       </div>
     </div>

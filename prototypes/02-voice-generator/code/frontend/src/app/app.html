@@ -43,7 +43,7 @@
           </span>
         </div>
         <div class="position-relative">
-          <textarea class="form-control" [value]="contentChatGPT" readonly rows="6"></textarea>
+          <textarea class="form-control" [value]="contentChatGPT" readonly rows="3"></textarea>
           <div *ngIf="chatgptLoading" class="loading">
             <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>
@@ -82,7 +82,7 @@
           </span>
         </div>
         <div class="position-relative">
-          <textarea class="form-control" [value]="contentClaude" readonly rows="6"></textarea>
+          <textarea class="form-control" [value]="contentClaude" readonly rows="3"></textarea>
           <div *ngIf="claudeLoading" class="loading">
             <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>

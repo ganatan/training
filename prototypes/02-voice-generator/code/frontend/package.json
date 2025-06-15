@@ -15,8 +15,8 @@
     "serve": "node server.js",
     "docker:list-containers": "docker ps -a",
     "docker:list-images": "docker images",
-    "docker:build": "docker build -t frontend-angular-bootstrap .",
-    "docker:run": "docker run -p 4000:4000 frontend-angular-bootstrap"
+    "docker:build": "docker build -t frontend-angular .",
+    "docker:run": "docker run -p 4000:4000 frontend-angular"
   },
   "private": true,
   "dependencies": {

@@ -19,14 +19,23 @@ export class App {
 
   contentChatGPT = '';
   contentClaude = '';
-
   chatgptLoading = false;
   claudeLoading = false;
+
+  voiceChatGPT = '';
+  voiceClaude = '';
+  voiceChatGPTLoading = false;
+  voiceClaudeLoading = false;
 
   chatgptDuration = 0;
   claudeDuration = 0;
   chatgptProgress = 0;
   claudeProgress = 0;
+
+  voiceChatGPTDuration = 0;
+  voiceClaudeDuration = 0;
+  voiceChatGPTProgress = 0;
+  voiceClaudeProgress = 0;
 
   useMock = environment.useMock;
 
@@ -105,6 +114,34 @@ export class App {
       this.claudeDuration = 0;
       this.claudeProgress = 0;
     }
+  }
+
+  loadVoice(llm: 'chatgpt' | 'claude') {
+    const start = performance.now();
+
+    if (llm === 'chatgpt') {
+      this.voiceChatGPTLoading = true;
+    } else {
+      this.voiceClaudeLoading = true;
+    }
+
+    // this.personService
+    //   .postVoice(llm, this.name, this.length, this.style)
+    //   .subscribe((response: BiographyResponse) => {
+    //     const duration = (performance.now() - start) / 1000;
+
+    //     if (llm === 'chatgpt') {
+    //       this.biographyChatGPT = response.data;
+    //       this.audioChatGPT = response.audioUrl!;
+    //       this.voiceChatGPTDuration = duration;
+    //       this.voiceChatGPTLoading = false;
+    //     } else {
+    //       this.biographyClaude = response.data;
+    //       this.audioClaude = response.audioUrl!;
+    //       this.voiceClaudeDuration = duration;
+    //       this.voiceClaudeLoading = false;
+    //     }
+    //   });
   }
 
   onStyleChange(value: string) {

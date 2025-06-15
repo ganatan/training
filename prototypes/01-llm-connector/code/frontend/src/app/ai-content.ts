@@ -12,6 +12,7 @@ export interface TextGenerationResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AiContentService {
+  private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
   generate(llm: string, name: string, length: string, style: string, type: string): Observable<TextGenerationResponse> {
@@ -21,7 +22,7 @@ export class AiContentService {
       return of({ success: true, llm, data: mockData });
     }
 
-    const url = `http://localhost:3000/api/llm/${type}/${llm}`;
+    const url = `${this.baseUrl}/llm/${type}/${llm}`;
 
     return this.http.post<TextGenerationResponse>(url, { name, length, style });
   }

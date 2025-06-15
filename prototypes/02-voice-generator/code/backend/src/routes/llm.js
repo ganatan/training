@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
+import fs from 'fs/promises';
+import path from 'path';
+
 import chatgptMock from '../mock/llm/chatgpt.mock.js';
 import claudeMock from '../mock/llm/claude.mock.js';
 import chatgptReal from '../services/llm/chatgpt.service.js';
@@ -13,6 +16,10 @@ const useMock = process.env.USE_MOCK === 'true';
 
 function isUnauthorizedError(message) {
   return message.includes('unauthorized') || message.includes('401');
+}
+
+function safeFilename(name, llm) {
+  return `${name.toLowerCase().replace(/\s+/g, '-')}-${llm}`;
 }
 
 function getProvider(llm) {
@@ -51,6 +58,7 @@ async function handleLLMRequest(type, llm, data) {
 
 router.post('/:type/:llm', async (req, res) => {
   const { type, llm } = req.params;
+
   const input = req.body;
 
   try {
@@ -60,9 +68,17 @@ router.post('/:type/:llm', async (req, res) => {
       return res.status(400).json({ success: false, llm: llm, data: error });
     }
 
+    let name = input.name;
+    const fileName = safeFilename(name, llm);
+    const jsonPath = path.join(process.cwd(), 'storage', 'data', `${fileName}.json`);
+    await fs.mkdir(path.dirname(jsonPath), { recursive: true });
+    await fs.writeFile(jsonPath, JSON.stringify({ name: name, llm: llm, text: data }, null, 2));
+
     return res.json({ success: true, llm: llm, data: data });
 
   } catch (err) {
+
+    console.error('Erreur', err);
 
     const msg = err.message?.toLowerCase() || '';
     const isUnauthorized = isUnauthorizedError(msg);

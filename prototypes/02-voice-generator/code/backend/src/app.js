@@ -2,7 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import aiRoutes from './routes/ai.js';
+import llmRoutes from './routes/llm.js';
+import voiceRoutes from './routes/voice.js';
+
 import aiServices from './config/ai-services.js';
 
 dotenv.config();
@@ -13,8 +15,8 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/ai', aiRoutes);
-app.use('/api/audio', audioRoutes);
+app.use('/api/llm', llmRoutes);
+app.use('/api/voice', voiceRoutes);
 
 app.get('/', (req, res) => {
   res.json({ services: aiServices });

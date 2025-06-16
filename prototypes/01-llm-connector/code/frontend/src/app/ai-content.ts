@@ -17,7 +17,7 @@ export class AiContentService {
   private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
-  generate(llm: string, name: string, length: string, style: string, type: string): Observable<TextGenerationResponse> {
+  generateContent(llm: string, name: string, length: string, style: string, type: string): Observable<TextGenerationResponse> {
     if (environment.useMock) {
       const mockData = mockReply(type, { llm, name, length, style });
 

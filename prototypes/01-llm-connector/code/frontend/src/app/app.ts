@@ -17,7 +17,7 @@ export class App {
   style = 'neutral';
   length = 'short';
 
-  contentChatGPT = '';
+  contentChatgpt = '';
   contentClaude = '';
 
   chatgptLoading = false;
@@ -65,13 +65,15 @@ export class App {
     const interval = this.startProgress(llm);
 
     if (llm === 'chatgpt') {
-      this.contentChatGPT = '';
+      this.contentChatgpt = '';
       this.chatgptLoading = true;
       this.chatgptProgress = 0;
+      this.chatgptDuration = 0;
     } else {
       this.contentClaude = '';
       this.claudeLoading = true;
       this.claudeProgress = 0;
+      this.claudeDuration = 0;
     }
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
@@ -80,7 +82,7 @@ export class App {
         clearInterval(interval);
 
         if (llm === 'chatgpt') {
-          this.contentChatGPT = response.data;
+          this.contentChatgpt = response.data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;
           this.chatgptProgress = 100;
@@ -95,7 +97,7 @@ export class App {
 
   resetContent(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
-      this.contentChatGPT = '';
+      this.contentChatgpt = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
     } else {
@@ -124,7 +126,7 @@ export class App {
   }
 
   private resetAll() {
-    this.contentChatGPT = '';
+    this.contentChatgpt = '';
     this.contentClaude = '';
     this.chatgptDuration = 0;
     this.claudeDuration = 0;

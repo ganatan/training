@@ -72,8 +72,7 @@
           </div>
         </div>
         <div class="mt-2">
-          <audio controls class="w-100" [class.audio-disabled]="!voiceChatgpt">
-            <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+          <audio controls class="w-100" [class.audio-disabled]="!voiceChatgpt" [src]="voiceChatgpt">
             Votre navigateur ne supporte pas l'audio.
           </audio>
         </div>
@@ -120,54 +119,12 @@
           </div>
         </div>
         <div class="mt-2">
-          <audio controls class="w-100" [class.audio-disabled]="!voiceClaude">
-            <source src="audios/ridley-scott-claude.mp3" type="audio/mpeg">
+          <audio controls class="w-100" [class.audio-disabled]="!voiceClaude" [src]="voiceClaude">
             Votre navigateur ne supporte pas l'audio.
           </audio>
         </div>
       </div>
-      <!-- <div class="card p-4 m-1">
-        <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
-          <button class="btn btn-success" (click)="loadContent('claude')">Générer avec Claude</button>
-          <button class="btn btn-outline-success" (click)="resetContent('claude')">Réinitialiser</button>
-          <span *ngIf="contentClaude && !claudeLoading" class="badge bg-success">Texte Ok ✓</span>
-          <span *ngIf="claudeDuration > 0" class="text-success ms-auto small-text">
-            Réponse en {{ claudeDuration.toFixed(1) }}s
-          </span>
-        </div>
-        <div class="position-relative">
-          <textarea class="form-control" [value]="contentClaude" readonly rows="3"></textarea>
-          <div *ngIf="claudeLoading" class="loading">
-            <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
-              <span class="visually-hidden">Chargement...</span>
-            </div>
-          </div>
-          <div *ngIf="claudeLoading" class="progress mt-2">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-              [style.width.%]="claudeProgress"></div>
-          </div>
-        </div>
-      </div>
-      <div class="card p-4 m-1">
-        <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
-          <button class="btn btn-outline-success">Voix - ElevenLabs</button>
-          <span class="spinner-border spinner-border-sm text-success" role="status"></span>
-          <span class="badge bg-success">Voix OK</span>
-          <span class="text-success ms-auto small-text">Réponse en 1.9s</span>
-        </div>
-        <div class="mt-3">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 75%"></div>
-          </div>
-        </div>
-        <div class="mt-2">
-          <audio controls class="w-100 audio-disabled">
-            <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
-            Votre navigateur ne supporte pas l'audio.
-          </audio>
-        </div>
-      </div> -->
     </div>
-    toto
   </div>
+
 </div>

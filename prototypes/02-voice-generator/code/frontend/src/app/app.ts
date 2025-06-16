@@ -143,18 +143,18 @@ export class App {
       this.voiceClaudeProgress = 0;
     }
     this.aiContentService
-      .generateContent(llm, this.name, this.length, this.style, this.type)
+      .generateVoice(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 
         if (llm === 'chatgpt') {
-          this.voiceChatgpt = response.data!;
+          this.voiceChatgpt = this.useMock ? 'assets/audios/ridley-scott.mp3' : response.data!;
           this.voiceChatgptDuration = duration;
           this.voiceChatgptLoading = false;
           this.voiceChatgptProgress = 100;
         } else {
-          this.voiceClaude = response.data!;
+          this.voiceClaude = this.useMock ? 'assets/audios/ridley-scott.mp3' : response.data!;
           this.voiceClaudeDuration = duration;
           this.voiceClaudeLoading = false;
           this.voiceClaudeProgress = 100;

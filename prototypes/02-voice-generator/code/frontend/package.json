@@ -2,8 +2,6 @@
   "name": "voice-generator-frontend",
   "version": "20.0.3",
   "scripts": {
-    "generate-project-structure": "node tools/scripts/generate-project-structure.js",
-    "ng": "ng",
     "dev": "ng serve --port 4200",
     "start": "ng serve --port 4200",
     "build": "ng build",
@@ -16,7 +14,8 @@
     "docker:list-containers": "docker ps -a",
     "docker:list-images": "docker images",
     "docker:build": "docker build -t frontend-angular .",
-    "docker:run": "docker run -p 4000:4000 frontend-angular"
+    "docker:run": "docker run -p 4000:4000 frontend-angular",
+    "generate-project-structure": "node tools/scripts/generate-project-structure.js"
   },
   "private": true,
   "dependencies": {

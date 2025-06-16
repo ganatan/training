@@ -2,7 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AiContentService, ContentGenerationResponse } from './ai-content';
+import {
+  AiContentService,
+  ContentGenerationResponse,
+  VoiceGenerationResponse,
+} from './ai-content';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -78,10 +82,12 @@ export class App {
       this.contentChatGPT = '';
       this.chatgptLoading = true;
       this.chatgptProgress = 0;
+      this.voiceChatGPT = '';
     } else {
       this.contentClaude = '';
       this.claudeLoading = true;
       this.claudeProgress = 0;
+      this.voiceClaude = '';
     }
 
     this.aiContentService
@@ -109,39 +115,43 @@ export class App {
       this.contentChatGPT = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
+      this.voiceChatGPT = '';
     } else {
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
+      this.voiceClaude = '';
     }
   }
 
   loadVoice(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
-
     if (llm === 'chatgpt') {
       this.voiceChatGPTLoading = true;
+      this.voiceChatGPT = '';
     } else {
       this.voiceClaudeLoading = true;
+      this.voiceClaude = '';
     }
+    console.log('00000000001:' + llm);
 
-    // this.personService
-    //   .generateVoice(llm, this.name, this.length, this.style)
-    //   .subscribe((response: BiographyResponse) => {
-    //     const duration = (performance.now() - start) / 1000;
+    this.aiContentService
+      .generateContent(llm, this.name, this.length, this.style, this.type)
+      .subscribe((response: VoiceGenerationResponse) => {
+        const duration = (performance.now() - start) / 1000;
 
-    //     if (llm === 'chatgpt') {
-    //       this.biographyChatGPT = response.data;
-    //       this.audioChatGPT = response.audioUrl!;
-    //       this.voiceChatGPTDuration = duration;
-    //       this.voiceChatGPTLoading = false;
-    //     } else {
-    //       this.biographyClaude = response.data;
-    //       this.audioClaude = response.audioUrl!;
-    //       this.voiceClaudeDuration = duration;
-    //       this.voiceClaudeLoading = false;
-    //     }
-    //   });
+        console.log('00000000001:' + JSON.stringify(response));
+
+        if (llm === 'chatgpt') {
+          this.voiceChatGPT = response.data!;
+          this.voiceChatGPTDuration = duration;
+          this.voiceChatGPTLoading = false;
+        } else {
+          this.voiceClaude = response.data!;
+          this.voiceClaudeDuration = duration;
+          this.voiceClaudeLoading = false;
+        }
+      });
   }
 
   onStyleChange(value: string) {

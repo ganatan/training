@@ -12,6 +12,12 @@ export interface ContentGenerationResponse {
   data: string;
 }
 
+export interface VoiceGenerationResponse {
+  success: boolean;
+  llm: string;
+  data: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AiContentService {
   private baseUrl = 'http://localhost:3000/api';
@@ -29,11 +35,16 @@ export class AiContentService {
     return this.http.post<ContentGenerationResponse>(url, { name, length, style });
   }
 
+  generateVoice(llm: string, name: string, length: string, style: string, type: string): Observable<VoiceGenerationResponse> {
+    if (environment.useMock) {
+      const mockData = mockReply(type, { llm, name, length, style });
 
-  generateVoice(llm: string, name: string, length: string, style: string, type: string): Observable<ContentGenerationResponse> {
+      return of({ success: true, llm, data: mockData }).pipe(delay(1000));
+    }
+
     const url = `${this.baseUrl}/voice/${type}/${llm}`;
 
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style });
+    return this.http.post<VoiceGenerationResponse>(url, { name, length, style });
   }
 
 }

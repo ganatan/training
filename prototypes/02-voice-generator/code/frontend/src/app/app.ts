@@ -85,7 +85,7 @@ export class App {
     }
 
     this.aiContentService
-      .generate(llm, this.name, this.length, this.style, this.type)
+      .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: TextGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
@@ -126,7 +126,7 @@ export class App {
     }
 
     // this.personService
-    //   .postVoice(llm, this.name, this.length, this.style)
+    //   .generateVoice(llm, this.name, this.length, this.style)
     //   .subscribe((response: BiographyResponse) => {
     //     const duration = (performance.now() - start) / 1000;
 

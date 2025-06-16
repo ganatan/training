@@ -83,3 +83,8 @@
   body.dark-mode {
     background-color: var(--bg) !important;
   }
+
+  .audio-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }

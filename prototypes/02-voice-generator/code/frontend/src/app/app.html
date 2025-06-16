@@ -37,7 +37,7 @@
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
           <button class="btn btn-primary" (click)="loadContent('chatgpt')">Générer avec ChatGPT</button>
           <button class="btn btn-outline-primary" (click)="resetContent('chatgpt')">Réinitialiser</button>
-          <span *ngIf="contentChatgpt && !chatgptLoading" class="badge bg-primary">Texte ✓</span>
+          <span *ngIf="contentChatgpt && !chatgptLoading" class="badge bg-primary">Texte Ok ✓</span>
           <span *ngIf="chatgptDuration > 0" class="text-primary ms-auto small-text">
             Réponse en {{ chatgptDuration.toFixed(1) }}s
           </span>
@@ -49,34 +49,33 @@
               <span class="visually-hidden">Chargement...</span>
             </div>
           </div>
-          chatgptProgress : {{ chatgptProgress}}
           <div *ngIf="chatgptLoading" class="progress mt-2">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
               [style.width.%]="chatgptProgress"></div>
           </div>
         </div>
       </div>
-      <div class="card p-4">
+      <div class="card p-4 m-1">
         <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
-
           <button class="btn btn-outline-primary" (click)="loadVoice('chatgpt')">Voix - ElevenLabs</button>
           <div *ngIf="voiceChatgptLoading">
             <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
           </div>
-          <span *ngIf="voiceChatgpt && !voiceChatgptLoading" class="badge bg-primary">Voix OK</span>
+          <span *ngIf="voiceChatgpt && !voiceChatgptLoading" class="badge bg-primary">Voix OK ✓</span>
           <span *ngIf="voiceChatgptDuration > 0" class="text-primary ms-auto small-text">Réponse en {{
             voiceChatgptDuration.toFixed(1) }}s</span>
         </div>
         <div class="mt-3">
-          voiceChatgptProgress : {{ voiceChatgptProgress }}
           <div *ngIf="voiceChatgptLoading" class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
               [style.width.%]="voiceChatgptProgress"></div>
           </div>
-
         </div>
         <div class="mt-2">
-          <audio *ngIf="voiceChatgpt" [src]="voiceChatgpt" controls class="w-100"></audio>
+          <audio controls class="w-100" [class.audio-disabled]="!voiceChatgpt">
+            <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'audio.
+          </audio>
         </div>
       </div>
     </div>
@@ -86,7 +85,7 @@
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
           <button class="btn btn-success" (click)="loadContent('claude')">Générer avec Claude</button>
           <button class="btn btn-outline-success" (click)="resetContent('claude')">Réinitialiser</button>
-          <span *ngIf="contentClaude && !claudeLoading" class="badge bg-success">Texte ✓</span>
+          <span *ngIf="contentClaude && !claudeLoading" class="badge bg-success">Texte Ok ✓</span>
           <span *ngIf="claudeDuration > 0" class="text-success ms-auto small-text">
             Réponse en {{ claudeDuration.toFixed(1) }}s
           </span>
@@ -104,7 +103,51 @@
           </div>
         </div>
       </div>
-
+      <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <button class="btn btn-outline-success" (click)="loadVoice('claude')">Voix - ElevenLabs</button>
+          <div *ngIf="voiceClaudeLoading">
+            <span class="spinner-border spinner-border-sm text-success" role="status"></span>
+          </div>
+          <span *ngIf="voiceClaude && !voiceClaudeLoading" class="badge bg-success">Voix OK ✓</span>
+          <span *ngIf="voiceClaudeDuration > 0" class="text-success ms-auto small-text">Réponse en {{
+            voiceClaudeDuration.toFixed(1) }}s</span>
+        </div>
+        <div class="mt-3">
+          <div *ngIf="voiceClaudeLoading" class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              [style.width.%]="voiceClaudeProgress"></div>
+          </div>
+        </div>
+        <div class="mt-2">
+          <audio controls class="w-100" [class.audio-disabled]="!voiceClaude">
+            <source src="audios/ridley-scott-claude.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'audio.
+          </audio>
+        </div>
+      </div>
+      <!-- <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
+          <button class="btn btn-success" (click)="loadContent('claude')">Générer avec Claude</button>
+          <button class="btn btn-outline-success" (click)="resetContent('claude')">Réinitialiser</button>
+          <span *ngIf="contentClaude && !claudeLoading" class="badge bg-success">Texte Ok ✓</span>
+          <span *ngIf="claudeDuration > 0" class="text-success ms-auto small-text">
+            Réponse en {{ claudeDuration.toFixed(1) }}s
+          </span>
+        </div>
+        <div class="position-relative">
+          <textarea class="form-control" [value]="contentClaude" readonly rows="3"></textarea>
+          <div *ngIf="claudeLoading" class="loading">
+            <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+              <span class="visually-hidden">Chargement...</span>
+            </div>
+          </div>
+          <div *ngIf="claudeLoading" class="progress mt-2">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              [style.width.%]="claudeProgress"></div>
+          </div>
+        </div>
+      </div>
       <div class="card p-4 m-1">
         <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
           <button class="btn btn-outline-success">Voix - ElevenLabs</button>
@@ -123,8 +166,8 @@
             Votre navigateur ne supporte pas l'audio.
           </audio>
         </div>
-      </div>
-
+      </div> -->
     </div>
+    toto
   </div>
 </div>

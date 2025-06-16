@@ -77,26 +77,27 @@ export class App {
   loadContent(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
     const interval = this.startProgress(llm);
-    console.log('00000000001:' + this.chatgptProgress);
     if (llm === 'chatgpt') {
       this.contentChatgpt = '';
       this.chatgptLoading = true;
       this.chatgptProgress = 0;
       this.voiceChatgpt = '';
+      this.chatgptDuration = 0;
+      this.voiceChatgptDuration = 0;
     } else {
       this.contentClaude = '';
       this.claudeLoading = true;
       this.claudeProgress = 0;
       this.voiceClaude = '';
+      this.claudeDuration = 0;
+      this.voiceClaudeDuration = 0;
     }
 
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {
-        console.log('00000000002:' + this.chatgptProgress);
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        console.log('00000000003:' + this.chatgptProgress);
         if (llm === 'chatgpt') {
           this.contentChatgpt = response.data;
           this.chatgptDuration = duration;
@@ -108,8 +109,6 @@ export class App {
           this.claudeLoading = false;
           this.claudeProgress = 100;
         }
-        console.log('00000000004:' + this.chatgptProgress);
-
       });
   }
 
@@ -119,11 +118,13 @@ export class App {
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
       this.voiceChatgpt = '';
+      this.voiceChatgptDuration = 0;
     } else {
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
       this.voiceClaude = '';
+      this.voiceClaudeDuration = 0;
     }
   }
 
@@ -141,13 +142,11 @@ export class App {
       this.voiceClaudeDuration = 0;
       this.voiceClaudeProgress = 0;
     }
-    console.log('00000000001:' + this.voiceChatgptProgress);
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        console.log('00000000002:' + this.voiceChatgptProgress);
 
         if (llm === 'chatgpt') {
           this.voiceChatgpt = response.data!;
@@ -160,8 +159,6 @@ export class App {
           this.voiceClaudeLoading = false;
           this.voiceClaudeProgress = 100;
         }
-        console.log('00000000003:' + this.voiceChatgptProgress);
-
       });
   }
 

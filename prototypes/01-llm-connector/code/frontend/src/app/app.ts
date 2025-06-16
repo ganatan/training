@@ -73,10 +73,11 @@ export class App {
       this.claudeLoading = true;
       this.claudeProgress = 0;
     }
-
+    console.log('00000000001');
     this.aiContentService
       .generate(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: TextGenerationResponse) => {
+        console.log('00000000002');
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 

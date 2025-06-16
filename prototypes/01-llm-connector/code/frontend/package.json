@@ -1,5 +1,5 @@
 {
-  "name": "angular-node-ai-llm-connector-frontend",
+  "name": "llm-connector-frontend",
   "version": "20.0.3",
   "scripts": {
     "ng": "ng",

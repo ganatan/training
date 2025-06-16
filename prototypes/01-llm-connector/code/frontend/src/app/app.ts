@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AiContentService, TextGenerationResponse } from './ai-content';
+import { AiContentService, ContentGenerationResponse } from './ai-content';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -73,11 +73,9 @@ export class App {
       this.claudeLoading = true;
       this.claudeProgress = 0;
     }
-    console.log('00000000001');
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
-      .subscribe((response: TextGenerationResponse) => {
-        console.log('00000000002');
+      .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 

@@ -27,12 +27,13 @@ const lengthMap = {
   long: 'environ 100 mots, réponse développée mais synthétique',
 };
 
-async function reply(type, llm, input) {
+async function reply(type, input) {
   try {
-
+    console.log('00000000001:' + JSON.stringify(input));
     const name = input.name || 'inconnu';
     const rawStyle = input.style || 'neutral';
     const rawLength = input.length || 'medium';
+
 
     const style = styleMap[rawStyle] || styleMap.neutral;
     const length = lengthMap[rawLength] || lengthMap.medium;
@@ -42,25 +43,20 @@ async function reply(type, llm, input) {
       : `Écris une biographie de ${name} avec un style ${style}, ${length}.`;
 
     const response = await axios.post(
-      'https://api.anthropic.com/v1/messages',
+      'https://api.openai.com/v1/chat/completions',
       {
-        model: 'claude-3-5-sonnet-20240620',
-        max_tokens: 1000,
+        model: 'gpt-4-turbo',
         messages: [{ role: 'user', content: prompt }],
       },
       {
         headers: {
-          'x-api-key': process.env.ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
           'Content-Type': 'application/json',
         },
       },
     );
 
-    const result = response.data.content?.[0]?.text;
-    if (!result) { throw new Error('Réponse vide de Claude.'); }
-
-    return result;
+    return response.data.choices[0].message.content.trim();
 
   } catch (error) {
     const status = error.response?.status;
@@ -68,9 +64,9 @@ async function reply(type, llm, input) {
     let errorMessage = '';
 
     if (status === 401) {
-      errorMessage = 'Erreur 401 : Clé API Claude manquante ou invalide.';
+      errorMessage = 'Erreur 401 : Clé API OpenAI manquante ou invalide.';
     } else if (status) {
-      errorMessage = `Erreur Claude (${status}) : ${JSON.stringify(data)}`;
+      errorMessage = `Erreur OpenAI (${status}) : ${JSON.stringify(data)}`;
     } else {
       errorMessage = `Erreur inattendue : ${error.message}`;
     }

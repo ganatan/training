@@ -187,6 +187,8 @@ export class App {
     this.claudeDuration = 0;
     this.chatgptProgress = 0;
     this.claudeProgress = 0;
+    this.voiceChatgpt = '';
+    this.voiceClaude = '';
   }
 
   startProgress(llm: 'chatgpt' | 'claude') {

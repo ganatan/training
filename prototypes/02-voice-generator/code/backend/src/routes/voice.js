@@ -2,7 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 
-import testElevenLabsAPI from '../services/voice/test-elevenlabs-api.js';
+import testElevenLabs from '../services/voice/test-elevenlabs.js';
 import generateVoice from '../services/voice/voice.service.js';
 
 const router = express.Router();
@@ -64,7 +64,7 @@ router.post('/:llm', async (req, res) => {
 
 router.get('/health/tts', async (req, res) => {
   const voiceId = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
-  const result = await testElevenLabsAPI(voiceId);
+  const result = await testElevenLabs(voiceId);
   res.json({ success: result });
 });
 

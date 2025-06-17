@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import generateVoice from './voice.service.js';
 
-async function testElevenLabsAPI(voiceId) {
+async function testElevenLabs(voiceId) {
   const fileName = 'test-elevenlabs';
   const filePath = path.join(process.cwd(), 'storage', 'voices', `${fileName}.mp3`);
   const outputDir = path.dirname(filePath);
@@ -33,4 +33,4 @@ async function testElevenLabsAPI(voiceId) {
   }
 }
 
-export default testElevenLabsAPI;
+export default testElevenLabs;

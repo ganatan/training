@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-export async function testElevenLabsAPI(voiceId) {
+async function testElevenLabsAPI(voiceId) {
   try {
-    const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
+    // const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
+    const url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128';
     const response = await axios.post(
       url,
       {
@@ -35,3 +36,5 @@ export async function testElevenLabsAPI(voiceId) {
     return false;
   }
 }
+
+export default testElevenLabsAPI;

@@ -7,7 +7,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('angular-node-multi-llm-podcast backend')
+  res.send('podcast-builder')
 })
 
 app.use('/api/podcast', podcastRoute)

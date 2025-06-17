@@ -5,17 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function testElevenLabsAPI(voiceId) {
-
-
-  // const outputDir = path.join(__dirname, '../audios')
-  // if (!fs.existsSync(outputDir)) {
-  //   fs.mkdirSync(outputDir, { recursive: true })
-  // }
-
-  // const filePath = path.join(outputDir, 'test.mp3');
 
   const fileName = 'test';
   const filePath = path.join(process.cwd(), 'storage', 'voices', `${fileName}.mp3`);
@@ -25,53 +16,18 @@ async function testElevenLabsAPI(voiceId) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
+  let text = 'Test de voix avec Eleven';
+  // let voiceId = '101A8UFM73tcrunWGirw';
+  console.log('00000000001:' + voiceId)
+  await generateSpeech(text, voiceId, filePath);
+  // await generateSpeech(text, '101A8UFM73tcrunWGirw', filePath);
 
-  await generateSpeech('Test de la fonction', 1234567, filePath);
   return false;
-
-  //   const url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128';
-  //   console.log('00000000001')
-  //   const response = await axios.post(
-  //     url,
-  //     {
-  //       text: 'Test',
-  //       model_id: 'eleven_multilingual_v2',
-  //     },
-  //     {
-  //       headers: {
-  //         'xi-api-key': process.env.ELEVENLABS_API_KEY,
-  //         'Content-Type': 'application/json',
-  //       },
-  //       responseType: 'arraybuffer',
-  //       timeout: 5000,
-  //     },
-  //   );
-
-  //   if (response.status === 200 && response.data) {
-  //     console.log('✅ ElevenLabs API accessible');
-
-  //     return true;
-  //   }
-
-  //   console.log('❌ ElevenLabs API inaccessible');
-
-  //   return false;
-
-  // } catch (err) {
-  //   console.error('❌ Erreur ElevenLabs API:', err.message);
-
-  //   return false;
-  // }
 }
 
 
-
 async function generateSpeech(text, voiceId, outputPath) {
-  // let url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
-  let url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128';
-  console.log('00000000001:' + url);
-  console.log('00000000002:' + text);
-  console.log('00000000003:' + outputPath);
+  let url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
   const response = await axios.post(
     url,
     {

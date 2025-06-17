@@ -15,12 +15,8 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// app.use('/api/llm', llmRoutes);
-// app.get('/api/voice', (req, res) => {
-//    res.json({ success: 1111 });
-// });
+app.use('/api/llm', llmRoutes);
 app.use('/api/voice', voiceRoutes);
-// res.json({ success: result });
 
 app.get('/', (req, res) => {
   res.json({ services: aiServices });

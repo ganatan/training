@@ -1,37 +1,6 @@
 
 import axios from 'axios';
 import fs from 'fs';
-import path from 'path';
-
-async function testElevenLabsAPI(voiceId) {
-  const fileName = 'test-tts-elevenlabs';
-  const filePath = path.join(process.cwd(), 'storage', 'voices', `${fileName}.mp3`);
-  const outputDir = path.dirname(filePath);
-
-  try {
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    await generateVoice('Test de voix avec Eleven', voiceId, filePath);
-
-    console.log('✅ Test TTS réussi - fichier créé :', filePath);
-
-    return {
-      success: true,
-      file: filePath,
-      voiceId,
-    };
-
-  } catch (err) {
-    console.error('❌ Échec du test TTS ElevenLabs :' + err.message);
-
-    return {
-      success: false,
-      error: err.message,
-    };
-  }
-}
 
 async function generateVoice(text, voiceId, outputPath) {
   const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
@@ -80,4 +49,4 @@ async function generateVoice(text, voiceId, outputPath) {
   }
 }
 
-export default testElevenLabsAPI;
+export default generateVoice;

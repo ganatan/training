@@ -1,6 +1,6 @@
 import express from 'express';
 
-import testElevenLabsAPI from '../services/voice/testElevenLabsAPI.js';
+import testElevenLabsAPI from '../services/voice/test-elevenlabs-api.js.js';
 
 const router = express.Router();
 

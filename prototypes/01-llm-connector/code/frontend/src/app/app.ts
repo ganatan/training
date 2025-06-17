@@ -75,6 +75,11 @@ export class App {
       this.claudeProgress = 0;
       this.claudeDuration = 0;
     }
+    console.log('00000000001:' + llm);
+    console.log('00000000001:' + this.name);
+    console.log('00000000001:' + this.length);
+    console.log('00000000001:' + this.style);
+    console.log('00000000001:' + this.type);
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {

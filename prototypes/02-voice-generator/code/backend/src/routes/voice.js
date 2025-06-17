@@ -42,10 +42,14 @@ router.post('/:llm', async (req, res) => {
 
     console.log('✅ TTS réussi - fichier créé :', audioPath);
 
+
+    const publicPath = `/storage/voices/${fileName}.mp3`;
+    const fullUrl = `${req.protocol}://${req.get('host')}${publicPath}`;
+
     return res.json({
       success: true,
-      file: audioPath,
-      voiceId: voiceId,
+      data: fullUrl,
+      voiceId,
     });
 
   } catch (err) {

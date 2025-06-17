@@ -20,11 +20,11 @@ async function testElevenLabsAPI(voiceId) {
     return {
       success: true,
       file: filePath,
-      voiceId,
+      voiceId: voiceId,
     };
 
   } catch (err) {
-    console.error('❌ Échec du test TTS ElevenLabs :' + err.message);
+    console.error(`❌ Échec du test TTS ElevenLabs :${err.message}`);
 
     return {
       success: false,

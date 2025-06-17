@@ -9,7 +9,7 @@ async function generateVoice(text, voiceId, outputPath) {
     const response = await axios.post(
       url,
       {
-        text,
+        text: text,
         model_id: 'eleven_multilingual_v2',
       },
       {
@@ -18,7 +18,7 @@ async function generateVoice(text, voiceId, outputPath) {
           'Content-Type': 'application/json',
         },
         responseType: 'stream',
-      }
+      },
     );
 
     const writer = fs.createWriteStream(outputPath);
@@ -37,7 +37,6 @@ async function generateVoice(text, voiceId, outputPath) {
 
   } catch (error) {
     const status = error.response?.status;
-    const data = error.response?.data;
 
     if (status) {
       console.error(`❌ Erreur ElevenLabs ${status}`);

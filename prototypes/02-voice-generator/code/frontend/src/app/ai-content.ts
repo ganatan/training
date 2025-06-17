@@ -42,7 +42,7 @@ export class AiContentService {
       return of({ success: true, llm, data: mockData }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/voice`;
+    const url = `${this.baseUrl}/voice/${llm}`;
 
     return this.http.post<VoiceGenerationResponse>(url, { name, length, style });
   }

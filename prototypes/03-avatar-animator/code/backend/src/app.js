@@ -5,6 +5,7 @@ import path from 'path';
 
 import llmRoutes from './routes/llm.js';
 import voiceRoutes from './routes/voice.js';
+import avatarRoutes from './routes/avatar.js';
 import aiServices from './config/ai-services.js';
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use('/api/llm', llmRoutes);
 app.use('/api/voice', voiceRoutes);
+app.use('/api/avatar', avatarRoutes);
 
 app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
 

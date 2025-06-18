@@ -11,25 +11,24 @@
 
 # Liste des modeles
 
-  Commande à passer sous prompt windows
+  - Commande à passer sous prompt windows
 
-curl "https://api.elevenlabs.io/v1/models" ^
-  -H "Content-Type: application/json" ^
-  -H "xi-api-key: $ELEVENLABS_API_KEY"
+    curl "https://api.elevenlabs.io/v1/models" ^
+      -H "Content-Type: application/json" ^
+      -H "xi-api-key: $ELEVENLABS_API_KEY"
+
 
 # Text to speech à partir d'un texte
 
   - Remplacer $ELEVENLABS_API_KEY par votre clé
 
-curl -X POST "https://api.elevenlabs.io/v1/text-to-speech/MF3mGyEYCl7XYWbV9V6O?output_format=mp3_44100_128" ^
- -H "Content-Type: application/json" ^
- -H "xi-api-key: $ELEVENLABS_API_KEY" ^
- -d "{ \"text\": \"Bienvenue dans notre podcast IA nous allons discuter et débattre.\", \"model_id\": \"eleven_multilingual_v2\" }" ^
- --output output02.mp3
+    curl -X POST "https://api.elevenlabs.io/v1/text-to-speech/MF3mGyEYCl7XYWbV9V6O?output_format=mp3_44100_128" ^
+    -H "Content-Type: application/json" ^
+    -H "xi-api-key: $ELEVENLABS_API_KEY" ^
+    -d "{ \"text\": \"Bienvenue dans notre podcast IA nous allons discuter et débattre.\", \"model_id\": \"eleven_multilingual_v2\" }" ^
+    --output output02.mp3
 
-
- sk_e93052f95e029071c86950e039d994aa906f01eed56c50bd
 
  curl 'https://api.elevenlabs.io/v1/models' \
   -H 'Content-Type: application/json' \
-  -H 'xi-api-key: sk_e93052f95e029071c86950e039d994aa906f01eed56c50bd'
+  -H "xi-api-key: $ELEVENLABS_API_KEY"

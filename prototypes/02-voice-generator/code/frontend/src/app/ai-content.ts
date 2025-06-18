@@ -9,6 +9,7 @@ export interface ContentGenerationResponse {
   success: boolean;
   llm: string;
   data: string;
+  error?: string;
 }
 
 export interface VoiceGenerationResponse {

@@ -97,7 +97,6 @@ export class App {
           this.claudeProgress = 100;
         }
       });
-
   }
 
   resetContent(llm: 'chatgpt' | 'claude') {

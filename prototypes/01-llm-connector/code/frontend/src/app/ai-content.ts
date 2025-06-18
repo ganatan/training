@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-import { delay } from 'rxjs/operators';
-
 import { reply as mockReply } from './ai-content.mock';
 
 export interface ContentGenerationResponse {
   success: boolean;
   llm: string;
   data: string;
+  error?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -20,12 +20,29 @@ export class AiContentService {
   generateContent(llm: string, name: string, length: string, style: string, type: string): Observable<ContentGenerationResponse> {
     if (environment.useMock) {
       const mockData = mockReply(type, { llm, name, length, style });
-
       return of({ success: true, llm, data: mockData }).pipe(delay(1000));
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
+    
+    return this.http.post<ContentGenerationResponse>(url, { name, length, style })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Erreur API:', error);
+          return of({
+            success: false,
+            llm,
+            data: '',
+            error: this.getErrorMessage(error)
+          });
+        })
+      );
+  }
 
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style });
+  private getErrorMessage(error: HttpErrorResponse): string {
+    if (error.status === 0) {
+      return 'Serveur inaccessible. Vérifiez votre connexion.';
+    }
+    return `Erreur ${error.status}: ${error.message}`;
   }
 }

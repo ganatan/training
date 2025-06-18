@@ -61,6 +61,7 @@ export class App {
   }
 
   loadContent(llm: 'chatgpt' | 'claude') {
+    console.log('00000000001');
     const start = performance.now();
     const interval = this.startProgress(llm);
 
@@ -75,24 +76,30 @@ export class App {
       this.claudeProgress = 0;
       this.claudeDuration = 0;
     }
+
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {
+        console.log('00000000002:' + JSON.stringify(response));
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-
+        let data = response.data;
+        if (!response.success) {
+          data = response.error || 'Erreur inconnue';
+        }
         if (llm === 'chatgpt') {
-          this.contentChatgpt = response.data;
+          this.contentChatgpt = data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;
           this.chatgptProgress = 100;
         } else {
-          this.contentClaude = response.data;
+          this.contentClaude = data;
           this.claudeDuration = duration;
           this.claudeLoading = false;
           this.claudeProgress = 100;
         }
       });
+
   }
 
   resetContent(llm: 'chatgpt' | 'claude') {

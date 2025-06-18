@@ -57,6 +57,7 @@ export class App {
     const body = document.querySelector('body');
     if (body) {
       body.classList.toggle('dark-mode');
+      document.documentElement.classList.toggle('dark-mode');
     }
   }
 

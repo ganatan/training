@@ -26,7 +26,7 @@
 
     html,
     body {
-      height: 100%;
+      min-height: 100%;
       background-color: var(--bg);
       color: var(--text);
       font-family: "Roboto", sans-serif;
@@ -111,11 +111,35 @@
       z-index: 999;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 576px) {
+      .toggle-mode {
+        top: auto;
+        bottom: 1rem;
+        right: 1rem;
+      }
+
+      .container {
+        padding-top: 3rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
       .btn-group-responsive {
         flex-direction: column;
         align-items: stretch;
       }
+    }
+
+    html.dark-mode,
+    body.dark-mode {
+      background-color: var(--bg) !important;
+    }
+
+    .audio-disabled {
+      pointer-events: none;
+      opacity: 0.6;
     }
   </style>
 </head>
@@ -227,6 +251,7 @@
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
+      document.documentElement.classList.toggle('dark-mode');
     }
   </script>
 

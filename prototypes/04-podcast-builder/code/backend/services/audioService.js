@@ -7,64 +7,11 @@ require('dotenv').config()
 
 const VOICES = {
   Animateur: '101A8UFM73tcrunWGirw',
-  // Claude: 'D6VK2PsbVdaFL5aALfRc',
   Claude: 'MF3mGyEYCl7XYWbV9V6O',
   GPT: 'TTtB1x9U8PF0Vgf20IAP',
 }
 
-// async function generateSpeech(text, outputPath) {
-//   const url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128';
-//   console.log('00000000001:' + url);
-//   console.log('00000000002:' + text);
-//   console.log('00000000003:' + outputPath);
-
-//   try {
-//     const response = await axios.post(
-//       url,
-//       {
-//         text,
-//         model_id: 'eleven_multilingual_v2'
-//       },
-//       {
-//         headers: {
-//           'xi-api-key': process.env.ELEVENLABS_API_KEY,
-//           'Content-Type': 'application/json'
-//         },
-//         responseType: 'stream'
-//       }
-//     );
-//     console.log('00000000004:');
-//     const writer = fs.createWriteStream(outputPath);
-//     response.data.pipe(writer);
-//     console.log('00000000005:');
-//     return new Promise((resolve, reject) => {
-//       writer.on('finish', () => {
-//         // console.log('✅ Fichier audio généré avec succès');
-//         resolve(outputPath);
-//       });
-//       writer.on('error', (err) => {
-//         // console.error('❌ Erreur lors de l’écriture du fichier :', err.message);
-//         reject(err);
-//       });
-//     });
-
-//   } catch (error) {
-//     console.log('00000000006:');
-//     const status = error.response?.status;
-//     const detail = error.response?.data;
-//     console.log('00000000007:');
-//     if (status) {
-//       // console.error(`❌ Erreur ElevenLabs ${status} : ${JSON.stringify(detail)}`);
-//     } else {
-//       // console.error('❌ Erreur axios :', error.message);
-//     }
-
-//     throw error;
-//   }
-// }
-
 async function generateSpeech(text, voiceId, outputPath) {
-  // let url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
   let url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128';
   console.log('00000000001:' + url);
   console.log('00000000002:' + text);
@@ -154,8 +101,6 @@ async function generateAllAudioFromJson(filename) {
 
       try {
         console.log(`🎙️ Génération audio : ${speaker} → ${fileName} → ${voiceId}`);
-        // let test = `Génération audio : ${speaker} → ${fileName} → ${voiceId}`;
-        // console.log('00000000001:' + test)
 
         await generateSpeech(message, voiceId, filePath)
 

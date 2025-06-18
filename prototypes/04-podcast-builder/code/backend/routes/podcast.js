@@ -6,7 +6,6 @@ const { saveMockConversationToFile } = require('../services/conversationService.
 const { generateAllAudioFromJson } = require('../services/audioService')
 
 router.get('/generate', async (req, res) => {
-  // const debat = req.query.topic || "Angular ou React : quel framework offre la meilleure architecture pour des applications à grande échelle ?"
   const debat = req.query.topic || "Dune de Denis Villeneuve : chef-d'œuvre de science-fiction ou exercice de style surcoté ?"
   try {
     const { filename, conversation } = await saveConversationToFile(debat)
@@ -18,7 +17,6 @@ router.get('/generate', async (req, res) => {
 })
 
 router.get('/mock', async (req, res) => {
-  // const debat = req.query.topic || "Angular ou React : quel framework offre la meilleure architecture pour des applications à grande échelle ?"
   const debat = req.query.topic || "Dune de Denis Villeneuve : chef-d'œuvre de science-fiction ou exercice de style surcoté ?"
   try {
     const { filename, conversation } = await saveMockConversationToFile(debat)

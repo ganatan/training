@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('podcast-builder');
-})
+});
 
 app.use('/api/podcast', podcastRoute);
 

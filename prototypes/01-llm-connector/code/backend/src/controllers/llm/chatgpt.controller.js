@@ -29,11 +29,9 @@ const lengthMap = {
 
 async function reply(type, input) {
   try {
-    console.log('00000000001:' + JSON.stringify(input));
     const name = input.name || 'inconnu';
     const rawStyle = input.style || 'neutral';
     const rawLength = input.length || 'medium';
-
 
     const style = styleMap[rawStyle] || styleMap.neutral;
     const length = lengthMap[rawLength] || lengthMap.medium;

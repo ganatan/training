@@ -61,7 +61,6 @@ export class App {
   }
 
   loadContent(llm: 'chatgpt' | 'claude') {
-    console.log('00000000001');
     const start = performance.now();
     const interval = this.startProgress(llm);
 
@@ -80,7 +79,6 @@ export class App {
     this.aiContentService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {
-        console.log('00000000002:' + JSON.stringify(response));
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
         let data = response.data;

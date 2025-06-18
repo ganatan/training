@@ -1,5 +1,7 @@
-const axios = require('axios')
-require('dotenv').config()
+import axios from 'axios'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 async function sendToClaude(text) {
   const url = 'https://api.anthropic.com/v1/messages'
@@ -32,4 +34,4 @@ async function sendToClaude(text) {
   }
 }
 
-module.exports = { sendToClaude }
+export { sendToClaude }

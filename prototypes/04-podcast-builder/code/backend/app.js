@@ -1,6 +1,6 @@
-const express = require('express')
-const cors = require('cors')
-const podcastRoute = require('./routes/podcast')
+import express from 'express'
+import cors from 'cors'
+import podcastRoute from './routes/podcast.js'
 
 const app = express()
 app.use(cors())

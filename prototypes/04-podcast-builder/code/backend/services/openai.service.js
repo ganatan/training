@@ -1,4 +1,4 @@
-const axios = require('axios')
+import axios from 'axios'
 
 async function sendToChatGPT(content) {
   const response = await axios.post(
@@ -14,7 +14,8 @@ async function sendToChatGPT(content) {
       }
     }
   )
+
   return response.data.choices[0].message.content
 }
 
-module.exports = { sendToChatGPT }
+export { sendToChatGPT }

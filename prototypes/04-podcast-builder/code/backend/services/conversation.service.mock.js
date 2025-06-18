@@ -1,5 +1,9 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 function generateMockConversation(debat, rounds = 3) {
   const result = []
@@ -32,9 +36,8 @@ async function saveMockConversationToFile(debat) {
   const conversation = generateMockConversation(debat)
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
   const filename = `mock-podcast-${timestamp}.json`
-  const conversationsDir = path.join(__dirname, '../conversations')
+  const conversationsDir = path.join(__dirname, '../storage/conversations')
 
-  // Création dossier si nécessaire
   if (!fs.existsSync(conversationsDir)) {
     fs.mkdirSync(conversationsDir, { recursive: true })
   }
@@ -45,4 +48,4 @@ async function saveMockConversationToFile(debat) {
   return { filename, conversation }
 }
 
-module.exports = { saveMockConversationToFile }
+export { saveMockConversationToFile }

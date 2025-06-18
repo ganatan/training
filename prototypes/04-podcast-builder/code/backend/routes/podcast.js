@@ -1,9 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const { saveConversationToFile } = require('../services/conversationService')
-const { saveMockConversationToFile } = require('../services/conversationService.mock')
+import express from 'express'
+import { saveConversationToFile } from '../services/conversation.service.js'
+import { saveMockConversationToFile } from '../services/conversation.service.mock.js'
+import { generateAllAudioFromJson } from '../services/audio.service.js'
 
-const { generateAllAudioFromJson } = require('../services/audioService')
+const router = express.Router()
 
 router.get('/generate', async (req, res) => {
   const debat = req.query.topic || "Dune de Denis Villeneuve : chef-d'œuvre de science-fiction ou exercice de style surcoté ?"
@@ -37,5 +37,4 @@ router.get('/audio/:filename', async (req, res) => {
   }
 })
 
-module.exports = router
-
+export default router

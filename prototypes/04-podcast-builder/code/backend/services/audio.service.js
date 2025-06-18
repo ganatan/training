@@ -1,21 +1,28 @@
-const fs = require('fs')
-const path = require('path')
-const axios = require('axios')
-const ffmpegPath = require('ffmpeg-static')
-const { spawn } = require('child_process')
-require('dotenv').config()
+import fs from 'fs'
+import path from 'path'
+import axios from 'axios'
+import ffmpegPath from 'ffmpeg-static'
+import { spawn } from 'child_process'
+import { fileURLToPath } from 'url'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const VOICES = {
   Animateur: '101A8UFM73tcrunWGirw',
   Claude: 'MF3mGyEYCl7XYWbV9V6O',
-  GPT: 'TTtB1x9U8PF0Vgf20IAP',
+  GPT: 'TTtB1x9U8PF0Vgf20IAP'
 }
 
 async function generateSpeech(text, voiceId, outputPath) {
-  let url = 'https://api.elevenlabs.io/v1/text-to-speech/101A8UFM73tcrunWGirw?output_format=mp3_44100_128';
-  console.log('00000000001:' + url);
-  console.log('00000000002:' + text);
-  console.log('00000000003:' + outputPath);
+  const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`
+  console.log('00000000001:' + url)
+  console.log('00000000002:' + text)
+  console.log('00000000003:' + outputPath)
+
   const response = await axios.post(
     url,
     {
@@ -30,7 +37,8 @@ async function generateSpeech(text, voiceId, outputPath) {
       responseType: 'stream'
     }
   )
-  console.log('00000000004:' + outputPath);
+
+  console.log('00000000004:' + outputPath)
   const writer = fs.createWriteStream(outputPath)
   response.data.pipe(writer)
 
@@ -78,12 +86,12 @@ async function generateAllAudioFromJson(filename) {
   console.log('🔄 Lecture JSON :', filename)
 
   try {
-    const inputPath = path.join(__dirname, '../conversations', filename)
+    const inputPath = path.join(__dirname, '../storage/conversations', filename)
     if (!fs.existsSync(inputPath)) throw new Error('Fichier JSON introuvable : ' + filename)
 
     const conversation = JSON.parse(fs.readFileSync(inputPath, 'utf-8'))
     const baseName = path.basename(filename, '.json')
-    const outputDir = path.join(__dirname, '../audios', baseName)
+    const outputDir = path.join(__dirname, '../storage/audios', baseName)
 
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true })
@@ -100,14 +108,14 @@ async function generateAllAudioFromJson(filename) {
       const filePath = path.join(outputDir, fileName)
 
       try {
-        console.log(`🎙️ Génération audio : ${speaker} → ${fileName} → ${voiceId}`);
+        console.log(`🎙️ Génération audio : ${speaker} → ${fileName} → ${voiceId}`)
 
         await generateSpeech(message, voiceId, filePath)
 
         result.push({
           speaker,
           message,
-          audio: `/audios/${baseName}/${fileName}`
+          audio: `/storage/audios/${baseName}/${fileName}`
         })
 
         listLines.push(`file '${fileName}'`)
@@ -126,12 +134,12 @@ async function generateAllAudioFromJson(filename) {
 
     try {
       await concatAudioFiles(outputDir)
-      console.log(`🎧 Podcast final généré : /audios/${baseName}/podcast-final.mp3`)
+      console.log(`🎧 Podcast final généré : /storage/audios/${baseName}/podcast-final.mp3`)
 
       return {
         folder: baseName,
         items: result,
-        fullAudio: `/audios/${baseName}/podcast-final.mp3`
+        fullAudio: `/storage/audios/${baseName}/podcast-final.mp3`
       }
     } catch (concatErr) {
       console.error(`❌ Erreur concaténation :`, concatErr.message)
@@ -147,4 +155,4 @@ async function generateAllAudioFromJson(filename) {
   }
 }
 
-module.exports = { generateAllAudioFromJson }
+export { generateAllAudioFromJson }

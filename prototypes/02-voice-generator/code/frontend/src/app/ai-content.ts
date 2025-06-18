@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-import { delay } from 'rxjs/operators';
-
 import { reply as mockReply } from './ai-content.mock';
 
 export interface ContentGenerationResponse {
@@ -27,24 +26,57 @@ export class AiContentService {
     if (environment.useMock) {
       const mockData = mockReply(type, { llm, name, length, style });
 
-      return of({ success: true, llm, data: mockData }).pipe(delay(1000));
+      return of({ success: true, llm: llm, data: mockData }).pipe(delay(1000));
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
 
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style });
+    return this.http.post<ContentGenerationResponse>(url, { name, length, style })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Erreur API:', error);
+
+          return of({
+            success: false,
+            llm: llm,
+            data: '',
+            error: this.getErrorMessage(error),
+          });
+        }),
+      );
   }
 
   generateVoice(llm: string, name: string, length: string, style: string, type: string): Observable<VoiceGenerationResponse> {
     if (environment.useMock) {
       const mockData = mockReply(type, { llm, name, length, style });
 
-      return of({ success: true, llm, data: mockData }).pipe(delay(1000));
+      return of({ success: true, llm:llm, data: mockData }).pipe(delay(1000));
     }
 
     const url = `${this.baseUrl}/voice/${llm}`;
 
-    return this.http.post<VoiceGenerationResponse>(url, { name, length, style });
+    return this.http.post<VoiceGenerationResponse>(url, { name, length, style })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Erreur API:', error);
+
+          return of({
+            success: false,
+            llm: llm,
+            data: '',
+            error: this.getErrorMessage(error),
+          });
+        }),
+      );
+
+  }
+
+  private getErrorMessage(error: HttpErrorResponse): string {
+    if (error.status === 0) {
+      return 'Serveur inaccessible. Vérifiez votre connexion.';
+    }
+
+    return `Erreur ${error.status}: ${error.message}`;
   }
 
 }

@@ -2,8 +2,8 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 
-import testElevenLabs from '../services/voice/test-elevenlabs.js';
-import generateVoice from '../services/voice/voice.service.js';
+import testElevenLabs from '../controllers/voice/test-elevenlabs.js';
+import generateVoice from '../controllers/voice/voice.service.js';
 
 const router = express.Router();
 
@@ -42,14 +42,13 @@ router.post('/:llm', async (req, res) => {
 
     console.log('✅ TTS réussi - fichier créé :', audioPath);
 
-
     const publicPath = `/storage/voices/${fileName}.mp3`;
     const fullUrl = `${req.protocol}://${req.get('host')}${publicPath}`;
 
     return res.json({
       success: true,
       data: fullUrl,
-      voiceId,
+      voiceId: voiceId,
     });
 
   } catch (err) {

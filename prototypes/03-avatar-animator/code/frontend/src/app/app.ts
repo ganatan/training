@@ -98,13 +98,17 @@ export class App {
       .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
+        let data = response.data;
+        if (!response.success) {
+          data = response.error || 'Erreur inconnue';
+        }
         if (llm === 'chatgpt') {
-          this.contentChatgpt = response.data;
+          this.contentChatgpt = data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;
           this.chatgptProgress = 100;
         } else {
-          this.contentClaude = response.data;
+          this.contentClaude = data;
           this.claudeDuration = duration;
           this.claudeLoading = false;
           this.claudeProgress = 100;
@@ -147,8 +151,7 @@ export class App {
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        console.log('00000000001:' + JSON.stringify(response));
-        let voiceMock = 'assets/voices/ridley-scott.mp3';
+        const voiceMock = 'assets/voices/ridley-scott.mp3';
         if (llm === 'chatgpt') {
           this.voiceChatgpt = this.useMock ? voiceMock : response.data!;
           this.voiceChatgptDuration = duration;

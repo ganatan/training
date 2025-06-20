@@ -166,7 +166,7 @@ export class App {
         if (!response.success) {
           data = response.error || 'Erreur inconnue';
         }
-        const voiceMock = 'assets/voices/ridley-scott.mp3';
+        const voiceMock = `assets/voices/ridley-scott-${llm}.mp3`;
         if (llm === 'chatgpt') {
           this.voiceChatgpt = this.useMock ? voiceMock : data;
           this.voiceChatgptDuration = duration;

@@ -152,13 +152,17 @@ export class App {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
         const voiceMock = 'assets/voices/ridley-scott.mp3';
+        let data = response.data;
+        if (!response.success) {
+          data = response.error || 'Erreur inconnue';
+        }
         if (llm === 'chatgpt') {
-          this.voiceChatgpt = this.useMock ? voiceMock : response.data!;
+          this.voiceChatgpt = this.useMock ? voiceMock : data;
           this.voiceChatgptDuration = duration;
           this.voiceChatgptLoading = false;
           this.voiceChatgptProgress = 100;
         } else {
-          this.voiceClaude = this.useMock ? voiceMock : response.data!;
+          this.voiceClaude = this.useMock ? voiceMock : data;
           this.voiceClaudeDuration = duration;
           this.voiceClaudeLoading = false;
           this.voiceClaudeProgress = 100;

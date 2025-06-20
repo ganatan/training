@@ -8,7 +8,7 @@ async function reply(type, input) {
   const name = (input.name || 'Inconnu').replace('-', ' ');
   const style = input.style || 'neutral';
   const length = input.length || 'medium';
-  const llm = 'chatgtp';
+  const llm = 'chatgpt';
   const validType = ['biography', 'filmography', 'summary'].includes(type) ? type : 'contenu';
 
   return `Mock Backend - Demande envoyée à ${llm} pour une ${validType} de "${name}", avec un style "${style}" et une longueur "${length}".`;

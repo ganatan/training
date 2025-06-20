@@ -16,6 +16,7 @@ export interface VoiceGenerationResponse {
   success: boolean;
   llm: string;
   data: string;
+  error?: string;
 }
 
 @Injectable({ providedIn: 'root' })

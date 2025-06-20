@@ -41,6 +41,11 @@ export class App {
   voiceChatgptProgress = 0;
   voiceClaudeProgress = 0;
 
+  videoChatgptDuration = 0;
+  videoClaudeDuration = 0;
+  videoChatgptProgress = 0;
+  videoClaudeProgress = 0;
+
   useMock = environment.useMock;
 
   styleOptions = [
@@ -166,6 +171,40 @@ export class App {
       });
   }
 
+  loadVideo(llm: 'chatgpt' | 'claude') {
+    const start = performance.now();
+    const interval = this.startVoiceProgress(llm);
+    if (llm === 'chatgpt') {
+      this.voiceChatgptLoading = true;
+      this.voiceChatgpt = '';
+      this.voiceChatgptDuration = 0;
+      this.voiceChatgptProgress = 0;
+    } else {
+      this.voiceClaudeLoading = true;
+      this.voiceClaude = '';
+      this.voiceClaudeDuration = 0;
+      this.voiceClaudeProgress = 0;
+    }
+    this.aiContentService
+      .generateVoice(llm, this.name, this.length, this.style, this.type)
+      .subscribe((response: VoiceGenerationResponse) => {
+        const duration = (performance.now() - start) / 1000;
+        clearInterval(interval);
+        const voiceMock = 'assets/voices/ridley-scott.mp3';
+        if (llm === 'chatgpt') {
+          this.voiceChatgpt = this.useMock ? voiceMock : response.data!;
+          this.voiceChatgptDuration = duration;
+          this.voiceChatgptLoading = false;
+          this.voiceChatgptProgress = 100;
+        } else {
+          this.voiceClaude = this.useMock ? voiceMock : response.data!;
+          this.voiceClaudeDuration = duration;
+          this.voiceClaudeLoading = false;
+          this.voiceClaudeProgress = 100;
+        }
+      });
+  }
+
   onStyleChange(value: string) {
     this.style = value;
     this.resetAll();
@@ -209,6 +248,18 @@ export class App {
 
 
   startVoiceProgress(llm: 'chatgpt' | 'claude') {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 5;
+      if (progress >= 95) return;
+      if (llm === 'chatgpt') this.voiceChatgptProgress = progress;
+      else this.voiceClaudeProgress = progress;
+    }, 100);
+
+    return interval;
+  }
+
+  startVideoProgress(llm: 'chatgpt' | 'claude') {
     let progress = 0;
     const interval = setInterval(() => {
       progress += 5;

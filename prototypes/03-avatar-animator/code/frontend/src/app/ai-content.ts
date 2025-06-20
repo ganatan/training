@@ -18,6 +18,12 @@ export interface VoiceGenerationResponse {
   data: string;
 }
 
+export interface VideoGenerationResponse {
+  success: boolean;
+  llm: string;
+  data: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AiContentService {
   private baseUrl = 'http://localhost:3000/api';
@@ -57,6 +63,31 @@ export class AiContentService {
     const url = `${this.baseUrl}/voice/${llm}`;
 
     return this.http.post<VoiceGenerationResponse>(url, { name, length, style })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Erreur API:', error);
+
+          return of({
+            success: false,
+            llm: llm,
+            data: '',
+            error: this.getErrorMessage(error),
+          });
+        }),
+      );
+
+  }
+
+  generateVideo(llm: string, name: string, length: string, style: string, type: string): Observable<VideoGenerationResponse> {
+    if (environment.useMock) {
+      const mockData = mockReply(type, { llm, name, length, style });
+
+      return of({ success: true, llm:llm, data: mockData }).pipe(delay(1000));
+    }
+
+    const url = `${this.baseUrl}/video/${llm}`;
+
+    return this.http.post<VideoGenerationResponse>(url, { name, length, style })
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Erreur API:', error);

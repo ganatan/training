@@ -1,7 +1,7 @@
 <button class="btn btn-sm btn-outline-secondary toggle-mode" (click)="toggleTheme()">Toggle thème</button>
 
 <div class="container p-2">
-  <h1 class="text-center text-primary">voice-generator</h1>
+  <h1 class="text-center text-primary">avatar-animator</h1>
 
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-lg-3">
@@ -83,6 +83,7 @@
                 [style.width.%]="voiceChatgptProgress"></div>
             </div>
           </div>
+          voiceChatgpt : {{ voiceChatgpt}}
           <div class="mt-2">
             <audio controls class="w-100" [class.audio-disabled]="!voiceChatgpt" [src]="voiceChatgpt">
               Votre navigateur ne supporte pas l'audio.
@@ -112,9 +113,9 @@
                 [style.width.%]="videoChatgptProgress"></div>
             </div>
           </div>
-          <div class="mt-3">
-            <video controls class="w-100 rounded" poster="assets/img/avatar-chatgpt.jpg">
-              <source [src]="videoChatgpt" type="video/mp4">
+          <div class="mt-3" *ngIf="videoChatgpt">
+            <video controls class="w-100 rounded" [attr.poster]="videoPosterChatgpt">
+              <source [attr.src]="videoChatgpt" type="video/mp4">
               Votre navigateur ne supporte pas la vidéo.
             </video>
           </div>

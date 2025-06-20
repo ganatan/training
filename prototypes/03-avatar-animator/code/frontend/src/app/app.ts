@@ -33,7 +33,9 @@ export class App {
   voiceClaudeLoading = false;
 
   videoChatgpt = '';
+  videoPosterChatgpt = '';
   videoClaude = '';
+  videoPosterClaude = '';
   videoChatgptLoading = false;
   videoClaudeLoading = false;
 
@@ -95,6 +97,8 @@ export class App {
       this.voiceChatgpt = '';
       this.chatgptDuration = 0;
       this.voiceChatgptDuration = 0;
+      this.videoChatgpt = '';
+      this.videoChatgptDuration = 0;
     } else {
       this.contentClaude = '';
       this.claudeLoading = true;
@@ -102,6 +106,8 @@ export class App {
       this.voiceClaude = '';
       this.claudeDuration = 0;
       this.voiceClaudeDuration = 0;
+      this.videoClaude = '';
+      this.videoClaudeDuration = 0;
     }
 
     this.aiContentService
@@ -201,17 +207,20 @@ export class App {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
         const videoMock = `assets/videos/ridley-scott-${llm}.mp4`;
+        const videoPosterMock = `assets/videos/ridley-scott-${llm}.jpg`;
         let data = response.data;
         if (!response.success) {
           data = response.error || 'Erreur inconnue';
         }
         if (llm === 'chatgpt') {
           this.videoChatgpt = this.useMock ? videoMock : data;
+          this.videoPosterChatgpt = videoPosterMock;
           this.videoChatgptDuration = duration;
           this.videoChatgptLoading = false;
           this.videoChatgptProgress = 100;
         } else {
           this.videoClaude = this.useMock ? videoMock : data;
+          this.videoPosterClaude = videoPosterMock;
           this.videoClaudeDuration = duration;
           this.videoClaudeLoading = false;
           this.videoClaudeProgress = 100;

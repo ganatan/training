@@ -142,6 +142,11 @@
       opacity: 0.6;
     }
 
+    .video-disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
     .chevron {
       display: inline-block;
       transition: transform 0.3s ease;
@@ -162,7 +167,7 @@
   <button class="btn btn-sm btn-outline-secondary toggle-mode" onclick="toggleTheme()">Toggle thème</button>
 
   <div class="container p-2">
-    <h1 class="text-center text-primary ">avatar-animator</h1>
+    <h1 class="text-center text-primary ">avatar-animator2</h1>
 
     <div class="row g-3 mb-4">
       <div class="col-12 col-lg-3">
@@ -261,7 +266,7 @@
             </div>
             <div class="mt-2">
               <audio controls class="w-100">
-                <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+                <source src="./assets//voices/ridley-scott-chatgpt.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'audio.
               </audio>
             </div>
@@ -280,8 +285,8 @@
           </div>
           <div class="collapse show" id="avatar-chatgpt">
             <div class="mt-3">
-              <video controls class="w-100 rounded" poster="assets/img/avatar-chatgpt.jpg">
-                <source src="videos/ridley-scott-chatgpt.mp4" type="video/mp4">
+              <video controls class="w-100 rounded" poster="./assets/videos/ridley-scott-chatgpt.png">
+                <source src="./assets/videos/ridley-scott-chatgpt.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la vidéo.
               </video>
             </div>
@@ -335,8 +340,14 @@
               </div>
             </div>
             <div class="mt-2">
+              <audio controls class="w-100">
+                <source src="./assets//voices/ridley-scott-claude.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'audio.
+              </audio>
+            </div>
+            <div class="mt-2">
               <audio controls class="w-100 audio-disabled">
-                <source src="audios/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+                <source src="./assets//voices/ridley-scott-claude.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'audio.
               </audio>
             </div>
@@ -354,8 +365,14 @@
           </div>
           <div class="collapse show" id="avatar-claude">
             <div class="mt-3">
-              <video controls class="w-100 rounded" poster="assets/img/avatar-claude.jpg">
-                <source src="videos/ridley-scott-claude.mp4" type="video/mp4">
+              <video controls class="w-100 rounded" poster="./assets/videos/ridley-scott-claude.png">
+                <source src="./assets/videos/ridley-scott-claude.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+              </video>
+            </div>
+            <div class="mt-3">
+              <video controls class="w-100 rounded video-disabled" poster="./assets/videos/ridley-scott-claude.png">
+                <source src="./assets/videos/ridley-scott-claude.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la vidéo.
               </video>
             </div>

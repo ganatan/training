@@ -32,6 +32,7 @@
   </div>
 
   <div class="row g-4 mb-3">
+
     <div class="col-12 col-md-6">
       <div class="card p-4 m-1">
         <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
@@ -91,16 +92,26 @@
       </div>
       <div class="card p-4 mt-3">
         <div class="d-flex align-items-center gap-2 btn-group-responsive">
-          <button class="btn btn-outline-primary">Avatar - JoggAI</button>
-          <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
-          <span class="badge bg-primary">Avatar OK ✓</span>
-          <span class="text-primary ms-auto small-text">Réponse en 3.4s</span>
+          <button class="btn btn-outline-primary" (click)="loadVideo('chatgpt')">Avatar - JoggAI</button>
+          <div *ngIf="videoChatgptLoading">
+            <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+          </div>
+          <span *ngIf="videoChatgpt && !videoChatgptLoading" class="badge bg-primary">Avatar OK ✓</span>
+          <span *ngIf="videoChatgptDuration > 0" class="text-primary ms-auto small-text">
+            Réponse en {{ chatgptDuration.toFixed(1) }}s
+          </span>
           <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
             data-bs-target="#avatar-chatgpt" aria-expanded="true">
             <span class="chevron">▼</span>
           </button>
         </div>
         <div class="collapse show" id="avatar-chatgpt">
+          <div class="mt-3">
+            <div *ngIf="videoChatgptLoading" class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                [style.width.%]="videoChatgptProgress"></div>
+            </div>
+          </div>
           <div class="mt-3">
             <video controls class="w-100 rounded" poster="assets/img/avatar-chatgpt.jpg">
               <source src="videos/ridley-scott-chatgpt.mp4" type="video/mp4">
@@ -189,6 +200,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 </div>

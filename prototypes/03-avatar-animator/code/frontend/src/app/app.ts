@@ -6,6 +6,7 @@ import {
   AiContentService,
   ContentGenerationResponse,
   VoiceGenerationResponse,
+  VideoGenerationResponse,
 } from './ai-content';
 import { environment } from '../environments/environment';
 
@@ -30,6 +31,11 @@ export class App {
   voiceClaude = '';
   voiceChatgptLoading = false;
   voiceClaudeLoading = false;
+
+  videoChatgpt = '';
+  videoClaude = '';
+  videoChatgptLoading = false;
+  videoClaudeLoading = false;
 
   chatgptDuration = 0;
   claudeDuration = 0;
@@ -173,34 +179,34 @@ export class App {
 
   loadVideo(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
-    const interval = this.startVoiceProgress(llm);
+    const interval = this.startVideoProgress(llm);
     if (llm === 'chatgpt') {
-      this.voiceChatgptLoading = true;
-      this.voiceChatgpt = '';
-      this.voiceChatgptDuration = 0;
-      this.voiceChatgptProgress = 0;
+      this.videoChatgptLoading = true;
+      this.videoChatgpt = '';
+      this.videoChatgptDuration = 0;
+      this.videoChatgptProgress = 0;
     } else {
-      this.voiceClaudeLoading = true;
-      this.voiceClaude = '';
-      this.voiceClaudeDuration = 0;
-      this.voiceClaudeProgress = 0;
+      this.videoClaudeLoading = true;
+      this.videoClaude = '';
+      this.videoClaudeDuration = 0;
+      this.videoClaudeProgress = 0;
     }
     this.aiContentService
-      .generateVoice(llm, this.name, this.length, this.style, this.type)
-      .subscribe((response: VoiceGenerationResponse) => {
+      .generateVideo(llm, this.name, this.length, this.style, this.type)
+      .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        const voiceMock = 'assets/voices/ridley-scott.mp3';
+        const videoMock = 'assets/videos/ridley-scott.mp3';
         if (llm === 'chatgpt') {
-          this.voiceChatgpt = this.useMock ? voiceMock : response.data!;
-          this.voiceChatgptDuration = duration;
-          this.voiceChatgptLoading = false;
-          this.voiceChatgptProgress = 100;
+          this.videoChatgpt = this.useMock ? videoMock : response.data!;
+          this.videoChatgptDuration = duration;
+          this.videoChatgptLoading = false;
+          this.videoChatgptProgress = 100;
         } else {
-          this.voiceClaude = this.useMock ? voiceMock : response.data!;
-          this.voiceClaudeDuration = duration;
-          this.voiceClaudeLoading = false;
-          this.voiceClaudeProgress = 100;
+          this.videoClaude = this.useMock ? videoMock : response.data!;
+          this.videoClaudeDuration = duration;
+          this.videoClaudeLoading = false;
+          this.videoClaudeProgress = 100;
         }
       });
   }

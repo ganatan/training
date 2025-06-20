@@ -1,5 +1,5 @@
 {
   "name": "ridley scott",
   "llm": "claude",
-  "text": "Ridley Scott, né en 1937, est un réalisateur et producteur britannique. Il a réalisé des films marquants comme \"Alien\", \"Blade Runner\" et \"Gladiator\". Sa carrière s'étend sur plusieurs décennies avec des succès commerciaux et critiques."
+  "text": "Mock Backend - Demande envoyée à claude pour une biography de \"ridley scott\", avec un style \"neutral\" et une longueur \"short\"."
 }

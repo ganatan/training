@@ -23,6 +23,43 @@ je veux une interface simple
 
 inspire toi du desing du projet llm-connector
 
+# prompt
+je veux un seul tableau avec les prenoms et personnalités
+et un seul bouton prenom personnalité
+
+# prompt
+tres bien par contre je veux que les resultats soient afficher sous forme de tableau
+
+# prompt
+rajoute trois boutons 
+generer les dialogues
+generer les voix
+generer les video
+
+# Prompt
+je veux le input et les 5 boutons en haut dans un seul card
+
+# Prompt
+je veux 
+
+sur une ligne
+input 
+generer questions
+generer intervenants et personnalites
+
+sur une ligne
+generer dialogues
+generer voix
+generer videos
+
+# Prompt
+je veux par contre 4 questions au lieu de 7
+a gauche je veux dans une colonne
+les intervenants et dessous les questions
+
+et a droite je veux une collone avec les dialogues generes
+
+
 
 <!DOCTYPE html>
 <html lang="fr">

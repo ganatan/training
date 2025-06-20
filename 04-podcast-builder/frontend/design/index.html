@@ -20,11 +20,6 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
     h1 {
       font-weight: 800;
       text-transform: uppercase;
@@ -39,6 +34,10 @@
       flex-wrap: wrap;
       gap: 0.5rem;
     }
+
+    th {
+      background-color: #e9ecef;
+    }
   </style>
 </head>
 
@@ -47,36 +46,74 @@
     <h1 class="text-primary">Podcast Builder</h1>
 
     <div class="card p-4 mb-4">
-      <div class="row g-3">
-        <div class="col-12 col-md-6">
+      <div class="row g-3 align-items-end mb-3">
+        <div class="col-md-5">
           <label class="form-label">Thème du podcast</label>
           <input type="text" class="form-control" placeholder="Ex : Angular vs React" />
         </div>
-        <div class="col-12 col-md-6 d-flex align-items-end btn-group-responsive">
-          <button class="btn btn-primary">Afficher 7 questions</button>
-          <button class="btn btn-secondary">Afficher 2 prénoms</button>
-          <button class="btn btn-outline-primary">Afficher leurs personnalités</button>
+        <div class="col-md-7 d-flex btn-group-responsive pt-md-4">
+          <button class="btn btn-primary">Afficher 4 questions</button>
+          <button class="btn btn-outline-primary">Afficher intervenants + personnalités</button>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-12 d-flex btn-group-responsive justify-content-start">
+          <button class="btn btn-dark">🎤 Générer les dialogues</button>
+          <button class="btn btn-success">🔊 Générer les voix</button>
+          <button class="btn btn-primary">🎥 Générer les vidéos</button>
         </div>
       </div>
     </div>
 
     <div class="row g-4">
-      <div class="col-md-4">
+      <!-- Colonne gauche : intervenants + questions -->
+      <div class="col-md-6">
+        <div class="card p-3 mb-4">
+          <h5>🧠 Intervenants</h5>
+          <table class="table table-bordered table-sm mt-2">
+            <thead>
+              <tr>
+                <th>Prénom</th>
+                <th>Position</th>
+                <th>Personnalité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Camille</td><td>Pour</td><td>Calme et analytique</td></tr>
+              <tr><td>Alexis</td><td>Contre</td><td>Passionné et critique</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="card p-3">
           <h5>🎙️ Questions</h5>
-          <textarea class="form-control" readonly placeholder="Questions générées ici..."></textarea>
+          <table class="table table-bordered table-sm mt-2">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Question</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Est-ce que Angular est trop rigide pour les projets modernes ?</td></tr>
+              <tr><td>2</td><td>React favorise-t-il une meilleure modularité à long terme ?</td></tr>
+              <tr><td>3</td><td>Quel framework est le plus adapté aux équipes débutantes ?</td></tr>
+              <tr><td>4</td><td>Angular est-il dépassé face à la popularité de React ?</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="col-md-4">
+
+      <!-- Colonne droite : dialogues -->
+      <div class="col-md-6">
         <div class="card p-3">
-          <h5>👤 Intervenants</h5>
-          <textarea class="form-control" readonly placeholder="Prénoms générés ici..."></textarea>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>🧠 Personnalités</h5>
-          <textarea class="form-control" readonly placeholder="Profil des intervenants ici..."></textarea>
+          <h5>💬 Dialogues générés</h5>
+          <div class="mt-2" style="white-space: pre-wrap; min-height: 300px;">
+            <strong>Camille :</strong> Je pense qu'Angular apporte une structure solide, idéale pour les projets d'entreprise...  
+            <br><strong>Alexis :</strong> Oui, mais justement, cette structure est trop contraignante pour les projets agiles...  
+            <br><strong>Camille :</strong> C’est une question de perspective. Pour une grande équipe, c’est un avantage.  
+            <br><strong>Alexis :</strong> À condition que toute l’équipe maîtrise bien le framework, ce qui n’est pas si simple.  
+          </div>
         </div>
       </div>
     </div>

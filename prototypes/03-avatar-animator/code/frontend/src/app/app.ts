@@ -143,12 +143,16 @@ export class App {
       this.chatgptProgress = 0;
       this.voiceChatgpt = '';
       this.voiceChatgptDuration = 0;
+      this.videoChatgpt = '';
+      this.videoChatgptDuration = 0;
     } else {
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
       this.voiceClaude = '';
       this.voiceClaudeDuration = 0;
+      this.videoClaude = '';
+      this.videoClaudeDuration = 0;
     }
   }
 

@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
   styleUrl: './app.css',
 })
 export class App {
+
   name = 'ridley scott';
   type = 'biography';
   style = 'neutral';
@@ -26,6 +27,8 @@ export class App {
   contentClaude = '';
   chatgptLoading = false;
   claudeLoading = false;
+
+  videoChatgptKey = false;
 
   voiceChatgpt = '';
   voiceClaude = '';
@@ -190,6 +193,7 @@ export class App {
   loadVideo(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
     const interval = this.startVideoProgress(llm);
+    this.videoChatgptKey = false;
     if (llm === 'chatgpt') {
       this.videoChatgptLoading = true;
       this.videoChatgpt = '';
@@ -207,7 +211,7 @@ export class App {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
         const videoMock = `assets/videos/ridley-scott-${llm}.mp4`;
-        const videoPosterMock = `assets/videos/ridley-scott-${llm}.jpg`;
+        const videoPosterMock = `assets/videos/ridley-scott-${llm}.png`;
         let data = response.data;
         if (!response.success) {
           data = response.error || 'Erreur inconnue';

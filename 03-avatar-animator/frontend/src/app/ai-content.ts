@@ -55,29 +55,32 @@ export class AiContentService {
       );
   }
 
-  generateVoice(llm: string, name: string, length: string, style: string, type: string): Observable<VoiceGenerationResponse> {
+  generateVoice(llm: string, name: string, length: string, style: string): Observable<VoiceGenerationResponse> {
     if (environment.useMock) {
-      const mockData = mockReply(type, { llm, name, length, style });
+      const safeName = name.toLowerCase().replace(/\s+/g, '-');
+      const voiceMockPath = `assets/voices/${safeName}-${llm}.mp3`;
 
-      return of({ success: true, llm:llm, data: mockData }).pipe(delay(1000));
+      return of({
+        success: true,
+        llm: llm,
+        data: voiceMockPath,
+      }).pipe(delay(1000));
     }
 
     const url = `${this.baseUrl}/voice/${llm}`;
 
-    return this.http.post<VoiceGenerationResponse>(url, { name, length, style })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Erreur API:', error);
+    return this.http.post<VoiceGenerationResponse>(url, { name, length, style }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erreur API:', error);
 
-          return of({
-            success: false,
-            llm: llm,
-            data: '',
-            error: this.getErrorMessage(error),
-          });
-        }),
-      );
-
+        return of({
+          success: false,
+          llm: llm,
+          data: '',
+          error: this.getErrorMessage(error),
+        });
+      }),
+    );
   }
 
   generateVideo(llm: string, name: string, length: string, style: string, type: string): Observable<VideoGenerationResponse> {

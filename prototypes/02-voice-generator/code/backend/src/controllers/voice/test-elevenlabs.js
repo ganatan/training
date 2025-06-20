@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import generateVoice from './voice.service.js';
+import generateVoice from './voice.controller.js';
 
 async function testElevenLabs(voiceId) {
   const fileName = 'test-elevenlabs';

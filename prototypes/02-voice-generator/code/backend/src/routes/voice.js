@@ -1,11 +1,16 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import dotenv from 'dotenv';
 
 import testElevenLabs from '../controllers/voice/test-elevenlabs.js';
-import generateVoice from '../controllers/voice/voice.service.js';
+import generateVoice from '../controllers/voice/voice.controller.js';
+import generateVoiceMock from '../mock/voice/voice.mock.js';
+
+dotenv.config();
 
 const router = express.Router();
+const useMock = process.env.USE_MOCK === 'true';
 
 function safeFilename(name, llm) {
   return `${name.toLowerCase().replace(/\s+/g, '-')}-${llm}`;
@@ -38,9 +43,13 @@ router.post('/:llm', async (req, res) => {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    await generateVoice(text, voiceId, audioPath);
-
-    console.log('✅ TTS réussi - fichier créé :', audioPath);
+    if (useMock) {
+      await generateVoiceMock(text, voiceId, audioPath);
+      console.log('🟡 TTS MOCK -', audioPath);
+    } else {
+      await generateVoice(text, voiceId, audioPath);
+      console.log('✅ TTS réel -', audioPath);
+    }
 
     const publicPath = `/storage/voices/${fileName}.mp3`;
     const fullUrl = `${req.protocol}://${req.get('host')}${publicPath}`;
@@ -49,6 +58,7 @@ router.post('/:llm', async (req, res) => {
       success: true,
       data: fullUrl,
       voiceId: voiceId,
+      mock: useMock,
     });
 
   } catch (err) {

@@ -135,6 +135,7 @@ export class App {
   loadVoice(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
     const interval = this.startVoiceProgress(llm);
+
     if (llm === 'chatgpt') {
       this.voiceChatgptLoading = true;
       this.voiceChatgpt = '';
@@ -146,23 +147,22 @@ export class App {
       this.voiceClaudeDuration = 0;
       this.voiceClaudeProgress = 0;
     }
+
     this.aiContentService
-      .generateVoice(llm, this.name, this.length, this.style, this.type)
+      .generateVoice(llm, this.name, this.length, this.style)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        const voiceMock = `assets/voices/ridley-scott-${llm}.mp3`;
-        let data = response.data;
-        if (!response.success) {
-          data = response.error || 'Erreur inconnue';
-        }
+
+        const voiceUrl = response.success ? response.data : '';
+
         if (llm === 'chatgpt') {
-          this.voiceChatgpt = this.useMock ? voiceMock : data;
+          this.voiceChatgpt = voiceUrl;
           this.voiceChatgptDuration = duration;
           this.voiceChatgptLoading = false;
           this.voiceChatgptProgress = 100;
         } else {
-          this.voiceClaude = this.useMock ? voiceMock : data;
+          this.voiceClaude = voiceUrl;
           this.voiceClaudeDuration = duration;
           this.voiceClaudeLoading = false;
           this.voiceClaudeProgress = 100;

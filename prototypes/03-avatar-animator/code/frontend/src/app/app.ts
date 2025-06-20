@@ -200,7 +200,7 @@ export class App {
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        const videoMock = 'assets/videos/ridley-scott.mp3';
+        const videoMock = `assets/videos/ridley-scott-${llm}.mp4`;
         let data = response.data;
         if (!response.success) {
           data = response.error || 'Erreur inconnue';

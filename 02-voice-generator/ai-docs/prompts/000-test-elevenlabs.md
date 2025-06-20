@@ -1,13 +1,13 @@
 
+# Test de fonctionnement de l'API elevenLabs via le backend
+  http://localhost:3000/api/voice/health/tts
+
 # Site Eleven
 
   site        https://elevenlabs.io/fr
   abonnement  https://elevenlabs.io/app/subscription?manage-subscription=true
   doc api     https://elevenlabs.io/docs/quickstart
   api         https://elevenlabs.io/app/settings/api-keys
-
-# Test de fonctionnement de l'API elevenLabs via le backend
-  http://localhost:3000/api/voice/health/tts
 
 # Liste des modeles
 

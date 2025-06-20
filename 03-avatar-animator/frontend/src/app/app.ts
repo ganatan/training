@@ -214,21 +214,16 @@ export class App {
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        const videoMock = `assets/videos/ridley-scott-${llm}.mp4`;
-        const videoPosterMock = `assets/videos/ridley-scott-${llm}.png`;
-        let data = response.data;
-        if (!response.success) {
-          data = response.error || 'Erreur inconnue';
-        }
+
         if (llm === 'chatgpt') {
-          this.videoChatgpt = this.useMock ? videoMock : data;
-          this.videoPosterChatgpt = videoPosterMock;
+          this.videoChatgpt = response.data.url;
+          this.videoPosterChatgpt = response.data.poster;
           this.videoChatgptDuration = duration;
           this.videoChatgptLoading = false;
           this.videoChatgptProgress = 100;
         } else {
-          this.videoClaude = this.useMock ? videoMock : data;
-          this.videoPosterClaude = videoPosterMock;
+          this.videoClaude = response.data.url;
+          this.videoPosterClaude = response.data.poster;
           this.videoClaudeDuration = duration;
           this.videoClaudeLoading = false;
           this.videoClaudeProgress = 100;

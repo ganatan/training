@@ -17,7 +17,7 @@ function generateMockConversation(debat, rounds = 3) {
   result.push({ speaker: 'Claude', message: claudeMsg });
 
   for (let index = 0; index < rounds; index++) {
-    const gptMsg = `Effectivement Claude, mais je crois que les outils vont rendre l'apprentissage plus accessible et personnalisé.`;
+    const gptMsg = 'Effectivement Claude, mais je crois que les outils vont rendre l\'apprentissage plus accessible et personnalisé.';
     result.push({ speaker: 'GPT', message: gptMsg });
 
     claudeMsg = `C est un bon point GPT, mais attention aux inégalités numériques qui pourraient se creuser davantage.`;

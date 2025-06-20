@@ -5,6 +5,11 @@ import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { reply as mockReply } from './ai-content.mock';
 
+export interface VideoData {
+  url: string;
+  poster: string;
+}
+
 export interface ContentGenerationResponse {
   success: boolean;
   llm: string;
@@ -22,7 +27,7 @@ export interface VoiceGenerationResponse {
 export interface VideoGenerationResponse {
   success: boolean;
   llm: string;
-  data: string;
+  data: VideoData;
   error?: string;
 }
 
@@ -85,10 +90,20 @@ export class AiContentService {
 
   generateVideo(llm: string, name: string, length: string, style: string, type: string): Observable<VideoGenerationResponse> {
     if (environment.useMock) {
-      const mockData = mockReply(type, { llm, name, length, style });
+      const safeName = name.toLowerCase().replace(/\s+/g, '-');
+      const voiceMockPath = `assets/videos/${safeName}-${llm}.mp3`;
+      const voicePosterMockPath = `assets/videos/${safeName}-${llm}.png`;
 
-      return of({ success: true, llm:llm, data: mockData }).pipe(delay(1000));
+      return of({
+        success: true,
+        llm: llm,
+        data: {
+          url: voiceMockPath,
+          poster: voicePosterMockPath,
+        }
+      }).pipe(delay(1000));
     }
+
 
     const url = `${this.baseUrl}/video/${llm}`;
 
@@ -100,7 +115,7 @@ export class AiContentService {
           return of({
             success: false,
             llm: llm,
-            data: '',
+            data: { url: '', poster: '' },
             error: this.getErrorMessage(error),
           });
         }),

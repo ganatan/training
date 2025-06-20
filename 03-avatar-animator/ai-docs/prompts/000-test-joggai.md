@@ -1,3 +1,8 @@
+# Test de fonctionnement de l'API elevenLabs via le backend
+  http://localhost:3000/api/voice/health/tts
+
+# Test de fonctionnement de l'API joggAI via le backend
+  http://localhost:3000/api/video/health/lva
 
 # Site JoggAI
 

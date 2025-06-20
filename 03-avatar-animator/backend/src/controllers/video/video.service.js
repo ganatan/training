@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 
-async function generateAvatar({ audioPath, imagePath, avatarId, outputPath }) {
+async function generateVideo({ audioPath, imagePath, avatarId, outputPath }) {
   const formData = new FormData();
   formData.append('voice', fs.createReadStream(audioPath));
   formData.append('image', fs.createReadStream(imagePath));
@@ -45,4 +45,4 @@ async function generateAvatar({ audioPath, imagePath, avatarId, outputPath }) {
   }
 }
 
-export default generateAvatar;
+export default generateVideo;

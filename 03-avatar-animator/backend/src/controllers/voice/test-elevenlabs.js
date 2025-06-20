@@ -13,7 +13,7 @@ async function testElevenLabs(voiceId) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    await generateVoice('Test de voix avec Eleven', voiceId, filePath);
+    await generateVoice('Test de voix avec ElevenLabs', voiceId, filePath);
 
     console.log('✅ Test TTS réussi - fichier créé :', filePath);
 

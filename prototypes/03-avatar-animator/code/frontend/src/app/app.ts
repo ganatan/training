@@ -162,14 +162,18 @@ export class App {
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
+        let data = response.data;
+        if (!response.success) {
+          data = response.error || 'Erreur inconnue';
+        }
         const voiceMock = 'assets/voices/ridley-scott.mp3';
         if (llm === 'chatgpt') {
-          this.voiceChatgpt = this.useMock ? voiceMock : response.data!;
+          this.voiceChatgpt = this.useMock ? voiceMock : data;
           this.voiceChatgptDuration = duration;
           this.voiceChatgptLoading = false;
           this.voiceChatgptProgress = 100;
         } else {
-          this.voiceClaude = this.useMock ? voiceMock : response.data!;
+          this.voiceClaude = this.useMock ? voiceMock : data;
           this.voiceClaudeDuration = duration;
           this.voiceClaudeLoading = false;
           this.voiceClaudeProgress = 100;
@@ -197,13 +201,17 @@ export class App {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
         const videoMock = 'assets/videos/ridley-scott.mp3';
+        let data = response.data;
+        if (!response.success) {
+          data = response.error || 'Erreur inconnue';
+        }
         if (llm === 'chatgpt') {
-          this.videoChatgpt = this.useMock ? videoMock : response.data!;
+          this.videoChatgpt = this.useMock ? videoMock : data;
           this.videoChatgptDuration = duration;
           this.videoChatgptLoading = false;
           this.videoChatgptProgress = 100;
         } else {
-          this.videoClaude = this.useMock ? videoMock : response.data!;
+          this.videoClaude = this.useMock ? videoMock : data;
           this.videoClaudeDuration = duration;
           this.videoClaudeLoading = false;
           this.videoClaudeProgress = 100;

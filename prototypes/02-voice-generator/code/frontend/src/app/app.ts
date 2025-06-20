@@ -151,7 +151,7 @@ export class App {
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        const voiceMock = 'assets/voices/ridley-scott.mp3';
+        const voiceMock = `assets/voices/ridley-scott-${llm}.mp3`;
         let data = response.data;
         if (!response.success) {
           data = response.error || 'Erreur inconnue';

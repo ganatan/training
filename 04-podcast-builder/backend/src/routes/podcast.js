@@ -3,7 +3,35 @@ import { saveConversationToFile } from '../services/conversation.service.js';
 import { saveMockConversationToFile } from '../services/conversation.service.mock.js';
 import { generateAllAudioFromJson } from '../services/audio.service.js';
 
+import { speakersMock } from '../mock/podcast/speakers.mock.js';
+
 const router = express.Router();
+
+router.post('/speakers', (req, res) => {
+  const { topic, count = 4 } = req.body;
+
+  try {
+    const result = speakersMock(topic, count);
+    console.log('00000000001:'+JSON.stringify(result));
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/dialogues', async (req, res) => {
+  res.status(500).json({ success: false, test: 'dialogues' });
+});
+
+router.get('/voices', async (req, res) => {
+  res.status(500).json({ success: false, test: 'voices' });
+});
+
+router.get('/videos', async (req, res) => {
+  res.status(500).json({ success: false, test: 'videos' });
+});
+
+
 
 router.get('/generate', async (req, res) => {
   const debat = req.query.topic || 'Dune de Denis Villeneuve : chef-d\'œuvre de science-fiction ou exercice de style surcoté ?';

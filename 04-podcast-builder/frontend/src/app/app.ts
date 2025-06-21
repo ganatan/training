@@ -42,6 +42,26 @@ export class App {
   videoChatgptLoading = false;
   videoClaudeLoading = false;
 
+  speakersProgress = 0;
+  speakersDuration = 0;
+
+  speakers: {
+    moderator: {
+      name: string;
+      role: string;
+      stance: string;
+      personality: string;
+    };
+    speakers: {
+      name: string;
+      role: string;
+      stance: string;
+      personality: string;
+    }[];
+  } | null = null;
+
+  speakersLoading = false;
+
   chatgptDuration = 0;
   claudeDuration = 0;
   chatgptProgress = 0;
@@ -90,49 +110,39 @@ export class App {
     }
   }
 
-  loadContent(llm: 'chatgpt' | 'claude') {
-    const start = performance.now();
-    const interval = this.startProgress(llm);
-    if (llm === 'chatgpt') {
-      this.contentChatgpt = '';
-      this.chatgptLoading = true;
-      this.chatgptProgress = 0;
-      this.voiceChatgpt = '';
-      this.chatgptDuration = 0;
-      this.voiceChatgptDuration = 0;
-      this.videoChatgpt = '';
-      this.videoChatgptDuration = 0;
-    } else {
-      this.contentClaude = '';
-      this.claudeLoading = true;
-      this.claudeProgress = 0;
-      this.voiceClaude = '';
-      this.claudeDuration = 0;
-      this.voiceClaudeDuration = 0;
-      this.videoClaude = '';
-      this.videoClaudeDuration = 0;
-    }
 
+  loadSpeakers() {
+    console.log('00000000001');
+    const start = performance.now();
+    const interval = this.startSpeakersProgress();
+    this.speakers = null;
+    this.speakersLoading = true;
+    let topic = '1111';
+    let speakerCount = 4;
     this.aiContentService
-      .generateContent(llm, this.name, this.length, this.style, this.type)
-      .subscribe((response: ContentGenerationResponse) => {
+      .generateSpeakers(topic, speakerCount)
+      .subscribe((response) => {
+        console.log('00000000002:' + JSON.stringify(response));
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        let data = response.data;
+        this.speakersLoading = false;
+        this.speakersDuration = duration;
+        this.speakersProgress = 100;
+
         if (!response.success) {
-          data = response.error || 'Erreur inconnue';
+          this.speakers = {
+            moderator: {
+              name: 'Erreur',
+              role: '',
+              stance: '',
+              personality: response.error || 'Erreur inconnue',
+            },
+            speakers: [],
+          };
+          return;
         }
-        if (llm === 'chatgpt') {
-          this.contentChatgpt = data;
-          this.chatgptDuration = duration;
-          this.chatgptLoading = false;
-          this.chatgptProgress = 100;
-        } else {
-          this.contentClaude = data;
-          this.claudeDuration = duration;
-          this.claudeLoading = false;
-          this.claudeProgress = 100;
-        }
+
+        this.speakers = response.data;
       });
   }
 
@@ -296,4 +306,17 @@ export class App {
 
     return interval;
   }
+
+
+  startSpeakersProgress() {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 5;
+      if (progress >= 95) return;
+      else this.speakersProgress = progress;
+    }, 100);
+
+    return interval;
+  }
+
 }

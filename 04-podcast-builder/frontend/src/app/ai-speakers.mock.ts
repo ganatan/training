@@ -1,4 +1,4 @@
-function speakersMock(topic, count = 4) {
+export function reply(topic: string, count = 4) {
   if (!topic) throw new Error('Sujet manquant');
   if (count % 2 !== 0) throw new Error('Le nombre d’intervenants doit être pair');
 
@@ -43,6 +43,3 @@ function speakersMock(topic, count = 4) {
     speakers,
   };
 }
-
-export { speakersMock };
-

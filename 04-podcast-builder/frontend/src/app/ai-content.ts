@@ -4,6 +4,25 @@ import { Observable, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { reply as mockReply } from './ai-content.mock';
+import { reply as mockSpeakersReply } from './ai-speakers.mock';
+
+export interface Speaker {
+  name: string;
+  role: string;
+  stance: string;
+  personality: string;
+}
+
+export interface SpeakersData {
+  moderator: Speaker;
+  speakers: Speaker[];
+}
+
+export interface SpeakersGenerationResponse {
+  success: boolean;
+  data: SpeakersData;
+  error?: string;
+}
 
 export interface VideoData {
   url: string;
@@ -36,28 +55,30 @@ export class AiContentService {
   private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
-  generateContent(llm: string, name: string, length: string, style: string, type: string): Observable<ContentGenerationResponse> {
+  generateSpeakers( topic: string, count: number): Observable<SpeakersGenerationResponse> {
     if (environment.useMock) {
-      const mockData = mockReply(type, { llm, name, length, style });
+      const mockData = mockSpeakersReply(topic, count);
+      console.log('00000000002:' + JSON.stringify(mockData));
 
-      return of({ success: true, llm: llm, data: mockData }).pipe(delay(1000));
+      return of({
+        success: true,
+        data: mockData,
+      }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/llm/${type}/${llm}`;
+    const url = `${this.baseUrl}/speakers`;
 
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Erreur API:', error);
+    return this.http.post<SpeakersGenerationResponse>(url, { topic, count }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erreur API:', error);
 
-          return of({
-            success: false,
-            llm: llm,
-            data: '',
-            error: this.getErrorMessage(error),
-          });
-        }),
-      );
+        return of({
+          success: false,
+          data: { moderator: { name: '', role: '', stance: '', personality: '' }, speakers: [] },
+          error: this.getErrorMessage(error),
+        });
+      }),
+    );
   }
 
   generateVoice(llm: string, name: string, length: string, style: string): Observable<VoiceGenerationResponse> {

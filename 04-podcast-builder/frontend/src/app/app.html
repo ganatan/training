@@ -15,7 +15,7 @@
         <span class="form-label mb-1 fw-bold">Questions</span>
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
-        <button class="btn btn-primary">Générer</button>
+        <button class="btn btn-primary" (click)="loadSpeakers()">Générer</button>
         <input type="number" min="1" max="10" value="2" class="form-control" style="width: 70px;" />
         <span class="form-label mb-1 fw-bold">Intervenants</span>
       </div>
@@ -33,30 +33,33 @@
           </button>
         </div>
         <div class="collapse show" id="intervenants-collapse">
-          <div class="mb-3">
+          <div class="mb-3" *ngIf="speakersLoading">
             <div class="d-flex justify-content-between align-items-center">
               <div class="flex-grow-1 me-3">
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
                 </div>
               </div>
-              <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
-                <span class="visually-hidden">Chargement...</span>
+              <div class="loading">
+                <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                  <span class="visually-hidden">Chargement...</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="row g-3">
+          <div class="row g-3" *ngIf="speakers && speakers.speakers.length > 0">
             <div class="col-12">
               <div class="border rounded p-3">
                 <div class="mb-2">
-                  <strong>Ganatan</strong> — <span class="text-muted">Animateur</span><br />
-                  <small class="text-secondary">Neutre, pose les questions, relance le débat</small>
+                  <strong>{{ speakers.moderator.name }}</strong> — <span class="text-muted">{{ speakers.moderator.role
+                    }}</span><br />
+                  <small class="text-secondary">{{ speakers.moderator.personality }}</small>
                 </div>
                 <div class="d-flex gap-3">
                   <div class="flex-fill">
                     <label class="form-label mb-1 small">Voix</label>
                     <select class="form-select form-select-sm">
-                      <option>Ganatan</option>
+                      <option>{{ speakers.moderator.name }}</option>
                       <option>Luc</option>
                       <option>Thomas</option>
                     </select>
@@ -72,58 +75,36 @@
                 </div>
               </div>
             </div>
-            <div class="col-12">
-              <div class="border rounded p-3">
-                <div class="mb-2">
-                  <strong>Camille</strong> — <span class="text-muted">Pour</span><br />
-                  <small class="text-secondary">Calme et analytique</small>
-                </div>
-                <div class="d-flex gap-3">
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Voix</label>
-                    <select class="form-select form-select-sm">
-                      <option>Clara</option>
-                      <option>Camille</option>
-                      <option>Julie</option>
-                    </select>
+
+            <ng-container *ngFor="let s of speakers.speakers">
+              <div class="col-12">
+                <div class="border rounded p-3">
+                  <div class="mb-2">
+                    <strong>{{ s.name }}</strong> — <span class="text-muted">{{ s.stance }}</span><br />
+                    <small class="text-secondary">{{ s.personality }}</small>
                   </div>
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Avatar</label>
-                    <select class="form-select form-select-sm">
-                      <option>jogg-001</option>
-                      <option>jogg-003</option>
-                      <option>jogg-007</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="border rounded p-3">
-                <div class="mb-2">
-                  <strong>Alexis</strong> — <span class="text-muted">Contre</span><br />
-                  <small class="text-secondary">Passionné et critique</small>
-                </div>
-                <div class="d-flex gap-3">
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Voix</label>
-                    <select class="form-select form-select-sm">
-                      <option>Antoine</option>
-                      <option>Luc</option>
-                      <option>Thomas</option>
-                    </select>
-                  </div>
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Avatar</label>
-                    <select class="form-select form-select-sm">
-                      <option>jogg-002</option>
-                      <option>jogg-004</option>
-                      <option>jogg-008</option>
-                    </select>
+                  <div class="d-flex gap-3">
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Voix</label>
+                      <select class="form-select form-select-sm">
+                        <option>{{ s.name }}</option>
+                        <option>Luc</option>
+                        <option>Thomas</option>
+                        <option>Julie</option>
+                      </select>
+                    </div>
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Avatar</label>
+                      <select class="form-select form-select-sm">
+                        <option>jogg-001</option>
+                        <option>jogg-002</option>
+                        <option>jogg-003</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ng-container>
           </div>
         </div>
       </div>

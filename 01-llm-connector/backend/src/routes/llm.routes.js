@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
-import chatgptMock from '../mock/llm/chatgpt.mock.js';
-import claudeMock from '../mock/llm/claude.mock.js';
+import chatgptMock from '../mocks/llm/chatgpt.mock.js';
+import claudeMock from '../mocks/llm/claude.mock.js';
 import chatgptService from '../services/llm/chatgpt.service.js';
 import claudeService from '../services/llm/claude.service.js';
 

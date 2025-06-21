@@ -10,7 +10,7 @@
         <input type="text" class="form-control" placeholder="" />
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
-        <button class="btn btn-primary" (click)="loadSpeakers()">Générer</button>
+        <button class="btn btn-primary" (click)="loadSpeaker()">Générer</button>
         <input type="number" min="1" max="10" value="4" class="form-control" style="width: 70px;" />
         <span class="form-label mb-1 fw-bold">Intervenants</span>
       </div>
@@ -26,14 +26,14 @@
     <div class="col-md-6">
       <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="mb-0">Intervenants générés ({{ speakersCount }})</h5>
+          <h5 class="mb-0">Intervenants générés ({{ speakerCount }})</h5>
           <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
             data-bs-target="#intervenants-collapse" aria-expanded="true">
             <span class="chevron">▼</span>
           </button>
         </div>
         <div class="collapse show" id="intervenants-collapse">
-          <div class="mb-3" *ngIf="speakersLoading">
+          <div class="mb-3" *ngIf="speakerLoading">
             <div class="d-flex justify-content-between align-items-center">
               <div class="flex-grow-1 me-3">
                 <div class="progress">
@@ -47,19 +47,19 @@
               </div>
             </div>
           </div>
-          <div class="row g-3" *ngIf="speakers && speakers.speakers.length > 0">
+          <div class="row g-3" *ngIf="speaker && speaker.items.length > 0">
             <div class="col-12">
               <div class="border rounded p-3">
                 <div class="mb-2">
-                  <strong>{{ speakers.moderator.name }}</strong> — <span class="text-muted">{{ speakers.moderator.role
+                  <strong>{{ speaker.moderator.name }}</strong> — <span class="text-muted">{{ speaker.moderator.role
                     }}</span><br />
-                  <small class="text-secondary">{{ speakers.moderator.personality }}</small>
+                  <small class="text-secondary">{{ speaker.moderator.personality }}</small>
                 </div>
                 <div class="d-flex gap-3">
                   <div class="flex-fill">
                     <label class="form-label mb-1 small">Voix</label>
                     <select class="form-select form-select-sm">
-                      <option>{{ speakers.moderator.name }}</option>
+                      <option>{{ speaker.moderator.name }}</option>
                       <option>Luc</option>
                       <option>Thomas</option>
                     </select>
@@ -76,7 +76,7 @@
               </div>
             </div>
 
-            <ng-container *ngFor="let s of speakers.speakers">
+            <ng-container *ngFor="let s of speaker.items">
               <div class="col-12">
                 <div class="border rounded p-3">
                   <div class="mb-2">

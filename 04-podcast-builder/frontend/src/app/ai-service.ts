@@ -3,8 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-import { reply as mockReply } from './ai.mock';
-import { reply as mockSpeakersReply } from './ai-speakers.mock';
+import { reply as mockSpeakerReply } from './ai-speaker.mock';
 
 export interface Speaker {
   name: string;
@@ -13,14 +12,14 @@ export interface Speaker {
   personality: string;
 }
 
-export interface SpeakersData {
+export interface SpeakerData {
   moderator: Speaker;
-  speakers: Speaker[];
+  items: Speaker[];
 }
 
-export interface SpeakersGenerationResponse {
+export interface SpeakerGenerationResponse {
   success: boolean;
-  data: SpeakersData;
+  data: SpeakerData;
   error?: string;
 }
 
@@ -29,36 +28,14 @@ export interface VideoData {
   poster: string;
 }
 
-export interface ContentGenerationResponse {
-  success: boolean;
-  llm: string;
-  data: string;
-  error?: string;
-}
-
-export interface VoiceGenerationResponse {
-  success: boolean;
-  llm: string;
-  data: string;
-  error?: string;
-}
-
-export interface VideoGenerationResponse {
-  success: boolean;
-  llm: string;
-  data: VideoData;
-  error?: string;
-}
-
 @Injectable({ providedIn: 'root' })
 export class AiService {
   private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
-  generateSpeakers( topic: string, count: number): Observable<SpeakersGenerationResponse> {
+  generateSpeaker( topic: string, count: number): Observable<SpeakerGenerationResponse> {
     if (environment.useMock) {
-      const mockData = mockSpeakersReply(topic, count);
-      console.log('00000000002:' + JSON.stringify(mockData));
+      const mockData = mockSpeakerReply(topic, count);
 
       return of({
         success: true,
@@ -66,82 +43,19 @@ export class AiService {
       }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/podcast/speakers`;
+    const url = `${this.baseUrl}/podcast/speaker`;
 
-    return this.http.post<SpeakersGenerationResponse>(url, { topic, count }).pipe(
+    return this.http.post<SpeakerGenerationResponse>(url, { topic, count }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);
 
         return of({
           success: false,
-          data: { moderator: { name: '', role: '', stance: '', personality: '' }, speakers: [] },
+          data: { moderator: { name: '', role: '', stance: '', personality: '' }, items: [] },
           error: this.getErrorMessage(error),
         });
       }),
     );
-  }
-
-  generateVoice(llm: string, name: string, length: string, style: string): Observable<VoiceGenerationResponse> {
-    if (environment.useMock) {
-      const safeName = name.toLowerCase().replace(/\s+/g, '-');
-      const voiceMockPath = `assets/voices/${safeName}-${llm}.mp3`;
-
-      return of({
-        success: true,
-        llm: llm,
-        data: voiceMockPath,
-      }).pipe(delay(1000));
-    }
-
-    const url = `${this.baseUrl}/voice/${llm}`;
-
-    return this.http.post<VoiceGenerationResponse>(url, { name, length, style }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Erreur API:', error);
-
-        return of({
-          success: false,
-          llm: llm,
-          data: '',
-          error: this.getErrorMessage(error),
-        });
-      }),
-    );
-  }
-
-  generateVideo(llm: string, name: string, length: string, style: string, type: string): Observable<VideoGenerationResponse> {
-    if (environment.useMock) {
-      const safeName = name.toLowerCase().replace(/\s+/g, '-');
-      const voiceMockPath = `assets/videos/${safeName}-${llm}.mp3`;
-      const voicePosterMockPath = `assets/videos/${safeName}-${llm}.png`;
-
-      return of({
-        success: true,
-        llm: llm,
-        data: {
-          url: voiceMockPath,
-          poster: voicePosterMockPath,
-        }
-      }).pipe(delay(1000));
-    }
-
-
-    const url = `${this.baseUrl}/video/${llm}`;
-
-    return this.http.post<VideoGenerationResponse>(url, { name, length, style })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Erreur API:', error);
-
-          return of({
-            success: false,
-            llm: llm,
-            data: { url: '', poster: '' },
-            error: this.getErrorMessage(error),
-          });
-        }),
-      );
-
   }
 
   private getErrorMessage(error: HttpErrorResponse): string {

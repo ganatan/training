@@ -1,4 +1,7 @@
 import express from 'express';
+import fs from 'fs/promises';
+import path from 'path';
+
 import { saveConversationToFile } from '../services/conversation.service.js';
 import { saveMockConversationToFile } from '../services/conversation.service.mock.js';
 import { generateAllAudioFromJson } from '../services/audio.service.js';
@@ -9,11 +12,14 @@ import generateSpeakerMock from '../mocks/podcast/speaker.mock.js';
 const router = express.Router();
 const useMock = process.env.USE_MOCK === 'true';
 
-router.post('/speakers', async (req, res) => {
+function safeFilename(text) {
+  return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
+}
+
+router.post('/speaker', async (req, res) => {
   const { topic, count } = req.body;
 
   try {
-
     let result;
 
     if (useMock) {
@@ -21,6 +27,11 @@ router.post('/speakers', async (req, res) => {
     } else {
       result = await generateSpeaker(topic, count);
     }
+
+    const filename = safeFilename(topic);
+    const jsonPath = path.join(process.cwd(), 'storage', 'speakers', `${filename}.json`);
+    await fs.mkdir(path.dirname(jsonPath), { recursive: true });
+    await fs.writeFile(jsonPath, JSON.stringify(result, null, 2));
 
     return res.json({
       success: true,

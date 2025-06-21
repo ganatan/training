@@ -23,7 +23,7 @@ export default async function generateSpeakerMock(topic, count = 4) {
 
   const moitié = count / 2;
 
-  const speakers = [
+  const items = [
     ...pour.slice(0, moitié).map((speaker) => ({
       name: speaker.name,
       role: 'Intervenant',
@@ -41,10 +41,10 @@ export default async function generateSpeakerMock(topic, count = 4) {
   return {
     moderator: {
       name: 'Ganatan',
-      role: 'Animateur',
+      role: 'Animateur Mock Backend',
       stance: 'Neutre',
       personality: 'Neutre, pose les questions et relance le débat',
     },
-    speakers: speakers,
+    items: items,
   };
 }

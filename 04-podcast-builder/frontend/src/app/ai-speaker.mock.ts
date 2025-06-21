@@ -18,28 +18,28 @@ export function reply(topic: string, count = 4) {
 
   const moitié = count / 2;
 
-  const speakers = [
-    ...pour.slice(0, moitié).map((s) => ({
-      name: s.name,
+  const items = [
+    ...pour.slice(0, moitié).map((item) => ({
+      name: item.name,
       role: 'Intervenant',
       stance: 'Pour',
-      personality: s.personality,
+      personality: item.personality,
     })),
-    ...contre.slice(0, moitié).map((s) => ({
-      name: s.name,
+    ...contre.slice(0, moitié).map((item) => ({
+      name: item.name,
       role: 'Intervenant',
       stance: 'Contre',
-      personality: s.personality,
+      personality: item.personality,
     })),
   ];
 
   return {
     moderator: {
       name: 'Ganatan',
-      role: 'Animateur',
+      role: 'Animateur Mock Frontend',
       stance: 'Neutre',
       personality: 'Neutre, pose les questions et relance le débat',
     },
-    speakers,
+    items,
   };
 }

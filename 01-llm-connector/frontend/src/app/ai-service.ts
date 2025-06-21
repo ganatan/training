@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-import { reply as mockReply } from './ai-content.mock';
+import { reply as mockReply } from './ai.mock';
 
 export interface ContentGenerationResponse {
   success: boolean;
@@ -13,7 +13,7 @@ export interface ContentGenerationResponse {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AiContentService {
+export class AiService {
   private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 

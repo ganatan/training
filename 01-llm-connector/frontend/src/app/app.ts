@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AiContentService, ContentGenerationResponse } from './ai-content';
+import { AiService, ContentGenerationResponse } from './ai-service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -51,7 +51,7 @@ export class App {
     { value: 'technical', label: 'Technique' },
   ];
 
-  private aiContentService = inject(AiContentService);
+  private aiService = inject(AiService);
 
   toggleTheme() {
     const body = document.querySelector('body');
@@ -77,7 +77,7 @@ export class App {
       this.claudeDuration = 0;
     }
 
-    this.aiContentService
+    this.aiService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;

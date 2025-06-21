@@ -1,34 +1,34 @@
 {
   "moderator": {
     "name": "Ganatan",
-    "role": "Animateur Mock Backend",
+    "role": "Animateur",
     "stance": "Neutre",
     "personality": "Neutre, pose les questions et relance le débat"
   },
   "items": [
     {
-      "name": "Camille",
+      "name": "Clémentine",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Calme et analytique"
+      "personality": "Développeuse front-end passionnée par l'innovation et les nouvelles technologies."
     },
     {
-      "name": "Julien",
+      "name": "Bastien",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Structuré et convaincant"
+      "personality": "Architecte logiciel avec une prédilection pour les solutions réactives et évolutives."
     },
     {
-      "name": "Alexis",
+      "name": "Solène",
       "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Critique et passionné"
+      "personality": "Experte en UI/UX qui privilégie la simplicité et l'efficacité des interfaces utilisateur."
     },
     {
-      "name": "Lina",
+      "name": "Romain",
       "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Directe et sceptique"
+      "personality": "Développeur senior qui favorise la stabilité et la maintenabilité du code dans les projets à long terme."
     }
   ]
 }

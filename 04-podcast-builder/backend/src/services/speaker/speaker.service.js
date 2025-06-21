@@ -1,51 +1,189 @@
-
 import axios from 'axios';
-import fs from 'fs';
 
-async function generateSpeaker(text, voiceId, outputPath) {
-  const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
+function buildPrompt(topic, count) {
+  return `
+Tu dois générer ${count} intervenants pour un podcast dont le titre est : "${topic}".
 
+- ${count / 2} seront POUR, ${count / 2} seront CONTRE ce sujet.
+- Pour chaque intervenant, donne :
+  - un **prénom crédible**, qui **n’a pas déjà été utilisé** dans les réponses précédentes
+  - une **personnalité** courte (humaine, crédible, sans caricature)
+  - la **position** : "Pour" ou "Contre"
+
+Attention :
+- Les **prénoms doivent être uniques** à chaque nouvelle génération.
+- Rends-moi le tout au format JSON tableau strictement comme ceci :
+
+[
+  { "name": "...", "stance": "Pour", "personality": "..." },
+  { "name": "...", "stance": "Pour", "personality": "..." },
+  { "name": "...", "stance": "Contre", "personality": "..." },
+  { "name": "...", "stance": "Contre", "personality": "..." }
+]
+`;
+}
+
+function cleanJsonBlock(rawText) {
+  let text = rawText.trim();
+  if (text.startsWith('```json')) {
+    text = text.replace(/^```json\s*/, '').replace(/```$/, '').trim();
+  } else if (text.startsWith('```')) {
+    text = text.replace(/^```\s*/, '').replace(/```$/, '').trim();
+  }
+  return text;
+}
+
+async function generateSpeaker(topic, count = 4) {
   try {
+    if (!topic) throw new Error('Sujet manquant');
+    if (count % 2 !== 0) throw new Error('Le nombre d’intervenants doit être pair');
+
+    const prompt = buildPrompt(topic, count);
+
     const response = await axios.post(
-      url,
+      'https://api.openai.com/v1/chat/completions',
       {
-        text: text,
-        model_id: 'eleven_multilingual_v2',
+        model: 'gpt-4-turbo',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.8,
       },
       {
         headers: {
-          'xi-api-key': process.env.ELEVENLABS_API_KEY,
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
           'Content-Type': 'application/json',
         },
-        responseType: 'stream',
-      },
+      }
     );
 
-    const writer = fs.createWriteStream(outputPath);
-    response.data.pipe(writer);
+    let rawText = response.data.choices[0].message.content;
+    rawText = cleanJsonBlock(rawText);
 
-    return new Promise((resolve, reject) => {
-      writer.on('finish', () => {
-        console.log('✅ Audio enregistré :', outputPath);
-        resolve(outputPath);
-      });
-      writer.on('error', (err) => {
-        console.error('❌ Erreur lors de l’écriture du fichier :', err.message);
-        reject(err);
-      });
-    });
+    const parsed = JSON.parse(rawText);
+
+    const items = parsed.map((item) => ({
+      name: item.name,
+      role: 'Intervenant',
+      stance: item.stance,
+      personality: item.personality,
+    }));
+
+    return {
+      moderator: {
+        name: 'Ganatan',
+        role: 'Animateur',
+        stance: 'Neutre',
+        personality: 'Neutre, pose les questions et relance le débat',
+      },
+      items,
+    };
 
   } catch (error) {
     const status = error.response?.status;
+    const data = error.response?.data;
+    let errorMessage = '';
 
-    if (status) {
-      console.error(`❌ Erreur ElevenLabs ${status}`);
+    if (status === 401) {
+      errorMessage = 'Erreur 401 : Clé API OpenAI manquante ou invalide.';
+    } else if (status) {
+      errorMessage = `Erreur OpenAI (${status}) : ${JSON.stringify(data)}`;
+    } else if (error.message.includes('Unexpected token')) {
+      errorMessage = 'Réponse non JSON : format inattendu. Utilise console.log pour examiner le texte brut.';
     } else {
-      console.error('❌ Erreur inconnue :', error.message);
+      errorMessage = `Erreur inattendue : ${error.message}`;
     }
 
-    throw error;
+    console.error(`❌ generateSpeaker error: ${errorMessage}`);
+    return errorMessage;
   }
 }
 
 export default generateSpeaker;
+
+
+
+// import axios from 'axios';
+
+// async function generateSpeaker(topic, count = 4) {
+//   try {
+//     if (!topic) throw new Error('Sujet manquant');
+//     if (count % 2 !== 0) throw new Error('Le nombre d’intervenants doit être pair');
+
+//     const prompt = `
+// Tu dois générer ${count} intervenants pour un podcast dont le titre est : "${topic}".
+
+// - ${count / 2} seront POUR, ${count / 2} seront CONTRE ce sujet.
+// - Pour chaque intervenant, donne :
+//   - un **prénom crédible**, qui **n’a pas déjà été utilisé** dans les réponses précédentes
+//   - une **personnalité** courte (humaine, crédible, sans caricature)
+//   - la **position** : "Pour" ou "Contre"
+
+// Attention :
+// - Les **prénoms doivent être uniques** à chaque nouvelle génération.
+// - N’utilise **pas Julien, Nina, Alexis ou Lina**.
+// - Rends-moi le tout au format JSON tableau strictement comme ceci :
+
+// [
+//   { "name": "...", "stance": "Pour", "personality": "..." },
+//   { "name": "...", "stance": "Pour", "personality": "..." },
+//   { "name": "...", "stance": "Contre", "personality": "..." },
+//   { "name": "...", "stance": "Contre", "personality": "..." }
+// ]
+// `;
+
+//     const response = await axios.post(
+//       'https://api.openai.com/v1/chat/completions',
+//       {
+//         model: 'gpt-4-turbo',
+//         messages: [{ role: 'user', content: prompt }],
+//         temperature: 0.8,
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+//           'Content-Type': 'application/json',
+//         },
+//       }
+//     );
+
+//     const rawText = response.data.choices[0].message.content.trim();
+//     console.log('00000000001:' + JSON.stringify(rawText));
+//     const parsed = JSON.parse(rawText);
+
+//     const items = parsed.map((item) => ({
+//       name: item.name,
+//       role: 'Intervenant',
+//       stance: item.stance,
+//       personality: item.personality,
+//     }));
+
+//     return {
+//       moderator: {
+//         name: 'Ganatan',
+//         role: 'Animateur',
+//         stance: 'Neutre',
+//         personality: 'Neutre, pose les questions et relance le débat',
+//       },
+//       items,
+//     };
+
+//   } catch (error) {
+//     const status = error.response?.status;
+//     const data = error.response?.data;
+//     let errorMessage = '';
+
+//     if (status === 401) {
+//       errorMessage = 'Erreur 401 : Clé API OpenAI manquante ou invalide.';
+//     } else if (status) {
+//       errorMessage = `Erreur OpenAI (${status}) : ${JSON.stringify(data)}`;
+//     } else if (error.message.includes('Unexpected token')) {
+//       errorMessage = 'Réponse non JSON : format inattendu. Utilise `console.log(rawText)` pour déboguer.';
+//     } else {
+//       errorMessage = `Erreur inattendue : ${error.message}`;
+//     }
+
+//     console.error(`❌ generateSpeaker error: ${errorMessage}`);
+//     return errorMessage;
+//   }
+// }
+
+// export default generateSpeaker;

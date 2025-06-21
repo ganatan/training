@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
 
-import chatgptMock from '../mock/llm/chatgpt.mock.js';
-import claudeMock from '../mock/llm/claude.mock.js';
-import chatgptReal from '../controllers/llm/chatgpt.controller.js';
-import claudeReal from '../controllers/llm/claude.controller.js';
+import chatgptMock from '../mocks/llm/chatgpt.mock.js';
+import claudeMock from '../mocks/llm/claude.mock.js';
+import chatgptReal from '../services/llm/chatgpt.service.js';
+import claudeReal from '../services/llm/claude.service.js';
 
 dotenv.config();
 

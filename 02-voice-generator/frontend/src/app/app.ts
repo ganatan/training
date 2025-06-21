@@ -3,10 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import {
-  AiContentService,
+  AiService,
   ContentGenerationResponse,
   VoiceGenerationResponse,
-} from './ai-content';
+} from './ai-service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -64,7 +64,7 @@ export class App {
     { value: 'technical', label: 'Technique' },
   ];
 
-  private aiContentService = inject(AiContentService);
+  private aiContentService = inject(AiService);
 
   toggleTheme() {
     const body = document.querySelector('body');

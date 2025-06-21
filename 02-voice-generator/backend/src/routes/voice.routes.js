@@ -3,9 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 
-import testElevenLabs from '../controllers/voice/test-elevenlabs.js';
-import generateVoice from '../controllers/voice/voice.controller.js';
-import generateVoiceMock from '../mock/voice/voice.mock.js';
+import testElevenLabs from '../services/voice/test-elevenlabs.js';
+import generateVoice from '../services/voice/voice.service.js';
+import generateVoiceMock from '../mocks/voice/voice.mock.js';
 
 dotenv.config();
 

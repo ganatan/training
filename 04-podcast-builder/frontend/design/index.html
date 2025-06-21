@@ -202,8 +202,15 @@
           </div>
           <div class="collapse show" id="intervenants-collapse">
             <div class="mb-3">
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="flex-grow-1 me-3">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                  <span class="visually-hidden">Chargement...</span>
+                </div>
               </div>
             </div>
             <div class="row g-3">
@@ -299,8 +306,15 @@
           </div>
           <div class="collapse show" id="questions-collapse">
             <div class="mb-3">
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="flex-grow-1 me-3">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                  <span class="visually-hidden">Chargement...</span>
+                </div>
               </div>
             </div>
             <table class="table table-bordered table-sm mt-2">
@@ -340,6 +354,7 @@
 
       <div class="col-md-6">
 
+
         <div class="card p-3 mb-4">
           <div class="d-flex gap-2 flex-wrap mb-3">
             <button class="btn btn-dark flex-fill">Générer dialogues</button>
@@ -347,26 +362,42 @@
             <button class="btn btn-info flex-fill">Générer vidéos</button>
           </div>
 
-          <div class="d-flex flex-column gap-2">
-            <div class="progress">
-              <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 60%"></div>
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="flex-grow-1">
+                <div class="progress">
+                  <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 60%"></div>
+                </div>
+              </div>
+              <div class="spinner-border text-dark" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
             </div>
-            <div class="progress">
-              <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 40%"></div>
+
+            <div class="d-flex align-items-center gap-3">
+              <div class="flex-grow-1">
+                <div class="progress">
+                  <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 40%">
+                  </div>
+                </div>
+              </div>
+              <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
             </div>
-            <div class="progress">
-              <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width: 20%"></div>
+
+            <div class="d-flex align-items-center gap-3">
+              <div class="flex-grow-1">
+                <div class="progress">
+                  <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width: 20%"></div>
+                </div>
+              </div>
+              <div class="spinner-border text-info" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- <div class="card p-3 mb-4">
-          <div class="d-flex gap-2 flex-wrap">
-            <button class="btn btn-dark flex-fill">Générer dialogues</button>
-            <button class="btn btn-success flex-fill">Générer voix</button>
-            <button class="btn btn-info flex-fill">Générer vidéos</button>
-          </div>
-        </div> -->
 
         <div class="card p-4 m-1">
           <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">

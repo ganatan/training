@@ -1,0 +1,216 @@
+<button class="btn btn-sm btn-outline-secondary toggle-mode" (click)="toggleTheme()">Toggle thème</button>
+
+<div class="container p-2">
+  <h1 class="text-center text-primary">avatar-animator</h1>
+
+  <div class="row g-3 align-items-center mb-4">
+    <div class="col-12 col-lg-3">
+      <label class="form-label" for="title">Nom / Titre</label>
+      <input type="text" class="form-control" [(ngModel)]="name" [readonly]="useMock">
+    </div>
+    <div class="col-12 col-lg-3">
+      <label class="form-label" for="type">Type</label>
+      <select class="form-select" [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
+        <option value="biography">Biographie de réalisateur</option>
+        <option value="summary">Résumé de film</option>
+      </select>
+    </div>
+    <div class="col-12 col-lg-3">
+      <label class="form-label" for="style">Style</label>
+      <select class="form-select" [(ngModel)]="style" (ngModelChange)="onStyleChange($event)">
+        <option *ngFor="let s of styleOptions" [value]="s.value">{{ s.label }}</option>
+      </select>
+    </div>
+    <div class="col-12 col-lg-3">
+      <label class="form-label" for="length">Longueur</label>
+      <select class="form-select" [(ngModel)]="length" (ngModelChange)="onLengthChange($event)">
+        <option value="short">Courte</option>
+        <option value="medium">Moyenne</option>
+        <option value="long">Longue</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-3">
+
+    <div class="col-12 col-md-6">
+      <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
+          <button class="btn btn-primary" (click)="loadContent('chatgpt')">Générer avec ChatGPT</button>
+          <button class="btn btn-outline-primary" (click)="resetContent('chatgpt')">Réinitialiser</button>
+          <span *ngIf="contentChatgpt && !chatgptLoading" class="badge bg-primary">Ok ✓</span>
+          <span *ngIf="chatgptDuration > 0" class="text-primary ms-auto small-text">
+            Réponse en {{ chatgptDuration.toFixed(1) }}s
+          </span>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+            data-bs-target="#text-chatgpt" aria-expanded="true">
+            <span class="chevron">▼</span>
+          </button>
+        </div>
+        <div class="collapse show" id="text-chatgpt">
+          <div class="position-relative">
+            <textarea class="form-control" [value]="contentChatgpt" readonly rows="3"></textarea>
+            <div *ngIf="chatgptLoading" class="loading">
+              <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+            </div>
+            <div *ngIf="chatgptLoading" class="progress mt-2">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                [style.width.%]="chatgptProgress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <button class="btn btn-outline-primary" (click)="loadVoice('chatgpt')">Voix - ElevenLabs</button>
+          <div *ngIf="voiceChatgptLoading">
+            <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+          </div>
+          <span *ngIf="voiceChatgpt && !voiceChatgptLoading" class="badge bg-primary">Voix OK ✓</span>
+          <span *ngIf="voiceChatgptDuration > 0" class="text-primary ms-auto small-text">Réponse en {{
+            voiceChatgptDuration.toFixed(1) }}s</span>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+            data-bs-target="#voice-chatgpt" aria-expanded="true">
+            <span class="chevron">▼</span>
+          </button>
+        </div>
+        <div class="collapse show" id="voice-chatgpt">
+          <div class="mt-3">
+            <div *ngIf="voiceChatgptLoading" class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                [style.width.%]="voiceChatgptProgress"></div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <audio controls class="w-100" [class.audio-disabled]="!voiceChatgpt" [src]="voiceChatgpt">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4 mt-3">
+        <div class="d-flex align-items-center gap-2 btn-group-responsive">
+          <button class="btn btn-outline-primary" (click)="loadVideo('chatgpt')">Avatar - JoggAI</button>
+          <div *ngIf="videoChatgptLoading">
+            <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+          </div>
+          <span *ngIf="videoChatgpt && !videoChatgptLoading" class="badge bg-primary">Avatar OK ✓</span>
+          <span *ngIf="videoChatgptDuration > 0" class="text-primary ms-auto small-text">
+            Réponse en {{ chatgptDuration.toFixed(1) }}s
+          </span>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+            data-bs-target="#avatar-chatgpt" aria-expanded="true">
+            <span class="chevron">▼</span>
+          </button>
+        </div>
+        <div class="collapse show" id="avatar-chatgpt">
+          <div class="mt-3">
+            <div *ngIf="videoChatgptLoading" class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                [style.width.%]="videoChatgptProgress"></div>
+            </div>
+          </div>
+          <div class="mt-3" *ngIf="videoChatgpt">
+            <video controls class="w-100 rounded" [attr.poster]="videoPosterChatgpt">
+              <source [attr.src]="videoChatgpt" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mb-2 btn-group-responsive">
+          <button class="btn btn-success" (click)="loadContent('claude')">Générer avec Claude</button>
+          <button class="btn btn-outline-success" (click)="resetContent('claude')">Réinitialiser</button>
+          <span *ngIf="contentClaude && !claudeLoading" class="badge bg-success">Ok ✓</span>
+          <span *ngIf="claudeDuration > 0" class="text-success ms-auto small-text">
+            Réponse en {{ claudeDuration.toFixed(1) }}s
+          </span>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+            data-bs-target="#text-claude">
+            <span class="chevron text-success">▼</span>
+          </button>
+        </div>
+        <div class="collapse show" id="text-claude">
+          <div class="position-relative">
+            <textarea class="form-control" [value]="contentClaude" readonly rows="3"></textarea>
+            <div *ngIf="claudeLoading" class="loading">
+              <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+            </div>
+            <div *ngIf="claudeLoading" class="progress mt-2">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                [style.width.%]="claudeProgress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4 m-1">
+        <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <button class="btn btn-outline-success" (click)="loadVoice('claude')">Voix - ElevenLabs</button>
+          <div *ngIf="voiceClaudeLoading">
+            <span class="spinner-border spinner-border-sm text-success" role="status"></span>
+          </div>
+          <span *ngIf="voiceClaude && !voiceClaudeLoading" class="badge bg-success">Voix OK ✓</span>
+          <span *ngIf="voiceClaudeDuration > 0" class="text-success ms-auto small-text">Réponse en {{
+            voiceClaudeDuration.toFixed(1) }}s</span>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2 text-succes" data-bs-toggle="collapse"
+            data-bs-target="#voice-claude">
+            <span class="chevron text-success">▼</span>
+          </button>
+        </div>
+        <div class="collapse show" id="voice-claude">
+          <div class="mt-3">
+            <div *ngIf="voiceClaudeLoading" class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                [style.width.%]="voiceClaudeProgress"></div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <audio controls class="w-100" [class.audio-disabled]="!voiceClaude" [src]="voiceClaude">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4 mt-3">
+        <div class="d-flex align-items-center gap-2 btn-group-responsive">
+          <button class="btn btn-outline-success" (click)="loadVideo('claude')">Avatar - JoggAI</button>
+          <div *ngIf="videoClaudeLoading">
+            <span class="spinner-border spinner-border-sm text-success" role="status"></span>
+          </div>
+          <span *ngIf="videoClaude && !videoClaudeLoading" class="badge bg-success">Avatar OK ✓</span>
+          <span *ngIf="videoClaudeDuration > 0" class="text-success ms-auto small-text">
+            Réponse en {{ claudeDuration.toFixed(1) }}s
+          </span>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+            data-bs-target="#avatar-claude" aria-expanded="true">
+            <span class="chevron text-success">▼</span>
+          </button>
+        </div>
+        <div class="collapse show" id="avatar-claude">
+          <div class="mt-3">
+            <div *ngIf="videoClaudeLoading" class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                [style.width.%]="videoClaudeProgress"></div>
+            </div>
+          </div>
+          <div class="mt-3" *ngIf="videoClaude">
+            <video controls class="w-100 rounded" [attr.poster]="videoPosterClaude">
+              <source [attr.src]="videoClaude" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

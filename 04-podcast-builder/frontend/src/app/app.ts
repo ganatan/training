@@ -17,7 +17,7 @@ export class App {
   type = 'biography';
   style = 'neutral';
   length = 'short';
-
+  topic = '';
   speakerProgress = 0;
   speakerDuration = 0;
   speakerCount = 0;
@@ -55,15 +55,13 @@ export class App {
     const interval = this.startSpeakerProgress();
     this.speaker = null;
     this.speakerLoading = true;
-    let topic = '1111';
     let speakerCount = 4;
     this.speakerCount = 0;
     this.aiService
-      .generateSpeaker(topic, speakerCount)
+      .generateSpeaker(this.topic, speakerCount)
       .subscribe((response) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        console.log('00000000001:' + JSON.stringify(response));
         this.speakerLoading = false;
         this.speakerDuration = duration;
         this.speakerProgress = 100;

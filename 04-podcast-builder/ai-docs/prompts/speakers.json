@@ -1,34 +1,37 @@
 {
-    "moderator": {
-        "name": "Ganatan",
-        "role": "Animateur",
-        "stance": "Neutre",
-        "personality": "Neutre, pose les questions et relance le débat"
-    },
-    "speakers": [
-        {
-            "name": "Camille",
-            "role": "Intervenant",
-            "stance": "Pour",
-            "personality": "Calme et analytique"
+    "success": true,
+    "data": {
+        "moderator": {
+            "name": "Ganatan",
+            "role": "Animateur",
+            "stance": "Neutre",
+            "personality": "Neutre, pose les questions et relance le débat"
         },
-        {
-            "name": "Julien",
-            "role": "Intervenant",
-            "stance": "Pour",
-            "personality": "Structuré et convaincant"
-        },
-        {
-            "name": "Alexis",
-            "role": "Intervenant",
-            "stance": "Contre",
-            "personality": "Critique et passionné"
-        },
-        {
-            "name": "Lina",
-            "role": "Intervenant",
-            "stance": "Contre",
-            "personality": "Directe et sceptique"
-        }
-    ]
+        "speakers": [
+            {
+                "name": "Camille",
+                "role": "Intervenant",
+                "stance": "Pour",
+                "personality": "Calme et analytique"
+            },
+            {
+                "name": "Julien",
+                "role": "Intervenant",
+                "stance": "Pour",
+                "personality": "Structuré et convaincant"
+            },
+            {
+                "name": "Alexis",
+                "role": "Intervenant",
+                "stance": "Contre",
+                "personality": "Critique et passionné"
+            },
+            {
+                "name": "Lina",
+                "role": "Intervenant",
+                "stance": "Contre",
+                "personality": "Directe et sceptique"
+            }
+        ]
+    }
 }

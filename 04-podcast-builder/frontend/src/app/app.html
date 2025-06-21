@@ -7,7 +7,7 @@
     <div class="row align-items-end g-2">
       <div class="col-md-6 d-flex align-items-end gap-2">
         <span class="form-label mb-1 fw-bold">Thème</span>
-        <input type="text" class="form-control" placeholder="" />
+        <input type="text" class="form-control" name="topic" [(ngModel)]="topic" placeholder="" />
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
         <button class="btn btn-primary" (click)="loadSpeaker()">Générer</button>

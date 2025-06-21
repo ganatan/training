@@ -1,4 +1,9 @@
-function generateSpeakerMock(topic, count = 4) {
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export default async function generateSpeakerMock(topic, count = 4) {
+  await delay(1000);
   if (!topic) { throw new Error('Sujet manquant'); }
   if (count % 2 !== 0) { throw new Error('Le nombre d’intervenants doit être pair'); }
 
@@ -43,6 +48,3 @@ function generateSpeakerMock(topic, count = 4) {
     speakers: speakers,
   };
 }
-
-export default generateSpeakerMock;
-

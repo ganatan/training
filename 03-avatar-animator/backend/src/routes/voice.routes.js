@@ -45,7 +45,7 @@ router.post('/:llm', async (req, res) => {
     }
 
     if (useMock) {
-      await generateVoiceMock(text, voiceId, audioPath);
+      await generateVoiceMock(audioPath);
       console.log('🟡 TTS MOCK -', audioPath);
     } else {
       await generateVoice(text, voiceId, audioPath);

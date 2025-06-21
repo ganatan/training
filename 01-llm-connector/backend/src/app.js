@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import llmRoutes from './routes/llm.js';
+import llmRoutes from './routes/llm.routes.js';
 import aiServices from './config/ai-services.js';
 
 dotenv.config();

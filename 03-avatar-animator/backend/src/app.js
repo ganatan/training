@@ -3,9 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 
-import llmRoutes from './routes/llm.js';
-import voiceRoutes from './routes/voice.js';
-import videoRoutes from './routes/video.js';
+import llmRoutes from './routes/llm.routes.js';
+import voiceRoutes from './routes/voice.routes.js';
+import videoRoutes from './routes/video.routes.js';
+
 import aiServices from './config/ai-services.js';
 
 dotenv.config();

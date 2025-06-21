@@ -5,8 +5,8 @@ import path from 'path';
 
 import chatgptMock from '../mock/llm/chatgpt.mock.js';
 import claudeMock from '../mock/llm/claude.mock.js';
-import chatgptReal from '../controllers/llm/chatgpt.controller.js';
-import claudeReal from '../controllers/llm/claude.controller.js';
+import chatgptReal from '../controllers/llm/chatgpt.service.js';
+import claudeReal from '../controllers/llm/claude.service.js';
 
 dotenv.config();
 

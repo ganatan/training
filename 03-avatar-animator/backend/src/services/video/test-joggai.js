@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import generateAvatar from './avatar.service.js';
+import generateVideo from './video.service.js';
 
 async function testJoggAI(avatarId) {
   const fileName = 'test-joggai';
@@ -10,15 +10,15 @@ async function testJoggAI(avatarId) {
   const outputDir = path.dirname(outputPath);
 
   try {
-    if (!fs.existsSync(voicePath)) throw new Error('Fichier audio manquant');
-    if (!fs.existsSync(imagePath)) throw new Error('Fichier portrait manquant');
-    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+    if (!fs.existsSync(voicePath)) { throw new Error('Fichier audio manquant'); }
+    if (!fs.existsSync(imagePath)) { throw new Error('Fichier portrait manquant'); }
+    if (!fs.existsSync(outputDir)) { fs.mkdirSync(outputDir, { recursive: true }); }
 
-    await generateAvatar({
+    await generateVideo({
       audioPath: voicePath,
-      imagePath,
-      avatarId,
-      outputPath
+      imagePath: imagePath,
+      avatarId: avatarId,
+      outputPath: outputPath,
     });
 
     console.log('✅ Test JoggAI réussi - vidéo créée :', outputPath);
@@ -26,7 +26,7 @@ async function testJoggAI(avatarId) {
     return {
       success: true,
       file: outputPath,
-      avatarId,
+      avatarId: avatarId,
     };
 
   } catch (err) {

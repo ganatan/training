@@ -210,11 +210,11 @@ export class App {
       this.videoClaudeProgress = 0;
     }
     this.aiService
-      .generateVideo(llm, this.name, this.length, this.style, this.type)
+      .generateVideo(llm, this.name, this.length, this.style)
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-
+        console.log('00000000001:' + JSON.stringify(response));
         if (llm === 'chatgpt') {
           this.videoChatgpt = response.data.url;
           this.videoPosterChatgpt = response.data.poster;

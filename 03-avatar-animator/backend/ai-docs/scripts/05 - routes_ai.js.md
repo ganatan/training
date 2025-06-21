@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 
 import chatgptMock from '../mock/llm/chatgpt.mock.js';
 import claudeMock from '../mock/llm/claude.mock.js';
-import chatgptReal from '../services/llm/chatgpt.service.js';
+import chatgptService from '../services/llm/chatgpt.service.js';
 import claudeReal from '../services/llm/claude.service.js';
 ```
 
@@ -38,7 +38,7 @@ function getProvider(llm) {
   const providers = {
     chatgpt: {
       mock: chatgptMock,
-      real: chatgptReal,
+      real: chatgptService,
     },
     claude: {
       mock: claudeMock,

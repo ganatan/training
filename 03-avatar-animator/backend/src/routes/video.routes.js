@@ -1,11 +1,12 @@
 import express from 'express';
 
+import testJoggAI from '../services/video/test-joggai.js';
+
 const router = express.Router();
 
 router.get('/health/lva', async (req, res) => {
-  // const voiceId = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
-  // const result = await testElevenLabs(voiceId);
-  let result = {aaa:111}
+  const avatarId = process.env.JOGGAI__AVATAR_ID || '2222';
+  const result = await testJoggAI(avatarId);
   res.json({ success: result });
 });
 

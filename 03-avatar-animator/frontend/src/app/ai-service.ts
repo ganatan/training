@@ -88,10 +88,10 @@ export class AiService {
     );
   }
 
-  generateVideo(llm: string, name: string, length: string, style: string, type: string): Observable<VideoGenerationResponse> {
+  generateVideo(llm: string, name: string, length: string, style: string): Observable<VideoGenerationResponse> {
     if (environment.useMock) {
       const safeName = name.toLowerCase().replace(/\s+/g, '-');
-      const voiceMockPath = `assets/videos/${safeName}-${llm}.mp3`;
+      const voiceMockPath = `assets/videos/${safeName}-${llm}.mp4`;
       const voicePosterMockPath = `assets/videos/${safeName}-${llm}.png`;
 
       return of({
@@ -100,7 +100,7 @@ export class AiService {
         data: {
           url: voiceMockPath,
           poster: voicePosterMockPath,
-        }
+        },
       }).pipe(delay(1000));
     }
 

@@ -16,7 +16,7 @@ async function generateVideo({ audioPath, imagePath, avatarId, outputPath }) {
     const response = await axios.post(
       'https://api.jogg.ai/v1/avatar/generate',
       formData,
-      { headers, responseType: 'stream' }
+      { headers: headers, responseType: 'stream' },
     );
 
     const writer = fs.createWriteStream(outputPath);

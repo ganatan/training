@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
 
-import chatgptMock from '../mock/llm/chatgpt.mock.js';
-import claudeMock from '../mock/llm/claude.mock.js';
-import chatgptReal from '../controllers/llm/chatgpt.service.js';
-import claudeReal from '../controllers/llm/claude.service.js';
+import chatgptMock from '../mocks/llm/chatgpt.mock.js';
+import claudeMock from '../mocks/llm/claude.mock.js';
+import chatgptService from '../services/llm/chatgpt.service.js';
+import claudeService from '../services/llm/claude.service.js';
 
 dotenv.config();
 
@@ -25,11 +25,11 @@ function getProvider(llm) {
   const providers = {
     chatgpt: {
       mock: chatgptMock,
-      real: chatgptReal,
+      real: chatgptService,
     },
     claude: {
       mock: claudeMock,
-      real: claudeReal,
+      real: claudeService,
     },
   };
 

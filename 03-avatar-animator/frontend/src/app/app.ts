@@ -3,11 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import {
-  AiContentService,
+  AiService,
   ContentGenerationResponse,
   VoiceGenerationResponse,
   VideoGenerationResponse,
-} from './ai-content';
+} from './ai-service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -80,7 +80,7 @@ export class App {
     { value: 'technical', label: 'Technique' },
   ];
 
-  private aiContentService = inject(AiContentService);
+  private aiService = inject(AiService);
 
   toggleTheme() {
     const body = document.querySelector('body');
@@ -113,7 +113,7 @@ export class App {
       this.videoClaudeDuration = 0;
     }
 
-    this.aiContentService
+    this.aiService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
@@ -172,7 +172,7 @@ export class App {
       this.voiceClaudeProgress = 0;
     }
 
-    this.aiContentService
+    this.aiService
       .generateVoice(llm, this.name, this.length, this.style)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
@@ -209,7 +209,7 @@ export class App {
       this.videoClaudeDuration = 0;
       this.videoClaudeProgress = 0;
     }
-    this.aiContentService
+    this.aiService
       .generateVideo(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;

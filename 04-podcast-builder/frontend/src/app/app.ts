@@ -144,6 +144,7 @@ export class App {
           return;
         }
         this.speakers = response.data;
+        console.log('00000000002:' + JSON.stringify(this.speakers));
         this.speakersCount = this.speakers.speakers.length + 1;
       });
   }

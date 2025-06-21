@@ -1,6 +1,6 @@
 function generateSpeakerMock(topic, count = 4) {
-  if (!topic) throw new Error('Sujet manquant');
-  if (count % 2 !== 0) throw new Error('Le nombre d’intervenants doit être pair');
+  if (!topic) { throw new Error('Sujet manquant'); }
+  if (count % 2 !== 0) { throw new Error('Le nombre d’intervenants doit être pair'); }
 
   const pour = [
     { name: 'Camille', personality: 'Calme et analytique' },
@@ -19,17 +19,17 @@ function generateSpeakerMock(topic, count = 4) {
   const moitié = count / 2;
 
   const speakers = [
-    ...pour.slice(0, moitié).map((s) => ({
-      name: s.name,
+    ...pour.slice(0, moitié).map((speaker) => ({
+      name: speaker.name,
       role: 'Intervenant',
       stance: 'Pour',
-      personality: s.personality,
+      personality: speaker.personality,
     })),
-    ...contre.slice(0, moitié).map((s) => ({
-      name: s.name,
+    ...contre.slice(0, moitié).map((speaker) => ({
+      name: speaker.name,
       role: 'Intervenant',
       stance: 'Contre',
-      personality: s.personality,
+      personality: speaker.personality,
     })),
   ];
 
@@ -40,7 +40,7 @@ function generateSpeakerMock(topic, count = 4) {
       stance: 'Neutre',
       personality: 'Neutre, pose les questions et relance le débat',
     },
-    speakers,
+    speakers: speakers,
   };
 }
 

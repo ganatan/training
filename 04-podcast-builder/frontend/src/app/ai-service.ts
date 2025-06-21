@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-import { reply as mockReply } from './ai-content.mock';
+import { reply as mockReply } from './ai.mock';
 import { reply as mockSpeakersReply } from './ai-speakers.mock';
 
 export interface Speaker {
@@ -51,7 +51,7 @@ export interface VideoGenerationResponse {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AiContentService {
+export class AiService {
   private baseUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 

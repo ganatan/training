@@ -3,11 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import {
-  AiContentService,
-  ContentGenerationResponse,
-  VoiceGenerationResponse,
-  VideoGenerationResponse,
-} from './ai-content';
+  AiService,
+} from './ai-service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -101,7 +98,7 @@ export class App {
     { value: 'technical', label: 'Technique' },
   ];
 
-  private aiContentService = inject(AiContentService);
+  private aiService = inject(AiService);
 
   toggleTheme() {
     const body = document.querySelector('body');
@@ -110,7 +107,6 @@ export class App {
       document.documentElement.classList.toggle('dark-mode');
     }
   }
-
 
   loadSpeakers() {
     console.log('00000000001');
@@ -121,7 +117,7 @@ export class App {
     let topic = '1111';
     let speakerCount = 4;
     this.speakersCount = 0;
-    this.aiContentService
+    this.aiService
       .generateSpeakers(topic, speakerCount)
       .subscribe((response) => {
         console.log('00000000001:' + JSON.stringify(response));
@@ -167,81 +163,6 @@ export class App {
       this.videoClaude = '';
       this.videoClaudeDuration = 0;
     }
-  }
-
-  loadVoice(llm: 'chatgpt' | 'claude') {
-    const start = performance.now();
-    const interval = this.startVoiceProgress(llm);
-
-    if (llm === 'chatgpt') {
-      this.voiceChatgptLoading = true;
-      this.voiceChatgpt = '';
-      this.voiceChatgptDuration = 0;
-      this.voiceChatgptProgress = 0;
-    } else {
-      this.voiceClaudeLoading = true;
-      this.voiceClaude = '';
-      this.voiceClaudeDuration = 0;
-      this.voiceClaudeProgress = 0;
-    }
-
-    this.aiContentService
-      .generateVoice(llm, this.name, this.length, this.style)
-      .subscribe((response: VoiceGenerationResponse) => {
-        const duration = (performance.now() - start) / 1000;
-        clearInterval(interval);
-
-        const voiceUrl = response.success ? response.data : '';
-
-        if (llm === 'chatgpt') {
-          this.voiceChatgpt = voiceUrl;
-          this.voiceChatgptDuration = duration;
-          this.voiceChatgptLoading = false;
-          this.voiceChatgptProgress = 100;
-        } else {
-          this.voiceClaude = voiceUrl;
-          this.voiceClaudeDuration = duration;
-          this.voiceClaudeLoading = false;
-          this.voiceClaudeProgress = 100;
-        }
-      });
-  }
-
-  loadVideo(llm: 'chatgpt' | 'claude') {
-    const start = performance.now();
-    const interval = this.startVideoProgress(llm);
-    this.videoChatgptKey = false;
-    if (llm === 'chatgpt') {
-      this.videoChatgptLoading = true;
-      this.videoChatgpt = '';
-      this.videoChatgptDuration = 0;
-      this.videoChatgptProgress = 0;
-    } else {
-      this.videoClaudeLoading = true;
-      this.videoClaude = '';
-      this.videoClaudeDuration = 0;
-      this.videoClaudeProgress = 0;
-    }
-    this.aiContentService
-      .generateVideo(llm, this.name, this.length, this.style, this.type)
-      .subscribe((response: VideoGenerationResponse) => {
-        const duration = (performance.now() - start) / 1000;
-        clearInterval(interval);
-
-        if (llm === 'chatgpt') {
-          this.videoChatgpt = response.data.url;
-          this.videoPosterChatgpt = response.data.poster;
-          this.videoChatgptDuration = duration;
-          this.videoChatgptLoading = false;
-          this.videoChatgptProgress = 100;
-        } else {
-          this.videoClaude = response.data.url;
-          this.videoPosterClaude = response.data.poster;
-          this.videoClaudeDuration = duration;
-          this.videoClaudeLoading = false;
-          this.videoClaudeProgress = 100;
-        }
-      });
   }
 
   onStyleChange(value: string) {

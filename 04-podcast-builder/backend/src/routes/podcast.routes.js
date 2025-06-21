@@ -3,8 +3,8 @@ import { saveConversationToFile } from '../services/conversation.service.js';
 import { saveMockConversationToFile } from '../services/conversation.service.mock.js';
 import { generateAllAudioFromJson } from '../services/audio.service.js';
 
-import generateSpeaker from '../controllers/speaker/speaker.service.js';
-import generateSpeakerMock from '../mock/podcast/speaker.mock.js';
+import generateSpeaker from '../services/speaker/speaker.service.js';
+import generateSpeakerMock from '../mocks/podcast/speaker.mock.js';
 
 const router = express.Router();
 const useMock = process.env.USE_MOCK === 'true';
@@ -27,7 +27,6 @@ router.post('/speakers', async (req, res) => {
       data: result,
     });
 
-
   } catch (err) {
     console.error('❌ Erreur génération Speakers :', err.message);
 
@@ -49,8 +48,6 @@ router.get('/voices', async (req, res) => {
 router.get('/videos', async (req, res) => {
   res.status(500).json({ success: false, test: 'videos' });
 });
-
-
 
 router.get('/generate', async (req, res) => {
   const debat = req.query.topic || 'Dune de Denis Villeneuve : chef-d\'œuvre de science-fiction ou exercice de style surcoté ?';

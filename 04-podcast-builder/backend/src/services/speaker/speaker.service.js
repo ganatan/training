@@ -5,13 +5,16 @@ function buildPrompt(topic, count) {
 Tu dois générer ${count} intervenants pour un podcast dont le titre est : "${topic}".
 
 - ${count / 2} seront POUR, ${count / 2} seront CONTRE ce sujet.
+- Il doit y avoir autant d'hommes que de femmes (parité totale).
 - Pour chaque intervenant, donne :
-  - un **prénom crédible**, qui **n’a pas déjà été utilisé** dans les réponses précédentes
+  - un **prénom crédible**, venant de cultures variées (français, anglais, allemands, italiens, espagnols, etc.)
   - une **personnalité** courte (humaine, crédible, sans caricature)
   - la **position** : "Pour" ou "Contre"
 
 Attention :
 - Les **prénoms doivent être uniques** à chaque nouvelle génération.
+- Évite les prénoms déjà utilisés dans les réponses précédentes.
+- Indique uniquement des prénoms dont le genre est facilement identifiable.
 - Rends-moi le tout au format JSON tableau strictement comme ceci :
 
 [
@@ -98,92 +101,3 @@ async function generateSpeaker(topic, count = 4) {
 }
 
 export default generateSpeaker;
-
-
-
-// import axios from 'axios';
-
-// async function generateSpeaker(topic, count = 4) {
-//   try {
-//     if (!topic) throw new Error('Sujet manquant');
-//     if (count % 2 !== 0) throw new Error('Le nombre d’intervenants doit être pair');
-
-//     const prompt = `
-// Tu dois générer ${count} intervenants pour un podcast dont le titre est : "${topic}".
-
-// - ${count / 2} seront POUR, ${count / 2} seront CONTRE ce sujet.
-// - Pour chaque intervenant, donne :
-//   - un **prénom crédible**, qui **n’a pas déjà été utilisé** dans les réponses précédentes
-//   - une **personnalité** courte (humaine, crédible, sans caricature)
-//   - la **position** : "Pour" ou "Contre"
-
-// Attention :
-// - Les **prénoms doivent être uniques** à chaque nouvelle génération.
-// - N’utilise **pas Julien, Nina, Alexis ou Lina**.
-// - Rends-moi le tout au format JSON tableau strictement comme ceci :
-
-// [
-//   { "name": "...", "stance": "Pour", "personality": "..." },
-//   { "name": "...", "stance": "Pour", "personality": "..." },
-//   { "name": "...", "stance": "Contre", "personality": "..." },
-//   { "name": "...", "stance": "Contre", "personality": "..." }
-// ]
-// `;
-
-//     const response = await axios.post(
-//       'https://api.openai.com/v1/chat/completions',
-//       {
-//         model: 'gpt-4-turbo',
-//         messages: [{ role: 'user', content: prompt }],
-//         temperature: 0.8,
-//       },
-//       {
-//         headers: {
-//           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-//           'Content-Type': 'application/json',
-//         },
-//       }
-//     );
-
-//     const rawText = response.data.choices[0].message.content.trim();
-//     console.log('00000000001:' + JSON.stringify(rawText));
-//     const parsed = JSON.parse(rawText);
-
-//     const items = parsed.map((item) => ({
-//       name: item.name,
-//       role: 'Intervenant',
-//       stance: item.stance,
-//       personality: item.personality,
-//     }));
-
-//     return {
-//       moderator: {
-//         name: 'Ganatan',
-//         role: 'Animateur',
-//         stance: 'Neutre',
-//         personality: 'Neutre, pose les questions et relance le débat',
-//       },
-//       items,
-//     };
-
-//   } catch (error) {
-//     const status = error.response?.status;
-//     const data = error.response?.data;
-//     let errorMessage = '';
-
-//     if (status === 401) {
-//       errorMessage = 'Erreur 401 : Clé API OpenAI manquante ou invalide.';
-//     } else if (status) {
-//       errorMessage = `Erreur OpenAI (${status}) : ${JSON.stringify(data)}`;
-//     } else if (error.message.includes('Unexpected token')) {
-//       errorMessage = 'Réponse non JSON : format inattendu. Utilise `console.log(rawText)` pour déboguer.';
-//     } else {
-//       errorMessage = `Erreur inattendue : ${error.message}`;
-//     }
-
-//     console.error(`❌ generateSpeaker error: ${errorMessage}`);
-//     return errorMessage;
-//   }
-// }
-
-// export default generateSpeaker;

@@ -7,28 +7,28 @@
   },
   "items": [
     {
-      "name": "Clémentine",
+      "name": "Thomas",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Développeuse front-end passionnée par l'innovation et les nouvelles technologies."
+      "personality": "Développeur web expérimenté, passionné par les nouvelles technologies et l'efficacité du développement front-end."
     },
     {
-      "name": "Bastien",
+      "name": "Chiara",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Architecte logiciel avec une prédilection pour les solutions réactives et évolutives."
+      "personality": "Chef de projet agile avec un fort intérêt pour les frameworks modernes et leur impact sur la productivité de l'équipe."
     },
     {
-      "name": "Solène",
+      "name": "Anika",
       "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Experte en UI/UX qui privilégie la simplicité et l'efficacité des interfaces utilisateur."
+      "personality": "Architecte logiciel senior qui préfère les solutions éprouvées et est sceptique quant à l'adoption rapide de nouvelles librairies sans tests approfondis."
     },
     {
-      "name": "Romain",
+      "name": "Luis",
       "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Développeur senior qui favorise la stabilité et la maintenabilité du code dans les projets à long terme."
+      "personality": "Programmeur polyvalent qui valorise la stabilité et la compatibilité à long terme dans les choix technologiques pour des entreprises de grande envergure."
     }
   ]
 }

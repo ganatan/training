@@ -64,7 +64,7 @@ export class App {
     { value: 'technical', label: 'Technique' },
   ];
 
-  private aiContentService = inject(AiService);
+  private aiService = inject(AiService);
 
   toggleTheme() {
     const body = document.querySelector('body');
@@ -93,7 +93,7 @@ export class App {
       this.voiceClaudeDuration = 0;
     }
 
-    this.aiContentService
+    this.aiService
       .generateContent(llm, this.name, this.length, this.style, this.type)
       .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
@@ -148,7 +148,7 @@ export class App {
       this.voiceClaudeProgress = 0;
     }
 
-    this.aiContentService
+    this.aiService
       .generateVoice(llm, this.name, this.length, this.style)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;

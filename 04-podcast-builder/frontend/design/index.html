@@ -6,6 +6,250 @@
   <title>podcast-builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --text: #212529;
+      --card-bg: #ffffff;
+      --input-bg: #e9ecef;
+      --accent: #0d6efd;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Roboto", sans-serif;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group-responsive {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .small-text {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .chevron {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    [data-bs-toggle="collapse"][aria-expanded="true"] .chevron {
+      transform: rotate(0deg);
+    }
+
+    [data-bs-toggle="collapse"][aria-expanded="false"] .chevron {
+      transform: rotate(-90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-4">
+    <h1 class="text-primary">Podcast Builder</h1>
+
+    <div class="card p-4 mb-4">
+      <div class="row align-items-end g-2">
+        <div class="col-md-6 d-flex align-items-end gap-2">
+          <span class="form-label mb-1">Thème</span>
+          <input type="text" class="form-control" placeholder="Angular vs React" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end gap-2">
+          <button class="btn btn-outline-primary">Générer</button>
+          <input type="number" min="1" max="10" value="4" class="form-control text-primary" style="width: 70px;" />
+          <span class="form-label mb-1 text-primary">Questions</span>
+        </div>
+        <div class="col-md-3 d-flex align-items-end gap-2">
+          <button class="btn btn-outline-primary">Générer</button>
+          <input type="number" min="1" max="10" value="2" class="form-control text-primary" style="width: 70px;" />
+          <span class="form-label mb-1 text-primary">Intervenants</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-3 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Intervenants</h5>
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+              data-bs-target="#intervenants-collapse" aria-expanded="true">
+              <span class="chevron">▼</span>
+            </button>
+          </div>
+
+          <div class="collapse show" id="intervenants-collapse">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="border rounded p-3">
+                  <div class="mb-2">
+                    <strong>Camille</strong> — <span class="text-muted">Pour</span><br />
+                    <small class="text-secondary">Calme et analytique</small>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Voix</label>
+                      <select class="form-select form-select-sm">
+                        <option>Clara</option>
+                        <option>Camille</option>
+                        <option>Julie</option>
+                      </select>
+                    </div>
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Avatar</label>
+                      <select class="form-select form-select-sm">
+                        <option>jogg-001</option>
+                        <option>jogg-003</option>
+                        <option>jogg-007</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="border rounded p-3">
+                  <div class="mb-2">
+                    <strong>Alexis</strong> — <span class="text-muted">Contre</span><br />
+                    <small class="text-secondary">Passionné et critique</small>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Voix</label>
+                      <select class="form-select form-select-sm">
+                        <option>Antoine</option>
+                        <option>Luc</option>
+                        <option>Thomas</option>
+                      </select>
+                    </div>
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Avatar</label>
+                      <select class="form-select form-select-sm">
+                        <option>jogg-002</option>
+                        <option>jogg-004</option>
+                        <option>jogg-008</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">🎙️ Questions</h5>
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+              data-bs-target="#questions-collapse" aria-expanded="true">
+              <span class="chevron">▼</span>
+            </button>
+          </div>
+          <div class="collapse show" id="questions-collapse">
+            <table class="table table-bordered table-sm mt-2">
+              <thead>
+                <tr>
+                  <th style="width: 40px;"><input type="checkbox" disabled /></th>
+                  <th>Question</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Est-ce que Angular est trop rigide pour les projets modernes ?</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>React favorise-t-il une meilleure modularité à long terme ?</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Quel framework est le plus adapté aux équipes débutantes ?</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Angular est-il dépassé face à la popularité de React ?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-3 mb-4">
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-dark flex-fill">Générer dialogues</button>
+            <button class="btn btn-success flex-fill">Générer voix</button>
+            <button class="btn btn-primary flex-fill">Générer vidéos</button>
+          </div>
+        </div>
+
+        <div class="card p-4 m-1">
+          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-outline-dark">Dialogue</button>
+              <span class="badge bg-dark">Camille</span>
+              <span class="text-muted small-text">Voix + Vidéo prêtes</span>
+            </div>
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+              data-bs-target="#dialogue-camille-1" aria-expanded="true">
+              <span class="chevron">▼</span>
+            </button>
+          </div>
+          <div class="collapse show" id="dialogue-camille-1">
+            <p class="mb-3"><strong>Camille :</strong> Je pense qu'Angular apporte une structure solide, idéale pour les projets d'entreprise...</p>
+            <div class="d-flex gap-3">
+              <audio controls class="w-50">
+                <source src="assets/audio/camille-1.mp3" type="audio/mpeg" />
+              </audio>
+              <video controls class="w-50 rounded" height="100">
+                <source src="assets/video/camille-1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>podcast-builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #f9f9f9;
@@ -46,78 +290,184 @@
     <h1 class="text-primary">Podcast Builder</h1>
 
     <div class="card p-4 mb-4">
-      <div class="row g-3 align-items-end mb-3">
-        <div class="col-md-5">
-          <label class="form-label">Thème du podcast</label>
-          <input type="text" class="form-control" placeholder="Ex : Angular vs React" />
+      <div class="row align-items-end g-2">
+        <div class="col-md-6 d-flex align-items-end gap-2">
+          <span class="form-label mb-1">Thème</span>
+          <input type="text" class="form-control" placeholder="Angular vs React" />
         </div>
-        <div class="col-md-7 d-flex btn-group-responsive pt-md-4">
-          <button class="btn btn-primary">Afficher 4 questions</button>
-          <button class="btn btn-outline-primary">Afficher intervenants + personnalités</button>
+        <div class="col-md-3 d-flex align-items-end gap-2">
+          <button class="btn btn-outline-primary">Générer</button>
+          <input type="number" min="1" max="10" value="4" class="form-control text-primary" style="width: 70px;" />
+          <span class="form-label mb-1 text-primary">Questions</span>
         </div>
-      </div>
-      <div class="row g-3">
-        <div class="col-md-12 d-flex btn-group-responsive justify-content-start">
-          <button class="btn btn-dark">🎤 Générer les dialogues</button>
-          <button class="btn btn-success">🔊 Générer les voix</button>
-          <button class="btn btn-primary">🎥 Générer les vidéos</button>
+        <div class="col-md-3 d-flex align-items-end gap-2">
+          <button class="btn btn-outline-primary">Générer</button>
+          <input type="number" min="1" max="10" value="2" class="form-control text-primary" style="width: 70px;" />
+          <span class="form-label mb-1 text-primary">Intervenants</span>
         </div>
       </div>
     </div>
 
     <div class="row g-4">
-      <!-- Colonne gauche : intervenants + questions -->
       <div class="col-md-6">
+
+
+
         <div class="card p-3 mb-4">
-          <h5>🧠 Intervenants</h5>
-          <table class="table table-bordered table-sm mt-2">
-            <thead>
-              <tr>
-                <th>Prénom</th>
-                <th>Position</th>
-                <th>Personnalité</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Camille</td><td>Pour</td><td>Calme et analytique</td></tr>
-              <tr><td>Alexis</td><td>Contre</td><td>Passionné et critique</td></tr>
-            </tbody>
-          </table>
-        </div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Intervenants</h5>
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+              data-bs-target="#intervenants-collapse" aria-expanded="true">
+              <span class="chevron">▼</span>
+            </button>
+          </div>
 
-        <div class="card p-3">
-          <h5>🎙️ Questions</h5>
-          <table class="table table-bordered table-sm mt-2">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Question</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>1</td><td>Est-ce que Angular est trop rigide pour les projets modernes ?</td></tr>
-              <tr><td>2</td><td>React favorise-t-il une meilleure modularité à long terme ?</td></tr>
-              <tr><td>3</td><td>Quel framework est le plus adapté aux équipes débutantes ?</td></tr>
-              <tr><td>4</td><td>Angular est-il dépassé face à la popularité de React ?</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+          <div class="collapse show" id="intervenants-collapse">
+            <div class="row g-3">
 
-      <!-- Colonne droite : dialogues -->
-      <div class="col-md-6">
-        <div class="card p-3">
-          <h5>💬 Dialogues générés</h5>
-          <div class="mt-2" style="white-space: pre-wrap; min-height: 300px;">
-            <strong>Camille :</strong> Je pense qu'Angular apporte une structure solide, idéale pour les projets d'entreprise...  
-            <br><strong>Alexis :</strong> Oui, mais justement, cette structure est trop contraignante pour les projets agiles...  
-            <br><strong>Camille :</strong> C’est une question de perspective. Pour une grande équipe, c’est un avantage.  
-            <br><strong>Alexis :</strong> À condition que toute l’équipe maîtrise bien le framework, ce qui n’est pas si simple.  
+              <div class="col-12">
+                <div class="border rounded p-3">
+                  <div class="mb-2">
+                    <strong>Camille</strong> — <span class="text-muted">Pour</span><br />
+                    <small class="text-secondary">Calme et analytique</small>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Voix</label>
+                      <select class="form-select form-select-sm">
+                        <option>Clara</option>
+                        <option>Camille</option>
+                        <option>Julie</option>
+                      </select>
+                    </div>
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Avatar</label>
+                      <select class="form-select form-select-sm">
+                        <option>jogg-001</option>
+                        <option>jogg-003</option>
+                        <option>jogg-007</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="border rounded p-3">
+                  <div class="mb-2">
+                    <strong>Alexis</strong> — <span class="text-muted">Contre</span><br />
+                    <small class="text-secondary">Passionné et critique</small>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Voix</label>
+                      <select class="form-select form-select-sm">
+                        <option>Antoine</option>
+                        <option>Luc</option>
+                        <option>Thomas</option>
+                      </select>
+                    </div>
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Avatar</label>
+                      <select class="form-select form-select-sm">
+                        <option>jogg-002</option>
+                        <option>jogg-004</option>
+                        <option>jogg-008</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
+
+
+        <div class="card p-3 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">🎙️ Questions</h5>
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+              data-bs-target="#questions-collapse" aria-expanded="true">
+              <span class="chevron">▼</span>
+            </button>
+          </div>
+          <div class="collapse show" id="questions-collapse">
+            <table class="table table-bordered table-sm mt-2">
+              <thead>
+                <tr>
+                  <th style="width: 40px;"><input type="checkbox" disabled /></th>
+                  <th>Question</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Est-ce que Angular est trop rigide pour les projets modernes ?</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>React favorise-t-il une meilleure modularité à long terme ?</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Quel framework est le plus adapté aux équipes débutantes ?</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Angular est-il dépassé face à la popularité de React ?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
+
+      <div class="col-md-6">
+
+        <div class="card p-3 mb-4">
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-dark flex-fill">Générer dialogues</button>
+            <button class="btn btn-success flex-fill">Générer voix</button>
+            <button class="btn btn-primary flex-fill">Générer vidéos</button>
+          </div>
+        </div>
+
+
+
+        <div class="card p-4 m-1">
+          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-outline-dark">Dialogue</button>
+              <span class="badge bg-dark">Camille</span>
+              <span class="text-muted small-text">Voix + Vidéo prêtes</span>
+            </div>
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+              data-bs-target="#dialogue-camille-1" aria-expanded="true">
+              <span class="chevron">▼</span>
+            </button>
+          </div>
+          <div class="collapse show" id="dialogue-camille-1">
+            <p class="mb-3"><strong>Camille :</strong> Je pense qu'Angular apporte une structure solide, idéale pour les
+              projets d'entreprise…</p>
+            <div class="d-flex gap-3">
+              <audio controls class="w-50">
+                <source src="assets/audio/camille-1.mp3" type="audio/mpeg" />
+              </audio>
+              <video controls class="w-50 rounded" height="100">
+                <source src="assets/video/camille-1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
-</html>
+</html> -->

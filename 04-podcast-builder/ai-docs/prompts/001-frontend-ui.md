@@ -59,6 +59,17 @@ les intervenants et dessous les questions
 
 et a droite je veux une collone avec les dialogues generes
 
+# Prompt
+je veux que 
+les 3 buttons
+
+generer dailogues voix videos
+
+soient au dessus de la colonne de droite des dialogues generes
+
+# Prompt
+Je veux que Afficher 4 questions
+soient remplaces par un button et une zone de saisie du nombre de questions
 
 
 <!DOCTYPE html>

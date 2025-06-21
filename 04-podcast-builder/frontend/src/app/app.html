@@ -10,14 +10,14 @@
         <input type="text" class="form-control" placeholder="" />
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
-        <button class="btn btn-primary">Générer</button>
+        <button class="btn btn-primary" (click)="loadSpeakers()">Générer</button>
         <input type="number" min="1" max="10" value="4" class="form-control" style="width: 70px;" />
-        <span class="form-label mb-1 fw-bold">Questions</span>
+        <span class="form-label mb-1 fw-bold">Intervenants</span>
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
-        <button class="btn btn-primary" (click)="loadSpeakers()">Générer</button>
-        <input type="number" min="1" max="10" value="2" class="form-control" style="width: 70px;" />
-        <span class="form-label mb-1 fw-bold">Intervenants</span>
+        <button class="btn btn-primary">Générer</button>
+        <input type="number" min="1" max="10" value="7" class="form-control" style="width: 70px;" />
+        <span class="form-label mb-1 fw-bold">Questions</span>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
     <div class="col-md-6">
       <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="mb-0">Intervenants générés</h5>
+          <h5 class="mb-0">Intervenants générés ({{ speakersCount }})</h5>
           <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
             data-bs-target="#intervenants-collapse" aria-expanded="true">
             <span class="chevron">▼</span>

@@ -44,6 +44,7 @@ export class App {
 
   speakersProgress = 0;
   speakersDuration = 0;
+  speakersCount = 0;
 
   speakers: {
     moderator: {
@@ -119,10 +120,11 @@ export class App {
     this.speakersLoading = true;
     let topic = '1111';
     let speakerCount = 4;
+    this.speakersCount = 0;
     this.aiContentService
       .generateSpeakers(topic, speakerCount)
       .subscribe((response) => {
-        console.log('00000000002:' + JSON.stringify(response));
+        console.log('00000000001:' + JSON.stringify(response));
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
         this.speakersLoading = false;
@@ -141,8 +143,8 @@ export class App {
           };
           return;
         }
-
         this.speakers = response.data;
+        this.speakersCount = this.speakers.speakers.length + 1;
       });
   }
 

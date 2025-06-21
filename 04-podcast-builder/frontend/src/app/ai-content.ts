@@ -66,7 +66,7 @@ export class AiContentService {
       }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/speakers`;
+    const url = `${this.baseUrl}/podcast/speakers`;
 
     return this.http.post<SpeakersGenerationResponse>(url, { topic, count }).pipe(
       catchError((error: HttpErrorResponse) => {

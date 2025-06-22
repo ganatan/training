@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -12,11 +12,11 @@ import { environment } from '../environments/environment';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
+export class App implements OnInit {
 
-  topic = 'Angular vs React';
-  topicSpeakerCount = 2;
-  topicQuestionCount = 2;
+  topic = '';
+  topicSpeakerCount = 0;
+  topicQuestionCount = 0;
 
   speakerProgress = 0;
   speakerDuration = 0;
@@ -39,6 +39,14 @@ export class App {
   useMock = environment.useMock;
 
   private aiService = inject(AiService);
+
+  ngOnInit() {
+    if (this.useMock) {
+      this.topic = 'Angular vs React';
+      this.topicSpeakerCount = 2;
+      this.topicQuestionCount = 2;
+    }
+  }
 
   toggleTheme() {
     const body = document.querySelector('body');
@@ -115,10 +123,7 @@ export class App {
       return;
     }
 
-    const enabledQuestions = this.question.items
-      .filter(q => q.enabled)
-      .map(q => q.text);
-
+    const enabledQuestions = this.question.items.filter(q => q.enabled);
     if (enabledQuestions.length === 0) {
       console.warn('Aucune question cochée');
       return;

@@ -1,8 +1,8 @@
-import { DialogueData, DialogueExchange, Speaker } from './ai-service';
+import { DialogueData, DialogueExchange, QuestionItem, Speaker } from './ai-service';
 
 export function reply(
   topic: string,
-  questions: string[],
+  questions: QuestionItem[],
   speakers: Speaker[]
 ): DialogueData {
   const exchanges: DialogueExchange[] = [];
@@ -13,17 +13,26 @@ export function reply(
     text: `Bienvenue dans ce podcast sur le thème : "${topic}". Commençons tout de suite.`,
   });
 
-  for (let i = 0; i < questions.length; i++) {
-    const q = questions[i];
-    const s1 = speakers[i % speakers.length];
-    const s2 = speakers[(i + 1) % speakers.length];
+  questions.forEach((q, index) => {
+    exchanges.push({
+      speaker: 'Ganatan',
+      role: 'Animateur',
+      text: q.text,
+      question: q.text,
+    });
 
-    exchanges.push(
-      { speaker: 'Ganatan', role: 'Animateur', text: q, question: q },
-      { speaker: s1.name, role: s1.stance, text: `À mon avis, ${q.toLowerCase()} — c'est une évidence.`, question: q },
-      { speaker: s2.name, role: s2.stance, text: `Je ne suis pas d'accord. ${q.toLowerCase()} est bien plus complexe.`, question: q }
-    );
-  }
+    const count = q.dialogueCount ?? 1;
+
+    for (let i = 0; i < count; i++) {
+      const s1 = speakers[(index + i) % speakers.length];
+      exchanges.push({
+        speaker: s1.name,
+        role: s1.stance,
+        text: `Réponse ${i + 1} sur : ${q.text.toLowerCase()}`,
+        question: q.text,
+      });
+    }
+  });
 
   exchanges.push({
     speaker: 'Ganatan',

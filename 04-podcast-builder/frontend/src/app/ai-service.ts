@@ -40,6 +40,7 @@ export interface SpeakerGenerationResponse {
 export interface QuestionItem {
   text: string;
   enabled: boolean;
+  dialogueCount?: number;
 }
 
 export interface QuestionData {
@@ -122,43 +123,32 @@ export class AiService {
     );
   }
 
-  // generateDialogues(topic: string, questions: QuestionItem[], speakers: Speaker[]): Observable<DialogueGenerationResponse> {
-  //   const enabledQuestions = questions.filter(q => q.enabled).map(q => q.text);
+  generateDialogues(topic: string, questions: QuestionItem[], speakers: Speaker[]): Observable<DialogueGenerationResponse> {
+    if (environment.useMock) {
+      const mockData = mockDialogueReply(topic, questions, speakers);
+      return of({ success: true, data: mockData }).pipe(delay(1000));
+    }
 
-  //   if (environment.useMock) {
-  //     const mockData = mockDialogueReply(topic, enabledQuestions, speakers);
-  //     return of({ success: true, data: mockData }).pipe(delay(1000));
-  //   }
+    const payload = {
+      topic,
+      questions: questions.map(q => ({
+        text: q.text,
+        dialogueCount: q.dialogueCount ?? 2
+      })),
+      speakers
+    };
 
-  //   const url = `${this.baseUrl}/podcast/dialogues`;
-  //   return this.http.post<DialogueGenerationResponse>(url, { topic, questions: enabledQuestions, speakers }).pipe(
-  //     catchError((error: HttpErrorResponse) =>
-  //       of({
-  //         success: false,
-  //         data: { topic, exchanges: [] },
-  //         error: this.getErrorMessage(error),
-  //       })
-  //     )
-  //   );
-  // }
-
-generateDialogues(topic: string, questions: string[], speakers: Speaker[]): Observable<DialogueGenerationResponse> {
-  if (environment.useMock) {
-    const mockData = mockDialogueReply(topic, questions, speakers);
-    return of({ success: true, data: mockData }).pipe(delay(1000));
+    const url = `${this.baseUrl}/podcast/dialogues`;
+    return this.http.post<DialogueGenerationResponse>(url, payload).pipe(
+      catchError((error: HttpErrorResponse) =>
+        of({
+          success: false,
+          data: { topic, exchanges: [] },
+          error: this.getErrorMessage(error)
+        })
+      )
+    );
   }
-
-  const url = `${this.baseUrl}/podcast/dialogues`;
-  return this.http.post<DialogueGenerationResponse>(url, { topic, questions, speakers }).pipe(
-    catchError((error: HttpErrorResponse) =>
-      of({
-        success: false,
-        data: { topic, exchanges: [] },
-        error: this.getErrorMessage(error),
-      })
-    )
-  );
-}
 
   private getErrorMessage(error: HttpErrorResponse): string {
     if (error.status === 0) return 'Serveur inaccessible. Vérifiez votre connexion.';

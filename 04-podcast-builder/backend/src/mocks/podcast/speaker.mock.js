@@ -1,3 +1,29 @@
+  // voiceOptions = [
+  //   { id: '101A8UFM73tcrunWGirw', name: 'guillaume' },
+  //   { id: 'aQROLel5sQbj1vuIVi6B', name: 'nicolas' },
+  //   { id: 'kENkNtk0xyzG09WW40xE', name: 'marcel' },
+  //   { id: 'kwajW3Xh5svCeKU5ky2S', name: 'dmitry' },
+  //   { id: 'D9Thk1W7FRMgiOhy3zVI', name: 'aaron' },
+  //   { id: 'McVZB9hVxVSk3Equu8EH', name: 'audrey' },
+  //   { id: 'sANWqF1bCMzR6eyZbCGw', name: 'marie' },
+  //   { id: 'rfkTsdZrVWEVhDycUYn9', name: 'shelby' },
+  //   { id: 'i4CzbCVWoqvD0P1QJCUL', name: 'ivy' },
+  // ];
+
+  // avatarOptions = [
+  //   { id: 100, name: 'avatar-ganatan' },
+  //   { id: 101, name: 'avatar-camille' },
+  //   { id: 102, name: 'avatar-julien' },
+  //   { id: 103, name: 'avatar-nina' },
+  //   { id: 104, name: 'avatar-olivier' },
+  //   { id: 105, name: 'avatar-alexis' },
+  //   { id: 106, name: 'avatar-lina' },
+  //   { id: 107, name: 'avatar-victor' },
+  //   { id: 108, name: 'avatar-sophie' },
+  // ];
+
+
+
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }

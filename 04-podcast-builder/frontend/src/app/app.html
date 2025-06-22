@@ -32,7 +32,6 @@
 
     <div class="col-md-6">
 
-
       <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="mb-0">Intervenants générés ({{ speakerCount }})</h5>
@@ -41,7 +40,6 @@
             <span class="chevron">▼</span>
           </button>
         </div>
-
         <div class="collapse show" id="intervenants-collapse">
           <div class="mb-3" *ngIf="speakerLoading">
             <div class="d-flex justify-content-between align-items-center">
@@ -59,7 +57,6 @@
           </div>
 
           <div class="row g-3" *ngIf="speaker && speaker.items.length > 0">
-            <!-- Animateur -->
             <div class="col-12">
               <div class="border rounded p-3">
                 <div class="mb-2">
@@ -67,22 +64,29 @@
                   <span class="text-muted">{{ speaker.moderator.role }}</span><br />
                   <small class="text-secondary">{{ speaker.moderator.personality }}</small>
                 </div>
-                <div class="d-flex gap-3">
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Voix ElevenLabs</label>
-                    <select class="form-select form-select-sm" [value]="speaker.moderator.voiceId.name">
-                      <option [value]="speaker.moderator.voiceId.name">{{ speaker.moderator.voiceId.name }}</option>
-                    </select>
+                <div class="row gy-2 gx-4 mt-2">
+                  <div class="col-12 col-md-6">
+                    <span class="d-block text-muted small mb-1">🎙️ Voix ElevenLabs</span>
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                      <span class="badge bg-primary px-3 py-1 text-capitalize">{{ speaker.moderator.voiceId.name
+                        }}</span>
+                      <span class="badge text-danger bg-light border px-3 py-1 small">{{ speaker.moderator.voiceId.id
+                        }}</span>
+                    </div>
                   </div>
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Avatar JoggAI</label>
-                    <select class="form-select form-select-sm" [value]="speaker.moderator.avatarId.name">
-                      <option [value]="speaker.moderator.avatarId.name">{{ speaker.moderator.avatarId.name }}</option>
-                    </select>
+                  <div class="col-12 col-md-6">
+                    <span class="d-block text-muted small mb-1">🧍 Avatar JoggAI</span>
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                      <span class="badge bg-secondary px-3 py-1 text-capitalize">{{ speaker.moderator.avatarId.name
+                        }}</span>
+                      <span class="badge text-danger bg-light border px-3 py-1 small">{{ speaker.moderator.avatarId.id
+                        }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <ng-container *ngFor="let s of speaker.items">
               <div class="col-12">
                 <div class="border rounded p-3">
@@ -91,110 +95,31 @@
                     <span class="text-muted">{{ s.stance }}</span><br />
                     <small class="text-secondary">{{ s.personality }}</small>
                   </div>
-                  <div class="d-flex gap-3">
-                    <div class="flex-fill">
-                      <label class="form-label mb-1 small">Voix ElevenLabs</label>
-                      <select class="form-select form-select-sm" [value]="s.voiceId.name">
-                        <option [value]="s.voiceId.name">{{ s.voiceId.name }}</option>
-                      </select>
+                  <div class="row gy-2 gx-4 mt-2">
+                    <div class="col-12 col-md-6">
+                      <span class="d-block text-muted small mb-1">🎙️ Voix ElevenLabs</span>
+                      <div class="d-flex flex-wrap align-items-center gap-2">
+                        <span class="badge bg-primary px-3 py-1 text-capitalize">{{ s.voiceId.name }}</span>
+                        <span class="badge text-danger bg-light border px-3 py-1 small">{{ s.voiceId.id }}</span>
+                      </div>
                     </div>
-                    <div class="flex-fill">
-                      <label class="form-label mb-1 small">Avatar JoggAI</label>
-                      <select class="form-select form-select-sm" [value]="s.avatarId.name">
-                        <option [value]="s.avatarId.name">{{ s.avatarId.name }}</option>
-                      </select>
+                    <div class="col-12 col-md-6">
+                      <span class="d-block text-muted small mb-1">🧍 Avatar JoggAI</span>
+                      <div class="d-flex flex-wrap align-items-center gap-2">
+                        <span class="badge bg-secondary px-3 py-1 text-capitalize">{{ s.avatarId.name }}</span>
+                        <span class="badge text-danger bg-light border px-3 py-1 small">{{ s.avatarId.id }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </ng-container>
           </div>
+
+
+
         </div>
       </div>
-
-      <!-- <div class="card p-3 mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="mb-0">Intervenants générés ({{ speakerCount }})</h5>
-          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-            data-bs-target="#intervenants-collapse" aria-expanded="true">
-            <span class="chevron">▼</span>
-          </button>
-        </div>
-        <div class="collapse show" id="intervenants-collapse">
-          <div class="mb-3" *ngIf="speakerLoading">
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="flex-grow-1 me-3">
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
-                </div>
-              </div>
-              <div class="loading">
-                <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
-                  <span class="visually-hidden">Chargement...</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row g-3" *ngIf="speaker && speaker.items.length > 0">
-            <div class="col-12">
-              <div class="border rounded p-3">
-                <div class="mb-2">
-                  <strong>{{ speaker.moderator.name }}</strong> — <span class="text-muted">{{ speaker.moderator.role
-                    }}</span><br />
-                  <small class="text-secondary">{{ speaker.moderator.personality }}</small>
-                </div>
-                <div class="d-flex gap-3">
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Voix</label>
-                    <select class="form-select form-select-sm">
-                      <option>{{ speaker.moderator.name }}</option>
-                      <option>Luc</option>
-                      <option>Thomas</option>
-                    </select>
-                  </div>
-                  <div class="flex-fill">
-                    <label class="form-label mb-1 small">Avatar</label>
-                    <select class="form-select form-select-sm">
-                      <option>ganatan-001</option>
-                      <option>ganatan-002</option>
-                      <option>ganatan-003</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <ng-container *ngFor="let s of speaker.items">
-              <div class="col-12">
-                <div class="border rounded p-3">
-                  <div class="mb-2">
-                    <strong>{{ s.name }}</strong> — <span class="text-muted">{{ s.stance }}</span><br />
-                    <small class="text-secondary">{{ s.personality }}</small>
-                  </div>
-                  <div class="d-flex gap-3">
-                    <div class="flex-fill">
-                      <label class="form-label mb-1 small">Voix</label>
-                      <select class="form-select form-select-sm">
-                        <option>{{ s.name }}</option>
-                        <option>Luc</option>
-                        <option>Thomas</option>
-                        <option>Julie</option>
-                      </select>
-                    </div>
-                    <div class="flex-fill">
-                      <label class="form-label mb-1 small">Avatar</label>
-                      <select class="form-select form-select-sm">
-                        <option>jogg-001</option>
-                        <option>jogg-002</option>
-                        <option>jogg-003</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div> -->
 
       <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">

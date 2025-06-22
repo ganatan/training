@@ -11,13 +11,18 @@
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
         <button class="btn btn-primary" (click)="loadSpeakers()">Générer</button>
-        <input type="number" min="2" max="10" [(ngModel)]="topicSpeakerCount" class="form-control" style="width: 70px;" />
+        <select [(ngModel)]="topicSpeakerCount" class="form-select" style="width: 70px;">
+          <option [ngValue]="2">2</option>
+          <option [ngValue]="4">4</option>
+          <option [ngValue]="6">6</option>
+          <option [ngValue]="8">8</option>
+        </select>
         <span class="form-label mb-1 fw-bold">Intervenants</span>
       </div>
-
       <div class="col-md-3 d-flex align-items-end gap-2">
         <button class="btn btn-primary" (click)="loadQuestions()">Générer</button>
-        <input type="number" min="1" max="10" [(ngModel)]="topicQuestionCount" class="form-control" style="width: 70px;" />
+        <input type="number" min="2" max="7" [(ngModel)]="topicQuestionCount" class="form-control"
+          style="width: 70px;" />
         <span class="form-label mb-1 fw-bold">Questions</span>
       </div>
     </div>
@@ -27,7 +32,87 @@
 
     <div class="col-md-6">
 
+
       <div class="card p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Intervenants générés ({{ speakerCount }})</h5>
+          <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+            data-bs-target="#intervenants-collapse" aria-expanded="true">
+            <span class="chevron">▼</span>
+          </button>
+        </div>
+
+        <div class="collapse show" id="intervenants-collapse">
+          <div class="mb-3" *ngIf="speakerLoading">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="flex-grow-1 me-3">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                </div>
+              </div>
+              <div class="loading">
+                <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                  <span class="visually-hidden">Chargement...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3" *ngIf="speaker && speaker.items.length > 0">
+            <!-- Animateur -->
+            <div class="col-12">
+              <div class="border rounded p-3">
+                <div class="mb-2">
+                  <strong>{{ speaker.moderator.name }}</strong> —
+                  <span class="text-muted">{{ speaker.moderator.role }}</span><br />
+                  <small class="text-secondary">{{ speaker.moderator.personality }}</small>
+                </div>
+                <div class="d-flex gap-3">
+                  <div class="flex-fill">
+                    <label class="form-label mb-1 small">Voix ElevenLabs</label>
+                    <select class="form-select form-select-sm" [value]="speaker.moderator.voiceId.name">
+                      <option [value]="speaker.moderator.voiceId.name">{{ speaker.moderator.voiceId.name }}</option>
+                    </select>
+                  </div>
+                  <div class="flex-fill">
+                    <label class="form-label mb-1 small">Avatar JoggAI</label>
+                    <select class="form-select form-select-sm" [value]="speaker.moderator.avatarId.name">
+                      <option [value]="speaker.moderator.avatarId.name">{{ speaker.moderator.avatarId.name }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngFor="let s of speaker.items">
+              <div class="col-12">
+                <div class="border rounded p-3">
+                  <div class="mb-2">
+                    <strong>{{ s.name }}</strong> —
+                    <span class="text-muted">{{ s.stance }}</span><br />
+                    <small class="text-secondary">{{ s.personality }}</small>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Voix ElevenLabs</label>
+                      <select class="form-select form-select-sm" [value]="s.voiceId.name">
+                        <option [value]="s.voiceId.name">{{ s.voiceId.name }}</option>
+                      </select>
+                    </div>
+                    <div class="flex-fill">
+                      <label class="form-label mb-1 small">Avatar JoggAI</label>
+                      <select class="form-select form-select-sm" [value]="s.avatarId.name">
+                        <option [value]="s.avatarId.name">{{ s.avatarId.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="mb-0">Intervenants générés ({{ speakerCount }})</h5>
           <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
@@ -78,7 +163,6 @@
                 </div>
               </div>
             </div>
-
             <ng-container *ngFor="let s of speaker.items">
               <div class="col-12">
                 <div class="border rounded p-3">
@@ -110,7 +194,7 @@
             </ng-container>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -170,27 +254,24 @@
         </div>
 
         <div class="d-flex flex-column gap-3">
-          <div class="d-flex align-items-center gap-3">
-            <div class="flex-grow-1">
-              <div class="progress">
-                <!-- <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 60%"></div> -->
-                <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated"
-                  [style.width.%]="dialogueProgress">
-                </div>
 
+          <div class="mb-3" *ngIf="dialogueLoading">
+            <div class="d-flex align-items-center gap-3">
+              <div class="flex-grow-1">
+                <div class="progress">
+                  <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated"
+                    [style.width.%]="dialogueProgress">
+                  </div>
+
+                </div>
+              </div>
+              <div class="spinner-border text-dark" role="status" *ngIf="dialogueLoading"
+                style="width: 1.5rem; height: 1.5rem;">
               </div>
             </div>
-            <!-- <div class="spinner-border text-dark" role="status" style="width: 1.5rem; height: 1.5rem;">
-              <span class="visually-hidden">Chargement...</span>
-            </div> -->
-
-            <div class="spinner-border text-dark" role="status" *ngIf="dialogueLoading"
-              style="width: 1.5rem; height: 1.5rem;">
-            </div>
-
           </div>
 
-          <div class="d-flex align-items-center gap-3">
+          <!-- <div class="d-flex align-items-center gap-3">
             <div class="flex-grow-1">
               <div class="progress">
                 <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 40%">
@@ -211,7 +292,8 @@
             <div class="spinner-border text-info" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>
             </div>
-          </div>
+          </div> -->
+
         </div>
       </div>
 

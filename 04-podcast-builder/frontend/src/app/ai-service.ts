@@ -36,9 +36,14 @@ export interface SpeakerGenerationResponse {
   error?: string;
 }
 
+export interface QuestionItem {
+  text: string;
+  enabled: boolean;
+}
+
 export interface QuestionData {
   topic: string;
-  items: string[];
+  items: QuestionItem[];
 }
 
 export interface QuestionGenerationResponse {
@@ -165,171 +170,3 @@ export class AiService {
   }
 }
 
-
-// import { Injectable, inject } from '@angular/core';
-// import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-// import { Observable, of } from 'rxjs';
-// import { catchError, delay } from 'rxjs/operators';
-// import { environment } from '../environments/environment';
-// import { reply as mockSpeakerReply } from './ai-speaker.mock';
-// import { reply as mockQuestionReply } from './ai-question.mock';
-
-// export interface Speaker {
-//   name: string;
-//   role: string;
-//   stance: string;
-//   personality: string;
-// }
-
-// export interface SpeakerData {
-//   moderator: Speaker;
-//   items: Speaker[];
-// }
-
-// export interface SpeakerGenerationResponse {
-//   success: boolean;
-//   data: SpeakerData;
-//   error?: string;
-// }
-
-// export interface QuestionData {
-//   topic: string;
-//   items: string[];
-// }
-
-// export interface QuestionGenerationResponse {
-//   success: boolean;
-//   data: QuestionData;
-//   error?: string;
-// }
-
-// export interface DialogueExchange {
-//   speaker: string;
-//   role: string;
-//   text: string;
-//   question?: string;
-// }
-
-// export interface DialogueData {
-//   topic: string;
-//   exchanges: DialogueExchange[];
-// }
-
-// export interface DialogueGenerationResponse {
-//   success: boolean;
-//   data: DialogueData;
-//   error?: string;
-// }
-
-
-// @Injectable({ providedIn: 'root' })
-// export class AiService {
-//   private baseUrl = 'http://localhost:3000/api';
-//   private http = inject(HttpClient);
-
-//   generateSpeakers(topic: string, count: number): Observable<SpeakerGenerationResponse> {
-//     if (environment.useMock) {
-//       const mockData = mockSpeakerReply(topic, count);
-//       return of({
-//         success: true,
-//         data: mockData,
-//       }).pipe(delay(1000));
-//     }
-
-//     const url = `${this.baseUrl}/podcast/speaker`;
-
-//     return this.http.post<SpeakerGenerationResponse>(url, { topic, count }).pipe(
-//       catchError((error: HttpErrorResponse) => {
-//         console.error('Erreur API:', error);
-
-//         return of({
-//           success: false,
-//           data: { moderator: { name: '', role: '', stance: '', personality: '' }, items: [] },
-//           error: this.getErrorMessage(error),
-//         });
-//       }),
-//     );
-//   }
-
-//   generateQuestions(topic: string, count: number): Observable<QuestionGenerationResponse> {
-//     if (environment.useMock) {
-//       const mockData = mockQuestionReply(topic, count);
-//       return of({
-//         success: true,
-//         data: mockData,
-//       }).pipe(delay(1000));
-//     }
-
-//     const url = `${this.baseUrl}/podcast/questions`;
-
-//     return this.http.post<QuestionGenerationResponse>(url, { topic, count }).pipe(
-//       catchError((error: HttpErrorResponse) => {
-//         console.error('Erreur API:', error);
-
-//         return of({
-//           success: false,
-//           data: { topic, items: [] },
-//           error: this.getErrorMessage(error),
-//         });
-//       }),
-//     );
-//   }
-
-//   generateDialogues(
-//     topic: string,
-//     questions: string[],
-//     speakers: Speaker[]
-//   ): Observable<DialogueGenerationResponse> {
-//     if (environment.useMock) {
-//       const mockExchanges: DialogueExchange[] = [
-//         {
-//           speaker: 'Ganatan',
-//           role: 'Animateur',
-//           text: `Bienvenue à notre débat sur : ${topic}`,
-//         },
-//         {
-//           speaker: speakers[0]?.name || 'Intervenant 1',
-//           role: speakers[0]?.stance || 'Pour',
-//           text: `Je pense que le sujet est crucial et mérite un vrai débat.`,
-//           question: questions[0] || '',
-//         },
-//         {
-//           speaker: speakers[1]?.name || 'Intervenant 2',
-//           role: speakers[1]?.stance || 'Contre',
-//           text: `Je suis d'accord sur le fond, mais pas sur la manière.`,
-//           question: questions[0] || '',
-//         },
-//       ];
-
-//       return of({
-//         success: true,
-//         data: {
-//           topic,
-//           exchanges: mockExchanges,
-//         },
-//       }).pipe(delay(1000));
-//     }
-
-//     const url = `${this.baseUrl}/podcast/dialogues`;
-//     return this.http
-//       .post<DialogueGenerationResponse>(url, { topic, questions, speakers })
-//       .pipe(
-//         catchError((error: HttpErrorResponse) => {
-//           console.error('Erreur API:', error);
-//           return of({
-//             success: false,
-//             data: { topic, exchanges: [] },
-//             error: this.getErrorMessage(error),
-//           });
-//         })
-//       );
-//   }
-
-//   private getErrorMessage(error: HttpErrorResponse): string {
-//     if (error.status === 0) {
-//       return 'Serveur inaccessible. Vérifiez votre connexion.';
-//     }
-
-//     return `Erreur ${error.status}: ${error.message}`;
-//   }
-// }

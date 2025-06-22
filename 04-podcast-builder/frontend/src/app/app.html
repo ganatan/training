@@ -55,7 +55,6 @@
               </div>
             </div>
           </div>
-
           <div class="row g-3" *ngIf="speaker && speaker.items.length > 0">
             <div class="col-12">
               <div class="border rounded p-3">
@@ -115,13 +114,74 @@
               </div>
             </ng-container>
           </div>
-
-
-
         </div>
       </div>
 
-      <div class="card p-3 mb-4">
+<div class="card p-3 mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">Questions générées ({{ questionCount }})</h5>
+    <button
+      class="btn btn-sm btn-link text-decoration-none p-0 ms-2"
+      data-bs-toggle="collapse"
+      data-bs-target="#questions-collapse"
+      aria-expanded="true">
+      <span class="chevron">▼</span>
+    </button>
+  </div>
+  <div class="collapse show" id="questions-collapse">
+    <div class="mb-3" *ngIf="questionLoading">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="flex-grow-1 me-3">
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              [style.width.%]="questionProgress">
+            </div>
+          </div>
+        </div>
+        <div
+          class="spinner-border text-primary"
+          role="status"
+          style="width: 1.5rem; height: 1.5rem;">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-sm mt-2" *ngIf="question && question.items.length > 0">
+      <thead>
+        <tr>
+          <th style="width: 40px;"></th>
+          <th>Question</th>
+          <th style="width: 120px;">Dialogues</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let q of question.items; let i = index">
+          <td>
+            <input
+              type="checkbox"
+              [(ngModel)]="q.enabled"
+              class="form-check-input" />
+          </td>
+          <td>{{ q.text }}</td>
+          <td>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              class="form-control form-control-sm"
+              [value]="2"
+              [attr.data-index]="i" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+      <!-- <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="mb-0">Questions générées ({{ questionCount }})</h5>
           <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
@@ -129,7 +189,6 @@
             <span class="chevron">▼</span>
           </button>
         </div>
-
         <div class="collapse show" id="questions-collapse">
           <div class="mb-3" *ngIf="questionLoading">
             <div class="d-flex justify-content-between align-items-center">
@@ -144,7 +203,6 @@
               </div>
             </div>
           </div>
-
           <table class="table table-bordered table-sm mt-2" *ngIf="question && question.items.length > 0">
             <thead>
               <tr>
@@ -165,7 +223,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
 
     </div>
 

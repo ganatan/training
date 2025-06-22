@@ -179,7 +179,6 @@ export class App {
         clearInterval(interval);
 
         const voiceUrl = response.success ? response.data : '';
-
         if (llm === 'chatgpt') {
           this.voiceChatgpt = voiceUrl;
           this.voiceChatgptDuration = duration;
@@ -220,9 +219,6 @@ export class App {
         const data = response.data || {};
         const url = success ? data.url : '';
         const poster = success ? data.poster : '';
-
-        console.log('00000000001:' + url)
-        console.log('00000000001:' + poster)
 
         if (llm === 'chatgpt') {
           this.videoChatgpt = url;

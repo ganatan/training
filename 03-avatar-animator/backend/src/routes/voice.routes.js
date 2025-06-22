@@ -43,9 +43,8 @@ router.post('/:llm', async (req, res) => {
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
-
     if (useMock) {
-      await generateVoiceMock(audioPath);
+      await generateVoiceMock(audioPath, llm);
       console.log('🟡 TTS MOCK -', audioPath);
     } else {
       await generateVoice(text, voiceId, audioPath);

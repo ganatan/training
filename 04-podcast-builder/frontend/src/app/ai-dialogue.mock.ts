@@ -1,10 +1,6 @@
 import { DialogueData, DialogueExchange, QuestionItem, Speaker } from './ai-service';
 
-export function reply(
-  topic: string,
-  questions: QuestionItem[],
-  speakers: Speaker[]
-): DialogueData {
+export function reply(topic: string, questions: QuestionItem[], speakers: Speaker[]): DialogueData {
   const exchanges: DialogueExchange[] = [];
 
   exchanges.push({
@@ -13,23 +9,23 @@ export function reply(
     text: `Bienvenue dans ce podcast sur le thème : "${topic}". Commençons tout de suite.`,
   });
 
-  questions.forEach((q, index) => {
+  questions.forEach((question, index) => {
     exchanges.push({
       speaker: 'Ganatan',
       role: 'Animateur',
-      text: q.text,
-      question: q.text,
+      text: question.text,
+      question: question.text,
     });
 
-    const count = q.dialogueCount ?? 1;
+    const count = question.dialogueCount ?? 1;
 
-    for (let i = 0; i < count; i++) {
-      const s1 = speakers[(index + i) % speakers.length];
+    for (let num = 0; num < count; num++) {
+      const s1 = speakers[(index + num) % speakers.length];
       exchanges.push({
         speaker: s1.name,
         role: s1.stance,
-        text: `Réponse ${i + 1} sur : ${q.text.toLowerCase()}`,
-        question: q.text,
+        text: `Réponse ${num + 1} sur : ${question.text.toLowerCase()}`,
+        question: question.text,
       });
     }
   });

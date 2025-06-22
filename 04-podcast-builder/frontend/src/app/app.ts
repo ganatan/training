@@ -82,6 +82,7 @@ export class App implements OnInit {
           },
           items: [],
         };
+
         return;
       }
 
@@ -109,6 +110,7 @@ export class App implements OnInit {
           topic: this.topic,
           items: [{ text: `Erreur : ${response.error || 'Erreur inconnue'}`, enabled: false }],
         };
+
         return;
       }
 
@@ -120,12 +122,14 @@ export class App implements OnInit {
   loadDialogues() {
     if (!this.speaker || !this.question || this.speaker.items.length === 0 || this.question.items.length === 0) {
       console.warn('Speakers ou questions manquants');
+
       return;
     }
 
-    const enabledQuestions = this.question.items.filter(q => q.enabled);
+    const enabledQuestions = this.question.items.filter(question => question.enabled);
     if (enabledQuestions.length === 0) {
       console.warn('Aucune question cochée');
+
       return;
     }
 
@@ -155,6 +159,7 @@ export class App implements OnInit {
               },
             ],
           };
+
           return;
         }
 

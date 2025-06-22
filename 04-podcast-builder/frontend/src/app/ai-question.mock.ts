@@ -20,9 +20,9 @@ export function reply(topic: string, count = 4) {
   const dialogueCount = environment.useMock ? 2 : 2;
 
   const items = angularVsReactQuestions.slice(0, count).map((text) => ({
-    text,
+    text: text,
     enabled: true,
-    dialogueCount,
+    dialogueCount: dialogueCount,
   }));
 
   return {

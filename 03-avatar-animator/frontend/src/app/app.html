@@ -6,24 +6,30 @@
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-lg-3">
       <label class="form-label" for="title">Nom / Titre</label>
-      <input type="text" class="form-control" [(ngModel)]="name" [readonly]="useMock">
+      <input id="title" type="text" class="form-control" [(ngModel)]="name" [readonly]="useMock" />
     </div>
+
     <div class="col-12 col-lg-3">
       <label class="form-label" for="type">Type</label>
-      <select class="form-select" [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
+      <select id="type" class="form-select" [(ngModel)]="type" (ngModelChange)="onTypeChange($event)"
+        [disabled]="useMock">
         <option value="biography">Biographie de réalisateur</option>
         <option value="summary">Résumé de film</option>
       </select>
     </div>
+
     <div class="col-12 col-lg-3">
       <label class="form-label" for="style">Style</label>
-      <select class="form-select" [(ngModel)]="style" (ngModelChange)="onStyleChange($event)">
+      <select id="style" class="form-select" [(ngModel)]="style" (ngModelChange)="onStyleChange($event)"
+        [disabled]="useMock">
         <option *ngFor="let s of styleOptions" [value]="s.value">{{ s.label }}</option>
       </select>
     </div>
+
     <div class="col-12 col-lg-3">
       <label class="form-label" for="length">Longueur</label>
-      <select class="form-select" [(ngModel)]="length" (ngModelChange)="onLengthChange($event)">
+      <select id="length" class="form-select" [(ngModel)]="length" (ngModelChange)="onLengthChange($event)"
+        [disabled]="useMock">
         <option value="short">Courte</option>
         <option value="medium">Moyenne</option>
         <option value="long">Longue</option>

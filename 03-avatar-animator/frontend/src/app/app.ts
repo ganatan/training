@@ -198,6 +198,7 @@ export class App {
     const start = performance.now();
     const interval = this.startVideoProgress(llm);
     this.videoChatgptKey = false;
+
     if (llm === 'chatgpt') {
       this.videoChatgptLoading = true;
       this.videoChatgpt = '';
@@ -214,19 +215,38 @@ export class App {
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        console.log('00000000001:' + JSON.stringify(response));
+
+        const success = response.success;
+        const data = response.data || {};
+        const url = success ? data.url : '';
+        const poster = success ? data.poster : '';
+
+        // if (llm === 'chatgpt') {
+        //   this.videoChatgpt = response.data.url;
+        //   this.videoPosterChatgpt = response.data.poster;
+        //   this.videoChatgptDuration = duration;
+        //   this.videoChatgptLoading = false;
+        //   this.videoChatgptProgress = 100;
+        // } else {
+        //   this.videoClaude = response.data.url;
+        //   this.videoPosterClaude = response.data.poster;
+        //   this.videoClaudeDuration = duration;
+        //   this.videoClaudeLoading = false;
+        //   this.videoClaudeProgress = 100;
+        // }
+
         if (llm === 'chatgpt') {
-          this.videoChatgpt = response.data.url;
-          this.videoPosterChatgpt = response.data.poster;
+          this.videoChatgpt = url;
+          this.videoPosterChatgpt = poster;
           this.videoChatgptDuration = duration;
           this.videoChatgptLoading = false;
-          this.videoChatgptProgress = 100;
+          this.videoChatgptProgress = success ? 100 : 0;
         } else {
-          this.videoClaude = response.data.url;
-          this.videoPosterClaude = response.data.poster;
+          this.videoClaude = url;
+          this.videoPosterClaude = poster;
           this.videoClaudeDuration = duration;
           this.videoClaudeLoading = false;
-          this.videoClaudeProgress = 100;
+          this.videoClaudeProgress = success ? 100 : 0;
         }
       });
   }
@@ -290,8 +310,8 @@ export class App {
     const interval = setInterval(() => {
       progress += 5;
       if (progress >= 95) return;
-      if (llm === 'chatgpt') this.voiceChatgptProgress = progress;
-      else this.voiceClaudeProgress = progress;
+      if (llm === 'chatgpt') this.videoChatgptProgress = progress;
+      else this.videoClaudeProgress = progress;
     }, 100);
 
     return interval;

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import testJoggAI from '../services/video/test-joggai.js';
 
+import generateVideo from '../services/video/video.service.js';
 import generateVideoMock from '../mocks/video/video.mock.js';
 
 dotenv.config();
@@ -48,10 +49,11 @@ router.post('/:llm', async (req, res) => {
     const fullUrlVideo = `${req.protocol}://${req.get('host')}${publicPathVideo}`;
     const fullUrlPoster = `${req.protocol}://${req.get('host')}${publicPathPoster}`;
 
-    let dataVideo = {
+    const dataVideo = {
       url: fullUrlVideo,
       poster: fullUrlPoster,
-    }
+    };
+
     return res.json({
       success: true,
       data: dataVideo,

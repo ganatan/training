@@ -10,14 +10,14 @@ export default async function generateVideoMock(outputPath, llm = 'chatgpt') {
 
   const selectedLLM = ['chatgpt', 'claude'].includes(llm) ? llm : 'chatgpt';
 
-  const basePath = path.resolve(`src/mocks/video`);
+  const basePath = path.resolve('src/mocks/video');
   const baseName = `ridley-scott-${selectedLLM}`;
 
   const sourceMp4 = path.join(basePath, `${baseName}.mp4`);
   const sourcePng = path.join(basePath, `${baseName}.png`);
 
-  if (!fs.existsSync(sourceMp4)) throw new Error(`Fichier MP4 introuvable : ${sourceMp4}`);
-  if (!fs.existsSync(sourcePng)) throw new Error(`Fichier PNG introuvable : ${sourcePng}`);
+  if (!fs.existsSync(sourceMp4)) { throw new Error(`Fichier MP4 introuvable : ${sourceMp4}`); }
+  if (!fs.existsSync(sourcePng)) { throw new Error(`Fichier PNG introuvable : ${sourcePng}`); }
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
@@ -26,22 +26,3 @@ export default async function generateVideoMock(outputPath, llm = 'chatgpt') {
 
   return outputPath;
 }
-
-
-// import fs from 'fs';
-// import path from 'path';
-
-// function delay(ms) {
-//   return new Promise(resolve => setTimeout(resolve, ms));
-// }
-
-// export default async function generateVideoMock(outputPath, llm = 'chatgpt') {
-//   await delay(1000);
-//   const selectedLLM = ['chatgpt', 'claude'].includes(llm) ? llm : 'chatgpt';
-//   const sourceFile = path.resolve(`src/mocks/video/ridley-scott-${selectedLLM}.mp4`);
-//   if (!fs.existsSync(sourceFile)) { throw new Error(`Fichier mock introuvable : ${sourceFile}`); }
-//   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-//   fs.copyFileSync(sourceFile, outputPath);
-
-//   return outputPath;
-// }

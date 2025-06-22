@@ -1,37 +1,69 @@
 import axios from 'axios';
 import fs from 'fs';
 
+
 async function generateVideo({ script, avatarId, voiceId, outputPath }) {
   try {
+    const key = process.env.JOGGAI_API_KEY;
+    console.log('🔑 API Key:', key);
 
-    let key = process.env.JOGGAI_API_KEY;
-    console.log('00000000001:' + key);
-    let body = {
-      "script": "Test de Video avec JoggAI",
-      "aspect_ratio": 0,
-      "screen_style": 1,
-      "avatar_id": 1025,
-      "avatar_type": 0,
-      "voice_id": "en-US-ChristopherNeural",
-      "caption": false
+    const body = {
+      script: script,
+      aspect_ratio: 0,
+      screen_style: 1,
+      avatar_id: 1025,
+      avatar_type: 0,
+      voice_id: voiceId,
+      caption: false
     };
-
 
     const options = {
       method: 'POST',
-      headers: { 'x-api-key': key },
-      body: body,
+      headers: {
+        'x-api-key': key,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
     };
-
 
     const response = await fetch('https://api.jogg.ai/v1/create_video_from_talking_avatar', options);
     const data = await response.json();
-    console.log('✅ Données avatars reçues :', data);
+    console.log('✅ Réponse JoggAI :', data);
 
   } catch (error) {
-    console.error('❌ Erreur lors de la récupération des avatars :', error.message);
+    console.error('❌ Erreur JoggAI :', error.message);
   }
 }
+
+// async function generateVideo({ script, avatarId, voiceId, outputPath }) {
+//   try {
+
+//     let key = process.env.JOGGAI_API_KEY;
+//     console.log('00000000001:' + key);
+//     let body = {
+//       "script": "Test de Video avec JoggAI",
+//       "aspect_ratio": 0,
+//       "screen_style": 1,
+//       "avatar_id": 1025,
+//       "avatar_type": 0,
+//       "voice_id": "en-US-ChristopherNeural",
+//       "caption": false
+//     };
+
+//     const options = {
+//       method: 'POST',
+//       headers: { 'x-api-key': key },
+//       body: body,
+//     };
+
+//     const response = await fetch('https://api.jogg.ai/v1/create_video_from_talking_avatar', options);
+//     const data = await response.json();
+//     console.log('✅ Données avatars reçues :', data);
+
+//   } catch (error) {
+//     console.error('❌ Erreur lors de la récupération des avatars :', error.message);
+//   }
+// }
 
 
     // let body = {

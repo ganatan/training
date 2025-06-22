@@ -71,7 +71,7 @@ router.post('/:llm', async (req, res) => {
 });
 
 router.get('/health/lva', async (req, res) => {
-  const avatarId = process.env.JOGGAI__AVATAR_ID || '2222';
+  const avatarId = process.env.JOGGAI__AVATAR_ID || '1025';
   const result = await testJoggAI(avatarId);
   res.json({ success: result });
 });

@@ -50,18 +50,40 @@
   --header 'x-api-key: <your-api-key>' ^
   --header 'Content-Type: application/json' ^
   --data-raw '{
-      "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",
+      "script": "Test de Video avec JoggAI",
       "aspect_ratio": 0,
       "screen_style": 1,
       "avatar_id": 1025,
       "avatar_type": 0,
       "voice_id": "en-US-ChristopherNeural",
-      "caption": true   
+      "caption": false   
   }'
+
+  Response
+  {
+      "rid": "369b8b3fadc7762500e42a4c1fca1088",
+      "code": 0,
+      "msg": "success",
+      "data": {
+          "project_id": "xxxx"
+      }
+  }
 
   # Recuperer les infos project
 
-curl --location --request GET 'https://api.jogg.ai/v1/project?project_id=xxxx_id' \
+curl --location --request GET 'https://api.jogg.ai/v1/project?project_id=d65c2a57c0e543179ee3ccdf7aceaf2f' \
 --header 'x-api-key: <your-api-key>' \
 
+# Code javascript
+
+  const options = {
+    method: 'POST',
+    headers: {'x-api-key': '<api-key>', 'Content-Type': 'application/json'},
+    body: '{"product_id":"NTIzMzc0NjI5","aspect_ratio":0,"video_length":"15","language":"english","avatar_id":1,"avatar_type":0,"voice_id":"en-US-ChristopherNeural","music_id":13,"script_style":"Storytime","visual_style":"Simple Product Switch","template_id":123,"template_type":"public","override_script":"","caption":true}'
+  };
+
+  fetch('https://api.jogg.ai/v1/create_video_from_url', options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
 

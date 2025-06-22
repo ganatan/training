@@ -8,7 +8,7 @@ function delay(ms) {
 export default async function generateVoiceMock(outputPath, llm = 'chatgpt') {
   await delay(1000);
   const selectedLLM = ['chatgpt', 'claude'].includes(llm) ? llm : 'chatgpt';
-  const sourceFile = path.resolve(`src/mocks/voice/ridley-scott-${selectedLLM}.mp3`);
+  const sourceFile = path.resolve(`src/mocks/voices/ridley-scott-${selectedLLM}.mp3`);
   if (!fs.existsSync(sourceFile)) { throw new Error(`Fichier mock introuvable : ${sourceFile}`); }
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.copyFileSync(sourceFile, outputPath);

@@ -7,28 +7,28 @@
   },
   "items": [
     {
-      "name": "Thomas",
+      "name": "Sophie",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Développeur web expérimenté, passionné par les nouvelles technologies et l'efficacité du développement front-end."
-    },
-    {
-      "name": "Chiara",
-      "role": "Intervenant",
-      "stance": "Pour",
-      "personality": "Chef de projet agile avec un fort intérêt pour les frameworks modernes et leur impact sur la productivité de l'équipe."
-    },
-    {
-      "name": "Anika",
-      "role": "Intervenant",
-      "stance": "Contre",
-      "personality": "Architecte logiciel senior qui préfère les solutions éprouvées et est sceptique quant à l'adoption rapide de nouvelles librairies sans tests approfondis."
+      "personality": "Developpeuse front-end passionnée, Sophie aime la structure et l'efficacité que React apporte aux grands projets."
     },
     {
       "name": "Luis",
       "role": "Intervenant",
+      "stance": "Pour",
+      "personality": "Architecte logiciel, Luis préfère React pour sa flexibilité et son écosystème riche."
+    },
+    {
+      "name": "Anja",
+      "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Programmeur polyvalent qui valorise la stabilité et la compatibilité à long terme dans les choix technologiques pour des entreprises de grande envergure."
+      "personality": "Anja, cheffe de projet, trouve Angular plus robuste pour la gestion des applications d'entreprise complexes."
+    },
+    {
+      "name": "Marco",
+      "role": "Intervenant",
+      "stance": "Contre",
+      "personality": "Marco est développeur senior en JavaScript et favorise Angular pour son intégration complète et son support par Google."
     }
   ]
 }

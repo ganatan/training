@@ -10,20 +10,23 @@
         <input type="text" class="form-control" name="topic" [(ngModel)]="topic" placeholder="" />
       </div>
       <div class="col-md-3 d-flex align-items-end gap-2">
-        <button class="btn btn-primary" (click)="loadSpeaker()">Générer</button>
-        <input type="number" min="1" max="10" value="4" class="form-control" style="width: 70px;" />
+        <button class="btn btn-primary" (click)="loadSpeakers()">Générer</button>
+        <input type="number" min="2" max="10" [(ngModel)]="topicSpeakerCount" class="form-control" style="width: 70px;" />
         <span class="form-label mb-1 fw-bold">Intervenants</span>
       </div>
+
       <div class="col-md-3 d-flex align-items-end gap-2">
-        <button class="btn btn-primary">Générer</button>
-        <input type="number" min="1" max="10" value="7" class="form-control" style="width: 70px;" />
+        <button class="btn btn-primary" (click)="loadQuestions()">Générer</button>
+        <input type="number" min="1" max="10" [(ngModel)]="topicQuestionCount" class="form-control" style="width: 70px;" />
         <span class="form-label mb-1 fw-bold">Questions</span>
       </div>
     </div>
   </div>
 
   <div class="row g-4">
+
     <div class="col-md-6">
+
       <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="mb-0">Intervenants générés ({{ speakerCount }})</h5>
@@ -109,20 +112,22 @@
         </div>
       </div>
 
-      <!-- <div class="card p-3 mb-4">
+      <div class="card p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="mb-0">Questions générées</h5>
+          <h5 class="mb-0">Questions générées ({{ questionCount }})</h5>
           <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
             data-bs-target="#questions-collapse" aria-expanded="true">
             <span class="chevron">▼</span>
           </button>
         </div>
+
         <div class="collapse show" id="questions-collapse">
-          <div class="mb-3">
+          <div class="mb-3" *ngIf="questionLoading">
             <div class="d-flex justify-content-between align-items-center">
               <div class="flex-grow-1 me-3">
                 <div class="progress">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                  <div class="progress-bar progress-bar-striped progress-bar-animated"
+                    [style.width.%]="questionProgress"></div>
                 </div>
               </div>
               <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
@@ -130,7 +135,8 @@
               </div>
             </div>
           </div>
-          <table class="table table-bordered table-sm mt-2">
+
+          <table class="table table-bordered table-sm mt-2" *ngIf="question && question.items.length > 0">
             <thead>
               <tr>
                 <th style="width: 40px;"></th>
@@ -139,37 +145,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let q of question.items; let i = index">
                 <td><input type="checkbox" /></td>
-                <td>Est-ce que Angular est trop rigide pour les projets modernes ?</td>
-                <td><input type="number" min="1" max="10" class="form-control form-control-sm" value="2" /></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>React favorise-t-il une meilleure modularité à long terme ?</td>
-                <td><input type="number" min="1" max="10" class="form-control form-control-sm" value="2" /></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>Quel framework est le plus adapté aux équipes débutantes ?</td>
-                <td><input type="number" min="1" max="10" class="form-control form-control-sm" value="2" /></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>Angular est-il dépassé face à la popularité de React ?</td>
-                <td><input type="number" min="1" max="10" class="form-control form-control-sm" value="2" /></td>
+                <td>{{ q }}</td>
+                <td>
+                  <input type="number" min="1" max="10" class="form-control form-control-sm" [value]="2"
+                    [attr.data-index]="i" />
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div> -->
+      </div>
+
     </div>
 
     <div class="col-md-6">
 
       <div class="card p-3 mb-4">
         <div class="d-flex gap-2 flex-wrap mb-3">
-          <button class="btn btn-dark flex-fill">Générer dialogues</button>
+          <button class="btn btn-dark flex-fill" (click)="loadDialogues()">Générer dialogues</button>
           <button class="btn btn-success flex-fill">Générer voix</button>
           <button class="btn btn-info flex-fill">Générer vidéos</button>
         </div>
@@ -178,12 +173,21 @@
           <div class="d-flex align-items-center gap-3">
             <div class="flex-grow-1">
               <div class="progress">
-                <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 60%"></div>
+                <!-- <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 60%"></div> -->
+                <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated"
+                  [style.width.%]="dialogueProgress">
+                </div>
+
               </div>
             </div>
-            <div class="spinner-border text-dark" role="status" style="width: 1.5rem; height: 1.5rem;">
+            <!-- <div class="spinner-border text-dark" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>
+            </div> -->
+
+            <div class="spinner-border text-dark" role="status" *ngIf="dialogueLoading"
+              style="width: 1.5rem; height: 1.5rem;">
             </div>
+
           </div>
 
           <div class="d-flex align-items-center gap-3">
@@ -211,117 +215,46 @@
         </div>
       </div>
 
-      <!-- <div class="card p-4 m-1">
+      <div class="card p-4 m-1" *ngIf="dialogue && dialogue.exchanges.length > 0">
+        <ng-container *ngFor="let d of dialogue.exchanges; let i = index">
+          <div class="card p-4 m-1">
+            <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn" [ngClass]="{
+              'btn-outline-secondary': d.role === 'Animateur' || d.role === 'Neutre',
+              'btn-outline-dark': d.role !== 'Animateur' && d.role !== 'Neutre'
+            }">
+                  {{ i === 0 ? 'Introduction' : i === dialogue.exchanges.length - 1 ? 'Conclusion' : d.question ?
+                  'Réplique' : 'Dialogue' }}
+                </button>
+                <span class="badge" [ngClass]="{
+              'bg-secondary': d.role === 'Animateur' || d.role === 'Neutre',
+              'bg-dark': d.role !== 'Animateur' && d.role !== 'Neutre'
+            }">{{ d.speaker }}</span>
+                <span class="text-muted small-text" *ngIf="d.role !== 'Animateur'">Voix + Vidéo prêtes</span>
+              </div>
+              <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#dialogue-' + i" [attr.aria-expanded]="true">
+                <span class="chevron">▼</span>
+              </button>
+            </div>
 
-        <div class="card p-4 m-1">
-          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-outline-secondary">Introduction</button>
-              <span class="badge bg-secondary">Ganatan</span>
-              <span class="text-muted small-text">Animateur</span>
-            </div>
-            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-              data-bs-target="#dialogue-ganatan-1" aria-expanded="true">
-              <span class="chevron">▼</span>
-            </button>
-          </div>
-          <div class="collapse show" id="dialogue-ganatan-1">
-            <p class="mb-3">
-              <strong>Ganatan :</strong> Bonjour à tous et bienvenue dans ce nouveau podcast où nous allons plonger en
-              profondeur dans un débat technique qui passionne les développeurs depuis plusieurs années : Angular contre
-              React.
-              Camille, Alexis, préparez-vous, on commence dans un instant.
-            </p>
-            <div class="d-flex gap-3">
-              <audio controls class="w-50">
-                <source src="assets/audio/ganatan-1.mp3" type="audio/mpeg" />
-              </audio>
-              <video controls class="w-50 rounded">
-                <source src="assets/video/ganatan-1.mp4" type="video/mp4" />
-              </video>
+            <div class="collapse show" [id]="'dialogue-' + i">
+              <p class="mb-3">
+                <strong>{{ d.speaker }} :</strong> {{ d.text }}
+              </p>
+              <div class="d-flex gap-3">
+                <audio controls class="w-50">
+                  <source [src]="'assets/audio/' + d.speaker.toLowerCase() + '-' + i + '.mp3'" type="audio/mpeg" />
+                </audio>
+                <video controls class="w-50 rounded">
+                  <source [src]="'assets/video/' + d.speaker.toLowerCase() + '-' + i + '.mp4'" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="card p-4 m-1">
-          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-outline-dark">Dialogue</button>
-              <span class="badge bg-dark">Camille</span>
-              <span class="text-muted small-text">Voix + Vidéo prêtes</span>
-            </div>
-            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-              data-bs-target="#dialogue-camille-1" aria-expanded="true">
-              <span class="chevron">▼</span>
-            </button>
-          </div>
-          <div class="collapse show" id="dialogue-camille-1">
-            <p class="mb-3"><strong>Camille :</strong> Je pense qu’Angular offre une architecture robuste qui sécurise
-              les projets à grande échelle.</p>
-            <div class="d-flex gap-3">
-              <audio controls class="w-50">
-                <source src="assets/audio/camille-1.mp3" type="audio/mpeg" />
-              </audio>
-              <video controls class="w-50 rounded">
-                <source src="assets/video/camille-1.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-4 m-1">
-          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-outline-dark">Réplique</button>
-              <span class="badge bg-dark">Alexis</span>
-              <span class="text-muted small-text">Voix + Vidéo prêtes</span>
-            </div>
-            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-              data-bs-target="#dialogue-alexis-1" aria-expanded="true">
-              <span class="chevron">▼</span>
-            </button>
-          </div>
-          <div class="collapse show" id="dialogue-alexis-1">
-            <p class="mb-3"><strong>Alexis :</strong> Justement, cette rigidité bride la créativité. React me paraît
-              plus souple et intuitif.</p>
-            <div class="d-flex gap-3">
-              <audio controls class="w-50">
-                <source src="assets/audio/alexis-1.mp3" type="audio/mpeg" />
-              </audio>
-              <video controls class="w-50 rounded">
-                <source src="assets/video/alexis-1.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <div class="card p-4 m-1">
-          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-outline-secondary">Conclusion</button>
-              <span class="badge bg-secondary">Ganatan</span>
-              <span class="text-muted small-text">Animateur</span>
-            </div>
-            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-              data-bs-target="#dialogue-ganatan-2" aria-expanded="true">
-              <span class="chevron">▼</span>
-            </button>
-          </div>
-          <div class="collapse show" id="dialogue-ganatan-2">
-            <p class="mb-3"><strong>Ganatan :</strong> Merci à tous les deux. On voit bien que le choix entre Angular et
-              React dépend du contexte, des équipes et des objectifs du projet.</p>
-            <div class="d-flex gap-3">
-              <audio controls class="w-50">
-                <source src="assets/audio/ganatan-2.mp3" type="audio/mpeg" />
-              </audio>
-              <video controls class="w-50 rounded">
-                <source src="assets/video/ganatan-2.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
+        </ng-container>
+      </div>
     </div>
   </div>
 

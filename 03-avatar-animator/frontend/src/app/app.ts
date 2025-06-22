@@ -221,19 +221,8 @@ export class App {
         const url = success ? data.url : '';
         const poster = success ? data.poster : '';
 
-        // if (llm === 'chatgpt') {
-        //   this.videoChatgpt = response.data.url;
-        //   this.videoPosterChatgpt = response.data.poster;
-        //   this.videoChatgptDuration = duration;
-        //   this.videoChatgptLoading = false;
-        //   this.videoChatgptProgress = 100;
-        // } else {
-        //   this.videoClaude = response.data.url;
-        //   this.videoPosterClaude = response.data.poster;
-        //   this.videoClaudeDuration = duration;
-        //   this.videoClaudeLoading = false;
-        //   this.videoClaudeProgress = 100;
-        // }
+        console.log('00000000001:' + url)
+        console.log('00000000001:' + poster)
 
         if (llm === 'chatgpt') {
           this.videoChatgpt = url;

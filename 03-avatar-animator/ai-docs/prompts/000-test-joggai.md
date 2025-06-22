@@ -4,6 +4,12 @@
 # Test de fonctionnement de l'API joggAI via le backend
   http://localhost:3000/api/video/health/lva
 
+# Test de fonctionnement de l'API fichiers
+  http://localhost:3000/storage/voices/ridley-scott-chatgpt.mp3
+  
+  http://localhost:3000/storage/videos/ridley-scott-chatgpt.mp4
+  http://localhost:3000/storage/videos/ridley-scott-chatgpt.png
+
 # Site JoggAI
 
   site        https://www.jogg.ai/
@@ -37,8 +43,6 @@
     --url https://api.jogg.ai/v1/voices ^
     --header 'accept: application/json' ^
     --header 'x-api-key: <api-key>'
-
-
 
   # Creer une video
 

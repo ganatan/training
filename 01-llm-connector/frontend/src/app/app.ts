@@ -23,6 +23,7 @@ export class App {
   chatgptLoading = false;
   claudeLoading = false;
   chatgptError: string | null = null;
+  claudeError: string | null = null;
 
   chatgptDuration = 0;
   claudeDuration = 0;
@@ -83,18 +84,15 @@ export class App {
       .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        let data = response.data;
-        if (!response.success) {
-          data = response.error || 'Erreur inconnue';
-        }
         if (llm === 'chatgpt') {
-          this.chatgptError = response.success ? null : data;
-          this.contentChatgpt = data;
+          this.chatgptError = response.success ? null : response.error || null;
+          this.contentChatgpt = response.data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;
           this.chatgptProgress = 100;
         } else {
-          this.contentClaude = data;
+          this.claudeError = response.success ? null : response.error || null;
+          this.contentClaude = response.data;
           this.claudeDuration = duration;
           this.claudeLoading = false;
           this.claudeProgress = 100;
@@ -104,10 +102,12 @@ export class App {
 
   resetContent(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
+      this.chatgptError = '';
       this.contentChatgpt = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
     } else {
+      this.claudeError = '';
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;

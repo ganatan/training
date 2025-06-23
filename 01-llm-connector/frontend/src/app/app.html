@@ -59,22 +59,22 @@
             </div>
             <div *ngIf="chatgptLoading && !contentChatgpt && !chatgptError"
               class="alert alert-warning alert-dismissible fade show" role="alert">
-              ⏳ Réponse en cours de traitement...
+              ⏳ Réponse de OpenAI en cours de traitement...
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div *ngIf="chatgptLoading && chatgptError" class="alert alert-danger alert-dismissible fade show"
+            <div *ngIf="chatgptError" class="alert alert-danger alert-dismissible fade show"
               role="alert">
               ❌ {{ chatgptError }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div *ngIf="contentChatgpt && !chatgptError"
-              class="alert alert-success alert-dismissible fade show" role="alert">
-              ✅ Réponse reçue avec succès.
+            <div *ngIf="contentChatgpt && !chatgptError" class="alert alert-success alert-dismissible fade show"
+              role="alert">
+              ✅ Réponse de OpenAI reçue avec succès.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div class="mt-3">
-              <textarea class="form-control" [value]="contentChatgpt" readonly rows="6"></textarea>
-            </div>
+          </div>
+          <div class="mt-3">
+            <textarea class="form-control" [value]="contentChatgpt" readonly rows="6"></textarea>
           </div>
         </div>
       </div>
@@ -99,6 +99,27 @@
             </div>
             <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div *ngIf="claudeLoading" class="alert alert-info alert-dismissible fade show" role="alert">
+              📨 Requête envoyée à Anthropic...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="claudeLoading && !contentClaude && !claudeError"
+              class="alert alert-warning alert-dismissible fade show" role="alert">
+              ⏳ Réponse de Anthropic en cours de traitement...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="claudeError" class="alert alert-danger alert-dismissible fade show"
+              role="alert">
+              ❌ {{ claudeError }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="contentClaude && !claudeError" class="alert alert-success alert-dismissible fade show"
+              role="alert">
+              ✅ Réponse de Anthropic reçue avec succès.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
           </div>
           <div class="mt-3">

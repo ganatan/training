@@ -272,9 +272,11 @@
             </div>
           </div>
         </div>
+
         <div class="card p-4 mt-3">
           <div class="d-flex align-items-center gap-2 btn-group-responsive">
             <button class="btn btn-outline-primary">Avatar - JoggAI</button>
+            <button class="btn btn-outline-primary">🔍 Vérifier</button>
             <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
             <span class="badge bg-primary">Avatar OK ✓</span>
             <span class="text-primary ms-auto small-text">Réponse en 3.4s</span>
@@ -285,6 +287,25 @@
           </div>
           <div class="collapse show" id="avatar-chatgpt">
             <div class="mt-3">
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="alert alert-info" role="alert">
+                ✅ Demande envoyée à JoggAI
+              </div>
+              <div class="alert alert-success" role="alert">
+                ✅ Vidéo disponible et prête à être lue
+              </div>
+              <div class="alert alert-warning" role="alert">
+                ⏳ Vidéo en cours de génération, réessayez plus tard
+              </div>
+              <div class="alert alert-danger" role="alert">
+                ❌ Échec lors de la vérification de la vidéo
+              </div>
+            </div>
+            <div class="mt-3">
               <video controls class="w-100 rounded" poster="./assets/videos/ridley-scott-chatgpt.png">
                 <source src="./assets/videos/ridley-scott-chatgpt.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la vidéo.
@@ -292,6 +313,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
       <div class="col-md-6">

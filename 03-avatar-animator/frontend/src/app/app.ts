@@ -27,6 +27,10 @@ export class App {
   contentClaude = '';
   chatgptLoading = false;
   claudeLoading = false;
+  chatgptError: string | null = null;
+  claudeError: string | null = null;
+  voiceChatgptError: string | null = null;
+  voiceClaudeError: string | null = null;
 
   videoChatgptKey = false;
 
@@ -118,17 +122,15 @@ export class App {
       .subscribe((response: ContentGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-        let data = response.data;
-        if (!response.success) {
-          data = response.error || 'Erreur inconnue';
-        }
         if (llm === 'chatgpt') {
-          this.contentChatgpt = data;
+          this.chatgptError = response.success ? null : response.error || null;
+          this.contentChatgpt = response.data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;
           this.chatgptProgress = 100;
         } else {
-          this.contentClaude = data;
+          this.claudeError = response.success ? null : response.error || null;
+          this.contentClaude = response.data;
           this.claudeDuration = duration;
           this.claudeLoading = false;
           this.claudeProgress = 100;
@@ -138,6 +140,8 @@ export class App {
 
   resetContent(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
+      this.chatgptError = '';
+      this.voiceChatgptError = '';
       this.contentChatgpt = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
@@ -146,6 +150,8 @@ export class App {
       this.videoChatgpt = '';
       this.videoChatgptDuration = 0;
     } else {
+      this.claudeError = '';
+      this.voiceClaudeError = '';
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
@@ -179,12 +185,15 @@ export class App {
         clearInterval(interval);
 
         const voiceUrl = response.success ? response.data : '';
+
         if (llm === 'chatgpt') {
+          this.voiceChatgptError = response.success ? null : response.error || null;
           this.voiceChatgpt = voiceUrl;
           this.voiceChatgptDuration = duration;
           this.voiceChatgptLoading = false;
           this.voiceChatgptProgress = 100;
         } else {
+          this.voiceClaudeError = response.success ? null : response.error || null;
           this.voiceClaude = voiceUrl;
           this.voiceClaudeDuration = duration;
           this.voiceClaudeLoading = false;

@@ -267,6 +267,9 @@ export class App {
     const id = llm === 'chatgpt' ? this.videoChatgptId : this.videoClaudeId;
     if (!id) return;
 
+    const start = performance.now();
+    const interval = this.startVideoProgress(llm);
+
     if (llm === 'chatgpt') {
       this.videoChatgpt = '';
       this.videoPosterChatgpt = '';
@@ -278,7 +281,6 @@ export class App {
       this.videoClaude = '';
       this.videoPosterClaude = '';
       this.videoCheckClaudeLoading = true;
-      this.videoClaudeId = null;
       this.videoClaudeDuration = 0;
       this.videoClaudeProgress = 0;
       this.videoCheckClaudeError = null;
@@ -287,27 +289,26 @@ export class App {
     this.aiService
       .checkVideo(llm, id)
       .subscribe((response: VideoCheckResponse) => {
-        if (!response.success || !response.ready) return;
+        const duration = (performance.now() - start) / 1000;
+        clearInterval(interval);
 
         const { url, poster } = response;
-
 
         if (llm === 'chatgpt') {
           this.videoChatgpt = url;
           this.videoPosterChatgpt = poster;
-          this.videoCheckChatgptLoading = true;
-          this.videoChatgptDuration = 0;
-          this.videoChatgptProgress = 0;
+          this.videoCheckChatgptLoading = false;
+          this.videoChatgptDuration = duration;
+          this.videoChatgptProgress = 100;
           this.videoCheckChatgptError = null;
         } else {
           this.videoClaude = url;
           this.videoPosterClaude = poster;
-          this.videoCheckClaudeLoading = true;
-          this.videoClaudeDuration = 0;
-          this.videoClaudeProgress = 0;
+          this.videoCheckClaudeLoading = false;
+          this.videoClaudeDuration = duration;
+          this.videoClaudeProgress = 100;
           this.videoCheckClaudeError = null;
         }
-
       });
   }
 

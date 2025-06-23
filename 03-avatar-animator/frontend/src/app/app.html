@@ -142,7 +142,8 @@
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="btn-group-responsive d-flex align-items-center gap-2 flex-wrap">
             <button class="btn btn-outline-primary" (click)="loadVideo('chatgpt')">Avatar - JoggAI</button>
-            <button class="btn btn-outline-primary" (click)="checkVideo('chatgpt')">🔍 Vérifier</button>
+            <button class="btn btn-outline-primary" (click)="checkVideo('chatgpt')" [disabled]="!videoChatgptId">🔍
+              Vérifier</button>
             <span *ngIf="videoChatgpt && !videoChatgptLoading" class="badge bg-primary">Avatar OK ✓</span>
             <span *ngIf="videoChatgptDuration > 0" class="text-primary small-text">
               Réponse en {{ videoChatgptDuration.toFixed(1) }}s
@@ -153,11 +154,14 @@
             <span class="chevron">▼</span>
           </button>
         </div>
-        <div class="collapse show" id="avatar-chatgpt">
-          <div class="mt-3">
-            <div *ngIf="videoChatgptLoading" class="progress">
+        <div class="position-relative collapse show" id="avatar-chatgpt">
+          <div *ngIf="videoChatgptLoading || videoCheckChatgptLoading" class="d-flex align-items-center gap-3">
+            <div class="progress flex-grow-1">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
                 [style.width.%]="videoChatgptProgress"></div>
+            </div>
+            <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+              <span class="visually-hidden">Chargement...</span>
             </div>
           </div>
           <div class="mt-3">
@@ -199,30 +203,6 @@
               ✅ Réponse de JoggAI (check) reçue avec succès.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <!--
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              ⏳ Réponse de JoggAI en cours de traitement...
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-success" role="alert">
-              ✅ Vidéo disponible et prête à être lue
-            </div>
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              ⏳ Vidéo en cours de génération, réessayez plus tard
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              ❌ Échec lors de la vérification de la vidéo
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              ❌ Une erreur est survenue lors de l'appel à JoggAI.
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-success alert-dismissible" role="alert">
-              ✅ Réponse de JoggAI reçue avec succès.
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> -->
           </div>
           <div class="mt-3" *ngIf="videoChatgpt">
             <video controls class="w-100 rounded" [attr.poster]="videoPosterChatgpt">
@@ -339,7 +319,8 @@
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="btn-group-responsive d-flex align-items-center gap-2 flex-wrap">
             <button class="btn btn-outline-success" (click)="loadVideo('claude')">Avatar - JoggAI</button>
-            <button class="btn btn-outline-success" (click)="checkVideo('claude')">🔍 Vérifier</button>
+            <button class="btn btn-outline-success" (click)="checkVideo('claude')" [disabled]="!videoClaudeId">🔍
+              Vérifier</button>
             <span *ngIf="videoClaude && !videoClaudeLoading" class="badge bg-success">Avatar OK ✓</span>
             <span *ngIf="videoClaudeDuration > 0" class="text-primary small-text">
               Réponse en {{ videoClaudeDuration.toFixed(1) }}s
@@ -350,60 +331,55 @@
             <span class="chevron text-success">▼</span>
           </button>
         </div>
-
-        <div class="collapse show" id="avatar-claude">
-          <div class="mt-3">
-            <div *ngIf="videoClaudeLoading" class="progress">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+        <div class="position-relative collapse show" id="avatar-claude">
+          <div *ngIf="videoClaudeLoading || videoCheckClaudeLoading" class="d-flex align-items-center gap-3">
+            <div class="progress flex-grow-1">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
                 [style.width.%]="videoClaudeProgress"></div>
+            </div>
+            <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+              <span class="visually-hidden">Chargement...</span>
             </div>
           </div>
           <div class="mt-3">
             <div *ngIf="videoClaudeLoading" class="alert alert-info alert-dismissible fade show" role="alert">
-              📨 Requête envoyée à JoggAI...
+              📨 Requête envoyée à JoggAI (génération)...
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div *ngIf="videoClaudeLoading && !videoClaude && !videoClaudeError"
+            <div *ngIf="videoClaudeLoading && !videoClaudeId && !videoClaudeError"
               class="alert alert-warning alert-dismissible fade show" role="alert">
-              ⏳ Réponse de JoggAI en cours de traitement...
+              ⏳ Réponse de JoggAI (génération) en cours de traitement...
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
             <div *ngIf="videoClaudeError" class="alert alert-danger alert-dismissible fade show" role="alert">
-              ❌ {{ chatgptError }}
+              ❌ {{ claudeError }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div *ngIf="videoClaude && !videoClaudeError" class="alert alert-success alert-dismissible fade show"
+            <div *ngIf="videoClaudeId && !videoClaudeError" class="alert alert-success alert-dismissible fade show"
               role="alert">
-              ✅ Réponse de JoggAI reçue avec succès.
+              ✅ Réponse de JoggAI (génération) reçue avec succès.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <!-- <div class="alert alert-info alert-dismissible" role="alert">
-              📨 Requête envoyée à JoggAI, en attente de réponse...
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div class="mt-3">
+            <div *ngIf="videoCheckClaudeLoading" class="alert alert-info alert-dismissible fade show" role="alert">
+              📨 Requête envoyée à JoggAI (check)...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              ⏳ Réponse de JoggAI en cours de traitement...
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div *ngIf="videoCheckClaudeLoading && !videoClaude && !videoCheckClaudeError"
+              class="alert alert-warning alert-dismissible fade show" role="alert">
+              ⏳ Réponse de JoggAI (check) en cours de traitement...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div class="alert alert-success" role="alert">
-              ✅ Vidéo disponible et prête à être lue
+            <div *ngIf="videoCheckClaudeError" class="alert alert-danger alert-dismissible fade show" role="alert">
+              ❌ {{ claudeError }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              ⏳ Vidéo en cours de génération, réessayez plus tard
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div *ngIf="videoClaude && !videoCheckClaudeError" class="alert alert-success alert-dismissible fade show"
+              role="alert">
+              ✅ Réponse de JoggAI (check) reçue avec succès.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              ❌ Échec lors de la vérification de la vidéo
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              ❌ Une erreur est survenue lors de l'appel à JoggAI.
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-success alert-dismissible" role="alert">
-              ✅ Réponse de JoggAI reçue avec succès.
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> -->
           </div>
           <div class="mt-3" *ngIf="videoClaude">
             <video controls class="w-100 rounded" [attr.poster]="videoPosterClaude">

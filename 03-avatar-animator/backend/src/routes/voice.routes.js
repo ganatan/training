@@ -69,7 +69,6 @@ router.post('/:llm', async (req, res) => {
   }
 });
 
-
 router.get('/:id', async (req, res) => {
   const info = await joggAiStatus(req.params.id);        
   if (!info) return res.status(404).json({ success: false, error: 'not_found' });

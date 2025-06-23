@@ -5,11 +5,6 @@ import { map, catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { reply as mockReply } from './ai.mock';
 
-export interface VideoData {
-  url: string;
-  poster: string;
-}
-
 export interface ContentGenerationResponse {
   success: boolean;
   data: string;
@@ -49,15 +44,15 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
+    const body = { name, length, style };
 
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style })
+    return this.http.post<ContentGenerationResponse>(url, body)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Erreur API:', error);
 
           return of({
             success: false,
-            llm: llm,
             data: '',
             error: this.getErrorMessage(error),
           });
@@ -72,20 +67,19 @@ export class AiService {
 
       return of({
         success: true,
-        llm: llm,
         data: voiceMockPath,
       }).pipe(delay(1000));
     }
 
     const url = `${this.baseUrl}/voice/${llm}`;
+    const body = { name };
 
-    return this.http.post<VoiceGenerationResponse>(url, { name, length, style }).pipe(
+    return this.http.post<VoiceGenerationResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);
 
         return of({
           success: false,
-          llm: llm,
           data: '',
           error: this.getErrorMessage(error),
         });
@@ -97,23 +91,18 @@ export class AiService {
     if (environment.useMock) {
       return of({
         success: true,
-        llm,
         project_id: 'mock-project-id',
       }).pipe(delay(1000));
     }
 
     const url = `${this.baseUrl}/video/${llm}`;
+    const body = { name };
 
-    return this.http.post<{ success: boolean; project_id: string }>(url, { name, length, style }).pipe(
-      map(response => ({
-        ...response,
-        llm,
-      })),
+    return this.http.post<VideoGenerationResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);
         return of({
           success: false,
-          llm,
           project_id: undefined,
           error: this.getErrorMessage(error),
         });
@@ -146,6 +135,8 @@ export class AiService {
         return of({
           success: false,
           ready: false,
+          url: '',
+          poster: '',
           error: this.getErrorMessage(error),
         });
       }),

@@ -161,7 +161,25 @@
             </div>
           </div>
           <div class="mt-3">
-            <div class="alert alert-info alert-dismissible" role="alert">
+            <div *ngIf="videoChatgptLoading" class="alert alert-info alert-dismissible fade show" role="alert">
+              📨 Requête envoyée à JoggAI...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="videoChatgptLoading && !videoChatgpt && !videoChatgptError"
+              class="alert alert-warning alert-dismissible fade show" role="alert">
+              ⏳ Réponse de JoggAI en cours de traitement...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="videoChatgptError" class="alert alert-danger alert-dismissible fade show" role="alert">
+              ❌ {{ chatgptError }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="videoChatgpt && !videoChatgptError" class="alert alert-success alert-dismissible fade show"
+              role="alert">
+              ✅ Réponse de JoggAI reçue avec succès.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <!-- <div class="alert alert-info alert-dismissible" role="alert">
               📨 Requête envoyée à JoggAI, en attente de réponse...
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -187,7 +205,7 @@
             <div class="alert alert-success alert-dismissible" role="alert">
               ✅ Réponse de JoggAI reçue avec succès.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </div> -->
           </div>
           <div class="mt-3" *ngIf="videoChatgpt">
             <video controls class="w-100 rounded" [attr.poster]="videoPosterChatgpt">
@@ -324,7 +342,25 @@
             </div>
           </div>
           <div class="mt-3">
-            <div class="alert alert-info alert-dismissible" role="alert">
+            <div *ngIf="videoClaudeLoading" class="alert alert-info alert-dismissible fade show" role="alert">
+              📨 Requête envoyée à JoggAI...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="videoClaudeLoading && !videoClaude && !videoClaudeError"
+              class="alert alert-warning alert-dismissible fade show" role="alert">
+              ⏳ Réponse de JoggAI en cours de traitement...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="videoClaudeError" class="alert alert-danger alert-dismissible fade show" role="alert">
+              ❌ {{ chatgptError }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="videoClaude && !videoClaudeError" class="alert alert-success alert-dismissible fade show"
+              role="alert">
+              ✅ Réponse de JoggAI reçue avec succès.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <!-- <div class="alert alert-info alert-dismissible" role="alert">
               📨 Requête envoyée à JoggAI, en attente de réponse...
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -350,7 +386,7 @@
             <div class="alert alert-success alert-dismissible" role="alert">
               ✅ Réponse de JoggAI reçue avec succès.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </div> -->
           </div>
           <div class="mt-3" *ngIf="videoClaude">
             <video controls class="w-100 rounded" [attr.poster]="videoPosterClaude">

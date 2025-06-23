@@ -31,6 +31,8 @@ export class App {
   claudeError: string | null = null;
   voiceChatgptError: string | null = null;
   voiceClaudeError: string | null = null;
+  videoChatgptError: string | null = null;
+  videoClaudeError: string | null = null;
 
   videoChatgptKey = false;
 
@@ -142,6 +144,7 @@ export class App {
     if (llm === 'chatgpt') {
       this.chatgptError = '';
       this.voiceChatgptError = '';
+      this.videoChatgptError = '';
       this.contentChatgpt = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
@@ -152,6 +155,7 @@ export class App {
     } else {
       this.claudeError = '';
       this.voiceClaudeError = '';
+      this.videoClaudeError = '';
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
@@ -230,12 +234,14 @@ export class App {
         const poster = success ? data.poster : '';
 
         if (llm === 'chatgpt') {
+          this.videoChatgptError = response.success ? null : response.error || null;
           this.videoChatgpt = url;
           this.videoPosterChatgpt = poster;
           this.videoChatgptDuration = duration;
           this.videoChatgptLoading = false;
           this.videoChatgptProgress = success ? 100 : 0;
         } else {
+          this.videoClaudeError = response.success ? null : response.error || null;
           this.videoClaude = url;
           this.videoPosterClaude = poster;
           this.videoClaudeDuration = duration;

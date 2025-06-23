@@ -71,6 +71,13 @@ router.post('/:llm', async (req, res) => {
   }
 });
 
+
+router.get('/:id', async (req, res) => {
+  const info = await joggAiStatus(req.params.id);        
+  if (!info) return res.status(404).json({ success: false, error: 'not_found' });
+  return res.json({ success: true, ...info });
+});
+
 router.get('/health/tts', async (req, res) => {
   const voiceId = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
   const result = await testElevenLabs(voiceId);

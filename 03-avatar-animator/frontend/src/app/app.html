@@ -322,7 +322,7 @@
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="btn-group-responsive d-flex align-items-center gap-2 flex-wrap">
             <button class="btn btn-outline-success" (click)="loadVideo('claude')">Avatar - JoggAI</button>
-            <button class="btn btn-outline-success">🔍 Vérifier</button>
+            <button class="btn btn-outline-success" (click)="checkVideo('claude')">🔍 Vérifier</button>
             <span *ngIf="videoClaude && !videoClaudeLoading" class="badge bg-success">Avatar OK ✓</span>
             <span *ngIf="videoClaudeDuration > 0" class="text-primary small-text">
               Réponse en {{ videoClaudeDuration.toFixed(1) }}s

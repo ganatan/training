@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, delay } from 'rxjs/operators';
+import { map, catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { reply as mockReply } from './ai.mock';
 
@@ -27,7 +27,15 @@ export interface VoiceGenerationResponse {
 export interface VideoGenerationResponse {
   success: boolean;
   llm: string;
-  data: VideoData;
+  project_id?: string;
+  error?: string;
+}
+
+export interface VideoCheckResponse {
+  success: boolean;
+  ready: boolean;
+  url?: string;
+  poster?: string;
   error?: string;
 }
 
@@ -90,37 +98,73 @@ export class AiService {
 
   generateVideo(llm: string, name: string, length: string, style: string): Observable<VideoGenerationResponse> {
     if (environment.useMock) {
+      return of({
+        success: true,
+        llm,
+        project_id: 'mock-project-id',
+      }).pipe(delay(1000));
+    }
+
+    const url = `${this.baseUrl}/video/${llm}`;
+
+    // return this.http.post<{ success: boolean; project_id: string }>(url, { name, length, style })
+    //   .pipe(catchError((error: HttpErrorResponse) => {
+    //     console.error('Erreur API:', error);
+    //     return of({
+    //       success: false,
+    //       llm,
+    //       project_id: undefined,
+    //       error: this.getErrorMessage(error),
+    //     });
+    //   }),
+    //   );
+
+    return this.http.post<{ success: boolean; project_id: string }>(url, { name, length, style }).pipe(
+      map(response => ({
+        ...response,
+        llm, // on injecte le llm explicitement ici
+      })),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erreur API:', error);
+        return of({
+          success: false,
+          llm,
+          project_id: undefined,
+          error: this.getErrorMessage(error),
+        });
+      })
+    );
+
+  }
+
+  checkVideo(llm: string, id: string): Observable<VideoCheckResponse> {
+    if (environment.useMock) {
+      const name = 'ridley-scott';
       const safeName = name.toLowerCase().replace(/\s+/g, '-');
       const voiceMockPath = `assets/video/${safeName}-${llm}.mp4`;
       const voicePosterMockPath = `assets/video/${safeName}-${llm}.png`;
 
       return of({
         success: true,
-        llm: llm,
-        data: {
-          url: voiceMockPath,
-          poster: voicePosterMockPath,
-        },
+        ready: true,
+        url: voiceMockPath,
+        poster: voicePosterMockPath,
       }).pipe(delay(1000));
     }
 
+    const url = `${this.baseUrl}/video/${id}`;
 
-    const url = `${this.baseUrl}/video/${llm}`;
+    return this.http.get<VideoCheckResponse>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erreur API:', error);
 
-    return this.http.post<VideoGenerationResponse>(url, { name, length, style })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Erreur API:', error);
-
-          return of({
-            success: false,
-            llm: llm,
-            data: { url: '', poster: '' },
-            error: this.getErrorMessage(error),
-          });
-        }),
-      );
-
+        return of({
+          success: false,
+          ready: false,
+          error: this.getErrorMessage(error),
+        });
+      }),
+    );
   }
 
   private getErrorMessage(error: HttpErrorResponse): string {

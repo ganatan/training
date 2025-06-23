@@ -41,6 +41,9 @@ export class App {
   voiceChatgptLoading = false;
   voiceClaudeLoading = false;
 
+  videoChatgptId: string | null = null;
+  videoClaudeId: string | null = null;
+
   videoChatgpt = '';
   videoPosterChatgpt = '';
   videoClaude = '';
@@ -206,47 +209,116 @@ export class App {
       });
   }
 
+  // loadVideo(llm: 'chatgpt' | 'claude') {
+  //   const start = performance.now();
+  //   const interval = this.startVideoProgress(llm);
+  //   this.videoChatgptKey = false;
+
+  //   if (llm === 'chatgpt') {
+  //     this.videoChatgptLoading = true;
+  //     this.videoChatgpt = '';
+  //     this.videoChatgptDuration = 0;
+  //     this.videoChatgptProgress = 0;
+  //   } else {
+  //     this.videoClaudeLoading = true;
+  //     this.videoClaude = '';
+  //     this.videoClaudeDuration = 0;
+  //     this.videoClaudeProgress = 0;
+  //   }
+  //   this.aiService
+  //     .generateVideo(llm, this.name, this.length, this.style)
+  //     .subscribe((response: VideoGenerationResponse) => {
+  //       const duration = (performance.now() - start) / 1000;
+  //       clearInterval(interval);
+
+  //       const success = response.success;
+  //       const data = response.data || {};
+  //       const url = success ? data.url : '';
+  //       const poster = success ? data.poster : '';
+
+  //       if (llm === 'chatgpt') {
+  //         this.videoChatgptError = response.success ? null : response.error || null;
+  //         this.videoChatgpt = url;
+  //         this.videoPosterChatgpt = poster;
+  //         this.videoChatgptDuration = duration;
+  //         this.videoChatgptLoading = false;
+  //         this.videoChatgptProgress = success ? 100 : 0;
+  //       } else {
+  //         this.videoClaudeError = response.success ? null : response.error || null;
+  //         this.videoClaude = url;
+  //         this.videoPosterClaude = poster;
+  //         this.videoClaudeDuration = duration;
+  //         this.videoClaudeLoading = false;
+  //         this.videoClaudeProgress = success ? 100 : 0;
+  //       }
+  //     });
+  // }
+
   loadVideo(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
     const interval = this.startVideoProgress(llm);
-    this.videoChatgptKey = false;
 
     if (llm === 'chatgpt') {
       this.videoChatgptLoading = true;
-      this.videoChatgpt = '';
+      this.videoChatgptId = null;
       this.videoChatgptDuration = 0;
       this.videoChatgptProgress = 0;
+      this.videoChatgptError = null;
     } else {
       this.videoClaudeLoading = true;
-      this.videoClaude = '';
+      this.videoClaudeId = null;
       this.videoClaudeDuration = 0;
       this.videoClaudeProgress = 0;
+      this.videoClaudeError = null;
     }
+
     this.aiService
       .generateVideo(llm, this.name, this.length, this.style)
-      .subscribe((response: VideoGenerationResponse) => {
+      .subscribe((response: any) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 
-        const success = response.success;
-        const data = response.data || {};
-        const url = success ? data.url : '';
-        const poster = success ? data.poster : '';
+        if (llm === 'chatgpt') {
+          this.videoChatgptLoading = false;
+          this.videoChatgptDuration = duration;
+          if (response.success) {
+            this.videoChatgptId = response.project_id;
+            this.videoChatgptProgress = 100;
+          } else {
+            this.videoChatgptError = response.error || 'Erreur lors de la création';
+            this.videoChatgptProgress = 0;
+          }
+        } else {
+          this.videoClaudeLoading = false;
+          this.videoClaudeDuration = duration;
+          if (response.success) {
+            this.videoClaudeId = response.project_id;
+            this.videoClaudeProgress = 100;
+          } else {
+            this.videoClaudeError = response.error || 'Erreur lors de la création';
+            this.videoClaudeProgress = 0;
+          }
+        }
+      });
+  }
+
+  checkVideo(llm: 'chatgpt' | 'claude') {
+    const id = llm === 'chatgpt' ? this.videoChatgptId : this.videoClaudeId;
+    if (!id) return;
+
+    this.aiService
+      .checkVideo(llm, id)
+      .subscribe((response: any) => {
+        if (!response.success || !response.ready) return;
+
+        const { url, poster } = response;
 
         if (llm === 'chatgpt') {
-          this.videoChatgptError = response.success ? null : response.error || null;
           this.videoChatgpt = url;
           this.videoPosterChatgpt = poster;
-          this.videoChatgptDuration = duration;
-          this.videoChatgptLoading = false;
-          this.videoChatgptProgress = success ? 100 : 0;
         } else {
-          this.videoClaudeError = response.success ? null : response.error || null;
           this.videoClaude = url;
           this.videoPosterClaude = poster;
-          this.videoClaudeDuration = duration;
-          this.videoClaudeLoading = false;
-          this.videoClaudeProgress = success ? 100 : 0;
         }
       });
   }

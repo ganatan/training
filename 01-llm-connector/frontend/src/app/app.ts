@@ -21,7 +21,6 @@ export class App {
   contentClaude = '';
 
   chatgptLoading = false;
-  chatgptLoadingExecute = false;
   claudeLoading = false;
   chatgptError: string | null = null;
 
@@ -70,7 +69,6 @@ export class App {
     if (llm === 'chatgpt') {
       this.contentChatgpt = '';
       this.chatgptLoading = true;
-      this.chatgptLoadingExecute = true;
       this.chatgptProgress = 0;
       this.chatgptDuration = 0;
     } else {

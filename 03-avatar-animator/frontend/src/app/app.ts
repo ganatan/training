@@ -191,7 +191,7 @@ export class App {
     }
 
     this.aiService
-      .generateVoice(llm, this.name, this.length, this.style)
+      .generateVoice(llm, this.name)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
@@ -234,7 +234,7 @@ export class App {
     }
 
     this.aiService
-      .generateVideo(llm, this.name, this.length, this.style)
+      .generateVideo(llm, this.name)
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);

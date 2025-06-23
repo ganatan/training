@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, catchError, delay } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { reply as mockReply } from './ai.mock';
 
@@ -60,7 +60,7 @@ export class AiService {
       );
   }
 
-  generateVoice(llm: string, name: string, length: string, style: string): Observable<VoiceGenerationResponse> {
+  generateVoice(llm: string, name: string): Observable<VoiceGenerationResponse> {
     if (environment.useMock) {
       const safeName = name.toLowerCase().replace(/\s+/g, '-');
       const voiceMockPath = `assets/voice/${safeName}-${llm}.mp3`;
@@ -87,7 +87,7 @@ export class AiService {
     );
   }
 
-  generateVideo(llm: string, name: string, length: string, style: string): Observable<VideoGenerationResponse> {
+  generateVideo(llm: string, name: string): Observable<VideoGenerationResponse> {
     if (environment.useMock) {
       return of({
         success: true,
@@ -101,12 +101,13 @@ export class AiService {
     return this.http.post<VideoGenerationResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);
+
         return of({
           success: false,
           project_id: '',
           error: this.getErrorMessage(error),
         });
-      })
+      }),
     );
 
   }

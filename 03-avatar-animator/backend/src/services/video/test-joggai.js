@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import generateVideo from './video.service.js';
+import { generateVideo } from './video.service.js';
 
 async function testJoggAI(avatarId) {
   const fileName = 'test-joggai';

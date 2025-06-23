@@ -197,7 +197,6 @@ export class App {
         clearInterval(interval);
 
         const voiceUrl = response.success ? response.data : '';
-        console.log('00000000001:' + JSON.stringify(response));
         if (llm === 'chatgpt') {
           this.voiceChatgptError = response.success ? null : response.error || null;
           this.voiceChatgpt = voiceUrl;
@@ -237,6 +236,8 @@ export class App {
       .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
+
+        console.log('00000000001:' + JSON.stringify(response));
 
         if (llm === 'chatgpt') {
           this.videoChatgptLoading = false;

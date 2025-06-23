@@ -91,7 +91,7 @@ export class AiService {
     if (environment.useMock) {
       return of({
         success: true,
-        project_id: 'mock-project-id',
+        project_id: 'mock-frontend-project-id',
       }).pipe(delay(1000));
     }
 
@@ -127,9 +127,10 @@ export class AiService {
       }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/video/${id}`;
+    const url = `${this.baseUrl}/video/check`;
+    const body = { llm, project_id: id };
 
-    return this.http.get<VideoCheckResponse>(url).pipe(
+    return this.http.post<VideoCheckResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);
 

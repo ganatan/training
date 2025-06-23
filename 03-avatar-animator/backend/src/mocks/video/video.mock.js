@@ -5,7 +5,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export default async function generateVideoMock(outputPath, llm = 'chatgpt') {
+export async function checkVideoMock(outputPath, llm = 'chatgpt') {
   await delay(1000);
 
   const selectedLLM = ['chatgpt', 'claude'].includes(llm) ? llm : 'chatgpt';
@@ -25,4 +25,14 @@ export default async function generateVideoMock(outputPath, llm = 'chatgpt') {
   fs.copyFileSync(sourcePng, outputPath.replace(/\.mp4$/, '.png'));
 
   return outputPath;
+}
+
+export async function generateVideoMock(name, llm = 'chatgpt') {
+  await delay(1000);
+
+  const project_id = "mock-backend-project-id";
+  return {
+    success: true,
+    project_id: project_id,
+  };
 }

@@ -1,5 +1,5 @@
 {
   "name": "ridley scott",
   "llm": "claude",
-  "text": "Fade in sur un jeune Ridley Scott, cheveux ébouriffés, croquant frénétiquement dans son carnet de croquis. Cut to: le réalisateur novice sur le plateau de son premier film, regard déterminé. Montage rapide: succès fulgurants d'Alien et Blade Runner, plans iconiques défilant à l'écran. \n\nTravelling sur Scott vieillissant mais infatigable, dirigeant des blockbusters épiques. Gros plan sur ses yeux perçants scrutant un story-board. Flashbacks entrecoupés de ses œuvres marquantes: Gladiator, Kingdom of Heaven, The Martian.\n\nZoom arrière final révélant Scott, silhouette solitaire sur un plateau immense. Voix off: \"Ridley Scott, visionnaire cinématographique, architecte d'univers inoubliables, sa caméra toujours en quête de nouvelles frontières.\" Fade to black."
+  "text": "Mock Backend - Demande envoyée à claude pour une biography de \"ridley scott\", avec un style \"neutral\" et une longueur \"short\"."
 }

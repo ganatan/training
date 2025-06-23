@@ -12,21 +12,18 @@ export interface VideoData {
 
 export interface ContentGenerationResponse {
   success: boolean;
-  llm: string;
   data: string;
   error?: string;
 }
 
 export interface VoiceGenerationResponse {
   success: boolean;
-  llm: string;
   data: string;
   error?: string;
 }
 
 export interface VideoGenerationResponse {
   success: boolean;
-  llm: string;
   project_id?: string;
   error?: string;
 }

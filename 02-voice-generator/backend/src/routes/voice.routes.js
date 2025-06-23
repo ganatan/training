@@ -57,8 +57,6 @@ router.post('/:llm', async (req, res) => {
     return res.json({
       success: true,
       data: fullUrl,
-      voiceId: voiceId,
-      mock: useMock,
     });
 
   } catch (err) {

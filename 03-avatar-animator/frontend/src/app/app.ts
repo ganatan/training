@@ -7,6 +7,7 @@ import {
   ContentGenerationResponse,
   VoiceGenerationResponse,
   VideoGenerationResponse,
+  VideoCheckResponse,
 } from './ai-service';
 import { environment } from '../environments/environment';
 
@@ -33,6 +34,8 @@ export class App {
   voiceClaudeError: string | null = null;
   videoChatgptError: string | null = null;
   videoClaudeError: string | null = null;
+  videoCheckChatgptError: string | null = null;
+  videoCheckClaudeError: string | null = null;
 
   videoChatgptKey = false;
 
@@ -50,6 +53,8 @@ export class App {
   videoPosterClaude = '';
   videoChatgptLoading = false;
   videoClaudeLoading = false;
+  videoCheckChatgptLoading = false;
+  videoCheckClaudeLoading = false;
 
   chatgptDuration = 0;
   claudeDuration = 0;
@@ -209,50 +214,6 @@ export class App {
       });
   }
 
-  // loadVideo(llm: 'chatgpt' | 'claude') {
-  //   const start = performance.now();
-  //   const interval = this.startVideoProgress(llm);
-  //   this.videoChatgptKey = false;
-
-  //   if (llm === 'chatgpt') {
-  //     this.videoChatgptLoading = true;
-  //     this.videoChatgpt = '';
-  //     this.videoChatgptDuration = 0;
-  //     this.videoChatgptProgress = 0;
-  //   } else {
-  //     this.videoClaudeLoading = true;
-  //     this.videoClaude = '';
-  //     this.videoClaudeDuration = 0;
-  //     this.videoClaudeProgress = 0;
-  //   }
-  //   this.aiService
-  //     .generateVideo(llm, this.name, this.length, this.style)
-  //     .subscribe((response: VideoGenerationResponse) => {
-  //       const duration = (performance.now() - start) / 1000;
-  //       clearInterval(interval);
-
-  //       const success = response.success;
-  //       const data = response.data || {};
-  //       const url = success ? data.url : '';
-  //       const poster = success ? data.poster : '';
-
-  //       if (llm === 'chatgpt') {
-  //         this.videoChatgptError = response.success ? null : response.error || null;
-  //         this.videoChatgpt = url;
-  //         this.videoPosterChatgpt = poster;
-  //         this.videoChatgptDuration = duration;
-  //         this.videoChatgptLoading = false;
-  //         this.videoChatgptProgress = success ? 100 : 0;
-  //       } else {
-  //         this.videoClaudeError = response.success ? null : response.error || null;
-  //         this.videoClaude = url;
-  //         this.videoPosterClaude = poster;
-  //         this.videoClaudeDuration = duration;
-  //         this.videoClaudeLoading = false;
-  //         this.videoClaudeProgress = success ? 100 : 0;
-  //       }
-  //     });
-  // }
 
   loadVideo(llm: 'chatgpt' | 'claude') {
     const start = performance.now();
@@ -274,7 +235,7 @@ export class App {
 
     this.aiService
       .generateVideo(llm, this.name, this.length, this.style)
-      .subscribe((response: any) => {
+      .subscribe((response: VideoGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 
@@ -306,20 +267,47 @@ export class App {
     const id = llm === 'chatgpt' ? this.videoChatgptId : this.videoClaudeId;
     if (!id) return;
 
+    if (llm === 'chatgpt') {
+      this.videoChatgpt = '';
+      this.videoPosterChatgpt = '';
+      this.videoCheckChatgptLoading = true;
+      this.videoChatgptDuration = 0;
+      this.videoChatgptProgress = 0;
+      this.videoCheckChatgptError = null;
+    } else {
+      this.videoClaude = '';
+      this.videoPosterClaude = '';
+      this.videoCheckClaudeLoading = true;
+      this.videoClaudeId = null;
+      this.videoClaudeDuration = 0;
+      this.videoClaudeProgress = 0;
+      this.videoCheckClaudeError = null;
+    }
+
     this.aiService
       .checkVideo(llm, id)
-      .subscribe((response: any) => {
+      .subscribe((response: VideoCheckResponse) => {
         if (!response.success || !response.ready) return;
 
         const { url, poster } = response;
 
+
         if (llm === 'chatgpt') {
           this.videoChatgpt = url;
           this.videoPosterChatgpt = poster;
+          this.videoCheckChatgptLoading = true;
+          this.videoChatgptDuration = 0;
+          this.videoChatgptProgress = 0;
+          this.videoCheckChatgptError = null;
         } else {
           this.videoClaude = url;
           this.videoPosterClaude = poster;
+          this.videoCheckClaudeLoading = true;
+          this.videoClaudeDuration = 0;
+          this.videoClaudeProgress = 0;
+          this.videoCheckClaudeError = null;
         }
+
       });
   }
 

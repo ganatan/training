@@ -19,15 +19,15 @@ export interface VoiceGenerationResponse {
 
 export interface VideoGenerationResponse {
   success: boolean;
-  project_id?: string;
+  project_id: string;
   error?: string;
 }
 
 export interface VideoCheckResponse {
   success: boolean;
   ready: boolean;
-  url?: string;
-  poster?: string;
+  url: string;
+  poster: string;
   error?: string;
 }
 
@@ -103,7 +103,7 @@ export class AiService {
         console.error('Erreur API:', error);
         return of({
           success: false,
-          project_id: undefined,
+          project_id: '',
           error: this.getErrorMessage(error),
         });
       })

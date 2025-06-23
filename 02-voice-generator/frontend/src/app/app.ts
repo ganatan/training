@@ -155,7 +155,7 @@ export class App {
     }
 
     this.aiService
-      .generateVoice(llm, this.name, this.length, this.style)
+      .generateVoice(llm, this.name)
       .subscribe((response: VoiceGenerationResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);

@@ -7,14 +7,12 @@ import { reply as mockReply } from './ai.mock';
 
 export interface ContentGenerationResponse {
   success: boolean;
-  llm: string;
   data: string;
   error?: string;
 }
 
 export interface VoiceGenerationResponse {
   success: boolean;
-  llm: string;
   data: string;
   error?: string;
 }
@@ -32,7 +30,7 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
-    let body = { name, length, style };
+    const body = { name, length, style };
     return this.http.post<ContentGenerationResponse>(url, body)
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -40,7 +38,6 @@ export class AiService {
 
           return of({
             success: false,
-            llm: llm,
             data: '',
             error: this.getErrorMessage(error),
           });
@@ -48,14 +45,13 @@ export class AiService {
       );
   }
 
-  generateVoice(llm: string, name: string, length: string, style: string): Observable<VoiceGenerationResponse> {
+  generateVoice(llm: string, name: string): Observable<VoiceGenerationResponse> {
     if (environment.useMock) {
       const safeName = name.toLowerCase().replace(/\s+/g, '-');
       const voiceMockPath = `assets/voices/${safeName}-${llm}.mp3`;
 
       return of({
         success: true,
-        llm: llm,
         data: voiceMockPath,
       }).pipe(delay(1000));
     }
@@ -68,7 +64,6 @@ export class AiService {
 
         return of({
           success: false,
-          llm: llm,
           data: '',
           error: this.getErrorMessage(error),
         });

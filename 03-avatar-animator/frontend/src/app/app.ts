@@ -197,7 +197,7 @@ export class App {
         clearInterval(interval);
 
         const voiceUrl = response.success ? response.data : '';
-
+        console.log('00000000001:' + JSON.stringify(response));
         if (llm === 'chatgpt') {
           this.voiceChatgptError = response.success ? null : response.error || null;
           this.voiceChatgpt = voiceUrl;
@@ -213,7 +213,6 @@ export class App {
         }
       });
   }
-
 
   loadVideo(llm: 'chatgpt' | 'claude') {
     const start = performance.now();

@@ -105,7 +105,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
             <div *ngIf="voiceChatgptError" class="alert alert-danger alert-dismissible fade show" role="alert">
-              ❌ {{ chatgptError }}
+              ❌ {{ voiceChatgptError }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
             <div *ngIf="voiceChatgpt && !voiceChatgptError" class="alert alert-success alert-dismissible fade show"
@@ -197,7 +197,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
             <div *ngIf="voiceClaudeError" class="alert alert-danger alert-dismissible fade show" role="alert">
-              ❌ {{ claudeError }}
+              ❌ {{ voiceClaudeError }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
             <div *ngIf="voiceClaude && !voiceClaudeError" class="alert alert-success alert-dismissible fade show"

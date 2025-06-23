@@ -217,40 +217,52 @@
     <div class="row g-4">
       <div class="col-md-6">
 
-
         <div class="card p-4 m-1">
           <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-primary">Générer avec ChatGPT</button>
-              <button class="btn btn-outline-primary">Réinitialiser</button>
-            </div>
-            <span class="badge bg-primary">OK ✓</span>
-            <span class="text-primary small-text">Réponse en 1.2s</span>
+            <button class="btn btn-primary">Texte - ChatGPT</button>
+            <button class="btn btn-outline-primary">Réinitialiser</button>
+            <span class="badge bg-primary">Texte Ok ✓</span>
+            <span class="text-primary small-text ms-auto">Réponse en 1.2s</span>
             <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-              data-bs-target="#text-chatgpt" aria-expanded="true">
+              data-bs-target="#content-chatgpt" aria-expanded="true">
               <span class="chevron">▼</span>
             </button>
           </div>
-          <div class="collapse show" id="text-chatgpt">
-            <div class="position-relative">
+          <div class="position-relative collapse show" id="content-chatgpt">
+            <div class="d-flex align-items-center gap-3">
+              <div class="progress flex-grow-1">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+              </div>
+              <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="alert alert-info alert-dismissible" role="alert">
+                📨 Requête envoyée à OpenAI, en attente de réponse...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-warning alert-dismissible" role="alert">
+                ⏳ Réponse de OpenAI en cours de traitement...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                ❌ Une erreur est survenue lors de l'appel à OpenAI.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-success alert-dismissible" role="alert">
+                ✅ Réponse de OpenAI reçue avec succès.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+            <div class="mt-3">
               <textarea class="form-control">Résultat généré ici...</textarea>
-              <div class="loading">
-                <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
-                  <span class="visually-hidden">Chargement...</span>
-                </div>
-              </div>
-              <div class="mt-3">
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
         <div class="card p-4 m-1">
-          <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
             <button class="btn btn-outline-primary">Voix - ElevenLabs</button>
-            <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
             <span class="badge bg-primary">Voix OK ✓</span>
             <span class="text-primary ms-auto small-text">Réponse en 2.1s</span>
             <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
@@ -258,15 +270,36 @@
               <span class="chevron">▼</span>
             </button>
           </div>
-          <div class="collapse show" id="voice-chatgpt">
-            <div class="mt-3">
-              <div class="progress">
+          <div class="position-relative collapse show" id="voice-chatgpt">
+            <div class="d-flex align-items-center gap-3">
+              <div class="progress flex-grow-1">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+              </div>
+              <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="alert alert-info alert-dismissible" role="alert">
+                📨 Requête envoyée à ElevenLabs en attente de réponse...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-warning alert-dismissible" role="alert">
+                ⏳ Réponse de ElevenLabs en cours de traitement...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                ❌ Une erreur est survenue lors de l'appel à ElevenLabs.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-success alert-dismissible" role="alert">
+                ✅ Réponse de ElevenLabs reçue avec succès.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             </div>
             <div class="mt-2">
               <audio controls class="w-100">
-                <source src="./assets//voices/ridley-scott-chatgpt.mp3" type="audio/mpeg">
+                <source src="./assets/voices/ridley-scott-chatgpt.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'audio.
               </audio>
             </div>
@@ -277,7 +310,6 @@
           <div class="d-flex align-items-center gap-2 btn-group-responsive">
             <button class="btn btn-outline-primary">Avatar - JoggAI</button>
             <button class="btn btn-outline-primary">🔍 Vérifier</button>
-            <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
             <span class="badge bg-primary">Avatar OK ✓</span>
             <span class="text-primary ms-auto small-text">Réponse en 3.4s</span>
             <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
@@ -291,18 +323,34 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
               </div>
             </div>
+
             <div class="mt-3">
-              <div class="alert alert-info" role="alert">
-                ✅ Demande envoyée à JoggAI
+              <div class="alert alert-info alert-dismissible" role="alert">
+                📨 Requête envoyée à JoggAI, en attente de réponse...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-warning alert-dismissible" role="alert">
+                ⏳ Réponse de JoggAI en cours de traitement...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               <div class="alert alert-success" role="alert">
                 ✅ Vidéo disponible et prête à être lue
               </div>
-              <div class="alert alert-warning" role="alert">
+              <div class="alert alert-warning alert-dismissible" role="alert">
                 ⏳ Vidéo en cours de génération, réessayez plus tard
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-              <div class="alert alert-danger" role="alert">
+              <div class="alert alert-danger alert-dismissible" role="alert">
                 ❌ Échec lors de la vérification de la vidéo
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                ❌ Une erreur est survenue lors de l'appel à JoggAI.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-success alert-dismissible" role="alert">
+                ✅ Réponse de JoggAI reçue avec succès.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             </div>
             <div class="mt-3">
@@ -319,46 +367,46 @@
       <div class="col-md-6">
         <div class="card p-4 m-1">
           <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
-            <button class="btn btn-success">Générer avec Claude</button>
+            <button class="btn btn-success">Texte - Claude</button>
             <button class="btn btn-outline-success">Réinitialiser</button>
-            <span class="badge bg-success">Ok ✓</span>
+            <span class="badge bg-success">Texte Ok ✓</span>
             <span class="text-success small-text ms-auto">Réponse en 1.5s</span>
-            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2" data-bs-toggle="collapse"
-              data-bs-target="#text-claude">
+            <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2 text-succes" data-bs-toggle="collapse"
+              data-bs-target="#content-claude">
               <span class="chevron text-success">▼</span>
           </div>
-          <div class="collapse show" id="text-claude">
-            <div class="position-relative">
+          <div class="position-relative collapse show" id="content-claude">
+            <div class="d-flex align-items-center gap-3">
+              <div class="progress flex-grow-1">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 75%">
+                </div>
+              </div>
+              <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+            </div>
+            <div class="mt-3">
               <textarea class="form-control">Résultat généré ici...</textarea>
-              <div class="loading">
-                <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
-                  <span class="visually-hidden">Chargement...</span>
-                </div>
-              </div>
-              <div class="mt-3">
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 75%">
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
         <div class="card p-4 m-1">
-          <div class="d-flex align-items-center gap-2 mt-2 btn-group-responsive">
+          <div class="d-flex justify-content-between align-items-center mb-3 btn-group-responsive">
             <button class="btn btn-outline-success">Voix - ElevenLabs</button>
-            <span class="spinner-border spinner-border-sm text-success" role="status"></span>
             <span class="badge bg-success">Voix OK ✓</span>
-            <span class="text-success ms-auto small-text">Réponse en 1.9s</span>
+            <span class="text-success ms-auto small-text">Réponse en 2.1s</span>
             <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2 text-succes" data-bs-toggle="collapse"
               data-bs-target="#voice-claude">
               <span class="chevron text-success">▼</span>
           </div>
-          <div class="collapse show" id="voice-claude">
-            <div class="mt-3">
-              <div class="progress">
+          <div class="position-relative collapse show" id="voice-claude">
+            <div class="d-flex align-items-center gap-3">
+              <div class="progress flex-grow-1">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 75%">
                 </div>
+              </div>
+              <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+                <span class="visually-hidden">Chargement...</span>
               </div>
             </div>
             <div class="mt-2">
@@ -374,11 +422,12 @@
               </audio>
             </div>
           </div>
+
         </div>
+
         <div class="card p-4 mt-3">
           <div class="d-flex align-items-center gap-2 btn-group-responsive">
             <button class="btn btn-outline-success">Avatar - JoggAI</button>
-            <span class="spinner-border spinner-border-sm text-success" role="status"></span>
             <span class="badge bg-success">Avatar OK ✓</span>
             <span class="text-success ms-auto small-text">Réponse en 3.2s</span>
             <button class="btn btn-sm btn-link text-decoration-none p-0 ms-2 text-succes" data-bs-toggle="collapse"

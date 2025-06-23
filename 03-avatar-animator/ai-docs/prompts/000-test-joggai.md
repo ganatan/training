@@ -10,6 +10,10 @@
   http://localhost:3000/storage/videos/ridley-scott-chatgpt.mp4
   http://localhost:3000/storage/videos/ridley-scott-chatgpt.png
 
+# Test de fonctionnement de l'API JoggAI
+  http://localhost:3000/api/video/chatgpt
+  http://localhost:3000/api/video/claude
+
 # Site JoggAI
 
   site        https://www.jogg.ai/

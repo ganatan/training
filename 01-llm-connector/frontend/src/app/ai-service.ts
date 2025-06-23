@@ -25,8 +25,9 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
-
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style })
+    
+    let body = { name, length, style };
+    return this.http.post<ContentGenerationResponse>(url, body)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Erreur API:', error);

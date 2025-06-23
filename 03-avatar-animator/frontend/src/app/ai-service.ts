@@ -107,22 +107,10 @@ export class AiService {
 
     const url = `${this.baseUrl}/video/${llm}`;
 
-    // return this.http.post<{ success: boolean; project_id: string }>(url, { name, length, style })
-    //   .pipe(catchError((error: HttpErrorResponse) => {
-    //     console.error('Erreur API:', error);
-    //     return of({
-    //       success: false,
-    //       llm,
-    //       project_id: undefined,
-    //       error: this.getErrorMessage(error),
-    //     });
-    //   }),
-    //   );
-
     return this.http.post<{ success: boolean; project_id: string }>(url, { name, length, style }).pipe(
       map(response => ({
         ...response,
-        llm, // on injecte le llm explicitement ici
+        llm,
       })),
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);

@@ -7,7 +7,6 @@ import { reply as mockReply } from './ai.mock';
 
 export interface ContentGenerationResponse {
   success: boolean;
-  llm: string;
   data: string;
   error?: string;
 }
@@ -34,7 +33,6 @@ export class AiService {
 
           return of({
             success: false,
-            llm: llm,
             data: '',
             error: this.getErrorMessage(error),
           });

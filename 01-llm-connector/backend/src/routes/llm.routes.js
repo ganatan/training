@@ -57,10 +57,10 @@ router.post('/:type/:llm', async (req, res) => {
     const { data, error } = await callLLM(type, llm, input);
 
     if (error) {
-      return res.status(400).json({ success: false, llm: llm, data: error });
+      return res.status(400).json({ success: false, data: error });
     }
 
-    return res.json({ success: true, llm: llm, data: data });
+    return res.json({ success: true, data: data });
 
   } catch (err) {
 
@@ -68,7 +68,7 @@ router.post('/:type/:llm', async (req, res) => {
     const msg = err.message?.toLowerCase() || '';
     const errorText = isUnauthorizedError(msg) ? 'unauthorized API KEY' : 'internal-error';
 
-    return res.status(500).json({ success: false, llm: llm, data: errorText });
+    return res.status(500).json({ success: false, data: errorText });
   }
 });
 

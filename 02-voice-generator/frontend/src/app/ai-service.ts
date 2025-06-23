@@ -32,8 +32,8 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
-
-    return this.http.post<ContentGenerationResponse>(url, { name, length, style })
+    let body = { name, length, style };
+    return this.http.post<ContentGenerationResponse>(url, body)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Erreur API:', error);
@@ -61,8 +61,8 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/voice/${llm}`;
-
-    return this.http.post<VoiceGenerationResponse>(url, { name, length, style }).pipe(
+    let body = { name };
+    return this.http.post<VoiceGenerationResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur API:', error);
 

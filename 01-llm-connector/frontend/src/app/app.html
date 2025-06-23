@@ -53,17 +53,24 @@
             </div>
           </div>
           <div class="mt-3">
-            <div class="alert alert-info" role="alert">
+            <div *ngIf="chatgptLoadingExecute" class="alert alert-info alert-dismissible fade show" role="alert">
               📨 Requête envoyée à OpenAI, en attente de réponse...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
-            <div class="alert alert-success" role="alert">
+            <div *ngIf="chatgptLoadingExecute && !contentChatgpt && !chatgptError"
+              class="alert alert-warning alert-dismissible fade show" role="alert">
+              ⏳ Réponse en cours de traitement...
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="chatgptLoadingExecute && chatgptError" class="alert alert-danger alert-dismissible fade show"
+              role="alert">
+              ❌ {{ chatgptError }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+            <div *ngIf="chatgptLoadingExecute && contentChatgpt && !chatgptError"
+              class="alert alert-success alert-dismissible fade show" role="alert">
               ✅ Réponse reçue avec succès.
-            </div>
-            <div class="alert alert-warning" role="alert">
-              ⏳ OpenAI traite votre demande...
-            </div>
-            <div class="alert alert-danger" role="alert">
-              ❌ Une erreur est survenue lors de l’appel à OpenAI.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
             <div class="mt-3">
               <textarea class="form-control" [value]="contentChatgpt" readonly rows="6"></textarea>

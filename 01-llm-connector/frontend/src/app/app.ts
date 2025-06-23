@@ -21,7 +21,9 @@ export class App {
   contentClaude = '';
 
   chatgptLoading = false;
+  chatgptLoadingExecute = false;
   claudeLoading = false;
+  chatgptError: string | null = null;
 
   chatgptDuration = 0;
   claudeDuration = 0;
@@ -68,6 +70,7 @@ export class App {
     if (llm === 'chatgpt') {
       this.contentChatgpt = '';
       this.chatgptLoading = true;
+      this.chatgptLoadingExecute = true;
       this.chatgptProgress = 0;
       this.chatgptDuration = 0;
     } else {
@@ -87,6 +90,7 @@ export class App {
           data = response.error || 'Erreur inconnue';
         }
         if (llm === 'chatgpt') {
+          this.chatgptError = response.success ? null : data;
           this.contentChatgpt = data;
           this.chatgptDuration = duration;
           this.chatgptLoading = false;

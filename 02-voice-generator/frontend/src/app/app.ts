@@ -27,6 +27,8 @@ export class App {
   claudeLoading = false;
   chatgptError: string | null = null;
   claudeError: string | null = null;
+  voiceChatgptError: string | null = null;
+  voiceClaudeError: string | null = null;
 
   voiceChatgpt = '';
   voiceClaude = '';
@@ -119,6 +121,7 @@ export class App {
   resetContent(llm: 'chatgpt' | 'claude') {
     if (llm === 'chatgpt') {
       this.chatgptError = '';
+      this.voiceChatgptError = '';
       this.contentChatgpt = '';
       this.chatgptDuration = 0;
       this.chatgptProgress = 0;
@@ -126,6 +129,7 @@ export class App {
       this.voiceChatgptDuration = 0;
     } else {
       this.claudeError = '';
+      this.voiceClaudeError = '';
       this.contentClaude = '';
       this.claudeDuration = 0;
       this.claudeProgress = 0;
@@ -159,11 +163,13 @@ export class App {
         const voiceUrl = response.success ? response.data : '';
 
         if (llm === 'chatgpt') {
+          this.voiceChatgptError = response.success ? null : response.error || null;
           this.voiceChatgpt = voiceUrl;
           this.voiceChatgptDuration = duration;
           this.voiceChatgptLoading = false;
           this.voiceChatgptProgress = 100;
         } else {
+          this.voiceClaudeError = response.success ? null : response.error || null;
           this.voiceClaude = voiceUrl;
           this.voiceClaudeDuration = duration;
           this.voiceClaudeLoading = false;

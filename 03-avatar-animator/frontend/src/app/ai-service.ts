@@ -95,7 +95,7 @@ export class AiService {
       }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/video/${llm}`;
+    const url = `${this.baseUrl}/video/generate/${llm}`;
     const body = { name };
 
     return this.http.post<VideoGenerationResponse>(url, body).pipe(
@@ -128,7 +128,7 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/video/check`;
-    const body = { llm, project_id: id };
+    const body = { llm: llm, project_id: id };
 
     return this.http.post<VideoCheckResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {

@@ -17,7 +17,7 @@ function safeFilename(name, llm) {
   return `${name.toLowerCase().replace(/\s+/g, '-')}-${llm}`;
 }
 
-router.post('/:llm', async (req, res) => {
+router.post('/generate/:llm', async (req, res) => {
   const { llm } = req.params;
   const { name } = req.body;
 
@@ -52,34 +52,33 @@ router.post('/:llm', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
+  console.log('00000000001:check:' + JSON.stringify(req.body));
   const { llm, project_id } = req.body;
 
   if (!llm || !project_id) {
     return res.status(400).json({ success: false, error: 'Paramètres manquants' });
   }
 
+
   const avatarId = process.env.JOGGAI_AVATAR_ID || '1025';
-  const fileName = `${project_id}`;
+  const fileName = 'ridley-scott-chatgpt';
+  // const fileName = `${project_id}`;
   const videoPath = path.join(process.cwd(), 'storage', 'videos', `${fileName}.mp4`);
-  const audioPath = path.join(process.cwd(), 'storage', 'voices', `${fileName}.mp3`);
 
   try {
-    if (!fs.existsSync(audioPath)) {
-      return res.status(404).json({ success: false, error: 'Fichier audio introuvable' });
-    }
-
     const outputDir = path.dirname(videoPath);
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    if (useMock) {
-      await checkVideoMock(videoPath, llm);
-      console.log('🟡 AVATAR MOCK -', videoPath);
-    } else {
-      await checkVideo(project_id, avatarId, videoPath);
-      console.log('✅ AVATAR réel -', audioPath);
-    }
+    // if (useMock) {
+    //   await checkVideoMock(videoPath, llm);
+    //   console.log('🟡 AVATAR MOCK -', videoPath);
+    // } else {
+    //   await checkVideo(project_id, avatarId, videoPath);
+    //   console.log('✅ AVATAR réel -', audioPath);
+    // }
+
 
     const publicPathVideo = `/storage/videos/${fileName}.mp4`;
     const publicPathPoster = `/storage/videos/${fileName}.png`;
@@ -90,7 +89,6 @@ router.post('/check', async (req, res) => {
       success: true,
       url: fullUrlVideo,
       poster: fullUrlPoster,
-      mock: useMock,
       ready: true,
     });
 

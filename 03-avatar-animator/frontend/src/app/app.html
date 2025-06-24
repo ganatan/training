@@ -326,7 +326,7 @@
             <button class="btn btn-outline-success" (click)="checkVideo('claude')" [disabled]="!videoClaudeId">🔍
               Vérifier</button>
             <span *ngIf="videoClaude && !videoClaudeLoading" class="badge bg-success">Avatar OK ✓</span>
-            <span *ngIf="videoClaudeDuration > 0" class="text-primary small-text">
+            <span *ngIf="videoClaudeDuration > 0" class="text-success small-text">
               Réponse en {{ videoClaudeDuration.toFixed(1) }}s
             </span>
           </div>
@@ -338,10 +338,10 @@
         <div class="position-relative collapse show" id="avatar-claude">
           <div *ngIf="videoClaudeLoading || videoCheckClaudeLoading" class="d-flex align-items-center gap-3">
             <div class="progress flex-grow-1">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                 [style.width.%]="videoClaudeProgress"></div>
             </div>
-            <div class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;">
+            <div class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
               <span class="visually-hidden">Chargement...</span>
             </div>
           </div>

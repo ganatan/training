@@ -160,6 +160,9 @@ export class App {
       this.voiceChatgptDuration = 0;
       this.videoChatgpt = '';
       this.videoChatgptDuration = 0;
+      this.videoChatgptLoading = false;
+      this.videoChatgptId = '';
+      this.videoChatgptError = '';
     } else {
       this.claudeError = '';
       this.voiceClaudeError = '';
@@ -171,6 +174,9 @@ export class App {
       this.voiceClaudeDuration = 0;
       this.videoClaude = '';
       this.videoClaudeDuration = 0;
+      this.videoClaudeLoading = false;
+      this.videoClaudeId = '';
+      this.videoClaudeError = '';
     }
   }
 
@@ -341,6 +347,12 @@ export class App {
     this.claudeProgress = 0;
     this.voiceChatgpt = '';
     this.voiceClaude = '';
+    this.videoChatgptLoading = false;
+    this.videoChatgptId = '';
+    this.videoChatgptError = '';
+    this.videoClaudeLoading = false;
+    this.videoClaudeId = '';
+    this.videoClaudeError = '';
   }
 
   startProgress(llm: 'chatgpt' | 'claude') {

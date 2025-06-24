@@ -210,6 +210,12 @@
               Votre navigateur ne supporte pas la vidéo.
             </video>
           </div>
+          <div class="mt-3" *ngIf="!videoChatgpt">
+            <video controls class="w-100 rounded" poster="">
+              <source src="" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+          </div>
         </div>
       </div>
     </div>
@@ -382,6 +388,12 @@
           <div class="mt-3" *ngIf="videoClaude">
             <video controls class="w-100 rounded" [attr.poster]="videoPosterClaude">
               <source [attr.src]="videoClaude" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+          </div>
+          <div class="mt-3" *ngIf="!videoClaude">
+            <video controls class="w-100 rounded" poster="">
+              <source src="" type="video/mp4">
               Votre navigateur ne supporte pas la vidéo.
             </video>
           </div>

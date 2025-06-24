@@ -6,10 +6,6 @@ import fetch from 'node-fetch';
 
 const streamPipeline = promisify(pipeline);
 
-function safeFilename(name, llm) {
-  return `${name.toLowerCase().replace(/\s+/g, '-')}-${llm}`;
-}
-
 export async function generateVideo({ name, avatarId }) {
   try {
     const key = process.env.JOGGAI_API_KEY;
@@ -32,12 +28,8 @@ export async function generateVideo({ name, avatarId }) {
       body: JSON.stringify(body)
     };
 
-    console.log('00000000001:' + key);
-    console.log('00000000002:' + JSON.stringify(body));
     const response = await fetch('https://api.jogg.ai/v1/create_video_from_talking_avatar', options);
     const data = await response.json();
-    console.log('00000000003:' + JSON.stringify(data));
-    // console.log('✅ Réponse JoggAI :', data);
 
   } catch (error) {
     console.error('❌ Erreur JoggAI :', error.message);
@@ -77,11 +69,8 @@ export async function getVideoFromProjectId(projectId, name, llm) {
   }
 
   fs.mkdirSync(outputDir, { recursive: true });
-  const fileName = safeFilename(name, llm);
-  let videoFileName = `${fileName}.mp4`;
-  let imageFileName = `${fileName}.png`;
-  console.log('00000000001:' + videoFileName)
-  console.log('00000000001:' + imageFileName)
+  let videoFileName = `${name}.mp4`;
+  let imageFileName = `${name}.png`;
 
   const videoTarget = path.join(outputDir, videoFileName);
   const imageTarget = path.join(outputDir, imageFileName);

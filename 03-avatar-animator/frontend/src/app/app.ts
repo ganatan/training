@@ -245,8 +245,6 @@ export class App {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
 
-        console.log('00000000001:loadVideo:' + JSON.stringify(response));
-
         if (llm === 'chatgpt') {
           this.videoChatgptLoading = false;
           this.videoChatgptDuration = duration;
@@ -301,10 +299,6 @@ export class App {
       .subscribe((response: VideoCheckResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
-
-        console.log('00000000001:checkVideo:' + JSON.stringify(response));
-
-        const { url, poster } = response;
 
         if (llm === 'chatgpt') {
           this.videoCheckChatgptLoading = false;

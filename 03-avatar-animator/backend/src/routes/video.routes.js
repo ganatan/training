@@ -1,6 +1,4 @@
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
 import dotenv from 'dotenv';
 
 import testJoggAI from '../services/video/test-joggai.js';
@@ -14,6 +12,10 @@ dotenv.config();
 
 const router = express.Router();
 const useMock = process.env.USE_MOCK === 'true';
+
+function safeFilename(name, llm) {
+  return `${name.toLowerCase().replace(/\s+/g, '-')}-${llm}`;
+}
 
 router.post('/generate/:llm', async (req, res) => {
   const { llm } = req.params;
@@ -51,19 +53,17 @@ router.post('/generate/:llm', async (req, res) => {
 
 router.post('/check', async (req, res) => {
   const { llm, project_id, name } = req.body;
-  console.log('00000000001:check:' + JSON.stringify(req.body))
+  let fileName = safeFilename(name, llm);
   if (!llm || !project_id) {
     return res.status(400).json({ success: false, error: 'Paramètres manquants' });
   }
 
   try {
-    let fileName = '';
-
     if (useMock) {
       fileName = await checkVideoMock(llm);
       console.log('🟡 AVATAR MOCK -' + fileName);
     } else {
-      const result = await getVideoFromProjectId(project_id, name, llm);
+      const result = await getVideoFromProjectId(project_id, fileName, llm);
 
       if (!result.ready) {
         return res.json({

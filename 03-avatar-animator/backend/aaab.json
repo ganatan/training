@@ -1,9 +1,0 @@
-{
-    "rid": "bb9177fba513a6271f598e3567a6d5a7",
-    "code": 0,
-    "msg": "success",
-    "data": {
-        "sign_url": "https://asset.jogg.ai/joggUserData%2Fuser%2Feff91320-4684-4798-9908-f233a55305f7%2Fusermedia%2F2025-06-24%2F74ec8aa191014034a36a52ce2c3b73fc.mp3?Expires=1750772318&OSSAccessKeyId=LTAI5tJL4GudkEeC2wcuRj88&Signature=8Zevn396bBEgfp49Fi0Z5k7cxkE%3D&callback=eyJjYWxsYmFja0JvZHkiOiJjcmM2ND0ke2NyYzY0fVx1MDAyNmNvbnRlbnRfbWQ1PSR7Y29udGVudE1kNX1cdTAwMjZvYmplY3Q9JHtvYmplY3R9XHUwMDI2c2l6ZT0ke3NpemV9XHUwMDI2dD0xNzUwNzcxNzE4LjQ0MDkwN1x1MDAyNm1pbWVUeXBlPSR7bWltZVR5cGV9XHUwMDI2aW1hZ2VfaD0ke2ltYWdlSW5mby5oZWlnaHR9XHUwMDI2aW1hZ2Vfdz0ke2ltYWdlSW5mby53aWR0aH1cdTAwMjZpbWFnZV9mPSR7aW1hZ2VJbmZvLmZvcm1hdH0iLCJjYWxsYmFja1VybCI6Imh0dHBzOi8vYXBpLXNlcnZpY2VzLmpvZ2cuYWkvY29tbW9uL29zc19jYWxsYmFjayJ9",
-        "asset_id": "https://res.jogg.ai/joggUserData/user/eff91320-4684-4798-9908-f233a55305f7/usermedia/2025-06-24/74ec8aa191014034a36a52ce2c3b73fc.mp3"
-    }
-}

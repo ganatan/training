@@ -34,7 +34,7 @@ export async function generateVideo({ script, avatarId, voiceId, outputPath }) {
   }
 }
 
-export async function checkVideo({ script, avatarId, voiceId, outputPath }) {
+export async function checkVideo({ script, voiceId, outputPath }) {
   try {
     const key = process.env.JOGGAI_API_KEY;
     console.log('🔑 API Key:', key);

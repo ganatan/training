@@ -36,11 +36,11 @@ export async function checkVideoMock(llm = 'chatgpt') {
   }
 }
 
-
 export async function generateVideoMock(name, llm = 'chatgpt') {
   await delay(1000);
 
-  const project_id = "mock-backend-project-id";
+  const project_id = 'mock-backend-project-id';
+
   return {
     success: true,
     project_id: project_id,

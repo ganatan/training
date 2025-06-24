@@ -52,34 +52,26 @@ router.post('/generate/:llm', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
-  console.log('00000000001:check:' + JSON.stringify(req.body));
   const { llm, project_id } = req.body;
 
   if (!llm || !project_id) {
     return res.status(400).json({ success: false, error: 'Paramètres manquants' });
   }
 
-
-  const avatarId = process.env.JOGGAI_AVATAR_ID || '1025';
-  const fileName = 'ridley-scott-chatgpt';
-  // const fileName = `${project_id}`;
-  const videoPath = path.join(process.cwd(), 'storage', 'videos', `${fileName}.mp4`);
-
   try {
+    let fileName = '';
+    if (useMock) {
+      fileName = await checkVideoMock(llm);
+      console.log('🟡 AVATAR MOCK -');
+    } else {
+      fileName = await checkVideo(project_id, avatarId, videoPath);
+      console.log('✅ AVATAR réel -');
+    }
+    const videoPath = path.join(process.cwd(), 'storage', 'videos', `${fileName}.mp4`);
     const outputDir = path.dirname(videoPath);
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
-
-    // if (useMock) {
-    //   await checkVideoMock(videoPath, llm);
-    //   console.log('🟡 AVATAR MOCK -', videoPath);
-    // } else {
-    //   await checkVideo(project_id, avatarId, videoPath);
-    //   console.log('✅ AVATAR réel -', audioPath);
-    // }
-
-
     const publicPathVideo = `/storage/videos/${fileName}.mp4`;
     const publicPathPoster = `/storage/videos/${fileName}.png`;
     const fullUrlVideo = `${req.protocol}://${req.get('host')}${publicPathVideo}`;

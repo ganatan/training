@@ -6,10 +6,11 @@ import fetch from 'node-fetch';
 
 const streamPipeline = promisify(pipeline);
 
-export async function generateVideo({ name, avatarId, voiceId }) {
+export async function generateVideo({ name, avatarId, voiceId, text }) {
   try {
     const key = process.env.JOGGAI_API_KEY;
-    const script = 'Test de Video avec JoggAI';
+    const voiceIdTmp = process.env.JOGGAI_VOICE_ID
+    const script = text;
 
     const body = {
       script,
@@ -17,7 +18,7 @@ export async function generateVideo({ name, avatarId, voiceId }) {
       screen_style: 1,
       avatar_id: Number(avatarId),
       avatar_type: 0,
-      voice_id: "en-US-ChristopherNeural",
+      voice_id: Number(voiceIdTmp),
       caption: false
     };
 
@@ -135,12 +136,4 @@ export async function uploadMedia(filename, localPath) {
   let public_url = 1111;
   return public_url;
 
-
-  // if (!putRes.ok) {
-  //   throw new Error(`Erreur PUT audio vers ${sign_url}`);
-  // }
-
-
-  // let public_url = 1111;
-  // return public_url;
 }

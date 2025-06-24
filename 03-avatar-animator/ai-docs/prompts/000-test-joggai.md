@@ -68,14 +68,27 @@
   --header 'x-api-key: <your-api-key>' ^
   --header 'Content-Type: application/json' ^
   --data-raw '{
-      "script": "Test de Video avec JoggAI",
-      "aspect_ratio": 0,
+      "script": "Ridley Scott, né le 30 novembre 1937 à South Shields, Angleterre, est un réalisateur",
+      "aspect_ratio": 1,
       "screen_style": 1,
-      "avatar_id": 1025,
+      "avatar_id": 961,
       "avatar_type": 0,
-      "voice_id": "en-US-ChristopherNeural",
-      "caption": false   
+      "voice_id": "tb_32985e7eafff401eb9ebfcbd9d442e93",
+      "caption": false,   
+      "language": "french"
   }'
+
+  curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' ^
+    --header 'x-api-key: <your-api-key>' ^
+    --header 'Content-Type: application/json' ^
+    --data-raw '{
+        "audio_url": <your-audio-url>,
+        "aspect_ratio": 1,
+        "screen_style": 1,
+        "avatar_id": 961,
+        "avatar_type": 0,
+        "caption": false   
+    }'
 
   Response
   {

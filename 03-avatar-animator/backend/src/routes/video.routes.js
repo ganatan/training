@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import fs from 'fs';
 import path from 'path';
 
 import testJoggAI from '../services/video/test-joggai.js';
@@ -22,10 +23,22 @@ router.post('/generate/:llm', async (req, res) => {
   const { llm } = req.params;
   const { name } = req.body;
 
-  const avatarId = process.env.JOGGAI_AVATAR_ID || '961';
-  const voiceId = process.env.JOGGAI_VOICE_ID || 'en-US-ChristopherNeural';
+  const avatarId = process.env.JOGGAI_AVATAR_ID;
+  const voiceId = process.env.JOGGAI_VOICE_ID;
+
+  const fileName = safeFilename(name, llm);
+  const jsonPath = path.join(process.cwd(), 'storage', 'data', `${fileName}.json`);
+
 
   try {
+
+    if (!fs.existsSync(jsonPath)) {
+      return res.status(404).json({ success: false, error: 'Fichier JSON introuvable' });
+    }
+
+    const jsonContent = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+    const text = jsonContent.text;
+
     let result;
 
     if (useMock) {
@@ -35,7 +48,7 @@ router.post('/generate/:llm', async (req, res) => {
       console.log('00000000001:' + name)
       console.log('00000000001:' + avatarId)
       console.log('00000000001:' + voiceId)
-      result = await generateVideo({ name, avatarId, voiceId });
+      result = await generateVideo({ name, avatarId, voiceId ,text});
       console.log('✅ AVATAR réel -', result.project_id);
     }
 
@@ -103,9 +116,8 @@ router.post('/check', async (req, res) => {
 });
 
 router.get('/health/upload', async (req, res) => {
-  const localPath = path.resolve('storage/voices', 'ridley-scott-chatgpt.mp3');
-  const publicUrl = await uploadMedia('ridley-scott-chatgpt.mp3', localPath);
-  // let publicUrl = 1111;
+  const localPath = path.resolve('storage/voices', 'ridley-scott-test.mp3');
+  const publicUrl = await uploadMedia('ridley-scott-test.mp3', localPath);
   let result = true;
   console.log('✅ Fichier disponible publiquement :', publicUrl);
   res.json({ success: result, publicUrl: publicUrl });

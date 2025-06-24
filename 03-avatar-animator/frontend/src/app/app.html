@@ -139,14 +139,11 @@
         </div>
       </div>
       <div class="card p-4 mt-3">
-        videoChatgptId: {{ videoChatgptId}}
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="btn-group-responsive d-flex align-items-center gap-2 flex-wrap">
             <button class="btn btn-outline-primary" (click)="loadVideo('chatgpt')">Avatar - JoggAI</button>
-            <button class="btn btn-outline-primary" (click)="checkVideo('chatgpt')">🔍
+            <button class="btn btn-outline-primary" (click)="checkVideo('chatgpt')" [disabled]="!videoChatgptId">🔍
               Vérifier</button>
-            <!-- <button class="btn btn-outline-primary" (click)="checkVideo('chatgpt')" [disabled]="!videoChatgptId">🔍
-              Vérifier</button> -->
             <span *ngIf="videoChatgpt && !videoChatgptLoading" class="badge bg-primary">Avatar OK ✓</span>
             <span *ngIf="videoChatgptDuration > 0" class="text-primary small-text">
               Réponse en {{ videoChatgptDuration.toFixed(1) }}s
@@ -330,9 +327,7 @@
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="btn-group-responsive d-flex align-items-center gap-2 flex-wrap">
             <button class="btn btn-outline-success" (click)="loadVideo('claude')">Avatar - JoggAI</button>
-            <!-- <button class="btn btn-outline-success" (click)="checkVideo('claude')" [disabled]="!videoClaudeId">🔍
-              Vérifier</button> -->
-            <button class="btn btn-outline-success" (click)="checkVideo('claude')">🔍
+            <button class="btn btn-outline-success" (click)="checkVideo('claude')" [disabled]="!videoClaudeId">🔍
               Vérifier</button>
             <span *ngIf="videoClaude && !videoClaudeLoading" class="badge bg-success">Avatar OK ✓</span>
             <span *ngIf="videoClaudeDuration > 0" class="text-success small-text">

@@ -15,7 +15,7 @@ export async function generateVideo({ name, avatarId, voiceId }) {
       script,
       aspect_ratio: 1,         
       screen_style: 1,         
-      avatar_id: avatarId,
+      avatar_id:  Number(avatarId),
       avatar_type: 0,
       voice_id: "en-US-ChristopherNeural",
       caption: false

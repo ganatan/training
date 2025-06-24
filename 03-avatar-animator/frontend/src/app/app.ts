@@ -271,7 +271,7 @@ export class App {
 
   checkVideo(llm: 'chatgpt' | 'claude') {
     let id = llm === 'chatgpt' ? this.videoChatgptId : this.videoClaudeId;
-    id = '1c0c92b6addd4171970a0ee48a104fe6';
+    id = '8480a2cb74f04e8a9d8f407b383fa3d2';
     if (!id) return;
 
     const start = performance.now();

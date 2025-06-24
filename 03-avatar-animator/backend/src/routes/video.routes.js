@@ -21,7 +21,8 @@ router.post('/generate/:llm', async (req, res) => {
   const { llm } = req.params;
   const { name } = req.body;
 
-  const avatarId = process.env.JOGGAI_AVATAR_ID || '1025';
+  const avatarId = process.env.JOGGAI_AVATAR_ID || '961';
+  const voiceId = process.env.JOGGAI_VOICE_ID || 'en-US-ChristopherNeural';
 
   try {
     let result;
@@ -30,26 +31,60 @@ router.post('/generate/:llm', async (req, res) => {
       result = await generateVideoMock(name, llm);
       console.log('🟡 AVATAR MOCK -', result.project_id);
     } else {
-      result = await generateVideo(name, avatarId);
+      console.log('00000000001:' + name)
+      console.log('00000000001:' + avatarId)
+      console.log('00000000001:' + voiceId)
+      result = await generateVideo({ name, avatarId, voiceId });
       console.log('✅ AVATAR réel -', result.project_id);
     }
 
-    const projectId = result.project_id;
-
     return res.json({
       success: true,
-      project_id: projectId,
+      project_id: result.project_id
     });
 
   } catch (err) {
     console.error('❌ Erreur génération AVATAR :', err.message);
-
     return res.status(500).json({
       success: false,
-      error: err.message,
+      error: err.message
     });
   }
 });
+
+// router.post('/generate/:llm', async (req, res) => {
+//   const { llm } = req.params;
+//   const { name } = req.body;
+
+//   const avatarId = process.env.JOGGAI_AVATAR_ID || '1025';
+
+//   try {
+//     let result;
+
+//     if (useMock) {
+//       result = await generateVideoMock(name, llm);
+//       console.log('🟡 AVATAR MOCK -', result.project_id);
+//     } else {
+//       result = await generateVideo(name, avatarId);
+//       console.log('✅ AVATAR réel -', result.project_id);
+//     }
+
+//     const projectId = result.project_id;
+
+//     return res.json({
+//       success: true,
+//       project_id: projectId,
+//     });
+
+//   } catch (err) {
+//     console.error('❌ Erreur génération AVATAR :', err.message);
+
+//     return res.status(500).json({
+//       success: false,
+//       error: err.message,
+//     });
+//   }
+// });
 
 router.post('/check', async (req, res) => {
   const { llm, project_id, name } = req.body;

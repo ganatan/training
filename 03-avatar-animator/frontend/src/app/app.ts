@@ -36,6 +36,8 @@ export class App {
   videoClaudeError: string | null = null;
   videoCheckChatgptError: string | null = null;
   videoCheckClaudeError: string | null = null;
+  videoCheckChatgptProcess: boolean | null = null;
+  videoCheckClaudeProcess: boolean | null = null;
 
   videoChatgptKey = false;
 
@@ -284,6 +286,7 @@ export class App {
       this.videoChatgptDuration = 0;
       this.videoChatgptProgress = 0;
       this.videoCheckChatgptError = null;
+      this.videoCheckChatgptProcess = false;
     } else {
       this.videoClaude = '';
       this.videoPosterClaude = '';
@@ -291,9 +294,10 @@ export class App {
       this.videoClaudeDuration = 0;
       this.videoClaudeProgress = 0;
       this.videoCheckClaudeError = null;
+      this.videoCheckClaudeProcess = false;
     }
     this.aiService
-      .checkVideo(llm, id)
+      .checkVideo(llm, id, this.name)
       .subscribe((response: VideoCheckResponse) => {
         const duration = (performance.now() - start) / 1000;
         clearInterval(interval);
@@ -308,10 +312,12 @@ export class App {
           if (response.success) {
             this.videoChatgpt = response.url;
             this.videoPosterChatgpt = response.poster;
+            this.videoCheckChatgptProcess = !response.ready;
             this.videoChatgptProgress = 100;
           } else {
             this.videoChatgpt = '';
             this.videoPosterChatgpt = '';
+            this.videoCheckChatgptProcess = false;
             this.videoCheckChatgptError = response.error || 'Erreur lors de la création';
             this.videoChatgptProgress = 0;
           }
@@ -321,10 +327,12 @@ export class App {
           if (response.success) {
             this.videoClaude = response.url;
             this.videoPosterClaude = response.poster;
+            this.videoCheckClaudeProcess = !response.ready;
             this.videoClaudeProgress = 100;
           } else {
             this.videoChatgpt = '';
             this.videoPosterClaude = '';
+            this.videoCheckClaudeProcess = false;
             this.videoCheckClaudeError = response.error || 'Erreur lors de la création';
             this.videoClaudeProgress = 0;
           }

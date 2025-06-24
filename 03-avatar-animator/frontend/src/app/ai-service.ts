@@ -112,7 +112,7 @@ export class AiService {
 
   }
 
-  checkVideo(llm: string, id: string): Observable<VideoCheckResponse> {
+  checkVideo(llm: string, id: string, name: string): Observable<VideoCheckResponse> {
     if (environment.useMock) {
       const name = 'ridley-scott';
       const safeName = name.toLowerCase().replace(/\s+/g, '-');
@@ -128,7 +128,7 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/video/check`;
-    const body = { llm: llm, project_id: id };
+    const body = { llm: llm, project_id: id, name: name };
 
     return this.http.post<VideoCheckResponse>(url, body).pipe(
       catchError((error: HttpErrorResponse) => {

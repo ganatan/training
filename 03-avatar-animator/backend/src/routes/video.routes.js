@@ -50,46 +50,51 @@ router.post('/generate/:llm', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
-  const { llm, project_id } = req.body;
-  console.log('00000000001:' + llm)
-  console.log('00000000001:' + project_id)
-  return res.status(400).json({ success: false, error: 'Paramètres manquants' });
+  const { llm, project_id, name } = req.body;
+  console.log('00000000001:check:' + JSON.stringify(req.body))
+  if (!llm || !project_id) {
+    return res.status(400).json({ success: false, error: 'Paramètres manquants' });
+  }
 
-  // if (!llm || !project_id) {
-  //   return res.status(400).json({ success: false, error: 'Paramètres manquants' });
-  // }
+  try {
+    let fileName = '';
 
-  // try {
-  //   let fileName = '';
-  //   const outputDir = path.resolve('storage/videos');
+    if (useMock) {
+      fileName = await checkVideoMock(llm);
+      console.log('🟡 AVATAR MOCK -' + fileName);
+    } else {
+      const result = await getVideoFromProjectId(project_id, name, llm);
 
-  //   if (useMock) {
-  //     fileName = await checkVideoMock(llm);
-  //     console.log('🟡 AVATAR MOCK -');
-  //   } else {
-  //     const base = `video-${llm}-${Date.now()}`;
-  //     const outputPath = path.join(outputDir, `${base}.mp4`);
-  //     fileName = await getVideoFromProjectId(project_id, outputPath);
-  //     console.log('✅ AVATAR réel -');
-  //   }
+      if (!result.ready) {
+        return res.json({
+          success: true,
+          url: '',
+          poster: '',
+          ready: false
+        });
+      }
 
-  //   const publicVideo = `/storage/videos/${fileName}.mp4`;
-  //   const publicImage = `/storage/videos/${fileName}.png`;
+      fileName = result.fileName;
+      console.log('✅ AVATAR réel -');
+    }
 
-  //   const fullUrlVideo = `${req.protocol}://${req.get('host')}${publicVideo}`;
-  //   const fullUrlPoster = `${req.protocol}://${req.get('host')}${publicImage}`;
+    const publicVideo = `/storage/videos/${fileName}.mp4`;
+    const publicImage = `/storage/videos/${fileName}.png`;
 
-  //   return res.json({
-  //     success: true,
-  //     url: fullUrlVideo,
-  //     poster: fullUrlPoster,
-  //     ready: true,
-  //   });
+    const fullUrlVideo = `${req.protocol}://${req.get('host')}${publicVideo}`;
+    const fullUrlPoster = `${req.protocol}://${req.get('host')}${publicImage}`;
 
-  // } catch (err) {
-  //   console.error('❌ Erreur vérification vidéo :', err.message);
-  //   return res.status(500).json({ success: false, error: err.message });
-  // }
+    return res.json({
+      success: true,
+      url: fullUrlVideo,
+      poster: fullUrlPoster,
+      ready: true
+    });
+
+  } catch (err) {
+    console.error('❌ Erreur vérification vidéo :', err.message);
+    return res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 router.get('/health/lva', async (req, res) => {

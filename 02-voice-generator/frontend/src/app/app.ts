@@ -161,7 +161,6 @@ export class App {
         clearInterval(interval);
 
         const voiceUrl = response.success ? response.data : '';
-
         if (llm === 'chatgpt') {
           this.voiceChatgptError = response.success ? null : response.error || null;
           this.voiceChatgpt = voiceUrl;

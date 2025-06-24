@@ -6,35 +6,77 @@ import fetch from 'node-fetch';
 
 const streamPipeline = promisify(pipeline);
 
-export async function generateVideo({ name, avatarId }) {
+export async function generateVideo({ name, avatarId, voiceId }) {
   try {
     const key = process.env.JOGGAI_API_KEY;
+    const script = 'Test de Video avec JoggAI';
+
     const body = {
-      script: script,
-      aspect_ratio: 0,
-      screen_style: 1,
+      script,
+      aspect_ratio: 1,         
+      screen_style: 1,         
       avatar_id: avatarId,
       avatar_type: 0,
-      voice_id: voiceId,
+      voice_id: "en-US-ChristopherNeural",
       caption: false
     };
 
-    const options = {
+    const response = await fetch('https://api.jogg.ai/v1/create_video_from_talking_avatar', {
       method: 'POST',
       headers: {
         'x-api-key': key,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    };
+    });
 
-    const response = await fetch('https://api.jogg.ai/v1/create_video_from_talking_avatar', options);
     const data = await response.json();
 
+    if (data.code !== 0) {
+      throw new Error(`JoggAI API error: ${data.msg}`);
+    }
+
+    return {
+      success: true,
+      project_id: data.data.project_id
+    };
   } catch (error) {
     console.error('❌ Erreur JoggAI :', error.message);
+    throw error;
   }
 }
+
+
+// export async function generateVideo({ name, avatarId }) {
+//   try {
+//     let script = 'Test de Video avec JoggAI';
+//     const key = process.env.JOGGAI_API_KEY;
+//     const body = {
+//       script: script,
+//       aspect_ratio: 1,
+//       screen_style: 1,
+//       avatar_id: avatarId,
+//       avatar_type: 0,
+//       voice_id: voiceId,
+//       caption: false
+//     };
+
+//     const options = {
+//       method: 'POST',
+//       headers: {
+//         'x-api-key': key,
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(body)
+//     };
+
+//     const response = await fetch('https://api.jogg.ai/v1/create_video_from_talking_avatar', options);
+//     const data = await response.json();
+
+//   } catch (error) {
+//     console.error('❌ Erreur JoggAI :', error.message);
+//   }
+// }
 
 export async function getVideoFromProjectId(projectId, name, llm) {
 

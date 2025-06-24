@@ -20,6 +20,19 @@
   abonnement  https://app.jogg.ai/billing/subscriptions
   api         https://docs.jogg.ai/api-reference/QuickStart/GettingStarted
 
+# Format
+
+   # Format correct
+   "aspect_ratio": 1,     visage 16:9 dans 16:9
+   "screen_style": 1,     fond image
+
+   "aspect_ratio": 2,     visage carre dans 16:9
+   "screen_style": 1,     fond image
+
+   "aspect_ratio": 2,     visage carre dans 16:9
+   "screen_style": 3,     fond vert
+
+
 # Test
 
 

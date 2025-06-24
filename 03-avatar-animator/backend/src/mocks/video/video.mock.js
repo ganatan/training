@@ -9,40 +9,40 @@ export async function checkVideoMock(llm = 'chatgpt') {
   try {
     await delay(1000);
 
-    const selectedLLM = ['chatgpt', 'claude'].includes(llm) ? llm : 'chatgpt';
-    const basePath = path.resolve('src/mocks/video');
-    const baseName = `ridley-scott-${selectedLLM}`;
-    const sourceMp4 = path.join(basePath, `${baseName}.mp4`);
-    const sourcePng = path.join(basePath, `${baseName}.png`);
-    const videoPath = path.join(process.cwd(), 'storage', 'videos', `${baseName}.mp4`);
-    const imagePath = path.join(process.cwd(), 'storage', 'videos', `${baseName}.png`);
+    const selected = ['chatgpt', 'claude'].includes(llm) ? llm : 'chatgpt';
+    const baseName = `ridley-scott-${selected}`;
+
+    const sourceDir = path.resolve('src/mocks/video');
+    const sourceMp4 = path.join(sourceDir, `${baseName}.mp4`);
+    const sourcePng = path.join(sourceDir, `${baseName}.png`);
+
+    const outputDir = path.resolve('storage/videos');
+    const targetMp4 = path.join(outputDir, `${baseName}.mp4`);
+    const targetPng = path.join(outputDir, `${baseName}.png`);
 
     if (!fs.existsSync(sourceMp4)) {
-      throw new Error(`Fichier MP4 introuvable : ${sourceMp4}`);
+      throw new Error(`Fichier MP4 manquant : ${sourceMp4}`);
     }
     if (!fs.existsSync(sourcePng)) {
-      throw new Error(`Fichier PNG introuvable : ${sourcePng}`);
+      throw new Error(`Fichier PNG manquant : ${sourcePng}`);
     }
 
-    fs.mkdirSync(path.dirname(videoPath), { recursive: true });
-
-    fs.copyFileSync(sourceMp4, videoPath);
-    fs.copyFileSync(sourcePng, imagePath);
+    fs.mkdirSync(outputDir, { recursive: true });
+    fs.copyFileSync(sourceMp4, targetMp4);
+    fs.copyFileSync(sourcePng, targetPng);
 
     return baseName;
-  } catch (error) {
-    console.error('❌ Erreur dans checkVideoMock :', error.message);
-    throw error;
+  } catch (err) {
+    console.error('❌ Erreur checkVideoMock :', err.message);
+    throw err;
   }
 }
 
 export async function generateVideoMock(name, llm = 'chatgpt') {
   await delay(1000);
 
-  const project_id = 'mock-backend-project-id';
-
   return {
     success: true,
-    project_id: project_id,
+    project_id: 'mock-backend-project-id',
   };
 }

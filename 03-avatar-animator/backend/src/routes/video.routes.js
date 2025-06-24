@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 
 import testJoggAI from '../services/video/test-joggai.js';
 
-import { checkVideo, generateVideo } from '../services/video/video.service.js';
+import { generateVideo } from '../services/video/video.service.js';
+import { getVideoFromProjectId } from '../services/video/video.service.js';
+
 import { checkVideoMock, generateVideoMock } from '../mocks/video/video.mock.js';
 
 dotenv.config();
@@ -26,7 +28,7 @@ router.post('/generate/:llm', async (req, res) => {
       result = await generateVideoMock(name, llm);
       console.log('🟡 AVATAR MOCK -', result.project_id);
     } else {
-      result = await generateVideo(name, avatarId, llm);
+      result = await generateVideo(name, avatarId);
       console.log('✅ AVATAR réel -', result.project_id);
     }
 
@@ -49,45 +51,45 @@ router.post('/generate/:llm', async (req, res) => {
 
 router.post('/check', async (req, res) => {
   const { llm, project_id } = req.body;
+  console.log('00000000001:' + llm)
+  console.log('00000000001:' + project_id)
+  return res.status(400).json({ success: false, error: 'Paramètres manquants' });
 
-  if (!llm || !project_id) {
-    return res.status(400).json({ success: false, error: 'Paramètres manquants' });
-  }
+  // if (!llm || !project_id) {
+  //   return res.status(400).json({ success: false, error: 'Paramètres manquants' });
+  // }
 
-  try {
-    let fileName = '';
-    if (useMock) {
-      fileName = await checkVideoMock(llm);
-      console.log('🟡 AVATAR MOCK -');
-    } else {
-      fileName = await checkVideo(project_id, videoPath);
-      console.log('✅ AVATAR réel -');
-    }
-    const videoPath = path.join(process.cwd(), 'storage', 'videos', `${fileName}.mp4`);
-    const outputDir = path.dirname(videoPath);
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-    const publicPathVideo = `/storage/videos/${fileName}.mp4`;
-    const publicPathPoster = `/storage/videos/${fileName}.png`;
-    const fullUrlVideo = `${req.protocol}://${req.get('host')}${publicPathVideo}`;
-    const fullUrlPoster = `${req.protocol}://${req.get('host')}${publicPathPoster}`;
+  // try {
+  //   let fileName = '';
+  //   const outputDir = path.resolve('storage/videos');
 
-    return res.json({
-      success: true,
-      url: fullUrlVideo,
-      poster: fullUrlPoster,
-      ready: true,
-    });
+  //   if (useMock) {
+  //     fileName = await checkVideoMock(llm);
+  //     console.log('🟡 AVATAR MOCK -');
+  //   } else {
+  //     const base = `video-${llm}-${Date.now()}`;
+  //     const outputPath = path.join(outputDir, `${base}.mp4`);
+  //     fileName = await getVideoFromProjectId(project_id, outputPath);
+  //     console.log('✅ AVATAR réel -');
+  //   }
 
-  } catch (err) {
-    console.error('❌ Erreur vérification vidéo :', err.message);
+  //   const publicVideo = `/storage/videos/${fileName}.mp4`;
+  //   const publicImage = `/storage/videos/${fileName}.png`;
 
-    return res.status(500).json({
-      success: false,
-      error: err.message,
-    });
-  }
+  //   const fullUrlVideo = `${req.protocol}://${req.get('host')}${publicVideo}`;
+  //   const fullUrlPoster = `${req.protocol}://${req.get('host')}${publicImage}`;
+
+  //   return res.json({
+  //     success: true,
+  //     url: fullUrlVideo,
+  //     poster: fullUrlPoster,
+  //     ready: true,
+  //   });
+
+  // } catch (err) {
+  //   console.error('❌ Erreur vérification vidéo :', err.message);
+  //   return res.status(500).json({ success: false, error: err.message });
+  // }
 });
 
 router.get('/health/lva', async (req, res) => {

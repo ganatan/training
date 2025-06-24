@@ -78,6 +78,44 @@
 curl --location --request GET 'https://api.jogg.ai/v1/project?project_id=d65c2a57c0e543179ee3ccdf7aceaf2f' \
 --header 'x-api-key: <your-api-key>' \
 
+  
+  Infos retournes
+
+  Etape 1 en cours
+  {
+    "rid": "7fe36078261e3c81394609dfab5c483d",
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "id": "1c0c92b6addd4171970a0ee48a104fe6",
+        "title": "Ronald Studio 0624",
+        "video_duration": 0,
+        "video_url": "",
+        "cover_url": "https://res.jogg.ai/joggUserData/project/1c0c92b6addd4171970a0ee48a104fe6/1750750281710-0aed08a62c4365d5dc36a8ad690ca97fad4d83fb-cover.png",
+        "status_code": 3,
+        "status_desc": "processing",
+        "created_at": 1750750278
+    }
+
+  Etape 2 en cours
+  {
+      "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
+      "code": 0,
+      "msg": "success",
+      "data": {
+          "id": "fa6228c0f52c4f3986e88f7ffa5d2864",
+          "title": "welcome to jogg.ai",
+          "video_url": "https://res.jogg.ai/video.webm",
+          "cover_url": "https://res.jogg.ai/cover.png",
+          "video_duration": 6,
+          "status_code": 4,
+          "status_desc": "success",
+          "created_at": 1732806631
+      }
+  }
+
+
+
 # Code javascript
 
   const options = {

@@ -270,7 +270,8 @@ export class App {
   }
 
   checkVideo(llm: 'chatgpt' | 'claude') {
-    const id = llm === 'chatgpt' ? this.videoChatgptId : this.videoClaudeId;
+    let id = llm === 'chatgpt' ? this.videoChatgptId : this.videoClaudeId;
+    id = '1c0c92b6addd4171970a0ee48a104fe6';
     if (!id) return;
 
     const start = performance.now();
@@ -291,7 +292,6 @@ export class App {
       this.videoClaudeProgress = 0;
       this.videoCheckClaudeError = null;
     }
-
     this.aiService
       .checkVideo(llm, id)
       .subscribe((response: VideoCheckResponse) => {
@@ -303,19 +303,31 @@ export class App {
         const { url, poster } = response;
 
         if (llm === 'chatgpt') {
-          this.videoChatgpt = url;
-          this.videoPosterChatgpt = poster;
           this.videoCheckChatgptLoading = false;
           this.videoChatgptDuration = duration;
-          this.videoChatgptProgress = 100;
-          this.videoCheckChatgptError = null;
+          if (response.success) {
+            this.videoChatgpt = response.url;
+            this.videoPosterChatgpt = response.poster;
+            this.videoChatgptProgress = 100;
+          } else {
+            this.videoChatgpt = '';
+            this.videoPosterChatgpt = '';
+            this.videoCheckChatgptError = response.error || 'Erreur lors de la création';
+            this.videoChatgptProgress = 0;
+          }
         } else {
-          this.videoClaude = url;
-          this.videoPosterClaude = poster;
           this.videoCheckClaudeLoading = false;
           this.videoClaudeDuration = duration;
-          this.videoClaudeProgress = 100;
-          this.videoCheckClaudeError = null;
+          if (response.success) {
+            this.videoClaude = response.url;
+            this.videoPosterClaude = response.poster;
+            this.videoClaudeProgress = 100;
+          } else {
+            this.videoChatgpt = '';
+            this.videoPosterClaude = '';
+            this.videoCheckClaudeError = response.error || 'Erreur lors de la création';
+            this.videoClaudeProgress = 0;
+          }
         }
       });
   }

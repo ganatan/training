@@ -3,6 +3,7 @@
 
 # Test de fonctionnement de l'API joggAI via le backend
   http://localhost:3000/api/video/health/lva
+  http://localhost:3000/api/video/health/upload
 
 # Test de fonctionnement de l'API fichiers
   http://localhost:3000/storage/voices/ridley-scott-chatgpt.mp3

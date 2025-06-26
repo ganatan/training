@@ -1,34 +1,34 @@
 {
   "moderator": {
     "name": "Ganatan",
-    "role": "Animateur",
+    "role": "Animateur Mock Backend",
     "stance": "Neutre",
     "personality": "Neutre, pose les questions et relance le débat"
   },
   "items": [
     {
-      "name": "Sophie",
+      "name": "Camille",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Developpeuse front-end passionnée, Sophie aime la structure et l'efficacité que React apporte aux grands projets."
+      "personality": "Calme et analytique"
     },
     {
-      "name": "Luis",
+      "name": "Julien",
       "role": "Intervenant",
       "stance": "Pour",
-      "personality": "Architecte logiciel, Luis préfère React pour sa flexibilité et son écosystème riche."
+      "personality": "Structuré et convaincant"
     },
     {
-      "name": "Anja",
+      "name": "Alexis",
       "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Anja, cheffe de projet, trouve Angular plus robuste pour la gestion des applications d'entreprise complexes."
+      "personality": "Critique et passionné"
     },
     {
-      "name": "Marco",
+      "name": "Lina",
       "role": "Intervenant",
       "stance": "Contre",
-      "personality": "Marco est développeur senior en JavaScript et favorise Angular pour son intégration complète et son support par Google."
+      "personality": "Directe et sceptique"
     }
   ]
 }

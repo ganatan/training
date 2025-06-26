@@ -17,7 +17,7 @@ export function reply(topic: string, count = 4) {
     `Quelle courbe d’apprentissage est la plus accessible pour un débutant ?`,
   ];
 
-  const dialogueCount = environment.useMock ? 2 : 2;
+  const dialogueCount = environment.useMock ? 4 : 4;
 
   const items = angularVsReactQuestions.slice(0, count).map((text) => ({
     text: text,

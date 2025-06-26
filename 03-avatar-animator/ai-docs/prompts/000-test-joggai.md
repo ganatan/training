@@ -1,3 +1,14 @@
+# ChatGpt
+  https://platform.openai.com/api-keys
+
+# Claude
+  https://console.anthropic.com
+  https://support.anthropic.com/.
+
+# eleven-labs
+  https://elevenlabs.io/app/home
+
+
 # Test de fonctionnement de l'API elevenLabs via le backend
   http://localhost:3000/api/voice/health/tts
 

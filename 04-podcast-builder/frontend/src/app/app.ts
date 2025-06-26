@@ -43,8 +43,8 @@ export class App implements OnInit {
   ngOnInit() {
     if (this.useMock) {
       this.topic = 'Angular vs React';
-      this.topicSpeakerCount = 2;
-      this.topicQuestionCount = 2;
+      this.topicSpeakerCount = 4;
+      this.topicQuestionCount = 4;
     }
   }
 

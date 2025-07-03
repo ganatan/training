@@ -1,5 +1,4 @@
-# Rajouter le websocket
-
+# Rajouter le websocket dans main.js
 
   npm install ws
 
@@ -40,3 +39,7 @@ app.whenReady().then(() => {
   startWebSocketServer()
   createWindow()
 })
+
+
+# Rajouter websocket dans index.html
+

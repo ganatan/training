@@ -15,6 +15,7 @@
       --input-bg: #e9ecef;
       --accent: #0d6efd;
     }
+
     .dark-mode {
       --bg: #121212;
       --text: #f1f1f1;
@@ -22,69 +23,87 @@
       --input-bg: #2a3b4d;
       --accent: #00c9a7;
     }
-    html, body {
+
+    html,
+    body {
       min-height: 100%;
       background-color: var(--bg);
       color: var(--text);
       font-family: "Roboto", sans-serif;
     }
+
     .chat-bubble {
       padding: 0.5rem 1rem;
       border-radius: 1rem;
       margin-bottom: 0.5rem;
       background-color: var(--card-bg);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       max-width: 80%;
       word-break: break-word;
     }
+
     .chat-bubble.user {
       background-color: var(--accent);
       color: #fff;
       align-self: flex-end;
     }
+
     .chat-bubble.bot {
       background-color: var(--card-bg);
       color: var(--text);
       align-self: flex-start;
     }
+
     .sidebar {
       background-color: var(--card-bg);
-      border-right: 1px solid rgba(0,0,0,0.1);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
       padding: 1rem;
       height: 100%;
     }
+
     .conversation-list li {
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 0.5rem;
     }
+
     .conversation-list li:hover {
       background-color: var(--input-bg);
     }
+
     .toggle-mode {
       position: fixed;
       top: 1rem;
       right: 1rem;
       z-index: 999;
     }
+
     .status-indicator {
       display: inline-block;
       width: 10px;
       height: 10px;
       border-radius: 50%;
       margin-right: 0.5rem;
-      background-color: #28a745;
-    }
-    .status-disconnected {
       background-color: #dc3545;
     }
+
+    .alert {
+      font-size: 0.75rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      white-space: break-spaces;
+    }
+
     @media (max-width: 768px) {
       .layout {
         flex-direction: column;
       }
+
       .sidebar {
         border-right: none;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         height: auto;
       }
     }
@@ -100,12 +119,20 @@
         <li>Conversation 1</li>
         <li>Conversation 2</li>
       </ul>
+      <button class="btn btn-success w-100 mt-3">Tester la connexion</button>
+      <div class="alert alert-danger small mt-3" role="alert">
+        Erreur de connexion au serveur
+      </div>
+      <div class="alert alert-danger small mt-2" role="alert">
+        Timeout dépassé
+      </div>
     </aside>
     <main class="flex-grow-1 d-flex flex-column p-3">
-      <h1 class="text-primary">dialog-connector</h1>
-      <div class="d-flex align-items-center mb-2">
-        <span class="status-indicator" id="ws-status"></span>
-        <small id="ws-status-text">Connecté</small>
+      <h1 class="text-primary mb-0">dialog-connector</h1>
+      <small class="text-secondary">Version HTML de test</small>
+      <div class="d-flex align-items-center mb-2 mt-2">
+        <span class="status-indicator"></span>
+        <small>Déconnecté</small>
       </div>
       <div class="flex-grow-1 d-flex flex-column gap-2 p-2 border rounded overflow-auto">
         <div class="chat-bubble user">Bonjour, ChatGPT</div>

@@ -7,13 +7,12 @@ const { WebSocketServer } = require('ws')
 require('dotenv').config()
 
 function startWebSocketServer() {
-  console.log('00000000001:startWebSocketServer')
+  console.log('WebSocketServer démarré sur le port 8080')
   const wss = new WebSocketServer({ port: 8080 })
+
   wss.on('connection', (ws) => {
-    console.log('Client WebSocket connecté')
     ws.on('message', (message) => {
-      console.log('Message reçu :', message.toString())
-      ws.send(`Echo: ${message}`)
+      ws.send(`Réponse du serveur : vous avez dit "${message.toString()}"`)
     })
   })
 }
@@ -26,12 +25,9 @@ function createWindow() {
       nodeIntegration: false
     }
   })
-  console.log('00000000001:' + process.env.MODE)
   if (process.env.MODE === 'html') {
-    console.log('00000000002:' + process.env.MODE)
     win.loadFile(path.join(__dirname, '../renderer/html/index.html'))
   } else {
-    console.log('00000000003:' + process.env.MODE)
     win.loadFile(path.join(__dirname, '../renderer/angular/dist/angular-starter/browser/index.html'))
   }
   if (process.env.NODE_ENV === 'development') {
@@ -46,28 +42,3 @@ app.whenReady().then(() => {
   createWindow()
 })
 
-
-// 'use strict'
-
-// const { app, BrowserWindow } = require('electron')
-// const path = require('path')
-
-// function createWindow() {
-//   const win = new BrowserWindow({
-//     width: 1024,
-//     height: 768,
-//     webPreferences: {
-//       nodeIntegration: false
-//     }
-//   })
-//   win.loadFile(
-//     path.join(__dirname, '../renderer/angular/dist/angular-starter/browser/index.html')
-//   )
-//   if (process.env.NODE_ENV === 'development') {
-//     win.webContents.openDevTools()
-//   }
-// }
-
-// app.whenReady().then(() => {
-//   createWindow()
-// })

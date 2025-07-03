@@ -29,3 +29,7 @@
 
 
     est ce que je dois integrer le server websocket dedans pourquoi et comment
+
+
+# Prompt
+  Comment integrer la reponse dans l'application angular

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.css',
 })
 export class App {
-  protected title = 'angular-app';
 }

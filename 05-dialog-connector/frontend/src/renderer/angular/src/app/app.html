@@ -1,4 +1,4 @@
-<button class="btn btn-sm btn-outline-secondary toggle-mode" onclick="toggleTheme()">Toggle thème</button>
+<button class="btn btn-sm btn-outline-secondary toggle-mode" (click)="toggleTheme()">Toggle thème</button>
 <div class="d-flex layout vh-100">
   <aside class="sidebar flex-shrink-0">
     <h5>Conversations</h5>
@@ -8,7 +8,12 @@
     </ul>
   </aside>
   <main class="flex-grow-1 d-flex flex-column p-3">
-    <h1 class="text-primary">dialog-connector</h1>
+    <h1 class="text-primary">
+      dialog-connector
+    </h1>
+    <p class="text-secondary mt-0 mb-2 ">
+      Données <strong>{{ useMock ? 'mockées (fictives)' : 'réelles (production)' }}</strong>
+    </p>
     <div class="d-flex align-items-center mb-2">
       <span class="status-indicator" id="ws-status"></span>
       <small id="ws-status-text">Connecté</small>

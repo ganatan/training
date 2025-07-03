@@ -1,7 +1,7 @@
 # dialog-connector
 
 Starter **Electron + Angular**  
-Structure de projet claire et modulaire pour intégrer un chatbot avec WebSocket et OpenAI.
+Structure de projet pour intégrer un chatbot avec WebSocket et OpenAI.
 
 ---
 

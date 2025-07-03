@@ -68,3 +68,6 @@
 
 
   comment differencier
+
+  tiens compte de cette erreur (utilisation de cross_env je crois)
+  'NODE_ENV' n’est pas reconnu en tant que commande interne

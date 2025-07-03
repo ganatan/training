@@ -32,6 +32,7 @@ function getProvider(llm) {
 
 async function callLLM(type, llm, data) {
   try {
+    console.log('00000000002');
     const provider = getProvider(llm);
     if (!provider) {
       return { error: 'unknown-provider' };

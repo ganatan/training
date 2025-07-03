@@ -14,11 +14,12 @@
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",
-    "build:all": "electron-builder --win --mac --linux"
+    "build:all": "electron-builder --win --mac --linux",
+    "generate-project-structure": "node tools/scripts/generate-project-structure.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Danny - Ganatan",
+  "license": "MIT",
   "type": "commonjs",
   "build": {
     "appId": "com.ganatan.dialogconnector",

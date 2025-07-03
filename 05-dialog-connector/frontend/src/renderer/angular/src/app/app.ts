@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,9 @@ import { environment } from '../environments/environment.development';
 export class App {
   useMock = environment.useMock;
 
+  constructor() {
+    console.log('00000000001:'+JSON.stringify(environment))
+  }
   toggleTheme() {
     const body = document.querySelector('body');
     if (body) {

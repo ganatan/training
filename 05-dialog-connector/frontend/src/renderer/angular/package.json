@@ -6,6 +6,8 @@
     "dev": "ng serve --port 4200",
     "start": "ng serve --port 4200",
     "build": "ng build",
+    "build:production": "ng build --configuration=production",
+    "build:developpement": "ng build --configuration=development",
     "build:electron": "ng build --base-href ./",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

@@ -198,6 +198,25 @@
         chatContainer.scrollTop = chatContainer.scrollHeight
       }
     })
+
+    btnSend.addEventListener('click', () => {
+      const content = inputMsg.value.trim()
+      if (!content) return
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        const userMsg = document.createElement('div')
+        userMsg.className = 'chat-bubble user'
+        userMsg.textContent = content
+        chatContainer.appendChild(userMsg)
+        ws.send(content)
+        inputMsg.value = ''
+        chatContainer.scrollTop = chatContainer.scrollHeight
+        wsResponse.style.display = 'block'
+        wsResponse.textContent = `Message envoyé au serveur`
+      } else {
+        wsResponse.style.display = 'block'
+        wsResponse.textContent = 'WebSocket non connecté'
+      }
+    })
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>

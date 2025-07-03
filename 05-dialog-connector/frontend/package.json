@@ -11,6 +11,7 @@
     "coverage": "jest --coverage",
     "build:angular": "cd src/renderer/angular && npm run build:electron",
     "build": "electron-builder",
+    "build:html": "cross-env MODE=html electron-builder",
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",

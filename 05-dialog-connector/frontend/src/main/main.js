@@ -1,7 +1,7 @@
+'use strict'
+
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
-
-// require('dotenv').config()
 
 function createWindow() {
   const win = new BrowserWindow({

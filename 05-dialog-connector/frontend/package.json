@@ -7,7 +7,11 @@
     "dev": "cross-env NODE_ENV=development electron src/main/main.js",
     "start": "cross-env NODE_ENV=production electron src/main/main.js",
     "build:angular": "cd src/renderer/angular && npm run build:electron",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder --win --mac --linux"    
   },
   "keywords": [],
   "author": "",

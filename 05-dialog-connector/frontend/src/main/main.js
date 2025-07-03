@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
-require('dotenv').config()
+// require('dotenv').config()
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -14,8 +14,7 @@ function createWindow() {
   win.loadFile(
     path.join(__dirname, '../renderer/angular/dist/angular-starter/browser/index.html')
   )
-  console.log('00000000001:' + process.env.MODE)
-  if (process.env.MODE === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     win.webContents.openDevTools()
   }
 }

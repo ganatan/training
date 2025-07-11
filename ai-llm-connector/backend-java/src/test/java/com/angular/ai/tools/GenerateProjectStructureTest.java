@@ -1,4 +1,4 @@
-package com.example.tools;
+package com.angular.ai.tools;
 
 import org.junit.jupiter.api.Test;
 

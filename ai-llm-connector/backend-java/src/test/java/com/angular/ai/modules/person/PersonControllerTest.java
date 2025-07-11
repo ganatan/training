@@ -1,4 +1,4 @@
-package com.example.modules.person;
+package com.angular.ai.modules.person;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

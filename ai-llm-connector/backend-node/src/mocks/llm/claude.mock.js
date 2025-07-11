@@ -11,7 +11,7 @@ async function reply(type, input) {
   const llm = 'claude';
   const validType = ['biography', 'filmography', 'summary'].includes(type) ? type : 'contenu';
 
-  return `Mock Backend - Demande envoyée à ${llm} pour une ${validType} de "${name}", avec un style "${style}" et une longueur "${length}".`;
+  return `Node Mock Backend - Demande envoyée à ${llm} pour une ${validType} de "${name}", avec un style "${style}" et une longueur "${length}".`;
 }
 
 export default reply;

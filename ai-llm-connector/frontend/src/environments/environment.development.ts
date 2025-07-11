@@ -1,4 +1,4 @@
 export const environment = {
   useMock: false,
-  backend: 'java' // 'node' | 'java'
+  backend: 'node' // 'node' | 'java'
 };

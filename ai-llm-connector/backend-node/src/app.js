@@ -16,8 +16,6 @@ app.use(express.json());
 app.use('/api/llm', llmRoutes);
 
 app.get('/', (req, res) => {
-  let test = "test";
-  console.log(test);
   res.json({ services: aiServices });
 });
 

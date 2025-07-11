@@ -2,6 +2,8 @@ package com.example.tools;
 
 import org.junit.jupiter.api.Test;
 
+import com.angular.ai.tools.GenerateProjectStructure;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 

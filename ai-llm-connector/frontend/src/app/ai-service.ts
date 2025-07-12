@@ -37,7 +37,6 @@ export class AiService {
     }
 
     const url = `${this.baseUrl}/llm/${type}/${llm}`;
-    console.log('00000000001:' + url)
     const body = { name, length, style };
 
     return this.http.post<ContentGenerationResponse>(url, body)

@@ -3,6 +3,10 @@ import claudeMock from '../../mocks/llm/claude.mock.js';
 import chatgptService from '../../services/llm/chatgpt.service.js';
 import claudeService from '../../services/llm/claude.service.js';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const useMock = process.env.USE_MOCK === 'true';
 
 function isUnauthorizedError(message) {
@@ -30,7 +34,6 @@ async function callLLM(type, llm, data) {
     if (!provider) {
       return { error: 'unknown-provider' };
     }
-
     const handlerFunction = useMock ? provider.mock : provider.real;
     const result = await handlerFunction(type, data);
 

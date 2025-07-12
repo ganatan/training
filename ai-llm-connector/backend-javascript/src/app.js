@@ -19,7 +19,7 @@ app.get('/api/test', (req, res) => {
   res.json({
     success: true,
     method: 'GET',
-    message: 'Default GET route working'
+    message: 'Default GET route working',
   });
 });
 
@@ -30,7 +30,7 @@ app.post('/api/test', (req, res) => {
   res.json({
     success: true,
     method: 'POST',
-    received: body
+    received: body,
   });
 });
 
@@ -41,7 +41,7 @@ app.put('/api/test', (req, res) => {
   res.json({
     success: true,
     method: 'PUT',
-    updated: body
+    updated: body,
   });
 });
 
@@ -52,7 +52,7 @@ app.delete('/api/test', (req, res) => {
   res.json({
     success: true,
     method: 'DELETE',
-    deletedId: id
+    deletedId: id,
   });
 });
 

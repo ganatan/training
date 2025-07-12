@@ -29,6 +29,7 @@ const lengthMap = {
 
 async function reply(type, input) {
   try {
+
     const name = input.name || 'inconnu';
     const rawStyle = input.style || 'neutral';
     const rawLength = input.length || 'medium';

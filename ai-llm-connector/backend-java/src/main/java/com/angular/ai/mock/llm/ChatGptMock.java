@@ -9,7 +9,7 @@ public class ChatGptMock {
 
     public String reply(String type, Map<String, Object> input) {
         try {
-            Thread.sleep(1000); // Simule un délai de traitement
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

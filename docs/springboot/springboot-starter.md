@@ -37,10 +37,13 @@
       }
 
 
-      Renommer 
-        SpringbootStarterApplication
+      Renommer dans src/main/java
+        com.ganatan.starter/SpringbootStarterApplication
           en
-        StarterApplication
+        com.ganatan.starter/StarterApplication
+
+      Renommer les Tests src/test/java
+        com.ganatan.starter/SpringbootStarterApplication
 
       Executer
 

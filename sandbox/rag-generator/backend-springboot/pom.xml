@@ -10,15 +10,15 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.0.0-M2</version>
+    <version>3.5.5</version>
     <relativePath />
   </parent>
 
   <groupId>com.example</groupId>
   <artifactId>backend-springboot</artifactId>
   <version>1.0.0</version>
-  <name>backend-java</name>
-  <description>Demo backend-java</description>
+  <name>backend-springboot</name>
+  <description>Demo backend-springboot</description>
 
   <packaging>war</packaging>
 
@@ -36,25 +36,21 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
       <scope>provided</scope> 
     </dependency>
-    
 	<dependency>
     	<groupId>io.qdrant</groupId>
     	<artifactId>client</artifactId>
     	<version>${qdrant.version}</version>
 	</dependency>    
-
   </dependencies>
 
   <build>
@@ -83,7 +79,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -94,8 +89,7 @@
           <failsOnError>true</failsOnError>
         </configuration>
       </plugin>
-      
     </plugins>
-
   </build>
+  
 </project>

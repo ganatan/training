@@ -4,7 +4,6 @@
   
     Docker Desktop Installer.exe
 
-
     docker --version
     docker compose version
 

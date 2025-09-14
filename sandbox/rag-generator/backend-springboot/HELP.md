@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.example.backend-java-springboot' is invalid and this project uses 'com.example.backend-java-springboot' instead.
+* The original package name 'com.example.backend-springboot' is invalid and this project uses 'com.example.backend-springboot' instead.
 
 # Getting Started
 

@@ -1,0 +1,48 @@
+{
+  "name": "llm-connector-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "lint": "eslint .",
+    "docker:remove-all-containers": "FOR /f %i IN ('docker ps -a -q') DO docker rm -f %i",
+    "docker:remove-all-images": "FOR /f %i IN ('docker images -q') DO docker rmi -f %i",
+    "docker:remove-all-volumes": "FOR /f %i IN ('docker volume ls -q') DO docker volume rm %i",
+    "docker:remove-all": "npm run docker:remove-all-containers && npm run docker:remove-all-images && npm run docker:remove-all-volumes",
+    "docker:list-containers": "docker ps -a",
+    "docker:list-images": "docker images",
+    "docker:list-volumes": "docker volume ls",
+    "compose:qdrant": "docker compose -f docker/docker-compose.qdrant.yml up -d",
+    "compose:qdrant:stop": "docker compose -f docker/docker-compose.qdrant.yml down",
+    "compose:qdrant:clean": "docker compose -f docker/docker-compose.qdrant.yml down --volumes --rmi all",
+    "generate-project-structure": "node tools/scripts/generate-project-structure.js",
+    "generate-markdown-docs": "node tools/scripts/generate-markdown-docs.js",
+    "generate-script-text-openai": "node tools/scripts/generate-script-text-openai.js",
+    "generate-pdf-from-txt": "node tools/scripts/generate-pdf-from-txt.js",
+    "generate-documentation": "npm run generate-markdown-docs && npm run generate-script-text-openai && npm run generate-pdf-from-txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "axios": "1.12.0",
+    "cors": "2.8.5",
+    "dotenv": "17.2.2",
+    "express": "5.1.0",
+    "fs": "0.0.1-security",
+    "highlight.js": "11.11.1",
+    "markdown-it": "14.1.0",
+    "markdown-pdf": "11.0.0",
+    "node-fetch": "3.3.2",
+    "nodemon": "3.1.10",
+    "pdfkit": "0.17.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.35.0",
+    "eslint": "9.35.0",
+    "globals": "16.4.0"
+  }
+}

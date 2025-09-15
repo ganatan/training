@@ -122,7 +122,7 @@
       Commande pour avoir le nom de conteneur
     SELECT name, open_mode FROM v$pdbs;
 
-# Creation Database
+# Creation Database via sqlPlus
 
   sqlplus system/motdepasse@localhost:1521/XEPDB1
 
@@ -140,3 +140,86 @@
 
   - Attribution des droits
   GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO admin_user;
+
+# Creation Database via Oracle SQL Developer
+  - Par defaut
+    le service ou conteneur est 
+      CDB
+
+  - Selection 
+    Nouvelle Connection
+    Decocher SI Ex
+    Indiquer Nom de service
+      XEPDB1
+
+  ALTER SESSION SET CONTAINER = XEPDB1;
+
+  CREATE USER admin_user IDENTIFIED BY Trustno1
+    DEFAULT TABLESPACE USERS
+    TEMPORARY TABLESPACE TEMP
+    QUOTA UNLIMITED ON USERS;
+
+  GRANT CONNECT, RESOURCE TO admin_user;
+
+
+# Commandes
+  
+  - Connaitre l'utilisateur connecté
+    SELECT USER FROM dual;
+
+  - Tester utilisateur pour une table
+    SELECT owner, table_name 
+    FROM all_tables 
+    WHERE table_name = 'ESSAI';    
+
+  - Creer un utilisateur
+  
+    ALTER SESSION SET CONTAINER = XEPDB1;
+
+    CREATE USER ADMIN_USER IDENTIFIED BY "Trustno1"
+      DEFAULT TABLESPACE USERS
+      TEMPORARY TABLESPACE TEMP
+      QUOTA UNLIMITED ON USERS;
+
+    GRANT CONNECT, RESOURCE TO ADMIN_USER;
+    
+  - Detruire un user
+    DROP USER TOTO CASCADE;
+
+  - Tester un user
+    SELECT USERNAME, ACCOUNT_STATUS FROM DBA_USERS WHERE USERNAME = 'ADMIN_USER';
+
+
+# Scripts 
+
+  -- Basculer sur le bon PDB
+  ALTER SESSION SET CONTAINER = XEPDB1;
+
+  -- Vérifier si l'utilisateur existe déjà
+  DECLARE
+    v_count NUMBER;
+  BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM dba_users
+    WHERE username = 'ADMIN_USER';
+
+    IF v_count > 0 THEN
+      EXECUTE IMMEDIATE 'DROP USER ADMIN_USER CASCADE';
+    END IF;
+  END;
+  /
+
+  -- Créer l'utilisateur ADMIN_USER
+  CREATE USER ADMIN_USER IDENTIFIED BY "Trustno1"
+    DEFAULT TABLESPACE USERS
+    TEMPORARY TABLESPACE TEMP
+    QUOTA UNLIMITED ON USERS;
+
+  -- Donner les droits de base
+  GRANT CONNECT, RESOURCE TO ADMIN_USER;
+
+  -- Vérifier que l'utilisateur est bien créé et actif
+  SELECT USERNAME, ACCOUNT_STATUS 
+  FROM dba_users
+  WHERE USERNAME = 'ADMIN_USER';

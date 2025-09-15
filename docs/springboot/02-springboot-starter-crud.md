@@ -50,6 +50,8 @@
 
     package com.ganatan.starter.modules.person;
 
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
     import java.util.*;
@@ -76,8 +78,9 @@
         }
 
         @GetMapping("/{id}")
-        public Person getById(@PathVariable Long id) {
-            return persons.get(id);
+        public ResponseEntity<Person> getById(@PathVariable Long id) {
+            Person person = persons.get(id);
+            return person != null ? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
         }
 
         @PostMapping
@@ -89,20 +92,26 @@
         }
 
         @PutMapping("/{id}")
-        public Person update(@PathVariable Long id, @RequestBody Person updated) {
+        public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person updated) {
             if (persons.containsKey(id)) {
                 updated.setId(id);
                 persons.put(id, updated);
-                return updated;
+                return ResponseEntity.ok(updated);
             }
-            return null;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         @DeleteMapping("/{id}")
-        public void delete(@PathVariable Long id) {
-            persons.remove(id);
+        public ResponseEntity<Void> delete(@PathVariable Long id) {
+            if (persons.containsKey(id)) {
+                persons.remove(id);
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+
 
 # Test Maven
 

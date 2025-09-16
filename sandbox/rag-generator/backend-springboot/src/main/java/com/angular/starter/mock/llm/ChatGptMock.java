@@ -1,4 +1,4 @@
-package com.angular.ai.mock.llm;
+package com.angular.starter.mock.llm;
 
 import org.springframework.stereotype.Component;
 

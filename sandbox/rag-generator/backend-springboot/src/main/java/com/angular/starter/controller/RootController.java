@@ -1,13 +1,12 @@
-package com.angular.ai.controller;
+package com.angular.starter.controller;
 
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import com.angular.starter.config.AiServicesConfig;
 
-
-import com.angular.ai.config.AiServicesConfig; 
+import java.util.Map; 
 
 @RestController
 public class RootController {

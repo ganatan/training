@@ -1,9 +1,10 @@
-package com.angular.ai.controller;
+package com.angular.starter.controller;
 
-import com.angular.ai.service.llm.ChatGptService;
-import com.angular.ai.service.llm.ClaudeService;
-import com.angular.ai.mock.llm.ChatGptMock;
-import com.angular.ai.mock.llm.ClaudeMock;
+import com.angular.starter.mock.llm.ChatGptMock;
+import com.angular.starter.mock.llm.ClaudeMock;
+import com.angular.starter.service.llm.ChatGptService;
+import com.angular.starter.service.llm.ClaudeService;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 

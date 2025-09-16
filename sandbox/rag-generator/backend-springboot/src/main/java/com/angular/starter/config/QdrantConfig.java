@@ -1,4 +1,4 @@
-package com.angular.ai.config;
+package com.angular.starter.config;
 
 import io.qdrant.client.QdrantClient;
 import io.qdrant.client.QdrantGrpcClient;

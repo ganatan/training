@@ -1,6 +1,8 @@
-package com.angular.ai.tools;
+package com.angular.starter.tools;
 
 import org.junit.jupiter.api.Test;
+
+import com.angular.starter.tools.GenerateProjectStructure;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

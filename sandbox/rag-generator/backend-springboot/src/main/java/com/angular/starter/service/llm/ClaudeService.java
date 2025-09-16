@@ -1,4 +1,4 @@
-package com.angular.ai.service.llm;
+package com.angular.starter.service.llm;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;

@@ -8,6 +8,10 @@ import java.util.Map;
 @Configuration
 public class AiServicesConfig {
 
+	public AiServicesConfig() {
+		System.out.println("00000000001:constructor:AiServicesConfig");
+	}
+
 	public static Map<String, List<Map<String, String>>> getAllServices() {
 		return Map.of("llm",
 				List.of(create("chatgpt", "OpenAI", "Text generation, summarization, Q&A, code completion"),

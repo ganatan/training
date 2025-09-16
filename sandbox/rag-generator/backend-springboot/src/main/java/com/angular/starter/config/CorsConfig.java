@@ -8,6 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 
+	public CorsConfig() {
+		System.out.println("00000000001:constructor:CorsConfig");
+	}
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		System.out.println("✅ CORS configuration chargée");

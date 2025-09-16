@@ -13,15 +13,31 @@
   http://localhost:6333/dashboard#/welcome
 
 
-# Utilisation avec SprigBoot
+# Utilisation avec SpringBoot
 
   Pom.xml
 
+
+  <properties>
+    <qdrant.version>1.15.0</qdrant.version>
+    <io.grpc.version>1.75.0</io.grpc.version>
+  </properties>
+
   <dependency>
-      <groupId>io.qdrant</groupId>
-      <artifactId>client</artifactId>
-      <version>1.15.0</version>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-netty-shaded</artifactId>
+      <version>${io.grpc.version}</version>
   </dependency>
-  
+    <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-protobuf</artifactId>
+      <version>${io.grpc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-stub</artifactId>
+      <version>${io.grpc.version}</version>
+    </dependency>	
+	    
   .gitignore
     docker/qdrant_data/

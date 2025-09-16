@@ -1,2 +1,2 @@
 # Tester une classe en particulier
-  mvn test -Dtest=ApplicationTests
+  mvn test -Dtest=RootControllerTest

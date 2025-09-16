@@ -8,7 +8,7 @@ import aiServices from './config/ai-services.js';
 dotenv.config();
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());

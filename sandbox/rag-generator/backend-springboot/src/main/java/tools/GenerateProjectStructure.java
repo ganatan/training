@@ -1,4 +1,4 @@
-package com.angular.starter.tools;
+package tools;
 
 import java.io.File;
 

@@ -17,28 +17,26 @@ export class AiService {
   private baseUrl = environment.backend;
   private http = inject(HttpClient);
 
-  generateContent(llm: string, name: string, length: string, style: string, type: string): Observable<ContentGenerationResponse> {
+  generateContent(model: string, question: string, length: string, style: string, mode: string): Observable<ContentGenerationResponse> {
     if (environment.useMock) {
-      const mockData = mockReply(type, { llm, name, length, style });
-
-      return of({ success: true, llm: llm, data: mockData }).pipe(delay(1000));
+      const mockData = mockReply(mode, { llm: model, question, length, style });
+      return of({ success: true, data: mockData }).pipe(delay(1000));
     }
 
-    const url = `${this.baseUrl}/llm/${type}/${llm}`;
-    const body = { name, length, style };
+    const url = `${this.baseUrl}/llm/${mode}/${model}`;
+    const body = { name: question, length, style };
 
-    return this.http.post<ContentGenerationResponse>(url, body)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Erreur API:', error);
+    return this.http.post<ContentGenerationResponse>(url, body).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erreur API:', error);
 
-          return of({
-            success: false,
-            data: '',
-            error: this.getErrorMessage(error),
-          });
-        }),
-      );
+        return of({
+          success: false,
+          data: '',
+          error: this.getErrorMessage(error),
+        });
+      }),
+    );
   }
 
   private getErrorMessage(error: HttpErrorResponse): string {

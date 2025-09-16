@@ -102,3 +102,9 @@ body.dark-mode {
   pointer-events: none;
   opacity: 0.6;
 }
+
+
+textarea.form-control {
+  height: auto;
+  min-height: calc(1.5em * 3 + .75rem + 2px);
+}

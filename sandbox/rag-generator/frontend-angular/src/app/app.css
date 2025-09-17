@@ -38,11 +38,6 @@ label {
   font-weight: 600;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 160px;
-}
-
 .loading {
   position: absolute;
   top: 50%;
@@ -103,8 +98,3 @@ body.dark-mode {
   opacity: 0.6;
 }
 
-
-textarea.form-control {
-  height: auto;
-  min-height: calc(1.5em * 3 + .75rem + 2px);
-}

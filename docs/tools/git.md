@@ -1,3 +1,11 @@
+# Creation d'un repo
+  git init -b main
+  echo "# mon-repo" > README.md
+  git add README.md
+  git commit -m "init Repo"
+  git branch --show-current
+
+
 # Liste des branches
   git branch -a
 
@@ -30,5 +38,8 @@
 
 # Renommer un remote
   - Renommer origin en github
-  
-  git remote rename origin github
+    git remote rename origin github
+
+# Infos sur le remote
+  git remote show github
+  git remote show gitlab

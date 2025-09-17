@@ -1,5 +1,3 @@
-# 250917-10:09
-
 # Training
 
 Projet de formation et de démonstration.

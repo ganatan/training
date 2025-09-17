@@ -5,9 +5,21 @@
   git commit -m "init Repo"
   git branch --show-current
 
+# Selection d'une branche
+  git checkout feature-001  
+
+# Creation d'une branche
+  git checkout -b feature-001  
+
+# Suppression d'une branche
+  git branch -d feature-001  
 
 # Liste des branches
+  - Branches locales
   git branch -a
+  
+  - Branches distantes
+  git branch -r     # affiche les branches distantes
 
 # Liste des remote
   git remote -v
@@ -44,3 +56,12 @@
 # Infos sur le remote
   git remote show github
   git remote show gitlab
+
+
+# Push
+  git fetch github main
+  git pull github main
+
+# Effacer historiques des repo local
+  git remote remove github
+  git remote remove gitlab

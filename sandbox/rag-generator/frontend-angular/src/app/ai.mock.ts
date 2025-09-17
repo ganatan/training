@@ -6,7 +6,7 @@ export function reply(
   const style = data.style || 'neutral';
   const length = data.length || 'medium';
   const llm = data.llm || 'chatgpt';
-  const validMode = ['rag', 'direct'].includes(mode) ? mode : 'génération';
+  const validMode = mode === 'rag' ? 'avec rag' : 'sans rag';
 
   return `Mock Frontend Angular - Demande envoyée à ${llm} en mode ${validMode}, pour la question "${question}", avec un style "${style}" et une longueur "${length}".`;
 }

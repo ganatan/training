@@ -39,6 +39,7 @@
 # Renommer un remote
   - Renommer origin en github
     git remote rename origin github
+    git remote rename origin gitlab
 
 # Infos sur le remote
   git remote show github

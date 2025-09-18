@@ -5,6 +5,9 @@
   git commit -m "init Repo"
   git branch --show-current
 
+# Renommer une branche
+  git branch -M main
+  
 # Selection d'une branche
   git checkout feature-001  
 

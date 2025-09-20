@@ -1,0 +1,17 @@
+.box {
+  padding: 1rem;
+  border: 1px solid #333;
+  border-radius: .5rem;
+  max-width: 320px
+}
+
+.actions {
+  display: flex;
+  gap: .5rem;
+  margin-top: .5rem
+}
+
+button {
+  padding: .4rem .8rem;
+  cursor: pointer
+}

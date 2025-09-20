@@ -1,0 +1,14 @@
+<h1>angular-signals</h1>
+
+<div class="box">
+  <p>count: {{ count() }}</p>
+  <p>double: {{ double() }}</p>
+
+  <div class="actions">
+    <button (click)="dec()">-1</button>
+    <button (click)="inc()">+1</button>
+    <button (click)="reset()">reset</button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

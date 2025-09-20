@@ -12,3 +12,8 @@ Creation à la racine
 # Push des commits
   !!!!!!!
   avoir un package-lock.json    
+
+# Test des docker sur GitLab Registry  
+    Project / Deploy
+      Package Registry
+      Container Registry

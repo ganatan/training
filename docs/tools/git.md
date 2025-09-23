@@ -68,3 +68,7 @@
 # Effacer historiques des repo local
   git remote remove github
   git remote remove gitlab
+
+# Changer nom du dernier commit
+  git commit --amend -m "Nouveau message du commit"  
+  

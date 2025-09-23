@@ -71,74 +71,69 @@ dans app.ts
 
     13:5  error  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
 
+# Rajout du script pour pipeline
+
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
 
 # Fichier gitlab-ci Modele
+
+  workflow:
+    rules:
+      - changes:
+          - angular/angular-starter/**/*
+      - when: never
 
   image: node:20
 
   stages:
     - install
-    - lint
     - test
     - build
 
-  install:angular-eslint:
-    stage: install
-    script:
-      - echo "Installing dependencies"
-      - cd angular/eslint
-      - npm ci
+  .default-angular-starter:
+    variables:
+      PROJECT_DIR: angular/angular-starter
     cache:
+      key: angular-starter
       paths:
-        - angular/eslint/node_modules/
+        - $PROJECT_DIR/node_modules/
       policy: pull-push
     artifacts:
       paths:
-        - angular/eslint/node_modules/
+        - $PROJECT_DIR/node_modules/
       expire_in: 1h
-    rules:
-      - changes:
-          - angular/eslint/**/*
 
-  lint:angular-eslint:
-    stage: lint
+  install:angular-starter:
+    stage: install
+    extends: .default-angular-starter
     script:
-      - echo "Running ESLint"
-      - cd angular/eslint
-      - npm run lint
-    dependencies:
-      - install:angular-eslint
-    rules:
-      - changes:
-          - angular/eslint/**/*
+      - echo "Installing dependencies"
+      - cd $PROJECT_DIR
+      - npm ci
 
-  test:angular-eslint:
+  test:angular-starter:
     stage: test
+    extends: .default-angular-starter
+    dependencies:
+      - install:angular-starter
     script:
       - echo "Installing Chromium for headless tests"
       - apt-get update && apt-get install -y chromium
       - export CHROME_BIN=/usr/bin/chromium
-      - cd angular/eslint
+      - cd $PROJECT_DIR
       - echo "Running Angular unit tests in ChromeHeadless"
       - npm run test:ci
-    dependencies:
-      - install:angular-eslint
-    rules:
-      - changes:
-          - angular/eslint/**/*
 
-  build:angular-eslint:
+  build:angular-starter:
     stage: build
+    extends: .default-angular-starter
+    dependencies:
+      - install:angular-starter
     script:
       - echo "Building Angular app for production"
-      - cd angular/eslint
+      - cd $PROJECT_DIR
       - npm run build --configuration=production
-    dependencies:
-      - install:angular-eslint
     artifacts:
       paths:
-        - angular/eslint/dist/
+        - $PROJECT_DIR/dist/
       expire_in: 1 week
-    rules:
-      - changes:
-          - angular/eslint/**/*

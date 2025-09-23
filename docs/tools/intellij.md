@@ -67,3 +67,14 @@
     Lancement :
       Eclipse : clic droit sur Application.java → Run as > Java Application
       IntelliJ : clic droit → Run 'Application.main()'
+
+# Formattage
+  Ctrl + Alt + L      
+
+# Erreur UTF sur Eclipse
+  Clic droit sur ton projet java-starter → Properties
+  Menu Resource
+  Dans la section Text file encoding :
+  Sélectionne Other
+  Choisis UTF-8
+    Clique sur Apply and Close  

@@ -16,3 +16,22 @@
   "start": "node dist/app.js",
   "build": "tsc",
   "serve": "ts-node src/app.ts"
+
+# Parametre ESM
+  Package.json
+  
+  {
+    "type": "module"
+  }
+
+
+# tsconfig.json
+  {
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "CommonJS",
+      "outDir": "./dist"
+    },
+    "include": ["src"]
+  }  
+

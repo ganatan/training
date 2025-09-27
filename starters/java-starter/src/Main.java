@@ -1,23 +1,10 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
-public class Main {
-
-	static void getItems() {
-		System.out.println("00000000001:getItems");
-	}
-
+class Main {
 	public static void main(String[] args) {
-		Map<String, Integer> items = new HashMap<>();
-		items.put("Spielberg", 1001);
-		items.put("Cameron", 1001);
-		System.out.println("00000000001:" + items);
-
-//		String result = "";
-//		result = Lib.getItems();
-//		System.out.println("00000000001:" + result);
-//		getItems();
-//		System.out.println("00000000001");
+		String name = "Gladiator";
+		String[] movies = { "Gladiator", "Alien" };
+		System.out.println("000000000001:" + name);
+		System.out.println("000000000001:" + Arrays.toString(movies));
 	}
-
 }

@@ -1,5 +1,11 @@
-import getItems from "./lib";
+let movieName: string;
+let movies: string[];
 
-let movie = '3213213';
-getItems();
-console.log(`00000000001:${movie}`);
+movieName = 'Gladiator';
+movies = [
+   'game of thrones',
+   'lost'
+]
+
+console.log(`00000000001:${movieName}`);
+console.log(`00000000001:${JSON.stringify(movies)}`);

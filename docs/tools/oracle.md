@@ -141,6 +141,7 @@
   - Attribution des droits
   GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO admin_user;
 
+# Connexion Oracle SQL Developer
 # Creation Database via Oracle SQL Developer
   - Par defaut
     le service ou conteneur est 

@@ -6,7 +6,6 @@ Projet de formation et de démonstration.
 
 - Frontend : Angular
 - Backend : Node.js / Spring Boot
-- Prototypes : IA, RAG, Audio, Avatars
 
 ## Installation
 

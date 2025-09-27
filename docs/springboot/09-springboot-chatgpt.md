@@ -1,3 +1,13 @@
+# Ajout dependance
+
+  Fichier pom.xml
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+
+
 # Appel d'API en javascript
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',

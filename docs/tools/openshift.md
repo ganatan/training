@@ -128,8 +128,6 @@ Orchestration
         Nom de l'image
           docker.io/ganatan/frontend-angular:latest
 
-
-
 # Suppression
 
   - Selection Project
@@ -173,4 +171,5 @@ Orchestration
 # Onteste la route exposee
   https://frontend-angular-route-ganatan-dev.apps.rm2.thpm.p1.openshiftapps.com      
 
-    
+# Multi environnement    
+  un projet = un namespace Kubernetes

@@ -35,3 +35,22 @@
 
   - Volumes
     docker volume prune -f
+
+
+# Build et Run
+  
+  docker pull registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+
+  docker run -p 4000:4000 registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+
+  docker run -d -p 4000:4000 registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+
+  docker stop frontend-angular
+
+  docker rmi registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+
+
+
+docker pull https://hub.docker.com/r/ganatan/frontend-angular:latest
+docker pull ganatan/frontend-angular
+docker pull docker.io/ganatan/frontend-angular:latest

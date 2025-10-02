@@ -118,7 +118,7 @@ Orchestration
         Topologie
           - Liste des services
 
-# Creation de deploiement
+# Creation de deploiement manuellement
 
   - Selection Project
     - Charges de Travail
@@ -127,6 +127,29 @@ Orchestration
         Nom du deploiement
         Nom de l'image
           docker.io/ganatan/frontend-angular:latest
+
+# Creation de deployment via yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-angular
+  namespace: ganatan-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-angular
+  template:
+    metadata:
+      labels:
+        app: frontend-angular
+    spec:
+      containers:
+        - name: frontend-angular
+          image: registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+          ports:
+            - containerPort: 4000
 
 # Suppression
 
@@ -137,6 +160,7 @@ Orchestration
 
 
 # Creation d'un service
+
   apiVersion: v1
   kind: Service
   metadata:
@@ -144,11 +168,11 @@ Orchestration
     namespace: ganatan-dev
   spec:
     selector:
-      app: frontend-angular-manuel-001   # doit matcher le label du Deployment
+      app: frontend-angular
     ports:
       - protocol: TCP
-        port: 4000       # port exposé dans le cluster
-        targetPort: 4000 # port exposé par ton container
+        port: 4000
+        targetPort: 4000
     type: ClusterIP
 
 

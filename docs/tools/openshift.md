@@ -176,6 +176,21 @@ spec:
     type: ClusterIP
 
 
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: angular-ssr-service
+    namespace: ganatan-dev
+  spec:
+    selector:
+      app: angular-ssr
+    ports:
+      - protocol: TCP
+        port: 4000
+        targetPort: 4000
+    type: ClusterIP
+
+
 # Creation d'une route
 
   apiVersion: route.openshift.io/v1
@@ -192,8 +207,48 @@ spec:
     tls:
       termination: edge
 
+
+  apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    name: angular-ssr-route
+    namespace: ganatan-dev
+  spec:
+    to:
+      kind: Service
+      name: angular-ssr-service
+    port:
+      targetPort: 4000
+    tls:
+      termination: edge
+
 # Onteste la route exposee
   https://frontend-angular-route-ganatan-dev.apps.rm2.thpm.p1.openshiftapps.com      
 
 # Multi environnement    
   un projet = un namespace Kubernetes
+
+# Deploiment gitlab
+
+
+
+  - Verification sur openshift
+
+    Connection cluster OpenShift
+    En haut à droite → clique sur ton nom d’utilisateur
+    Copier la commande de connection
+    Display token
+
+    On obtient
+
+    oc login --token=xxxxxxx --server=https://yyyyyyy
+
+  créer manuellement que 2 variables dans GitLab :
+
+    Settings → CI/CD → Variables → Add variable
+    “Masked” et “Protected” pour OPENSHIFT_TOKEN et OPENSHIFT_SERVER.
+    
+    Nom	                      Exemple de valeur
+
+    OPENSHIFT_SERVER	        https://yyyyyyy
+    OPENSHIFT_TOKEN	          xxxxxxx

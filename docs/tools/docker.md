@@ -39,13 +39,25 @@
 
 # Build et Run
   
-  docker pull registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+  - frontend-angular
 
-  docker run -p 4000:4000 registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+    docker pull registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
 
-  docker run -d -p 4000:4000 registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+    docker run -p 4000:4000 registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
 
-  docker stop frontend-angular
+    docker run -d -p 4000:4000 registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
+
+    docker stop frontend-angular
+
+  - angular-ssr    
+
+    docker pull registry.gitlab.com/ganatan/sandbox/angular-ssr
+
+    docker run -p 4000:4000 registry.gitlab.com/ganatan/sandbox/angular-ssr:latest
+
+    docker run -d -p 4000:4000 registry.gitlab.com/ganatan/sandbox/angular-ssr:latest
+    
+    docker stop angular-ssr
 
   docker rmi registry.gitlab.com/ganatan/sandbox/rag-generator/frontend-angular:latest
 

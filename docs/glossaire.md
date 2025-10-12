@@ -1,7 +1,18 @@
 
+
+- COMPAS : en anglais (Boussole)
+	Sert à s’orienter dans ta base
+	l’interface graphique officielle de MongoDB (GUI).
+	Se connecter, créer bases/collections, insérer des documents, écrire des requêtes, construire des pipelines d’agrégation, créer des index, valider des schémas, importer/exporter des données, et inspecter les plans d’exécution.
+
 - CSS : Cascading Style Sheets
 		créé en 1996 par Håkon Wium Lie et le W3C
 		langage de feuille de style utilisé pour décrire l’apparence (couleurs, polices, mise en page) des documents HTML
+
+- EMBEDDING : Integration
+
+- GUI : Graphical User Interface
+	interface graphique utilisateur
 
 - Lombok
 	Bibliothèque d’annotations Java qui génère au compile-time le boilerplate (getters/setters, constructeurs, equals/hashCode, toString, @Builder, logs), via l’annotation processing; réduit la verbosité des POJO mais requiert support IDE et peut compliquer le debug.

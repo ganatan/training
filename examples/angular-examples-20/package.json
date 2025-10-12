@@ -14,6 +14,8 @@
     "start-component": "nx serve angular-component",
     "lint-component": "nx lint angular-component",
     "test-component": "nx test angular-component",
+    "coverage-component": "nx test angular-component --code-coverage",
+    "coverage2-component": "nx test angular-component --code-coverage --coverageReporters=text-summary",
     "build-component": "nx build angular-component",
     "start-ngrx": "nx serve angular-ngrx",
     "lint-ngrx": "nx lint angular-ngrx",

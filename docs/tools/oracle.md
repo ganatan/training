@@ -224,3 +224,24 @@
   SELECT USERNAME, ACCOUNT_STATUS 
   FROM dba_users
   WHERE USERNAME = 'ADMIN_USER';
+
+
+# Maintenance
+
+  1	Arrêter OracleServiceXE
+  2	Arrêter OracleOraDB21Home1TNSListener
+  3	Démarrer OracleServiceXE
+  4	Démarrer OracleOraDB21Home1TNSListener
+  
+  5	Vérifier lsnrctl status
+  6	Tester https://localhost:5500/em/
+
+  net start | find "Oracle"
+
+
+  Entre dans SQL*Plus :
+    sqlplus / as sysdba
+    select status from v$instance;
+    startup;
+    select instance_name, status from v$instance;
+    alter system register;

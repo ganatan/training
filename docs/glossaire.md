@@ -16,6 +16,9 @@
 
 - Lombok
 	Bibliothèque d’annotations Java qui génère au compile-time le boilerplate (getters/setters, constructeurs, equals/hashCode, toString, @Builder, logs), via l’annotation processing; réduit la verbosité des POJO mais requiert support IDE et peut compliquer le debug.
+  
+- MONGOSH
+  le shell officiel de MongoDB.
 
 - NPX : Node Package eXecute
 	npx est un outil livré avec Node.js (depuis npm v5.2), qui permet d’exécuter une commande d’un package sans l’installer globalement.		

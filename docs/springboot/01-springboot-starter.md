@@ -35,6 +35,21 @@
   
   Run as / Java Application
 
+# Generer un springboot-starter-crud
+  
+  Copier springboot-starter
+
+  Renommer un project
+    
+    dans .project le nom du projet Eclipse
+
+    	<name>springboot-starter-crud</name>
+
+    dans pom.xml le artifactId + name  (identifiant Maven complet)
+
+      <artifactId>springboot-starter-crud</artifactId>
+      <name>springboot-starter-crud</name>
+
 # Modifications controllers
 
   - Refacto SpringbootStarterApplication

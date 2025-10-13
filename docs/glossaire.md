@@ -9,20 +9,30 @@
 		créé en 1996 par Håkon Wium Lie et le W3C
 		langage de feuille de style utilisé pour décrire l’apparence (couleurs, polices, mise en page) des documents HTML
 
+- DTO (Data Transfer Object)
+	Objet dédié au transport de données entre couches/over-the-wire (API ⇄ client, service ⇄ service). Ne contient pas de logique métier ni d’annotations JPA. Contrat stable de l’API, souvent immuable.
+
 - EMBEDDING : Integration
 
 - GUI : Graphical User Interface
 	interface graphique utilisateur
 
-- Lombok
+- LOMBOK
 	Bibliothèque d’annotations Java qui génère au compile-time le boilerplate (getters/setters, constructeurs, equals/hashCode, toString, @Builder, logs), via l’annotation processing; réduit la verbosité des POJO mais requiert support IDE et peut compliquer le debug.
+	Origine probable du nom : clin d’œil au mot lombok (piment) en Indonésie → d’où le logo piment et le slogan officiel « spicing up your java ». 
+
+Autre écho : Lombok est aussi une île indonésienne (à l’est de Bali), le nom est court et mémorable.
   
 - MONGOSH
   le shell officiel de MongoDB.
 
 - NPX : Node Package eXecute
 	npx est un outil livré avec Node.js (depuis npm v5.2), qui permet d’exécuter une commande d’un package sans l’installer globalement.		
-	
+
+- POJO
+	Plain Old Java Object. 
+	Objet Java simple, sans dépendance à un framework, avec champs, getters/setters.
+
 - SASS : Syntactically Awesome Style Sheets
 		Créé en 2006 par Hampton Catlin
 		préprocesseur CSS ajoutant variables, fonctions, mixins et imbrication avec une syntaxe indentée sans accolades.

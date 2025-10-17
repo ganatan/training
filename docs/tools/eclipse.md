@@ -10,7 +10,15 @@
   https://www.eclipse.org/downloads/
   https://www.eclipse.org/downloads/packages/
 
-  Eclipse IDE for Enterprise Java and Web Developers
+  More Downloads
+    2025-09 R         
+    2025-06 R               !!!!!!! Utilise jdk 21 !!!!!!!
+  
+  Telecharger
+    Windows: x86_64    
+    Eclipse IDE for Enterprise Java and Web Developers
+  
+    eclipse-jee-2025-09-R-win32-x86_64.zip
 
   Decompresser
   - Utiliser eclipse.exe

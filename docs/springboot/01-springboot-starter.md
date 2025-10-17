@@ -1,5 +1,29 @@
+# Generer springboot-starter Version 4 Java 25
 
-# Generer springboot-starter
+ Générer le projet avec Spring Initializr
+ 
+    https://start.spring.io
+
+      Project           Maven
+      Language          Java
+      Spring Boot       4.0.0 (M3)
+
+      Group             com.ganatan
+      Artifact          springboot-starter
+      Name              springboot-starter
+      Description       Demo project for Spring Boot Starter
+      Package name      com.ganatan.starter
+
+      Java              25
+      Packaging         jar
+
+    Ajoute les dépendances :
+      Spring Web
+
+    Clique sur Generate    
+
+
+# Generer springboot-starter Version 3 Java 21
 
  Générer le projet avec Spring Initializr
  

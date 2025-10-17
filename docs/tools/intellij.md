@@ -29,6 +29,37 @@
         Ex sous Windows : C:\Program Files\Java\jdk-21
       Valide > Apply > OK
 
+# Changement de la version de JDK
+  Ouvre le menu :
+  File → Project Structure… (Ctrl + Alt + Shift + S)
+  Dans Project :
+    Project SDK → choisis jdk-25
+
+# Changement Couleur Editeur
+  File → Settings → Appearance & Behavior → Appearance    
+    Light with Light Header
+
+# Changement Taille Texte / font 
+  File → Settings → Editor → Font
+    consolas   12 / 1.0
+
+# Formattage
+  Formattage du texte
+    Ctrl + Alt + L
+
+# Indetation et Tab
+  
+  - Pour les fichiers Java
+    File → Settings → Editor → Code Style → Java → Tabs and Indents
+    2 partout
+
+  - Pour les fichiers XML
+    File → Settings → Editor → Code Style → XML    
+
+# Raccourcis
+  
+  Ctrl + F4 : Ferme Fichier
+
 # Lancement run et Browser
   run / Edit Configurations
     Modify Options

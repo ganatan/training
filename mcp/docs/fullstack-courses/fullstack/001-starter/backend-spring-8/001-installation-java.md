@@ -3,8 +3,6 @@
   https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html
 
   site        https://www.oracle.com/
-  Login       chendra123456@gmail.com
-  pass        Trustno123456
 
   echo %JAVA_HOME%
   echo %PATH%

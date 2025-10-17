@@ -1,3 +1,31 @@
+# Installation Maven
+  
+  https://maven.apache.org/download.cgi
+
+  apache-maven-3.9.11-bin.zip
+    Decompresser dans 
+    D:\hal\apache-maven-3.9.11\bin
+
+  Rajouter le Path
+    dans Variables d'environnement
+    
+    D:\hal\apache-maven-3.9.11\bin
+    Tester 
+      mvn -version
+
+# Compatibilite Maven / Java
+
+Java	Maven minimum	Plugin compiler minimum
+
+8	    3.0             3.3
+11	    3.6	            3.8
+17	    3.8.4	        3.10
+21	    3.9.5	        3.12
+22	    3.9.6	        3.13
+23	    3.9.6	        3.13
+24	    3.9.7	        3.13
+25	    3.9.9	        3.13
+
 # Commandes
 
 Commande	            Description

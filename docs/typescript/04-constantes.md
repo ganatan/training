@@ -1,0 +1,5 @@
+Nommer en UPPER_SNAKE_CASE 
+
+const MAX_RETRY_COUNT = 3
+const DEFAULT_TIMEOUT_MS = 5000
+const IS_PRODUCTION = true

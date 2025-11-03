@@ -1,0 +1,16 @@
+{
+  "name": "javascript-starter",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,4 +1,5 @@
-
+- ARRAY
+  Tableau
 
 - COMPAS : en anglais (Boussole)
 	Sert à s’orienter dans ta base
@@ -21,7 +22,7 @@
 	Bibliothèque d’annotations Java qui génère au compile-time le boilerplate (getters/setters, constructeurs, equals/hashCode, toString, @Builder, logs), via l’annotation processing; réduit la verbosité des POJO mais requiert support IDE et peut compliquer le debug.
 	Origine probable du nom : clin d’œil au mot lombok (piment) en Indonésie → d’où le logo piment et le slogan officiel « spicing up your java ». 
 
-Autre écho : Lombok est aussi une île indonésienne (à l’est de Bali), le nom est court et mémorable.
+	Autre écho : Lombok est aussi une île indonésienne (à l’est de Bali), le nom est court et mémorable.
   
 - MONGOSH
   le shell officiel de MongoDB.

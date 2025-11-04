@@ -1,26 +1,33 @@
+# Concept
 
-TypeScript	            Description	                        Exemple
+  En TypeScript, on utilise les types primitifs en minuscule (number, string, boolean).
 
-string	                Chaîne de caractères	            'Hello'
+  Les versions en majuscules (Number, String, Boolean) sont des objets wrappers JavaScript → à éviter.
 
-number	                Nombre (entier ou flottant)	        42, 3.14
+# Liste des Types en Typescript
 
-boolean	                Vrai ou faux	                    true, false
+  TypeScript	            Description	                        Exemple
 
-string[]	            Tableau de chaînes	                ['a', 'b']
+  string	                Chaîne de caractères	            'Hello'
 
-number[]	            Tableau de nombres	                [1, 2, 3]
+  number	                Nombre (entier ou flottant)	        42, 3.14
 
-any	                    Type libre	                        let x: any = 'test'
+  boolean	                Vrai ou faux	                    true, false
 
-void	                Aucune valeur retournée	            function f(): void {}
+  string[]	            Tableau de chaînes	                ['a', 'b']
 
-null / undefined	    Valeurs nulles ou indéfinies	    null, undefined
+  number[]	            Tableau de nombres	                [1, 2, 3]
 
-object	                Objet générique	                    { id: 1, name: 'X' }
+  any	                    Type libre	                        let x: any = 'test'
 
-Record<string, number>	Objet clé/valeur typé	            { a: 1, b: 2 }
+  void	                Aucune valeur retournée	            function f(): void {}
 
-T / <T>	                Type générique	                    function id<T>(x: T): T { return x }
+  null / undefined	    Valeurs nulles ou indéfinies	    null, undefined
 
-unknown	                Type inconnu                        plus sûr que any
+  object	                Objet générique	                    { id: 1, name: 'X' }
+
+  Record<string, number>	Objet clé/valeur typé	            { a: 1, b: 2 }
+
+  T / <T>	                Type générique	                    function id<T>(x: T): T { return x }
+
+  unknown	                Type inconnu                        plus sûr que any

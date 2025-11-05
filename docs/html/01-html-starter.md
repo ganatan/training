@@ -7,3 +7,7 @@
 	<ul>	Unordered List
 	<ol>	Ordered List
 	<li>	List Item
+	<button>
+	<p>
+	<table>
+	<input>

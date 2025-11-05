@@ -8,3 +8,5 @@
   ng g c components/table
 
 
+# Parametres
+ @Input() value = '';

@@ -1,24 +1,23 @@
-let items: string[] = [
-  'Alien',
-  'Exodus'
-]
+import { getItems } from "./lib/items";
+import { Media } from "./lib/library";
 
-function getItemsCallback() {
-  console.log('00000000001:getItemsCallback');
+let budget: number = 1234;
+
+let arrayMovies: string[] = [];
+
+class Movie extends Media {
+
 }
 
-// function getItems(items: string[]) {
-function getItems(callback) {
-  // items.forEach((value, index) => {
-  //   console.log('00000000001:' + value);
-  //   console.log('00000000002:' + index);
-  // })
-  callback();
-  console.log('00000000003:getItems');
-}
+let server = () => {
+  let media: Media = new Media();
+  media.name = 'Alien';
+  media.budget = 7777;
+  let movie: Movie = new Movie();
+  movie.name = 'Alien';
+  console.log('00000000002:' + JSON.stringify(media));
+  console.log('00000000003:' + JSON.stringify(movie));
+  getItems();
+};
 
-console.log('00000000004:');
-// console.log('00000000005:' + JSON.stringify(items));
-
-getItems(getItemsCallback);
-// getItems(items);
+server();

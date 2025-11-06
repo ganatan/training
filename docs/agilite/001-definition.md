@@ -1,3 +1,9 @@
+# Concetps
+    Epic 
+    → découpé en User Stories 
+    → intégrées dans le Backlog 
+    → Jira les gère en tickets dans les sprints.
+
 
 
 Catégorie	Mots-clés à connaître

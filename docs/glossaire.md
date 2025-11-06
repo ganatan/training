@@ -37,12 +37,31 @@
 	Plain Old Java Object. 
 	Objet Java simple, sans dépendance à un framework, avec champs, getters/setters.
 
+- SAFe
+  Scaled Agile Framework
+
+- SaaS
+  Software as a Service
+  Logiciel en tant que service
+  
 - SASS : Syntactically Awesome Style Sheets
 		Créé en 2006 par Hampton Catlin
 		préprocesseur CSS ajoutant variables, fonctions, mixins et imbrication avec une syntaxe indentée sans accolades.
-
+  
 - SCSS : Sassy CSS
 		introduit en 2010, version moderne de SASS totalement compatible avec le CSS classique, gardant toutes ses fonctionnalités avancées.
 
+- SOAP
+  Simple Object Access Protocol
+
+- SPREAD
+	propagé
+
 - Spring Boot DevTools
 	Outils de dev Spring Boot (redémarrage automatique via classloader dédié, désactivation des caches, LiveReload, propriétés “dev” par défaut) pour accélérer le cycle édition-exécution; dépendance réservée au développement, exclue du packaging prod.	
+- TAG
+	Balise
+	
+- WCF = Windows Communication Foundation
+  C’est un framework (.NET) permettant d’exposer des services via différents protocoles.
+  WCF peut utiliser : SOAP, HTTP, TCP, Named Pipes, MSMQ, etc.  

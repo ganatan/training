@@ -10,5 +10,8 @@
 	disabled        empêche l’action et le clic
 
 # Exemple de base
-	<label for="mail">Email</label>
-	<input type="email" id="mail" name="email" required />	
+	<button type="submit">Envoyer le formulaire</button>
+	<br><br>
+	<button type="reset">Réinitialiser</button>
+	<br><br>
+	<button type="button" name="action" value="delete">Supprimer</button>

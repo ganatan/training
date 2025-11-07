@@ -18,6 +18,9 @@
 
 - EMBEDDING : Integration
 
+- ESM = ECMAScript Modules
+	Date d’introduction officielle : juin 2015 avec la norme ECMAScript 2015 (ES6).
+	
 - GUI : Graphical User Interface
 	interface graphique utilisateur
 

@@ -1,11 +1,17 @@
-class Media {
-  public name: string;
-  constructor(name?: string) {
-    // this.name = 'Exodus';
-  }
+type Media = {
+  name: string,
+  budget: number
 }
-let media: Media = new Media();
-// media.name = 'Alien';
+
+
+let media: Media = {
+  name: '0001',
+  budget: 10
+};
+ media.name = '00001';
+// media.budget = 10;
+
+
 console.log('00000000001:');
-console.log('00000000001:' + media.name);
 console.log('00000000001:' + JSON.stringify(media));
+

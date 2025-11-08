@@ -1,10 +1,19 @@
+# Concepts
+  setTimeout(() => {
+    console.log('timeout')
+  }, 1000)
+
+  setInterval(() => {
+    console.log('Interval')
+  }, 1000)
+
+
 # Exemple
 
-  const operation = new Promise((resolve, reject) => {
-    const success = true
-    if (success) {
-      resolve('OK')
-    } else {
-      reject('ERROR')
-    }
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  delay(2000).then(() => {
+    console.log('Terminé')
   })

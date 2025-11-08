@@ -1,5 +1,5 @@
 
-# angular-routing
+# angular-start-component
 
   ng g component components/edit
   ng g component components/table

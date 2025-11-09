@@ -1,6 +1,9 @@
 - ARRAY
   Tableau
 
+- BEAHAVIOR
+  Comportement
+
 - CALLBACK
   Rappel
 

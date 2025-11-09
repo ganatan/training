@@ -1,16 +1,10 @@
-function getItems() {
-  console.log('00000000001');
-  try {
-    console.log('00000000002');
-    let x = 0;
-    let y = 100 / x;
-    undefinedFunction()
-    console.log('00000000003');
-  } catch (error) {
-    console.log('00000000004');
-  } finally {
-    console.log('00000000005');
-  }
+function getValue(ok) {
+  return new Promise((resolve, reject) => {
+    if (ok) resolve('OK')
+    else reject('ERROR')
+  })
 }
 
-getItems();
+getValue(false)
+  .then(value => console.log(value))
+  .catch(err => console.log(err))

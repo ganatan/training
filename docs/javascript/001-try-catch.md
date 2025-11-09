@@ -1,3 +1,12 @@
+# Concepts
+  function getItems() {
+    try {
+    } catch (error) {
+    } finally {
+    }
+  }
+
+
 # Exemple de code
 
   function getItems() {

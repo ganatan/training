@@ -21,7 +21,7 @@
   }
 
 
-  - Utilisation du service
+  - Utilisation du service via le constructor
   
     import { Component } from '@angular/core';
     import { DataService } from './services/data.service';
@@ -33,6 +33,24 @@
     })
     export class EditComponent {
       constructor(private data: DataService) {}
+      save() {
+        this.data.setValue('hello');
+      }
+    }
+
+
+  - Utilisation du service via inject
+  
+    import { Component, inject } from '@angular/core';
+    import { DataService } from './services/data.service';
+
+    @Component({
+      selector: 'app-edit',
+      standalone: true,
+      templateUrl: './edit.html'
+    })
+    export class EditComponent {
+      private medias = inject(data);
       save() {
         this.data.setValue('hello');
       }

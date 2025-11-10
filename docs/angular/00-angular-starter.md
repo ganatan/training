@@ -11,7 +11,7 @@
   Options
     CSS
     SSR (not)
-    Zoneless (not)
+    Zoneless (not)        Desactivation de Zoneless 
     IA (not)
 
 # Check dependencies

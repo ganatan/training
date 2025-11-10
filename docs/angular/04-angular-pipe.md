@@ -6,6 +6,21 @@
   {{ users | slice:0:3 }}
   {{ stream$ | async }}
 
+# json
+  
+  items : {{ items | json }}<br>
+
+  import { JsonPipe } from '@angular/common';
+
+  @Component({
+    selector: 'app-root',
+    imports: [
+      RouterOutlet,
+      JsonPipe],
+    templateUrl: './app.html',
+    styleUrl: './app.css'
+  })  
+
 # Currency
 
 import { CurrencyPipe } from '@angular/common'

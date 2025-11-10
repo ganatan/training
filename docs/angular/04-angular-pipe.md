@@ -1,3 +1,6 @@
+# Creation
+  ng g p pipes/budget
+
 # Liste de pipe
   {{ 1800 | currency:'USD' }}      → $1,800.00
   {{ 0.42 | percent }}            → 42%

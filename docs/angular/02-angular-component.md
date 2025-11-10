@@ -28,14 +28,14 @@
     styleUrl
 
 # Liste
-  Propriété	            Type	      Utilité
+  Propriété	            Type	                    Utilité
 
-  selector	            string	    Nom de la balise HTML du composant.
-  standalone	          boolean	    Définit le composant comme autonome (sans NgModule).
-  imports	              Array	      Liste des composants/directives/pipes
-  template	            string	    Template inline directement dans le code.
-  templateUrl	          string	    Lien vers un fichier HTML externe.
-  styles	              string[]	  Styles inline.
+  selector	            string	                  Nom de la balise HTML du composant.
+  standalone	          boolean	                  Composant comme autonome (sans NgModule).
+  imports	              Array	                    Liste des composants/directives/pipes
+  template	            string	                  Template inline directement dans le code.
+  templateUrl	          string	                  Lien vers un fichier HTML externe.
+  styles	              string[]	                Styles inline.
   styleUrls	            string[]	                Liste de fichiers CSS externes.
   styleUrl	            string	                  Version simplifiée pour un seul fichier CSS.
   encapsulation	        ViewEncapsulation	        Contrôle le scoping des styles.
@@ -45,4 +45,5 @@
   preserveWhitespaces	  boolean	                  Garde les espaces dans le template.
 
 # Parametres
+
  @Input() value = '';

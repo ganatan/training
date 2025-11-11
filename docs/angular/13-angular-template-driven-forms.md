@@ -6,3 +6,17 @@
 
 # Exemple
   <input [(ngModel)]="name">
+
+  - Rajout FormsModule
+
+  import { FormsModule } from '@angular/forms';
+
+  @Component({
+    selector: 'app-root',
+    imports: [
+      RouterOutlet,
+      FormsModule
+    ],
+    templateUrl: './app.html',
+    styleUrl: './app.css'
+  })

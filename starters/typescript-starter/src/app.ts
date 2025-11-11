@@ -1,26 +1,21 @@
+// let movies: string[] = ['Aliens', 'Exodus'];
 
-function geItems(): Promise<any[]> {
-  const result = fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => {
-      console.log('00000000002:geItems');
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      return response.json() as Promise<any[]>;
-    })
-    .then(items => {
-      const ids = items.map(({ id }) => id);
-      console.log(ids);
-      return ids;
-    });
+const movies = ['Aliens', 'Exodus', 'Legend', 'Dune'];
 
-  console.log('00000000004:geItems')
-  return result
-}
+let total = 0;
+let itemsForEach = movies.forEach((toto1, toto2, toto3) => {
+  let value: string = toto1.toUpperCase();
+  if (value.includes('O')) {
+    total = total + 1;
+  }
+})
+console.log('00000000001:' + total);
 
-geItems()
-  .then((value) => {
-    console.log(JSON.stringify(value))
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-  .finally(() => { })
+// let itemsMap = movies.map((toto1, toto2, toto3) => {
+//   return toto1;
+// })
+
+
+// console.log('00000000001:' + JSON.stringify(movies));
+// console.log('00000000002:' + JSON.stringify(itemsForEach));
+// console.log('00000000003:' + JSON.stringify(itemsMap));

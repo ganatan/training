@@ -1,7 +1,6 @@
 
 # angular-routing
 
-  ng g service services/items
   ng g s services/items
 
 # Parametres
@@ -40,7 +39,6 @@
 
 
   - Utilisation du service via inject
-  !!!!!!! Attention sur inject et non Inject avec I majuscule
   
     import { Component, inject } from '@angular/core';
     import { DataService } from './services/data.service';

@@ -1,3 +1,11 @@
+# Installation
+  npm init -y
+  
+  npm install typescript --save-dev
+  npm install nodemon
+  npm install ts-node
+  
+  npx tsc --init
 
 # package.json
   {

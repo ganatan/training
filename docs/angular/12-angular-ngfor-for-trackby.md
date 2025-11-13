@@ -9,13 +9,26 @@
   Sans trackBy :
     Angular recrée tous les éléments DOM si le tableau est remplacé par une nouvelle référence, même si les valeurs sont identiques.
 
-# ngFor sans trackby
+# Installation
+  import { CommonModule } from '@angular/common';
+
+  @Component({
+    selector: 'app-root',
+    imports: [
+      CommonModule
+    ],
+    templateUrl: './app.html',
+    styleUrl: './app.css'
+  })
+
+
+# Code ngFor sans trackby
 
   <li *ngFor="let movie of movies; trackBy: trackId">
     {{ movie.title }}
   </li>
 
-# ngFor with trackby
+# Code ngFor with trackby
 
   <h2>Version ngFor Items with trackBy</h2>
   <ul>
@@ -29,21 +42,7 @@
   }
 
 
-# Ajout de module
-
-  import { CommonModule } from '@angular/common';
-
-  @Component({
-    selector: 'app-root',
-    imports: [
-      CommonModule
-    ],
-    templateUrl: './app.html',
-    styleUrl: './app.css'
-  })
-
-
-# code for
+# Code for
 
 <ul>
   @for (item of items; track item) {

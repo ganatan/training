@@ -65,9 +65,13 @@
 
 - Spring Boot DevTools
 	Outils de dev Spring Boot (redémarrage automatique via classloader dédié, désactivation des caches, LiveReload, propriétés “dev” par défaut) pour accélérer le cycle édition-exécution; dépendance réservée au développement, exclue du packaging prod.	
+
 - TAG
 	Balise
-	
+
+- THROW
+	Lancer
+
 - WCF = Windows Communication Foundation
   C’est un framework (.NET) permettant d’exposer des services via différents protocoles.
   WCF peut utiliser : SOAP, HTTP, TCP, Named Pipes, MSMQ, etc.  

@@ -1,3 +1,32 @@
+# Concept
+  Une Promise = 2 chemins possibles
+
+  Une Promise ne fait qu’une seule chose :
+    resolve(value) → succès
+    reject(error) → échec
+    C’est tout.
+
+    new Promise((resolve, reject) => {
+      resolve(true);     // succès
+      reject(new Error); // échec
+    });
+
+  Une Promise ne peut être résolue ou rejetée qu’une seule fois.
+
+  Resolve → valeur typée
+    Si tu écris :
+    new Promise<boolean>((resolve) => resolve(true));
+
+    Alors le resolve doit envoyer un boolean.
+
+  Reject → n’importe quelle erreur
+    Le reject n’a pas besoin d’envoyer un boolean.
+    Il envoie toujours :
+      une erreur, pas un type logique.
+      reject(new Error('Oups'));
+    Le type du rejet est automatiquement unknown.
+
+
 # Exemple Promise avec then
 
   function geItems(): Promise<string[]> {

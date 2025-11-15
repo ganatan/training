@@ -5,6 +5,50 @@
 # Installation
   npm install rxjs
 
+
+# Best practices
+
+  - Mauvais pattern
+
+  async function run() {
+    await getItemsObservable().subscribe({
+      next: v => console.log('next', v),
+      error: e => console.log('error', e),
+      complete: () => console.log('complete')
+    });
+    console.log('après await'); 
+  }
+
+  "après await" s’affiche immédiatement, pas après le flux.
+
+  - Deux patterns corrects
+
+  Observable “pur” (sans await)
+  function run() {
+    getItemsObservable().subscribe({
+      next: v => console.log('next', v),
+      error: e => console.log('error', e),
+      complete: () => console.log('complete')
+    });
+  }
+
+  Conversion en Promise + await
+  import { firstValueFrom } from 'rxjs';
+
+  async function run() {
+    const result = await firstValueFrom(getItemsObservable());
+    console.log('result:', result);
+  }
+
+  4. Règle simple
+
+  Observable → subscribe ou | async
+
+  Promise → await
+
+  si tu veux await sur un Observable → firstValueFrom / lastValueFrom, jamais await observable.subscribe(...).
+
+
 # Exemple Typescript
 
   import { Observable } from 'rxjs';

@@ -48,3 +48,9 @@
       expect(compiled.querySelector('h1')?.textContent).toContain('angular-starter-test')
     })
   })
+
+
+# Executer un seul test
+  Parametres dans package.json
+
+    "test-calculator": "ng test --include='src/app/services/calculator.spec.ts'",

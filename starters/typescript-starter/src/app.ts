@@ -1,66 +1,66 @@
-let items = [
-  { "type": "movie", "id": "01", "title": "Jaws", "year": 1975, "duration": 124 }
-]
+import { Observable } from "rxjs";
 
-let items2 = // 00000000001:{"type":"series","id":"02","title":"Breaking Bad","seasons":5,"episodes":62}
-
-
-//   { title: 'aliens' },
-//   { title: 'Legend' },
-// :
-// 00000000001:{"type":"series","id":"02","title":"Breaking Bad","seasons":5,"episodes":62}
-
-let results = items.map((value) => {
-  console.log('00000000001:' + JSON.stringify(value))
-  return value.title;
-})
-
-console.log('00000000001:' + JSON.stringify(results));
-console.log('00000000001:' + JSON.stringify(items));
+function getItemsObservable(error: boolean): Observable<string> {
+  setTimeout
+  let result = new Observable<string>((subscriber) => {
+    if (error) {
+      console.log('00000000001:getItemsObservable:reject');
+      subscriber.error(false);
+    } else {
+      console.log('00000000001:getItemsObservable:resolve');
+      subscriber.next('1111');
+      subscriber.complete();
+      subscriber.next('2222');
+    }
+  })
+  return result;
+}
 
 
-// interface Movie {
-//   type: 'movie',
-//   id: string,
-//   title: string,
-//   year: number,
-//   duration: number,
-// }
+// getItemsPromise(true)
+//   .then(() => { })
+//   .catch(() => { })
+//   .finally(() => { });
 
-// interface Series {
-//   type: 'series',
-//   id: string,
-//   title: string,
-//   seasons: number,
-//   episodes: number,
-// }
-
-// const m1: Movie = {
-//   type: 'movie',
-//   id: '01',
-//   title: 'Jaws',
-//   year: 1975,
-//   duration: 124,
-// }
-// const m2: Series = {
-//   type: 'series',
-//   id: '02',
-//   title: 'Breaking Bad',
-//   seasons: 5,
-//   episodes: 62,
-// }
+// getItemsPromise(false)
+//   .then(() => { })
+//   .catch(() => { })
+//   .finally(() => { });
 
 
-// function extractTitles<T extends { title: string }>(list: T[]): string[] {
-//   // let results = ["Jaws", "Breaking Bad"]
-//   let results = list.map((value) => {
-//     console.log('00000000001:' + JSON.stringify(value));
-//     return value.title;
+// getItemsObservable(true)
+//   .subscribe((value) => {
+//     console.log('00000000001:' + value);
 //   })
-//   return results;
-// }
 
-// let items = [m1, m2];
-// console.log('00000000001:' + extractTitles(items));
 
+getItemsObservable(false)
+  .subscribe({
+    next: v => console.log('next', v),
+    error: e => console.log('error', e),
+    complete: () => console.log('complete')
+  });
+
+getItemsObservable(false)
+  .subscribe((value) => {
+
+    console.log('00000000001:' + value);
+  })
+
+
+
+
+function getItemsPromise(error: boolean): Promise<boolean> {
+  let result = new Promise<boolean>((resolve, reject) => {
+    if (error) {
+      console.log('00000000001:getItemsPromise:reject');
+      reject(false)
+    } else {
+      console.log('00000000001:getItemsPromise:resolve');
+      resolve(true)
+    }
+
+  })
+  return result;
+}
 

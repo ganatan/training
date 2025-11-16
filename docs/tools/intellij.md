@@ -29,6 +29,15 @@
         Ex sous Windows : C:\Program Files\Java\jdk-21
       Valide > Apply > OK
 
+# Touches Commentaires
+  File / Settings
+    KeyMap / Windows
+      Main Menu / code
+        Comment Actions
+          Tout supprimer
+          Add Keyboard Shortcut
+            Taper       Ctrl + /
+
 # Changement de la version de JDK
   Ouvre le menu :
   File → Project Structure… (Ctrl + Alt + Shift + S)

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3769581b-2133-4989-9018-6a8bc739ea2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../docs/springboot/01-springboot-starter.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/springboot/01-springboot-starter.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../docs/tools/eclipse.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/tools/eclipse.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../docs/tools/maven.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/tools/maven.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mcp/docs/fullstack-courses/fullstack/001-starter/backend-spring-11/001-installation-java.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../mcp/docs/fullstack-courses/fullstack/001-starter/backend-spring-11/001-installation-java.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mcp/docs/fullstack-courses/fullstack/001-starter/backend-spring-8/001-installation-java.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../mcp/docs/fullstack-courses/fullstack/001-starter/backend-spring-8/001-installation-java.md" afterDir="false" />
+    <list default="true" id="279c9456-624a-467d-a84e-4683cc1014c0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../docs/tools/intellij.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/tools/intellij.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typescript-starter/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typescript-starter/src/app.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,23 +20,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
-  <component name="ProjectId" id="34330H67Jed7Wmn4CAgfkIRpxJh" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="35YyaNol23fKTKRZgGTOLcQygGf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "D:/Chendra/00-tutorials/001-training/starters/java-starter/src/Main.java",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -44,12 +50,23 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3769581b-2133-4989-9018-6a8bc739ea2c" name="Changes" comment="" />
-      <created>1760428205037</created>
+      <changelist id="279c9456-624a-467d-a84e-4683cc1014c0" name="Changes" comment="" />
+      <created>1763301362088</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1760428205037</updated>
+      <updated>1763301362088</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

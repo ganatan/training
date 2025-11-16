@@ -1,4 +1,6 @@
 # Tailwind via cdn
+  
+  https://github.com/tailwindlabs/tailwindcss
 
   https://tailwindcss.com/docs/installation/play-cdn
 
@@ -17,19 +19,17 @@
 
     @import "tailwindcss";
 
-# Compilation
-  
-   tailwindcss -i .\42-html.src.css -o .\42-html.css --minify ≈ tailwindcss v4.1.14
+# Compilation directement dans HTML
 
-# Example
+  npm init -y
+  npm install -D tailwindcss@latest
 
   tailwindcss -i .\42-html-tailwind.src.css -o .\42-html-tailwind.css --minify
 
-  tailwindcss -i .\42-html-tailwind.src.css -o .\42-html-tailwind.css --minify ≈ tailwindcss v4.1.14
+  tailwindcss -i .\42-html-tailwind.src.css -o .\42-html-tailwind.css --minify ≈ tailwindcss v4.1.15
 
 
-
-# Example de ode
+# Exemple de code
 
   - styles.css
     @import url("tailwindcss");

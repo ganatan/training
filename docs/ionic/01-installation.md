@@ -1,6 +1,6 @@
 
 # Site
-https://ionicframework.com/
+  https://ionicframework.com/
 
 # Installation
   npm install -g @ionic/cli
@@ -12,6 +12,16 @@ https://ionicframework.com/
   ionic serve
 
   ionic g service services/movie
+
+# Build
+  Infos du build dans   angular.json
+
+    "options": {
+    "outputPath": {
+      "base": "www",
+      "browser": ""
+    },
+
 
 # Exemple de code
 

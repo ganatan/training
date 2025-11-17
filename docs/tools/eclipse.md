@@ -117,13 +117,17 @@
 
 
 # Format du texte
-
+  - Utiliser la commande shift ou Maj
   Ctrl + Shift + F
-
+  
+  Ctrl + Maj + F
 
 # Commentaires
   Ctrl + Shift + / (pour commenter)
   Ctrl + Shift + \ (pour décommenter)  
+
+  Ctrl + Maj + / (pour commenter)
+  Ctrl + Maj + \ (pour décommenter)  
 
 # Tabulation 2 espaces
   Window → Preferences

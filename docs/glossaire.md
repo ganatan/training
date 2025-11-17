@@ -27,6 +27,9 @@
 - GUI : Graphical User Interface
 	interface graphique utilisateur
 
+- LLM
+	Large Language Model
+
 - LOMBOK
 	Bibliothèque d’annotations Java qui génère au compile-time le boilerplate (getters/setters, constructeurs, equals/hashCode, toString, @Builder, logs), via l’annotation processing; réduit la verbosité des POJO mais requiert support IDE et peut compliquer le debug.
 	Origine probable du nom : clin d’œil au mot lombok (piment) en Indonésie → d’où le logo piment et le slogan officiel « spicing up your java ». 

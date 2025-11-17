@@ -1,7 +1,6 @@
-import { getItems } from "./lib/items";
+class Media {
+  name: string = '1111';
 
-// function getItems() {
-//   console.log('00000000001:getItems');
-// }
-
-getItems();
+}
+let media: Media = new Media();
+console.log('00000000001:' + JSON.stringify(media));

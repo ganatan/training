@@ -9,31 +9,35 @@
   TypeScript	            Description	                      Exemple
 
   string	                Chaîne de caractères	            'Hello'
-
   number	                Nombre (entier ou flottant)	      42, 3.14
-
   boolean	                Vrai ou faux	                    true, false
-
   string[]	              Tableau de chaînes	              ['a', 'b']
 
   number[]	              Tableau de nombres	              [1, 2, 3]
-
   any	                    Type libre	                      let x: any = 'test'
-
   void	                  Aucune valeur retournée	          function f(): void {}
-
   null / undefined	      Valeurs nulles ou indéfinies	    null, undefined
-
   object	                Objet générique	                  { id: 1, name: 'X' }
-
   Record<string, number>	Objet clé/valeur typé	            { a: 1, b: 2 }
-
   T / <T>	                Type générique	                  function id<T>(x: T): T { return x }
-
   unknown	                Type inconnu                      plus sûr que any
 
 
-# Exemple de code
+# Exemple de code Types essentiels
+
+  let franchise: boolean = true;
+  let title: string = 'Aliens';
+  let budget: number = 4000000;
+  let movies: string[] = [
+    'Aliens', 'Gladiator'
+  ]
+  console.log('00000000001:' + franchise);
+  console.log('00000000001:' + title);
+  console.log('00000000001:' + budget);
+  console.log('00000000001:' + JSON.stringify(movies));
+
+
+# Exemple de code 
 
   const franchise: boolean = true;
   const budget: number = 1000;

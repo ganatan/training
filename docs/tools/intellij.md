@@ -38,6 +38,17 @@
           Add Keyboard Shortcut
             Taper       Ctrl + /
 
+
+# Format du texte
+  File / Settings
+    KeyMap / Windows
+      Main Menu / code
+        code Formatting Actions
+          Reformat Code
+          Tout supprimer
+          Add Keyboard Shortcut
+            Taper       Maj + Alt + F
+
 # Changement de la version de JDK
   Ouvre le menu :
   File → Project Structure… (Ctrl + Alt + Shift + S)

@@ -1,5 +1,12 @@
  # Debug d'une application electron
+  
   ouvrir la DevTools Electron (renderer)
+  
+    npm run dev
+      Menu
+        View
+        Toogle Developper Tools
+
 
 
   const { app, BrowserWindow } = require('electron')

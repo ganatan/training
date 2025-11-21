@@ -1,3 +1,43 @@
+# Creation repo sur github
+
+  Profile /Repositories / New
+
+  Commande à executer
+    echo "# nx-angular-node-electron" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin https://github.com/ganatan/nx-angular-node-electron.git
+  
+  Copier le fichier de Config    
+
+  Push executer
+    git push -u github main
+
+  
+  - Vérifier les remotes
+    git remote -v
+  - Vérifier les branches locales
+    git branch
+  - Vérifier les branches distantes
+    git branch -r
+  - Vérifier le lien local ↔ remote (tracking)
+    git branch -vv
+  - Vérifier la configuration précise d’une branche
+    git config --get branch.main.remote
+    git config --get branch.main.merge
+  - Vérifier toute la config Git
+    git config --list --local
+      On check
+        remote.github.url=git@github.com:ganatan/nx-angular-node-electron.git
+        branch.main.remote=github
+        branch.main.merge=refs/heads/main
+  - Vérifier si tu peux push vers le bon remote
+    git push --dry-run github main        
+
+
+
 # Creation d'un repo
   git init -b main
   echo "# mon-repo" > README.md

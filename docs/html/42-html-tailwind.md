@@ -1,3 +1,25 @@
+# Concepts
+
+  Tailwind est un framework CSS utilitaire où chaque classe représente une propriété unique.
+  Il évite les CSS complexes en permettant de construire l’UI directement dans le HTML.
+  Le moteur génère uniquement les classes utilisées pour rester ultra-léger.
+  En v4, Tailwind adopte un compilateur Oxide (Rust) et simplifie tout avec @import "tailwindcss".
+
+
+# Historique 
+  v1 (2019) : sortie officielle, framework utility-first, classes statiques massives.
+  v2 (2020) : dark mode natif, palette élargie, amélioration du design.
+  v3 (2021) : moteur JIT par défaut, CDN officiel, arbitrary values.
+  v3.4 (2023) : dernière version majeure compatible CDN.
+  v4 (2024–2025) : moteur Oxide en Rust, compilation obligatoire, nouvelle syntaxe @import "tailwindcss".
+  v4.1+ (2025) : optimisations, bundle léger, configuration simplifiée.
+
+# Tailwind github
+  
+  https://github.com/tailwindlabs/tailwindcss
+
+  https://github.com/tailwindlabs/tailwindcss/releases
+
 # Tailwind via cdn
   
   https://github.com/tailwindlabs/tailwindcss

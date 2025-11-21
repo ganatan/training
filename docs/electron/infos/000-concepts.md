@@ -1,4 +1,4 @@
-Avantages ElectronJS
+# Avantages ElectronJS
   Déploiement simplifié - Un seul exécutable contient frontend + backend + runtime Node.js. Pas besoin d'installer Node.js sur chaque poste.
   
   API système natives - Notifications, barre d'état, auto-updater, accès fichiers... Toutes les API desktop dont tu as besoin.

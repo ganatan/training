@@ -17,7 +17,8 @@
 		langage de feuille de style utilisé pour décrire l’apparence (couleurs, polices, mise en page) des documents HTML
 
 - DTO (Data Transfer Object)
-	Objet dédié au transport de données entre couches/over-the-wire (API ⇄ client, service ⇄ service). Ne contient pas de logique métier ni d’annotations JPA. Contrat stable de l’API, souvent immuable.
+	Objet dédié au transport de données entre couches/over-the-wire (API ⇄ client, service ⇄ service). Ne contient pas de logique métier ni d’annotations JPA.
+	Contrat stable de l’API, souvent immuable.
 
 - EMBEDDING : Integration
 
@@ -46,6 +47,9 @@
 	Plain Old Java Object. 
 	Objet Java simple, sans dépendance à un framework, avec champs, getters/setters.
 
+- REMOTE
+	Telecommande
+	
 - SAFe
   Scaled Agile Framework
 

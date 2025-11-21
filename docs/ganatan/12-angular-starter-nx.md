@@ -56,6 +56,7 @@
   https://nx.dev/docs/technologies/angular/introduction
   
   nx g @nx/angular:lib libs/tailwindcomponents
+  
 
   "lint-tailwindcomponents": "nx lint tailwindcomponents",
   "test-tailwindcomponents": "nx test tailwindcomponents",

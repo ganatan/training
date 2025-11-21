@@ -3,36 +3,136 @@
   npx create-nx-workspace@latest
 
   nom du workspace 
+    angular-node-electron
+    stack
+      Angular
+      Integrated mono repo
+
+  nom du projet angular
     frontend-angular
+    esbuild
+    jest
+    playwright
+    guthub-actions
 
   Scripts
-    "start-frontend-angular": "nx serve frontend-angular",
-    "lint-frontend-angular": "nx lint frontend-angular",
-    "test-frontend-angular": "nx test frontend-angular",
-    "build-frontend-angular": "nx build frontend-angular",
-    "e2e-frontend-angular": "nx e2e frontend-angular-e2e"
-
+    "start:frontend": "nx serve frontend-angular",
+    "lint:frontend": "nx lint frontend-angular",
+    "test:frontend": "nx test frontend-angular",
+    "build:frontend": "nx build frontend-angular",
+    "e2e:frontend": "nx e2e frontend-angular-e2e"
 
   npx nx reset
   nx add @nx/node
 
   nx g @nx/node:application apps/backend-typescript
 
-  nx g @nx/node:application apps/electron-typescript
+    "start:backend": "nx serve backend-typescript",
+    "lint:backend": "nx lint backend-typescript",
+    "test:backend": "nx test backend-typescript",
+    "build:backend": "nx build backend-typescript",
+    "e2e:backend": "nx e2e backend-typescript-e2e"
 
-  nx g @nx/node:application apps/electron-javascript --js
+  nx g @nx/node:application apps/electron --js
 
-# Deploiement
-    npm run build-frontend
-    npm run build-backend
-    npm run build-electron-ts
-
+    "start:electron": "nx serve electron",
+    "lint:electron": "nx lint electron",
+    "test:electron": "nx test electron",
+    "build:electron": "nx build electron",
+    "e2e:electronts": "nx e2e electron-e2e",
 
 # Installation electron
   npm install electron
 
+# Deploiement
+    npm run build-frontend
+    npm run build-backend
+    npm run build-electron
+
 # Build angular 
-  "build-frontend": "nx build frontend-angular --base-href ./",
+  "build:frontend": "nx build frontend-angular --base-href ./",
+
+# Start & build electron
+  "start:electron": "electron apps/electron/src/main.js",
+
+
+  'use strict'
+
+  const { app, BrowserWindow } = require('electron')
+  const path = require('path')
+
+  require('dotenv').config()
+
+  function createWindow() {
+    const win = new BrowserWindow({
+      width: 1024,
+      height: 768,
+      webPreferences: {
+        nodeIntegration: false
+      }
+    })
+
+    const indexHtmlPath = path.join(
+        process.cwd(),
+        'dist/apps/frontend-angular/browser/index.html'
+      )
+    console.log('00000000001:' + process.env.MODE);
+    win.loadFile(indexHtmlPath)
+    if (process.env.NODE_ENV === 'development') {
+      if (process.env.DEVTOOLS === 'true') {
+        win.webContents.openDevTools()
+      }
+    }
+  }
+
+  console.log('module type =', typeof require === 'function' ? 'CJS' : 'ESM')
+  console.log('filename =', __filename)
+  console.log('dirname  =', __dirname)
+
+  app.whenReady().then(() => {
+    createWindow()
+  })
+
+
+
+# Options WebSocket
+  npm install ws
+
+# Compilation electron
+  npm install electron-builder  
+
+  "description": "Angular + Node + Electron demo"
+  "author": "ganatan"
+
+  Déplacer electron et electron-builder dans devDependencies
+
+  Rajouter dans dependencies
+        "dotenv": "17.0.1",
+
+  
+
+
+  parametres
+
+      "build": {
+      "appId": "com.ganatan.demo",
+      "productName": "GanatanElectronApp",
+      "directories": {
+        "output": "dist/electron"
+      },
+      "files": [
+        "apps/electron/**/*",
+        "dist/apps/frontend-angular/**/*",
+        "package.json"
+      ],
+      "extraMetadata": {
+        "main": "apps/electron/src/main.js"
+      }
+    },
+
+# Tout le code electron est en javascript et comon js modules
+  !!!!!!!
+  donc attention
 
 
 # Erreur pas utile d'installer js

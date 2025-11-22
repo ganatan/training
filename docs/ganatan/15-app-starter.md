@@ -164,3 +164,22 @@ L’ancien générateur @nrwl/js:app a été retiré précisément pour ça.
 GitHub
 
 ➡ Conclusion : @nx/js = libs uniquement, pas d’app.
+
+
+# Compilation frontend-angular
+
+  This workspace is more than three days old and is not connected. Workspaces must be connected within 3 days of creation. Claim your workspace at https://cloud.nx.app. (code: 401)
+
+
+  dans nx.json
+  supprimer
+    "nxCloudId": "691d97e3d1664320006c36c8",
+
+# Compilation frontend erreur budget
+project.json passer à 
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "1mb"
+            },
+

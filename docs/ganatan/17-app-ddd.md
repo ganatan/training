@@ -28,6 +28,35 @@ tsconfig.base.json
 # Créer la lib infrastructure service backend pour Catalog 
   nx g @nx/node:lib --directory=libs/catalog-infrastructure
 
+  nx g @nx/node:lib --directory=libs/inventory-domain
+  nx g @nx/node:lib --directory=shared/inventory-contract 
+  nx g @nx/node:lib --directory=libs/inventory-application
+  nx g @nx/node:lib --directory=libs/inventory-infrastructure
+
+# Deplacement 
+
+  nx g @nx/workspace:move --project catalog-domain libs/catalog/domain
+  nx g @nx/workspace:move --project catalog-application libs/catalog/application
+  nx g @nx/workspace:move --project catalog-infrastructure libs/catalog/infrastructure
+  nx g @nx/workspace:move --project catalog-contract libs/catalog/contract
+
+  nx g @nx/workspace:move --project inventory-domain libs/inventory/domain
+  nx g @nx/workspace:move --project inventory-application libs/inventory/application
+  nx g @nx/workspace:move --project inventory-infrastructure libs/inventory/infrastructure
+  nx g @nx/workspace:move --project inventory-contract libs/inventory/contract
+
+
+  nx g @nx/workspace:move --project catalog-domain libs/contexts/catalog/domain
+  nx g @nx/workspace:move --project catalog-application libs/contexts/catalog/application
+  nx g @nx/workspace:move --project catalog-infrastructure libs/contexts/catalog/infrastructure
+  nx g @nx/workspace:move --project catalog-contract libs/contexts/catalog/contract
+
+  nx g @nx/workspace:move --project inventory-domain libs/contexts/inventory/domain
+  nx g @nx/workspace:move --project inventory-application libs/contexts/inventory/application
+  nx g @nx/workspace:move --project inventory-infrastructure libs/contexts/inventory/infrastructure
+  nx g @nx/workspace:move --project inventory-contract libs/contexts/inventory/contract
+
+
 # Resume
   Frontend Angular     →   appelle  →   Backend API (Express/Nest)
   Backend API          →   appelle  →   Use Cases

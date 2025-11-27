@@ -119,6 +119,14 @@
       Eclipse : clic droit sur Application.java → Run as > Java Application
       IntelliJ : clic droit → Run 'Application.main()'
 
+# Fermer une fenetre
+  File → Settings → Keymap
+      
+    Window
+      Editor Tabs
+        Editor Close Action
+          Close Tab
+
 # Formattage
   Ctrl + Alt + L      
 

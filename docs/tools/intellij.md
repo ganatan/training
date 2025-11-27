@@ -129,3 +129,14 @@
   Sélectionne Other
   Choisis UTF-8
     Clique sur Apply and Close  
+
+# lombok
+# Activer l’annotation processing
+  File → Settings…
+    Build, Execution, Deployment
+      Compiler
+        Annotation Processors
+          Coche Enable annotation processing
+          En bas → cocher aussi :
+          ✔ "Obtain processors from project classpath"
+        Valide → OK

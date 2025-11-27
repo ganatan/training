@@ -20,6 +20,7 @@
     C:\Program Files\Java\latest\jre-1.8\bin
   
   Installation personnalise    
+    D:\hal\Java\jdk-21\
     D:\hal\Java\jdk-25\
 
   Variables d'environnement

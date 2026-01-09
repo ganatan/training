@@ -252,3 +252,21 @@ spec:
 
     OPENSHIFT_SERVER	        https://yyyyyyy
     OPENSHIFT_TOKEN	          xxxxxxx
+
+## ConfigMap — résumé
+
+- Un **ConfigMap** est un **objet Kubernetes**, pas un fichier.
+- Il contient de la **configuration non sensible**.
+- Il est déclaré via un **YAML** et stocké dans le cluster.
+- Il injecte des valeurs dans les pods (env ou fichiers).
+- L’application lit la config via `process.env`.
+
+### Exemple de ConfigMap
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-nest
+data:
+  PORT: "8080"
+

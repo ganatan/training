@@ -1,3 +1,15 @@
+# Concepts
+  Une classe est un modèle qui définit des propriétés, des méthodes et un constructeur.
+  Le constructeur initialise l’objet et s’exécute à chaque new.
+  L’héritage se fait avec extends, ce qui permet de réutiliser et spécialiser une classe parent.
+  super() appelle le constructeur du parent et doit être utilisé avant this dans l’enfant.
+  Une méthode du parent peut être redéfinie avec override, garantissant une signature correcte.
+  super.method() permet d’exécuter la version parent dans une méthode redéfinie.
+  TypeScript permet d’initialiser les propriétés directement dans la classe (name = '').
+  Les getters/setters avec les mots-clés get et set permettent d’exposer une propriété avec logique interne.
+  La classe définit aussi le type de l’objet, ce qui donne un typage strict (let movie: Movie).
+  Une instance existe réellement au runtime et peut être affichée via console.log ou JSON.stringify.
+
 # class
   Classe (TypeScript / JavaScript)
 

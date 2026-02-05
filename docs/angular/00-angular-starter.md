@@ -11,12 +11,10 @@
   Options
     CSS
     SSR (not)
+    AI Tools (not)
     Zoneless (not)        Desactivation de Zoneless 
-    IA (not)
 
 # Check dependencies
   npm list --depth=0
   npm outdated
 
-# Rajout du coverage
-  "coverage": "ng test --no-watch --code-coverage"
